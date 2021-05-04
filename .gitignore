@@ -1,0 +1,5 @@
+# Ignore everything but documents and source
+ /*
+ /*/
+ !/src/
+ !/doc/
