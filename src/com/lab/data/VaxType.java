@@ -4,7 +4,7 @@ package com.lab.data;
  * This enumerator represents a vaccination type.
  * toString() methods are overridden to easily get properly formatted names.
  *
- * @author Cicer Luigi
+ * @author Ciceri Luigi
  */
 
 public enum VaxType {
