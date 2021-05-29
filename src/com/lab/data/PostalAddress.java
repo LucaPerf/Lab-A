@@ -8,17 +8,13 @@ package com.lab.data;
  */
 
 public class PostalAddress {
-    private String via;
-    private String nome;
-    private Integer number;
+    private String indirizzo;
     private String comune;
     private String provincia;
     private Integer cap;
 
-    public PostalAddress(String via, String nome, Integer number, String comune, String provincia, Integer cap){
-        this.via = via;
-        this.nome = nome;
-        this.number = number;
+    public PostalAddress(String indirizzo, String comune, String provincia, Integer cap){
+        this.indirizzo = indirizzo;
         this.comune = comune;
         this.provincia = provincia;
         this.cap = cap;
