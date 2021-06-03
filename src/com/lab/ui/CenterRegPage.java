@@ -2,10 +2,12 @@ package com.lab.ui;
 
 import com.lab.data.Center;
 import com.lab.data.CenterType;
+import com.lab.data.PostalAddress;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import com.lab.centrivaccinali.CentriVaccinali;
 
 /**
  * Controller of the center registration page. Layout is stored in "center_registration.fxml".
@@ -40,7 +42,7 @@ public class CenterRegPage extends Page{
         type.getSelectionModel().select(0);
 
         register.setOnAction(actionEvent -> {
-            registraCentroVaccinale();
+            CentriVaccinali.registraCentroVaccinale(centerFromUI());
             PagesManager.openCenterActions();
         });
 
@@ -50,17 +52,20 @@ public class CenterRegPage extends Page{
         });
     }
 
-    private void registraCentroVaccinale() {
-        System.out.println("Not implemented");
-        /*
-        PostalAddress address = new PostalAddress(
-            address.getText(),
-            city.getText(),
-            province.getText(),
-            Integer.parseInt(cap.getText()));
-        center = new Center(nameField.getText(),address,(CenterType)centerTypeCombo.getSelectionModel().getSelectedItem());
-        Centri.add(center);
-        Centri.save();
-         */
+    private PostalAddress addressFromUI()
+    {
+        return new PostalAddress(
+                address.getText(),
+                city.getText(),
+                province.getText(),
+                Integer.parseInt(cap.getText()));
+    }
+
+    private Center centerFromUI()
+    {
+        return new Center(
+                name.getText(),
+                addressFromUI(),
+                (CenterType) type.getSelectionModel().getSelectedItem());
     }
 }

@@ -1,5 +1,6 @@
 package com.lab.centrivaccinali;
 
+import com.lab.data.Center;
 import com.lab.ui.PagesManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -31,5 +32,13 @@ public class CentriVaccinali extends Application {
         //Load files here
 
         PagesManager.openAreaSelection();
+    }
+
+    public static void registraCentroVaccinale(Center center) {
+        System.out.println("Not implemented");
+        /*
+        Centri.add(center);
+        Centri.save();
+         */
     }
 }
