@@ -11,9 +11,10 @@ import com.lab.centrivaccinali.CentriVaccinali;
 
 /**
  * Controller of the center registration page. Layout is stored in "center_registration.fxml".
+ *
  * @author Ciceri Luigi
  */
-public class CenterRegPage extends Page{
+public class CenterRegPage extends Page {
     @FXML
     private Button register;
     @FXML
@@ -52,17 +53,21 @@ public class CenterRegPage extends Page{
         });
     }
 
-    private PostalAddress addressFromUI()
-    {
+    private PostalAddress addressFromUI() {
+        //Set cap to 0 if the input is an invalid number
+        int capNumber = 0;
+        try {
+            capNumber = Integer.parseInt(cap.getText());
+        } catch (NumberFormatException e) { }
+
         return new PostalAddress(
                 address.getText(),
                 city.getText(),
                 province.getText(),
-                Integer.parseInt(cap.getText()));
+                capNumber);
     }
 
-    private Center centerFromUI()
-    {
+    private Center centerFromUI() {
         return new Center(
                 name.getText(),
                 addressFromUI(),
