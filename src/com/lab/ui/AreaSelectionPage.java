@@ -1,31 +1,25 @@
 package com.lab.ui;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 /**
- * This class represents the area selection page: "Centri" or "Cittadini". Layout is stored in "area_selection.fxml".
+ * Controller of the area selection page: "Centri" or "Cittadini". Layout is stored in "area_selection.fxml".
  * @author Ciceri Luigi
  */
-public class AreaSelectionPage extends Page {
-    private Button centriButton;
-    private Button cittadiniButton;
-
-    /**
-     * Creates a new instance of this class with nodes from area_selection.fxml
-     */
-    public AreaSelectionPage() {
-        super("area_selection.fxml");
-    }
+public class AreaSelectionPage extends Page{
+    @FXML
+    private Button centerArea;
+    @FXML
+    private Button userArea;
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    protected void getComponents() {
-        centriButton = (Button) root.lookup("#centerButton");
-        centriButton.setOnAction(actionEvent -> PagesManager.openCenterActions());
+    @FXML
+    protected void initialize() {
+        centerArea.setOnAction(actionEvent -> PagesManager.openCenterActions());
 
-        cittadiniButton = (Button) root.lookup("#citButton");
-        cittadiniButton.setOnAction(actionEvent -> System.out.println("Not implemented"));
+        userArea.setOnAction(actionEvent -> System.out.println("Not implemented"));
     }
 }

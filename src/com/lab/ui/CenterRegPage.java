@@ -2,55 +2,46 @@ package com.lab.ui;
 
 import com.lab.data.Center;
 import com.lab.data.CenterType;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 /**
- * This class represents the center registration page. Layout is stored in "center_registration.fxml".
+ * Controller of the center registration page. Layout is stored in "center_registration.fxml".
  * @author Ciceri Luigi
  */
-public class CenterRegPage extends Page {
+public class CenterRegPage extends Page{
+    @FXML
     private Button register;
+    @FXML
     private Button back;
-    private TextField nameField;
-    private ComboBox centerTypeCombo;
-    private TextField addressField;
-    private TextField cityField;
-    private TextField capField;
+    @FXML
+    private TextField name;
+    @FXML
+    private ComboBox type;
+    @FXML
+    private TextField address;
+    @FXML
+    private TextField city;
+    @FXML
+    private TextField cap;
     private Center center;
-    /**
-     * Creates a new instance of this class with nodes from center_registration.fxml
-     */
-    public CenterRegPage() {
-        super("center_registration.fxml");
-    }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    protected void getComponents() {
-        nameField = (TextField) root.lookup("#centerName");
-
+    @FXML
+    protected void initialize() {
         //Set center type items and select "Ospedaliero"
-        centerTypeCombo = (ComboBox) root.lookup("#typeSelector");
-        centerTypeCombo.getItems().addAll(CenterType.values());
-        centerTypeCombo.getSelectionModel().select(0);
+        type.getItems().addAll(CenterType.values());
+        type.getSelectionModel().select(0);
 
-        addressField = (TextField) root.lookup("#addressName");
-
-        cityField = (TextField) root.lookup("#comuneName");
-
-        capField = (TextField) root.lookup("#cap");
-
-        register = (Button) root.lookup("#registerButton");
         register.setOnAction(actionEvent -> {
             registraCentroVaccinale();
             PagesManager.openCenterActions();
         });
 
-        back = (Button) root.lookup("#backButton");
         back.requestFocus();
         back.setOnAction(actionEvent -> {
             PagesManager.openCenterActions();

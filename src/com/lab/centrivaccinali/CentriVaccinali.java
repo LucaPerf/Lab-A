@@ -25,7 +25,7 @@ public class CentriVaccinali extends Application {
     @Override
     public void start(Stage stage) {
         stage.setTitle("Lab AB");
-        PagesManager.setStage(stage);
+        PagesManager.initialize(stage);
         stage.show();
 
         //Load files here

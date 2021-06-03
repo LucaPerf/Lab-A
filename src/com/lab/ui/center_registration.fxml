@@ -5,44 +5,36 @@
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.lab.ui.CenterRegPage"
       spacing="12.0"
       alignment="CENTER">
     <TextField
-            fx:id="centerName"
+            fx:id="name"
             maxWidth="200.0"
-            promptText="Name"
-    >
-    </TextField>
+            promptText="Name"/>
     <ComboBox
-            fx:id="typeSelector"
-            maxWidth="200.0"
-    ></ComboBox>
+            fx:id="type"
+            maxWidth="200.0"/>
     <TextField
-            fx:id="addressName"
+            fx:id="address"
             promptText="Indirizzo"
-            maxWidth="200.0"
-    ></TextField>
+            maxWidth="200.0"/>
     <TextField
-            fx:id="comuneName"
+            fx:id="city"
             promptText="Comune"
-            maxWidth="200.0"
-    ></TextField>
+            maxWidth="200.0"/>
     <TextField
             fx:id="cap"
             promptText="CAP"
-            maxWidth="200.0"
-    ></TextField>
+            maxWidth="200.0"/>
     <HBox
             spacing="12.0"
             alignment="CENTER">
         <Button
                 text="ANNULLA"
-                fx:id="backButton"
-        ></Button>
+                fx:id="back"/>
         <Button
                 text="AGGIUNGI"
-                fx:id="registerButton"
-        ></Button>
-
+                fx:id="register"/>
     </HBox>
 </VBox>

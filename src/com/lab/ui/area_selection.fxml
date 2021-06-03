@@ -5,16 +5,15 @@
 <VBox
         xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
+        fx:controller="com.lab.ui.AreaSelectionPage"
         alignment="CENTER"
         spacing="12.0">
     <Button
-            fx:id="centerButton"
+            fx:id="centerArea"
             text="CENTRI"
-            prefWidth="200">
-    </Button>
+            prefWidth="200"/>
     <Button
-            fx:id="citButton"
+            fx:id="userArea"
             text="CITTADINI"
-            prefWidth="200">
-    </Button>
+            prefWidth="200"/>
 </VBox>
