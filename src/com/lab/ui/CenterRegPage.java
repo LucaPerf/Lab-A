@@ -25,6 +25,8 @@ public class CenterRegPage extends Page{
     @FXML
     private TextField city;
     @FXML
+    private TextField province;
+    @FXML
     private TextField cap;
     private Center center;
 
@@ -52,9 +54,10 @@ public class CenterRegPage extends Page{
         System.out.println("Not implemented");
         /*
         PostalAddress address = new PostalAddress(
-            addressField.getText(),
-            comuneField.getText(),
-            Integer.parseInt(capField.getText()));
+            address.getText(),
+            city.getText(),
+            province.getText(),
+            Integer.parseInt(cap.getText()));
         center = new Center(nameField.getText(),address,(CenterType)centerTypeCombo.getSelectionModel().getSelectedItem());
         Centri.add(center);
         Centri.save();
