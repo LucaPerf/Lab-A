@@ -1,0 +1,21 @@
+//Use application and OpenJFX plugin
+plugins
+        {
+            id 'application'
+            id 'org.openjfx.javafxplugin' version '0.0.10'
+        }
+
+//Where the class with the main method is
+mainClassName = 'com.lab.centrivaccinali.CentriVaccinali'
+
+//Maven repository to download libraries from
+repositories
+        {
+            mavenCentral()
+        }
+
+//OpenJFX version and modules to use in the project
+javafx {
+    version = "16"
+    modules = [ 'javafx.controls','javafx.fxml' ]
+}
