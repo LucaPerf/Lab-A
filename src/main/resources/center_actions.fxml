@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.VBox?>
+<?import com.jfoenix.controls.JFXButton?>
+
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.lab.ui.CenterActionsPage"
       alignment="CENTER"
       spacing="12.0">
-    <Button
+    <JFXButton
             text="AGGIUNGI CENTRO"
             fx:id="addCenter"
             prefWidth="200"/>
-    <Button
+    <JFXButton
             text="AGGIUNGI VACCINATO"
             fx:id="addVax"
             prefWidth="200"/>
-    <Button
+    <JFXButton
             text="INDIETRO"
             fx:id="back"
             prefWidth="200"/>

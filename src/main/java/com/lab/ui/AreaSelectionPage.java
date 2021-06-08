@@ -1,17 +1,18 @@
 package com.lab.ui;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
 /**
  * Controller of the area selection page: "Centri" or "Cittadini". Layout is stored in "area_selection.fxml".
+ *
  * @author Ciceri Luigi
  */
-public class AreaSelectionPage extends Page{
+public class AreaSelectionPage extends Page {
     @FXML
-    private Button centerArea;
+    private JFXButton centerArea;
     @FXML
-    private Button userArea;
+    private JFXButton userArea;
 
     /**
      * {@inheritDoc}

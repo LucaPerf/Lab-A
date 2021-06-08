@@ -7,15 +7,20 @@ plugins
 
 //Where the class with the main method is
 mainClassName = 'com.lab.centrivaccinali.CentriVaccinali'
-
+//Needed to fix JFoenix TextField errors
+applicationDefaultJvmArgs = ["--add-opens=java.base/java.lang.reflect=ALL-UNNAMED"]
 //Maven repository to download libraries from
 repositories
         {
             mavenCentral()
         }
-
+//Libraries
+dependencies
+        {
+            implementation 'com.jfoenix:jfoenix:9.0.10'
+        }
 //OpenJFX version and modules to use in the project
 javafx {
     version = "16"
-    modules = [ 'javafx.controls','javafx.fxml' ]
+    modules = ['javafx.controls', 'javafx.fxml']
 }

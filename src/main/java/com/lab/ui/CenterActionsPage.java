@@ -1,19 +1,20 @@
 package com.lab.ui;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
 /**
  * Controller of center actions page. Layout is stored in "center_actions.fxml".
+ *
  * @author CIceri Luigi
  */
-public class CenterActionsPage extends Page{
+public class CenterActionsPage extends Page {
     @FXML
-    private Button addVax;
+    private JFXButton addVax;
     @FXML
-    private Button addCenter;
+    private JFXButton addCenter;
     @FXML
-    private Button back;
+    private JFXButton back;
 
     /**
      * {@inheritDoc}

@@ -1,43 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXButton?>
+
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.lab.ui.CenterRegPage"
       spacing="12.0"
       alignment="CENTER">
-    <TextField
+    <JFXTextField
             fx:id="name"
             maxWidth="200.0"
             promptText="Name"/>
-    <ComboBox
+    <JFXComboBox
             fx:id="type"
             maxWidth="200.0"/>
-    <TextField
+    <JFXTextField
             fx:id="address"
             promptText="Indirizzo"
             maxWidth="200.0"/>
-    <TextField
+    <JFXTextField
             fx:id="city"
             promptText="Comune"
             maxWidth="200.0"/>
-    <TextField
+    <JFXTextField
             fx:id="province"
             promptText="Provincia"
             maxWidth="200.0"/>
-    <TextField
+    <JFXTextField
             fx:id="cap"
             promptText="CAP"
             maxWidth="200.0"/>
     <HBox
             spacing="12.0"
             alignment="CENTER">
-        <Button
+        <JFXButton
                 text="ANNULLA"
                 fx:id="back"/>
-        <Button
+        <JFXButton
                 text="AGGIUNGI"
                 fx:id="register"/>
     </HBox>

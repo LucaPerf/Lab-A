@@ -1,12 +1,12 @@
 package com.lab.ui;
 
+import javafx.fxml.FXML;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import com.lab.data.Center;
 import com.lab.data.CenterType;
 import com.lab.data.PostalAddress;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import com.lab.centrivaccinali.CentriVaccinali;
 
 /**
@@ -16,21 +16,21 @@ import com.lab.centrivaccinali.CentriVaccinali;
  */
 public class CenterRegPage extends Page {
     @FXML
-    private Button register;
+    private JFXButton register;
     @FXML
-    private Button back;
+    private JFXButton back;
     @FXML
-    private TextField name;
+    private JFXTextField name;
     @FXML
-    private ComboBox type;
+    private JFXComboBox type;
     @FXML
-    private TextField address;
+    private JFXTextField address;
     @FXML
-    private TextField city;
+    private JFXTextField city;
     @FXML
-    private TextField province;
+    private JFXTextField province;
     @FXML
-    private TextField cap;
+    private JFXTextField cap;
     private Center center;
 
     /**
@@ -58,7 +58,8 @@ public class CenterRegPage extends Page {
         int capNumber = 0;
         try {
             capNumber = Integer.parseInt(cap.getText());
-        } catch (NumberFormatException e) { }
+        } catch (NumberFormatException e) {
+        }
 
         return new PostalAddress(
                 address.getText(),
