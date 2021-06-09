@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.lab.ui.CenterActionsPage"
-      alignment="CENTER"
+<VBox alignment="CENTER"
       spacing="12.0"
-      stylesheets="/css/light.css">
-    <JFXButton
-            text="AGGIUNGI CENTRO"
-            fx:id="addCenter"
-            prefWidth="200"
-            styleClass="button-contained"/>
-    <JFXButton
-            text="AGGIUNGI VACCINATO"
-            fx:id="addVax"
-            prefWidth="200"
-            styleClass="button-contained"/>
-    <JFXButton
-            text="INDIETRO"
-            fx:id="back"
-            prefWidth="200"
-            styleClass="button-text"/>
+      stylesheets="/css/light.css"
+      xmlns="http://javafx.com/javafx/11.0.2"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.lab.ui.CenterActionsPage">
+    <JFXButton fx:id="addCenter"
+               prefWidth="200"
+               styleClass="button-contained"
+               text="AGGIUNGI CENTRO"/>
+    <JFXButton fx:id="addVax"
+               prefWidth="200"
+               styleClass="button-contained"
+               text="AGGIUNGI VACCINATO"/>
+    <JFXButton fx:id="back"
+               prefWidth="200"
+               styleClass="button-text"
+               text="INDIETRO"/>
+    <padding>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+    </padding>
 
 </VBox>

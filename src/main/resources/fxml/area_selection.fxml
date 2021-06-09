@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.lab.ui.AreaSelectionPage"
-      alignment="CENTER"
+<VBox alignment="CENTER"
       spacing="12.0"
-      stylesheets="/css/light.css">
-    <JFXButton
-            fx:id="centerArea"
-            text="CENTRI"
-            prefWidth="200"
-            styleClass="button-contained"/>
-    <JFXButton
-            fx:id="userArea"
-            text="CITTADINI"
-            prefWidth="200"
-            styleClass="button-contained"/>
+      stylesheets="/css/light.css"
+      xmlns="http://javafx.com/javafx/11.0.2"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.lab.ui.AreaSelectionPage">
+    <JFXButton fx:id="centerArea"
+               prefWidth="200"
+               styleClass="button-contained"
+               text="CENTRI"/>
+    <JFXButton fx:id="userArea"
+               prefWidth="200"
+               styleClass="button-contained"
+               text="CITTADINI"/>
+    <padding>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+    </padding>
 </VBox>

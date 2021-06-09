@@ -1,54 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.layout.*?>
 
 <VBox alignment="CENTER"
       spacing="28.0"
+      stylesheets="/css/light.css"
       xmlns="http://javafx.com/javafx/11.0.2"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.lab.ui.CenterRegPage"
-      stylesheets="/css/light.css">
-    <JFXTextField
-            fx:id="name"
-            maxWidth="200.0"
-            promptText="Name"
-            styleClass="text-field"/>
-    <JFXComboBox
-            fx:id="type"
-            maxWidth="200.0"
-            promptText="Tipo"
-            styleClass="combo-box"/>
-    <JFXTextField
-            fx:id="address"
-            maxWidth="200.0"
-            promptText="Indirizzo"
-            styleClass="text-field"/>
-    <JFXTextField
-            fx:id="city"
-            maxWidth="200.0"
-            promptText="Comune"
-            styleClass="text-field"/>
-    <JFXTextField
-            fx:id="province"
-            maxWidth="200.0"
-            promptText="Provincia"
-            styleClass="text-field"/>
-    <JFXTextField
-            fx:id="cap"
-            maxWidth="200.0"
-            promptText="CAP"
-            styleClass="text-field"/>
-    <HBox
-            alignment="CENTER"
-            spacing="12.0">
-        <JFXButton
-                fx:id="back"
-                styleClass="button-text"
-                text="ANNULLA"/>
-        <JFXButton
-                fx:id="register"
-                styleClass="button-contained"
-                text="AGGIUNGI"/>
+      fx:controller="com.lab.ui.CenterRegPage">
+    <JFXTextField fx:id="name"
+                  maxWidth="200.0"
+                  prefWidth="200.0"
+                  promptText="Name"
+                  styleClass="text-field"/>
+    <JFXComboBox fx:id="type"
+                 maxWidth="200.0"
+                 prefWidth="200.0"
+                 promptText="Tipo"
+                 styleClass="combo-box"/>
+    <JFXTextField fx:id="address"
+                  maxWidth="200.0" prefWidth="200.0" promptText="Indirizzo" styleClass="text-field"/>
+    <JFXTextField fx:id="city"
+                  maxWidth="200.0"
+                  prefWidth="200.0"
+                  promptText="Comune"
+                  styleClass="text-field"/>
+    <JFXTextField fx:id="province"
+                  maxWidth="200.0"
+                  prefWidth="200.0"
+                  promptText="Provincia"
+                  styleClass="text-field"/>
+    <JFXTextField fx:id="cap"
+                  maxWidth="200.0"
+                  prefWidth="200.0"
+                  promptText="CAP"
+                  styleClass="text-field"/>
+    <HBox alignment="CENTER"
+          maxWidth="200.0"
+          prefWidth="200.0"
+          spacing="12.0">
+        <JFXButton fx:id="back"
+                   maxWidth="96.0"
+                   prefWidth="96.0"
+                   styleClass="button-text"
+                   text="ANNULLA"/>
+        <JFXButton fx:id="register"
+                   maxWidth="96.0"
+                   prefWidth="96.0"
+                   styleClass="button-contained"
+                   text="AGGIUNGI"/>
     </HBox>
+    <padding>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+    </padding>
 </VBox>
