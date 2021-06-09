@@ -8,7 +8,7 @@
       fx:controller="com.lab.ui.CenterActionsPage"
       alignment="CENTER"
       spacing="12.0"
-      stylesheets="css/light.css">
+      stylesheets="/css/light.css">
     <JFXButton
             text="AGGIUNGI CENTRO"
             fx:id="addCenter"

@@ -31,9 +31,9 @@ public class PagesManager {
     public static void initialize(Stage stage) {
         //Load all pages from fxml
         try{
-            centerRegPage = FXMLLoader.load(PagesManager.class.getResource("/center_registration.fxml"));
-            centerActionsPage = FXMLLoader.load(PagesManager.class.getResource("/center_actions.fxml"));
-            areaSelectionPage = FXMLLoader.load(PagesManager.class.getResource("/area_selection.fxml"));
+            centerRegPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/center_registration.fxml"));
+            centerActionsPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/center_actions.fxml"));
+            areaSelectionPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/area_selection.fxml"));
         }
         catch (IOException e)
         {

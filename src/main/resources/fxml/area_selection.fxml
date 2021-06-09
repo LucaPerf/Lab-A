@@ -8,7 +8,7 @@
       fx:controller="com.lab.ui.AreaSelectionPage"
       alignment="CENTER"
       spacing="12.0"
-      stylesheets="css/light.css">
+      stylesheets="/css/light.css">
     <JFXButton
             fx:id="centerArea"
             text="CENTRI"

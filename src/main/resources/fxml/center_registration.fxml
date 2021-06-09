@@ -8,7 +8,7 @@
       xmlns="http://javafx.com/javafx/11.0.2"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.lab.ui.CenterRegPage"
-      stylesheets="css/light.css">
+      stylesheets="/css/light.css">
     <JFXTextField
             fx:id="name"
             maxWidth="200.0"
