@@ -1,0 +1,56 @@
+.root
+{
+    -primary-color: #3f51b5;
+    -primary-color-hover: #3f51b50a;
+    -secondary-color: #ffc107;
+    -text-on-primary: WHITE;
+    -text-on-secondary: #000000;
+    -rippler-indigo-fill: #5264AE;
+    -fx-background-color: WHITE;
+}
+
+//Buttons
+.button-contained{
+    -jfx-button-type: RAISED;
+    -fx-background-color: -primary-color;
+    -fx-text-fill: -text-on-primary;
+}
+.button-text
+{
+    -jfx-button-type: FLAT;
+    -fx-text-fill: -primary-color;
+}
+
+//Text field
+.text-field
+{
+    -jfx-label-float: true;
+}
+
+//Combo box
+.combo-box
+{
+    -jfx-label-float: true;
+}
+.combo-box .list-view
+{
+    -fx-background-color: WHITE;
+}
+.combo-box .list-view .jfx-list-cell:selected
+{
+    -fx-background-color: WHITE;
+    -fx-text-fill: -text-on-secondary;
+}
+.combo-box .list-view .jfx-list-cell:selected:hover
+{
+    -fx-background-color: -primary-color-hover;
+}
+.combo-box .list-view .jfx-list-cell:hover
+{
+    -fx-background-color: -primary-color-hover;
+    -fx-text-fill: -text-on-secondary;
+}
+.combo-box .list-view .jfx-list-cell .jfx-rippler
+{
+    -jfx-rippler-fill: -rippler-indigo-fill;
+}

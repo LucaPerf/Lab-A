@@ -1,47 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
+<VBox alignment="CENTER"
+      spacing="28.0"
+      xmlns="http://javafx.com/javafx/11.0.2"
+      xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.lab.ui.CenterRegPage"
-      spacing="12.0"
-      alignment="CENTER">
+      stylesheets="css/light.css">
     <JFXTextField
             fx:id="name"
             maxWidth="200.0"
-            promptText="Name"/>
+            promptText="Name"
+            styleClass="text-field"/>
     <JFXComboBox
             fx:id="type"
-            maxWidth="200.0"/>
+            maxWidth="200.0"
+            promptText="Tipo"
+            styleClass="combo-box"/>
     <JFXTextField
             fx:id="address"
+            maxWidth="200.0"
             promptText="Indirizzo"
-            maxWidth="200.0"/>
+            styleClass="text-field"/>
     <JFXTextField
             fx:id="city"
+            maxWidth="200.0"
             promptText="Comune"
-            maxWidth="200.0"/>
+            styleClass="text-field"/>
     <JFXTextField
             fx:id="province"
+            maxWidth="200.0"
             promptText="Provincia"
-            maxWidth="200.0"/>
+            styleClass="text-field"/>
     <JFXTextField
             fx:id="cap"
+            maxWidth="200.0"
             promptText="CAP"
-            maxWidth="200.0"/>
+            styleClass="text-field"/>
     <HBox
-            spacing="12.0"
-            alignment="CENTER">
+            alignment="CENTER"
+            spacing="12.0">
         <JFXButton
-                text="ANNULLA"
-                fx:id="back"/>
+                fx:id="back"
+                styleClass="button-text"
+                text="ANNULLA"/>
         <JFXButton
-                text="AGGIUNGI"
-                fx:id="register"/>
+                fx:id="register"
+                styleClass="button-contained"
+                text="AGGIUNGI"/>
     </HBox>
 </VBox>
