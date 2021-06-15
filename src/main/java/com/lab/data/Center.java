@@ -8,8 +8,22 @@ package com.lab.data;
  */
 
 public class Center {
+    public String getName() {
+        return name;
+    }
+
     private String name;
+
+    public PostalAddress getAddress() {
+        return address;
+    }
+
     private PostalAddress address;
+
+    public CenterType getType() {
+        return type;
+    }
+
     private CenterType type;
 
     public Center(String name, PostalAddress address, CenterType type){
