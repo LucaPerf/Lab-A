@@ -18,7 +18,8 @@ repositories
 dependencies
         {
             implementation 'com.jfoenix:jfoenix:9.0.10'
-            implementation 'org.simpleflatmapper:sfm-csv:8.2.3'
+            implementation group: 'org.simpleflatmapper', name: 'sfm-csv', version: '8.2.3'
+            implementation group: 'org.simpleflatmapper', name: 'lightning-csv', version: '8.2.3'
 
         }
 //OpenJFX version and modules to use in the project
