@@ -7,28 +7,33 @@ package com.lab.data;
  * @author Luca Perfetti
  */
 
-public class Center {
+public class Center{
+    private String name;
+    private PostalAddress address;
+    private CenterType type;
+
     public String getName() {
+
         return name;
     }
 
-    private String name;
-
     public PostalAddress getAddress() {
+
         return address;
     }
 
-    private PostalAddress address;
-
     public CenterType getType() {
+
         return type;
     }
-
-    private CenterType type;
 
     public Center(String name, PostalAddress address, CenterType type){
         this.name = name;
         this.address = address;
         this.type = type;
+    }
+
+    public String[] csvColumns(){
+        return new String[]{name, address.getCap().toString(), address.getComune(), address.getIndirizzo(), address.getProvincia(), type.toString()};
     }
 }
