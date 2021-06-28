@@ -13,6 +13,26 @@ public class PostalAddress {
     private String provincia;
     private Integer cap;
 
+    public String getIndirizzo() {
+
+        return indirizzo;
+    }
+
+    public String getComune() {
+
+        return comune;
+    }
+
+    public String getProvincia() {
+
+        return provincia;
+    }
+
+    public Integer getCap() {
+
+        return cap;
+    }
+
     public PostalAddress(String indirizzo, String comune, String provincia, Integer cap){
         this.indirizzo = indirizzo;
         this.comune = comune;
