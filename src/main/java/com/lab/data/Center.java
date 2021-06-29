@@ -36,4 +36,8 @@ public class Center{
     public String[] csvColumns(){
         return new String[]{name, address.getCap().toString(), address.getComune(), address.getIndirizzo(), address.getProvincia(), type.toString()};
     }
+
+    public String[] ArrayCenter(){
+            return new String[]{name, address.toString(), type.toString()};
+    }
 }
