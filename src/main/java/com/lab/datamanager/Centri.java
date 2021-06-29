@@ -30,7 +30,7 @@ public class Centri {
 
     private static void addToHashMapByComune(Center center) {
         //if the provincia is there, add to the list
-        if (centers.containsValue(center.getAddress().getComune()))
+        if (centers.containsKey(center.getAddress().getComune()))
             centers.get(center.getAddress().getComune()).add(center);
 
             //if there is no provincia, create a new list then add the center and put the list into the HashMap
