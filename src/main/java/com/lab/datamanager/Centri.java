@@ -10,7 +10,9 @@ import java.util.*;
 import java.io.*;
 
 /**
- * class used for center data management
+ * Class used for center data management.
+ * Centers data is stored into a LinkedHashMap with the comune name as key, and a LinkedList as values. In this way centers are grouped by comune.
+ * This class provides static methods to load and save centers to a CSV file, named "CentriVaccinali.csv".
  *
  * @author Luigi Ciceri
  **/
@@ -19,20 +21,25 @@ public class Centri {
     private static LinkedHashMap<String, LinkedList<Center>> centers = new LinkedHashMap<>();
 
     /**
-     * method for adding centers
+     * Adds a center to the LinkedHasMap, using the comune as key
      *
-     * @param center
+     * @param center The center to add
      */
     private static void addCenter(Center center) {
         addToHashMapByComune(center);
     }
 
+    /**
+     * Adds a center to the LinkedHashMap by putting it into its LinkedList which is associated to the center own comune
+     *
+     * @param center The center to add
+     */
     private static void addToHashMapByComune(Center center) {
-        //if the provincia is there, add to the list
+        //if the comune is there, add the center to the list
         if (centers.containsKey(center.getAddress().getComune()))
             centers.get(center.getAddress().getComune()).add(center);
 
-            //if there is no provincia, create a new list then add the center and put the list into the HashMap
+            //if there is no comune, create a new list then add the center and put the list into the HashMap
         else {
             LinkedList<Center> l = new LinkedList<>();
             l.add(center);
@@ -42,9 +49,9 @@ public class Centri {
 
 
     /**
-     * method to save the center
+     * Writes a center to the file, in CSV format
      *
-     * @param center
+     * @param center The center to write
      */
     public static void saveCenter(Center center) {
         //Add to the HashMap
@@ -68,7 +75,7 @@ public class Centri {
     }
 
     /**
-     * method used to read the data from the file and insert it into the LinkedHashMap
+     * Method used to read the data from the file and insert it into the LinkedHashMap
      */
     public static void load() {
         try {
