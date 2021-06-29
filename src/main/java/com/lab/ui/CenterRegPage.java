@@ -22,7 +22,7 @@ public class CenterRegPage extends Page {
     @FXML
     private JFXTextField name;
     @FXML
-    private JFXComboBox type;
+    private JFXComboBox<CenterType> type;
     @FXML
     private JFXTextField address;
     @FXML
@@ -72,6 +72,6 @@ public class CenterRegPage extends Page {
         return new Center(
                 name.getText(),
                 addressFromUI(),
-                (CenterType) type.getSelectionModel().getSelectedItem());
+                type.getSelectionModel().getSelectedItem());
     }
 }
