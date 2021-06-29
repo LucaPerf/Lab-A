@@ -39,4 +39,8 @@ public class PostalAddress {
         this.provincia = provincia;
         this.cap = cap;
     }
+
+    public String[] ArrayAddress(){
+        return new String[]{indirizzo, provincia, comune, cap.toString()};
+    }
 }
