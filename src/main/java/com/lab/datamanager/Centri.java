@@ -24,7 +24,6 @@ public class Centri {
      * @param center
      */
     private static void addCenter(Center center) {
-
         addToHashMapByComune(center);
     }
 
@@ -71,7 +70,7 @@ public class Centri {
     /**
      * method used to read the data from the file and insert it into the LinkedHashMap
      */
-    public static void loadCenter(Center center) {
+    public static void load() {
         try {
             FileReader fr = new FileReader("CentriVaccinali.csv");
 
@@ -88,7 +87,7 @@ public class Centri {
                 Center centro = new Center(row[0], address, CenterType.valueOf(row[5].toUpperCase(Locale.ROOT)));
 
                 //Add to LinkedHashMap with  a list of centers for each comune
-                addToHashMapByComune(center);
+                addToHashMapByComune(centro);
             }
 
             Collection<LinkedList<Center>> data = centers.values();
