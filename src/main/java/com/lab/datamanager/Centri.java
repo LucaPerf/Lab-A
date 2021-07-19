@@ -90,8 +90,7 @@ public class Centri {
                 String[] row = iter.next();
 
                 //Create the object
-                PostalAddress address = new PostalAddress(row[3], row[2], row[4], Integer.parseInt(row[1]));
-                Center centro = new Center(row[0], address, CenterType.valueOf(row[5].toUpperCase(Locale.ROOT)));
+                Center centro = new Center(row);
 
                 //Add to LinkedHashMap with  a list of centers for each comune
                 addToHashMapByComune(centro);
