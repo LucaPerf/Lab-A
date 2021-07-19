@@ -1,20 +1,24 @@
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
+
 //Use application and OpenJFX plugin
 plugins
         {
             id 'application'
             id 'org.openjfx.javafxplugin' version '0.0.10'
+            id "com.github.johnrengelman.shadow" version "7.0.0"
         }
-
+//Current OS
+OperatingSystem os = DefaultNativePlatform.currentOperatingSystem
 //Where the class with the main method is
-mainClassName = 'com.lab.centrivaccinali.CentriVaccinali'
+mainClassName = 'com.lab.centrivaccinali.Launcher'
 //Needed to fix JFoenix TextField errors
 applicationDefaultJvmArgs = ["--add-opens=java.base/java.lang.reflect=ALL-UNNAMED"]
-//Maven repository to download libraries from
+//Maven repository to download dependencies from
 repositories
         {
             mavenCentral()
         }
-//Libraries
+//Dependencies
 dependencies
         {
             implementation 'com.jfoenix:jfoenix:9.0.10'
@@ -27,3 +31,29 @@ javafx {
     version = "16"
     modules = ['javafx.controls', 'javafx.fxml']
 }
+
+//Adds the proper zip package name
+shadowDistZip
+        {
+            destinationDirectory = file("$rootDir/bin")
+            archiveBaseName.set("Lab-AB")
+            String classifier
+            if (os.isLinux())
+                classifier = 'linux'
+            else if (os.isWindows())
+                classifier = 'windows'
+            else
+                classifier = 'macOs'
+            archiveClassifier.set(classifier)
+        }
+
+//Delete unneeded starter (.sh and .bat) scripts as OpenJFX is bundled in the jar and is platform specific. Per-platform builds are required.
+startShadowScripts
+        {
+            doLast {
+                if (os.isWindows())
+                    delete unixScript
+                else
+                    delete windowsScript
+            }
+        }
