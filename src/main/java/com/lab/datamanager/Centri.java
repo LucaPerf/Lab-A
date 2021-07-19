@@ -64,7 +64,7 @@ public class Centri {
             CsvWriter writer = CsvWriter.dsl().to(fw);
 
             //Each element of the array is a cell
-            String[] columns = center.csvColumns();
+            String[] columns = center.toRow();
 
             //Write row
             writer.appendRow(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5]);
@@ -100,7 +100,7 @@ public class Centri {
             Collection<LinkedList<Center>> data = centers.values();
             for (LinkedList<Center> l : data) {
                 for (Center t : l)
-                    System.out.println(Arrays.toString(t.csvColumns()));
+                    System.out.println(Arrays.toString(t.toRow()));
             }
         } catch (IOException e) {
             System.out.println(e);

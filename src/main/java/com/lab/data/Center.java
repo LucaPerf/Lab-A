@@ -33,7 +33,7 @@ public class Center{
         this.type = type;
     }
 
-    public String[] csvColumns(){
+    public String[] toRow(){
         return new String[]{name, address.getCap().toString(), address.getComune(), address.getIndirizzo(), address.getProvincia(), type.toString()};
     }
 
