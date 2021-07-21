@@ -8,12 +8,14 @@ import javafx.stage.Stage;
 
 /**
  * Main class used to initialize data and UI
+ *
  * @author Ciceri Luigi
  */
 public class CentriVaccinali extends Application {
 
     /**
      * Launches the application
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -22,6 +24,7 @@ public class CentriVaccinali extends Application {
 
     /**
      * Opens the UI stage, loads data, and opens the area selection page
+     *
      * @param stage The stage to load
      */
     @Override
@@ -35,6 +38,11 @@ public class CentriVaccinali extends Application {
         PagesManager.openAreaSelection();
     }
 
+    /**
+     * Add a new center into "CentriVaccinali.csv"
+     *
+     * @param center The center to add
+     */
     public static void registraCentroVaccinale(Center center) {
         Centri.saveCenter(center);
     }
