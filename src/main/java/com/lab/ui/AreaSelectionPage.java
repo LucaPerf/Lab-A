@@ -21,6 +21,6 @@ public class AreaSelectionPage extends Page {
     protected void initialize() {
         centerArea.setOnAction(actionEvent -> PagesManager.openCenterActions());
 
-        userArea.setOnAction(actionEvent -> System.out.println("Not implemented"));
+        userArea.setOnAction(actionEvent -> PagesManager.openUserMain());
     }
 }
