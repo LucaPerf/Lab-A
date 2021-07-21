@@ -5,6 +5,11 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 
+/**
+ * Controller of the user area main page. Layout is stored in "user_main.fxml".
+ *
+ * @author Ciceri Luigi
+ */
 public class UserMainPage extends Page {
     @FXML
     private JFXButton login;
@@ -15,6 +20,9 @@ public class UserMainPage extends Page {
     @FXML
     private JFXListView centers;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void initialize() {
         login.setOnAction(actionEvent -> System.out.println("Not implemented"));

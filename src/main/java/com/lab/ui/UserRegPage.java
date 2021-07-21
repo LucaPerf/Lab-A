@@ -6,6 +6,11 @@ import com.lab.cittadini.Cittadini;
 import com.lab.data.User;
 import javafx.fxml.FXML;
 
+/**
+ * Controller of the user registration page. Layout is stored in "user_registration.fxml".
+ *
+ * @author CIceri Luigi
+ */
 public class UserRegPage extends Page {
     @FXML
     private JFXTextField username;
@@ -26,6 +31,9 @@ public class UserRegPage extends Page {
     @FXML
     private JFXButton cancel;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void initialize() {
         register.setOnAction(actionEvent ->
@@ -37,6 +45,7 @@ public class UserRegPage extends Page {
         cancel.setOnAction(actionEvent -> PagesManager.openUserMain());
     }
 
+    //Creates a new User object from the UI fields
     private User userFromUI() {
         return new User(name.getText(), surname.getText(), ccf.getText(), email.getText(), username.getText(), password.getText(), Integer.parseInt(uid.getText()));
     }

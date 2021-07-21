@@ -75,7 +75,13 @@ public class PagesManager {
         open(centerActionsPage);
     }
 
+    /**
+     * Opens the user area main page
+     */
     public static void openUserMain() { open(userMainPage); }
 
+    /**
+     * Opens the user registration page
+     */
     public static void openUserReg() { open(userRegPage); }
 }
