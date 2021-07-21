@@ -19,6 +19,6 @@ public class UserMainPage extends Page {
     protected void initialize() {
         login.setOnAction(actionEvent -> System.out.println("Not implemented"));
 
-        register.setOnAction(actionEvent -> System.out.println("Not implemented"));
+        register.setOnAction(actionEvent -> PagesManager.openUserReg());
     }
 }

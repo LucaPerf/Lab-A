@@ -26,6 +26,7 @@ public class PagesManager {
     private static Parent centerActionsPage;
     private static Parent areaSelectionPage;
     private static Parent userMainPage;
+    private static Parent userRegPage;
 
     /**
      * Loads all UI pages from fxml, creates a new scene with an empty HBox Node and sets the stage scene
@@ -39,6 +40,7 @@ public class PagesManager {
             centerActionsPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/center_actions.fxml"));
             areaSelectionPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/area_selection.fxml"));
             userMainPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/user_main.fxml"));
+            userRegPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/user_registration.fxml"));
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -73,7 +75,7 @@ public class PagesManager {
         open(centerActionsPage);
     }
 
-    public static void openUserMain() {
-        open(userMainPage);
-    }
+    public static void openUserMain() { open(userMainPage); }
+
+    public static void openUserReg() { open(userRegPage); }
 }
