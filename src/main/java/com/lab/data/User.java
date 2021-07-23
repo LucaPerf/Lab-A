@@ -15,6 +15,14 @@ public class User {
     private Integer uID;
 
     /**
+     * The "codice fiscale" of the user
+     * @return
+     */
+    public String getCcf(){
+        return ccf;
+    }
+
+    /**
      * Creates a new user object.
      *
      * @param name     The name of the user
@@ -69,7 +77,8 @@ public class User {
      * 5: email
      * 6: unique id
      */
-    String[] toRow() {
-        return new String[]{userID, password, name, surname, ccf, email, uID.toString()};
+    public String[] toRow() {
+        return new String[]{
+                userID, password, name, surname, ccf, email, uID.toString()};
     }
 }
