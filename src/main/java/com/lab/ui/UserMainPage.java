@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
  */
 public class UserMainPage extends Page {
     @FXML
+    private JFXButton back;
+    @FXML
     private JFXButton login;
     @FXML
     private JFXButton register;
@@ -28,5 +30,7 @@ public class UserMainPage extends Page {
         login.setOnAction(actionEvent -> System.out.println("Not implemented"));
 
         register.setOnAction(actionEvent -> PagesManager.openUserReg());
+
+        back.setOnAction(actionEvent -> PagesManager.openAreaSelection());
     }
 }
