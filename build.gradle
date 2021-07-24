@@ -2,28 +2,67 @@
 plugins
         {
             id 'application'
-            id 'org.openjfx.javafxplugin' version '0.0.10'
+            id "com.github.johnrengelman.shadow" version "7.0.0"
         }
 
 //Where the class with the main method is
-mainClassName = 'com.lab.centrivaccinali.CentriVaccinali'
+mainClassName = 'com.lab.centrivaccinali.Launcher'
 //Needed to fix JFoenix TextField errors
 applicationDefaultJvmArgs = ["--add-opens=java.base/java.lang.reflect=ALL-UNNAMED"]
-//Maven repository to download libraries from
+
+//Maven repository to download dependencies from
 repositories
         {
             mavenCentral()
         }
-//Libraries
+
+//Dependencies
 dependencies
         {
             implementation 'com.jfoenix:jfoenix:9.0.10'
             implementation group: 'org.simpleflatmapper', name: 'sfm-csv', version: '8.2.3'
             implementation group: 'org.simpleflatmapper', name: 'lightning-csv', version: '8.2.3'
-
+            //JavaFX dependencies
+            implementation group: 'org.openjfx', name: 'javafx-graphics', version: 16, classifier: 'linux'
+            implementation group: 'org.openjfx', name: 'javafx-graphics', version: 16, classifier: 'mac'
+            implementation group: 'org.openjfx', name: 'javafx-graphics', version: 16, classifier: 'win'
+            implementation group: 'org.openjfx', name: 'javafx-fxml', version: 16, classifier: 'win'
+            implementation group: 'org.openjfx', name: 'javafx-fxml', version: 16, classifier: 'linux'
+            implementation group: 'org.openjfx', name: 'javafx-fxml', version: 16, classifier: 'mac'
+            implementation group: 'org.openjfx', name: 'javafx-controls', version: 16, classifier: 'linux'
+            implementation group: 'org.openjfx', name: 'javafx-controls', version: 16, classifier: 'win'
+            implementation group: 'org.openjfx', name: 'javafx-controls', version: 16, classifier: 'mac'
+            implementation group: 'org.openjfx', name: 'javafx-base', version: 16, classifier: 'mac'
+            implementation group: 'org.openjfx', name: 'javafx-base', version: 16, classifier: 'linux'
+            implementation group: 'org.openjfx', name: 'javafx-base', version: 16, classifier: 'win'
         }
-//OpenJFX version and modules to use in the project
-javafx {
-    version = "16"
-    modules = ['javafx.controls', 'javafx.fxml']
-}
+
+//Copy scripts to root distribution folder
+distributions.shadow
+        {
+            contents
+                    {
+                        from startShadowScripts
+                    }
+        }
+//Customize shadow dist task
+shadowDistZip
+        {
+            destinationDirectory = file("$rootDir/bin")
+            archiveBaseName.set('Lab-AB')
+            archiveClassifier.set('all')
+            //Remove duplicate scripts file in bin folder
+            eachFile { file ->
+                if (file.path.contains('bin')) {
+                    file.exclude()
+                }
+            }
+        }
+//Set non default APP_HOME in scripts
+startShadowScripts
+        {
+            doLast {
+                windowsScript.text = windowsScript.text.replace('set APP_HOME=%DIRNAME%..', 'set APP_HOME=%DIRNAME%')
+                unixScript.text = unixScript.text.replace('cd "`dirname \\"$PRG\\"`/.." >/dev/null', 'cd "`dirname \\"$PRG\\"`" >/dev/null')
+            }
+        }
