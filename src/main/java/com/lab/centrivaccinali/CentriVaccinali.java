@@ -2,6 +2,7 @@ package com.lab.centrivaccinali;
 
 import com.lab.data.Center;
 import com.lab.datamanager.Centri;
+import com.lab.datamanager.Registrati;
 import com.lab.ui.PagesManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -34,6 +35,7 @@ public class CentriVaccinali extends Application {
         stage.show();
 
         Centri.load();
+        Registrati.loadCittadino();
 
         PagesManager.openAreaSelection();
     }

@@ -1,6 +1,7 @@
 package com.lab.cittadini;
 
 import com.lab.data.User;
+import com.lab.datamanager.Registrati;
 
 /**
  * This class manages the user actions
@@ -15,6 +16,6 @@ public class Cittadini {
      * @param user The user to add
      */
     public static void registraCittadino(User user) {
-        //Registrati.add(user);
+        Registrati.saveCittadini(user);
     }
 }
