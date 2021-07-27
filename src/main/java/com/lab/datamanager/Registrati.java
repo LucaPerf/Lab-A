@@ -14,43 +14,35 @@ import java.util.*;
  */
 
 public class Registrati {
-    private static LinkedHashMap<User, User> registracittadino= new LinkedHashMap();
+    private static LinkedHashMap<String, User> users = new LinkedHashMap<>();
 
     /**
      * Add a citizen to the LinkedHahMap, using userID as key
      *
-     * @param cittadino
+     * @param cittadino The citizen to add
      */
-    public static void addCittadini(User cittadino){
+    public static void add(User cittadino) {
 
-        addToHashMapByUserID(cittadino);
-    }
-
-    public static void addToHashMapByUserID(User cittadino){
-        if(registracittadino.containsKey(cittadino.getUserID()))
-            registracittadino.get(cittadino.getUserID()).add(cittadino);
-        else{
-            registracittadino.get(cittadino.getCcf()).add(cittadino);
-        }
+        users.put(cittadino.getUserID(), cittadino);
     }
 
     /**
      * Save citizens in a file, named "Cittadini.csv"
      *
-     * @param cittadino
+     * @param cittadino The citizen to save
      */
-    public static void saveCittadini(User cittadino){
-        addCittadini(cittadino);
+    public static void save(User cittadino) {
+        add(cittadino);
 
-        try{
+        try {
             FileWriter filew = new FileWriter("Cittadini.csv", true);
-                CsvWriter boh = CsvWriter.dsl().to(filew);
+            CsvWriter boh = CsvWriter.dsl().to(filew);
 
-                String[] columns = cittadino.toRow();
+            String[] columns = cittadino.toRow();
 
-                boh.appendRow(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5], columns[6]);
-                filew.close();
-        } catch (IOException e){
+            boh.appendRow(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5], columns[6]);
+            filew.close();
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
@@ -58,25 +50,21 @@ public class Registrati {
     /**
      * Read the citizens' data from the file and write them in a LinkedHahMap
      */
-    public static void loadCittadino(){
+    public static void load() {
         try {
             FileReader filer = new FileReader("Cittadini.csv");
-
             Iterator<String[]> it = CsvParser.iterator(filer);
 
-            while(it.hasNext()){
+            while (it.hasNext()) {
                 String[] row = it.next();
-
-                User cittadino = new User(row);
-
-                addToHashMapByUserID(cittadino);
+                add(new User(row));
             }
 
-            Collection<User> cit = registracittadino.values();
-            for(User y : cit)
-                    System.out.println(Arrays.toString(y.toRow()));
+            Collection<User> cit = users.values();
+            for (User y : cit)
+                System.out.println(Arrays.toString(y.toRow()));
 
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e);
         }
     }

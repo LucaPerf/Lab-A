@@ -17,7 +17,7 @@ public class CentriVaccinali extends Application {
     /**
      * Launches the application
      *
-     * @param args
+     * @param args The command line arguments
      */
     public static void main(String[] args) {
         launch(args);
@@ -35,7 +35,7 @@ public class CentriVaccinali extends Application {
         stage.show();
 
         Centri.load();
-        Registrati.loadCittadino();
+        Registrati.load();
 
         PagesManager.openAreaSelection();
     }

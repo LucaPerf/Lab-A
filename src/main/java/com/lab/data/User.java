@@ -14,16 +14,12 @@ public class User {
     private String email;
     private Integer uID;
 
+
     /**
-     * The "codice fiscale" of the user
-     * @return
+     * @return The username of this User
+     * @author Luca Perfetti
      */
-    public String getCcf(){
-
-        return ccf;
-    }
-
-    public String getUserID(){
+    public String getUserID() {
         return userID;
     }
 
@@ -85,9 +81,5 @@ public class User {
     public String[] toRow() {
         return new String[]{
                 userID, password, name, surname, ccf, email, uID.toString()};
-    }
-
-    public User add(User cittadino){
-        return cittadino;
     }
 }
