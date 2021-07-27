@@ -19,7 +19,12 @@ public class User {
      * @return
      */
     public String getCcf(){
+
         return ccf;
+    }
+
+    public String getUserID(){
+        return userID;
     }
 
     /**
@@ -80,5 +85,9 @@ public class User {
     public String[] toRow() {
         return new String[]{
                 userID, password, name, surname, ccf, email, uID.toString()};
+    }
+
+    public User add(User cittadino){
+        return cittadino;
     }
 }
