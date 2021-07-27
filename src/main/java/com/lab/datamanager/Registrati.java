@@ -14,24 +14,23 @@ import java.util.*;
  */
 
 public class Registrati {
-    private static LinkedHashMap<String, LinkedList<User>> registracittadino= new LinkedHashMap();
+    private static LinkedHashMap<User, User> registracittadino= new LinkedHashMap();
 
     /**
-     * Add a citizen to the LinkedHahMap, using ccf as key
+     * Add a citizen to the LinkedHahMap, using userID as key
      *
      * @param cittadino
      */
     public static void addCittadini(User cittadino){
-        addToHashMapByCcf(cittadino);
+
+        addToHashMapByUserID(cittadino);
     }
 
-    public static void addToHashMapByCcf(User cittadino){
-        if(registracittadino.containsKey(cittadino.getCcf()))
-            registracittadino.get(cittadino.getCcf()).add(cittadino);
+    public static void addToHashMapByUserID(User cittadino){
+        if(registracittadino.containsKey(cittadino.getUserID()))
+            registracittadino.get(cittadino.getUserID()).add(cittadino);
         else{
-            LinkedList<User> rc = new LinkedList<>();
-            rc.add(cittadino);
-            registracittadino.put(cittadino.getCcf(), rc);
+            registracittadino.get(cittadino.getCcf()).add(cittadino);
         }
     }
 
@@ -70,14 +69,13 @@ public class Registrati {
 
                 User cittadino = new User(row);
 
-                addToHashMapByCcf(cittadino);
+                addToHashMapByUserID(cittadino);
             }
 
-            Collection<LinkedList<User>> cit = registracittadino.values();
-            for(LinkedList<User> x : cit) {
-                for(User y : x)
+            Collection<User> cit = registracittadino.values();
+            for(User y : cit)
                     System.out.println(Arrays.toString(y.toRow()));
-            }
+
         }catch (IOException e){
             System.out.println(e);
         }
