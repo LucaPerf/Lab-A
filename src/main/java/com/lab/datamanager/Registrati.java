@@ -14,6 +14,7 @@ import java.util.*;
  */
 
 public class Registrati {
+    private static File file = new File("Cittadini.csv");
     private static LinkedHashMap<String, User> users = new LinkedHashMap<>();
 
     /**
@@ -35,7 +36,7 @@ public class Registrati {
         add(cittadino);
 
         try {
-            FileWriter filew = new FileWriter("Cittadini.csv", true);
+            FileWriter filew = new FileWriter(file, true);
             CsvWriter boh = CsvWriter.dsl().to(filew);
 
             String[] columns = cittadino.toRow();
@@ -52,14 +53,17 @@ public class Registrati {
      */
     public static void load() {
         try {
-            FileReader filer = new FileReader("Cittadini.csv");
+            //Create the file if it does not exist
+            file.createNewFile();
+
+            FileReader filer = new FileReader(file);
             Iterator<String[]> it = CsvParser.iterator(filer);
 
             while (it.hasNext()) {
                 String[] row = it.next();
                 add(new User(row));
             }
-
+            //Debug
             Collection<User> cit = users.values();
             for (User y : cit)
                 System.out.println(Arrays.toString(y.toRow()));

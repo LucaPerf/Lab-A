@@ -18,6 +18,7 @@ import java.io.*;
  **/
 
 public class Centri {
+    private static File file = new File("CentriVaccinali.csv");
     private static LinkedHashMap<String, LinkedList<Center>> centers = new LinkedHashMap<>();
 
     /**
@@ -60,7 +61,7 @@ public class Centri {
         //Write to file
         try {
             //Open file
-            FileWriter fw = new FileWriter("CentriVaccinali.csv", true);
+            FileWriter fw = new FileWriter(file, true);
             CsvWriter writer = CsvWriter.dsl().to(fw);
 
             //Each element of the array is a cell
@@ -79,8 +80,10 @@ public class Centri {
      */
     public static void load() {
         try {
-            FileReader fr = new FileReader("CentriVaccinali.csv");
+            //Create the file if it does not exist
+            file.createNewFile();
 
+            FileReader fr = new FileReader(file);
             //Create iterator
             Iterator<String[]> iter = CsvParser.iterator(fr);
 
@@ -95,7 +98,7 @@ public class Centri {
                 //Add to LinkedHashMap with  a list of centers for each comune
                 addToHashMapByComune(centro);
             }
-
+            //Debug
             Collection<LinkedList<Center>> data = centers.values();
             for (LinkedList<Center> l : data) {
                 for (Center t : l)
