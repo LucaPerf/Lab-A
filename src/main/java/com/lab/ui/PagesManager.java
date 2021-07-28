@@ -27,6 +27,7 @@ public class PagesManager {
     private static Parent areaSelectionPage;
     private static Parent userMainPage;
     private static Parent userRegPage;
+    private static Parent vaxRegPage;
 
     /**
      * Loads all UI pages from fxml, creates a new scene with an empty HBox Node and sets the stage scene
@@ -41,6 +42,7 @@ public class PagesManager {
             areaSelectionPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/area_selection.fxml"));
             userMainPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/user_main.fxml"));
             userRegPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/user_registration.fxml"));
+            vaxRegPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/vax_registration.fxml"));
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -84,4 +86,9 @@ public class PagesManager {
      * Opens the user registration page
      */
     public static void openUserReg() { open(userRegPage); }
+
+    /**
+     * Opens the vaccination registration page
+     */
+    public static void openVaxReg() {open(vaxRegPage);}
 }

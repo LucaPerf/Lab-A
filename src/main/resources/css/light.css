@@ -54,3 +54,9 @@
 {
     -jfx-rippler-fill: -rippler-indigo-fill;
 }
+
+//Date picker
+.date-picker
+{
+    -jfx-default-color: -primary-color;
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="root" stylesheets="@../css/light.css" xmlns="http://javafx.com/javafx/11.0.2"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.ui.VaxRegPage">
+
+    <JFXDialog fx:id="addAgain" overlayClose="false">
+        <JFXDialogLayout prefWidth="560" maxWidth="560" maxHeight="182" prefHeight="182">
+            <body>
+                <Label text="Aggiungere un altro vaccinato a questo centro?"/>
+            </body>
+            <actions>
+                <JFXButton fx:id="yes" text="SI" styleClass="button-text" prefHeight="36" maxHeight="36"/>
+                <JFXButton fx:id="no" text="NO" styleClass="button-text" prefHeight="36" maxHeight="36"/>
+            </actions>
+        </JFXDialogLayout>
+    </JFXDialog>
+
+    <VBox alignment="CENTER" spacing="28.0">
+        <JFXTextField fx:id="center" maxWidth="200.0" prefWidth="200.0" promptText="Nome centro"/>
+        <JFXTextField fx:id="name" maxWidth="200.0" prefWidth="200.0" promptText="Nome"/>
+        <JFXTextField fx:id="surname" maxWidth="200.0" prefWidth="200.0" promptText="Cognome"/>
+        <JFXTextField fx:id="ccf" maxWidth="200.0" prefWidth="200.0" promptText="Codice fiscale"/>
+        <JFXDatePicker fx:id="date" maxWidth="200.0" prefWidth="200.0" promptText="Data vaccinazione"/>
+        <JFXComboBox fx:id="type" maxWidth="200.0" prefWidth="200.0" promptText="Vaccino"/>
+        <JFXTextField fx:id="uID" maxWidth="200.0" prefWidth="200.0" promptText="ID vaccinazione"/>
+        <HBox alignment="CENTER" maxWidth="200.0" prefWidth="200.0" spacing="12.0">
+            <JFXButton fx:id="back" maxWidth="96.0" prefWidth="96.0" styleClass="button-text" text="ANNULLA"/>
+            <JFXButton fx:id="add" maxWidth="96.0" prefWidth="96.0" styleClass="button-contained" text="CONTINUA"/>
+        </HBox>
+        <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+        </padding>
+    </VBox>
+</StackPane>

@@ -23,7 +23,7 @@ public class CenterActionsPage extends Page {
     protected void initialize() {
         addCenter.setOnAction(actionEvent -> PagesManager.openCenterReg());
 
-        addVax.setOnAction(actionEvent -> System.out.println("Not implemented"));
+        addVax.setOnAction(actionEvent -> PagesManager.openVaxReg());
 
         back.setOnAction(actionEvent -> PagesManager.openAreaSelection());
     }

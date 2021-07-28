@@ -1,6 +1,7 @@
 package com.lab.centrivaccinali;
 
 import com.lab.data.Center;
+import com.lab.data.VaxInfo;
 import com.lab.datamanager.Centri;
 import com.lab.datamanager.Registrati;
 import com.lab.ui.PagesManager;
@@ -47,5 +48,12 @@ public class CentriVaccinali extends Application {
      */
     public static void registraCentroVaccinale(Center center) {
         Centri.saveCenter(center);
+    }
+
+    /**
+     * Add a new vaccinated citizen into the center own file
+     */
+    public static void registraVaccinato(String centerName, VaxInfo info) {
+        //Vaccinati.add(centerName,info);
     }
 }
