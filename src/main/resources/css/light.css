@@ -14,11 +14,13 @@
     -jfx-button-type: RAISED;
     -fx-background-color: -primary-color;
     -fx-text-fill: -text-on-primary;
+    -jfx-disable-visual-focus: true;
 }
 .button-text
 {
     -jfx-button-type: FLAT;
     -fx-text-fill: -primary-color;
+    -jfx-disable-visual-focus: true;
 }
 
 //Text field
