@@ -1,5 +1,6 @@
 package com.lab.data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ public class VaxInfo {
     private String name;
     private String surname;
     private String ccf;
-    private Date date;
+    private LocalDate date;
     private VaxType type;
     private Integer uID;
 
@@ -27,7 +28,7 @@ public class VaxInfo {
      * @param type    the vaccination type
      * @param uID     the unique vaccination id
      */
-    public VaxInfo(String name, String surname, String ccf, Date date, VaxType type, Integer uID) {
+    public VaxInfo(String name, String surname, String ccf, LocalDate date, VaxType type, Integer uID) {
         this.name = name;
         this.surname = surname;
         this.ccf = ccf;
