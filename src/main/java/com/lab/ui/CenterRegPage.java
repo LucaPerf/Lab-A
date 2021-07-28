@@ -49,9 +49,7 @@ public class CenterRegPage extends Page {
      */
     @FXML
     protected void initialize() {
-        //Set center type items and select "Ospedaliero"
         type.getItems().addAll(CenterType.values());
-        type.getSelectionModel().select(0);
 
         register.setOnAction(actionEvent -> {
             CentriVaccinali.registraCentroVaccinale(centerFromUI());
