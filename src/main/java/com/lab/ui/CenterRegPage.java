@@ -35,7 +35,6 @@ public class CenterRegPage extends Page {
     private JFXTextField province;
     @FXML
     private JFXTextField cap;
-    private Center center;
 
     /**
      * {@inheritDoc}
@@ -56,11 +55,27 @@ public class CenterRegPage extends Page {
 
         register.setOnAction(actionEvent -> {
             CentriVaccinali.registraCentroVaccinale(centerFromUI());
+            reset();
             PagesManager.openCenterActions();
         });
 
-        back.requestFocus();
-        back.setOnAction(actionEvent -> PagesManager.openCenterActions());
+        back.setOnAction(actionEvent -> {
+            reset();
+            PagesManager.openCenterActions();
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void reset() {
+        name.clear();
+        type.getSelectionModel().clearSelection();
+        address.clear();
+        city.clear();
+        province.clear();
+        cap.clear();
     }
 
     private PostalAddress addressFromUI() {

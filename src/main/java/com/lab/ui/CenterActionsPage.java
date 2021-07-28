@@ -39,4 +39,10 @@ public class CenterActionsPage extends Page {
 
         back.setOnAction(actionEvent -> PagesManager.openAreaSelection());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void reset() { }
 }

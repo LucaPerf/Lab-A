@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
+import java.time.LocalDate;
+
 /**
  * Controller of the vaccination registration page. Layout is stored in "vax:registration.fxml".
  *
@@ -57,19 +59,42 @@ public class VaxRegPage extends Page {
     @Override
     protected void initialize() {
         type.getItems().addAll(VaxType.values());
+
         add.setOnAction(actionEvent ->
         {
             CentriVaccinali.registraVaccinato(center.getText(), infoFromUI());
             addAgain.show(root);
         });
-        back.setOnAction(actionEvent -> PagesManager.openCenterActions());
 
-        //Dialog
-        yes.setOnAction(actionEvent -> addAgain.close());
-        no.setOnAction(actionEvent -> {
-            addAgain.close();
+        back.setOnAction(actionEvent -> {
+            reset();
             PagesManager.openCenterActions();
         });
+
+        //Dialog
+        yes.setOnAction(actionEvent -> {
+            addAgain.close();
+            String prevCenter = center.getText();
+            reset();
+            center.setText(prevCenter);
+        });
+
+        no.setOnAction(actionEvent -> {
+            addAgain.close();
+            reset();
+            PagesManager.openCenterActions();
+        });
+    }
+
+    @Override
+    public void reset() {
+        center.clear();
+        name.clear();
+        surname.clear();
+        ccf.clear();
+        date.setValue(LocalDate.now());
+        type.getSelectionModel().clearSelection();
+        uID.clear();
     }
 
     private VaxInfo infoFromUI() {

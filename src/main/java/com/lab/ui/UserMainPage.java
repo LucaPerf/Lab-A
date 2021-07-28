@@ -45,4 +45,10 @@ public class UserMainPage extends Page {
 
         back.setOnAction(actionEvent -> PagesManager.openAreaSelection());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void reset() { }
 }

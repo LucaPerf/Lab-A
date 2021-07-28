@@ -51,10 +51,29 @@ public class UserRegPage extends Page {
         register.setOnAction(actionEvent ->
         {
             Cittadini.registraCittadino(userFromUI());
+            reset();
             PagesManager.openUserMain();
         });
 
-        cancel.setOnAction(actionEvent -> PagesManager.openUserMain());
+        cancel.setOnAction(actionEvent ->
+        {
+            reset();
+            PagesManager.openUserMain();
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void reset() {
+        username.clear();
+        password.clear();
+        name.clear();
+        surname.clear();
+        ccf.clear();
+        email.clear();
+        uid.clear();
     }
 
     //Creates a new User object from the UI fields

@@ -19,4 +19,9 @@ abstract public class Page {
      */
     @FXML
     abstract protected void initialize();
+
+    /**
+     * Resets this page to its intial state
+     */
+    abstract public void reset();
 }
