@@ -58,6 +58,8 @@ public class VaxRegPage extends Page {
      */
     @Override
     protected void initialize() {
+        date.setValue(LocalDate.now());
+
         type.getItems().addAll(VaxType.values());
 
         add.setOnAction(actionEvent ->
