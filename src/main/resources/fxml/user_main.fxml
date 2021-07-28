@@ -4,32 +4,65 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0" stylesheets="@../css/light.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.ui.UserMainPage">
-    <VBox alignment="CENTER" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <HBox fx:id="topbar" alignment="TOP_RIGHT" spacing="12.0">
+<AnchorPane fx:id="root"
+            prefHeight="400.0"
+            prefWidth="400.0"
+            stylesheets="@../css/light.css"
+            xmlns="http://javafx.com/javafx/11.0.2"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.lab.ui.UserMainPage">
+    <VBox alignment="CENTER"
+          spacing="12.0"
+          AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0"
+          AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
+        <HBox fx:id="topbar"
+              alignment="TOP_RIGHT"
+              spacing="12.0">
             <VBox.margin>
-                <Insets left="12.0" right="12.0" top="12.0" />
+                <Insets left="12.0"
+                        right="12.0"
+                        top="12.0"/>
             </VBox.margin>
-            <JFXButton fx:id="login" styleClass="button-contained" text="ACCEDI" />
-            <JFXButton fx:id="register" styleClass="button-text" text="REGISTRATI" />
+            <JFXButton fx:id="login"
+                       styleClass="button-contained"
+                       text="ACCEDI"/>
+            <JFXButton fx:id="register"
+                       styleClass="button-text"
+                       text="REGISTRATI"/>
         </HBox>
-        <JFXTextField fx:id="searchbar" maxWidth="400.0" promptText="Cerca un centro" styleClass="text-field">
+        <JFXTextField fx:id="searchbar"
+                      maxWidth="400.0"
+                      promptText="Cerca un centro"
+
+                      styleClass="text-field">
             <VBox.margin>
-                <Insets left="12.0" right="12.0" top="12.0" />
+                <Insets left="12.0"
+                        right="12.0"
+                        top="12.0"/>
             </VBox.margin>
         </JFXTextField>
         <JFXListView fx:id="centers">
             <VBox.margin>
-                <Insets left="24.0" right="24.0" top="12.0" />
+                <Insets left="24.0"
+                        right="24.0"
+                        top="12.0"/>
             </VBox.margin>
         </JFXListView>
-      <HBox alignment="CENTER_RIGHT" spacing="12.0">
-         <children>
-            <JFXButton fx:id="back" alignment="CENTER" maxWidth="96.0" prefWidth="96.0" styleClass="button-contained" text="INDIETRO" />
-         </children>
-         <VBox.margin>
-            <Insets bottom="16.0" left="24.0" right="24.0" />
-         </VBox.margin>
-      </HBox>
+        <HBox alignment="CENTER_RIGHT"
+              spacing="12.0">
+            <VBox.margin>
+                <Insets bottom="16.0"
+                        left="24.0"
+                        right="24.0"/>
+            </VBox.margin>
+            <JFXButton fx:id="back"
+                       alignment="CENTER"
+                       maxWidth="96.0"
+                       prefWidth="96.0"
+                       styleClass="button-contained"
+                       text="INDIETRO"/>
+        </HBox>
     </VBox>
 </AnchorPane>

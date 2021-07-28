@@ -5,6 +5,7 @@ import com.lab.centrivaccinali.CentriVaccinali;
 import com.lab.data.VaxInfo;
 import com.lab.data.VaxType;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
@@ -42,6 +43,13 @@ public class VaxRegPage extends Page {
     private JFXButton yes;
     @FXML
     private JFXButton no;
+
+    /**
+     * {@inheritDoc}
+     */
+    public Parent getRoot() {
+        return root;
+    }
 
     /**
      * {@inheritDoc}

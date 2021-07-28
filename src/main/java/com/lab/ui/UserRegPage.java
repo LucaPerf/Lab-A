@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXTextField;
 import com.lab.cittadini.Cittadini;
 import com.lab.data.User;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.layout.VBox;
 
 /**
  * Controller of the user registration page. Layout is stored in "user_registration.fxml".
@@ -12,6 +14,8 @@ import javafx.fxml.FXML;
  * @author CIceri Luigi
  */
 public class UserRegPage extends Page {
+    @FXML
+    private VBox root;
     @FXML
     private JFXTextField username;
     @FXML
@@ -30,6 +34,14 @@ public class UserRegPage extends Page {
     private JFXButton register;
     @FXML
     private JFXButton cancel;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Parent getRoot() {
+        return root;
+    }
 
     /**
      * {@inheritDoc}

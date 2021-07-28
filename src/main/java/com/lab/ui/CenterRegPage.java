@@ -8,6 +8,8 @@ import com.lab.data.Center;
 import com.lab.data.CenterType;
 import com.lab.data.PostalAddress;
 import com.lab.centrivaccinali.CentriVaccinali;
+import javafx.scene.Parent;
+import javafx.scene.layout.VBox;
 
 /**
  * Controller of the center registration page. Layout is stored in "center_registration.fxml".
@@ -15,6 +17,8 @@ import com.lab.centrivaccinali.CentriVaccinali;
  * @author Ciceri Luigi
  */
 public class CenterRegPage extends Page {
+    @FXML
+    private VBox root;
     @FXML
     private JFXButton register;
     @FXML
@@ -36,6 +40,14 @@ public class CenterRegPage extends Page {
     /**
      * {@inheritDoc}
      */
+    @Override
+    public Parent getRoot() {
+        return root;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @FXML
     protected void initialize() {
         //Set center type items and select "Ospedaliero"
@@ -48,9 +60,7 @@ public class CenterRegPage extends Page {
         });
 
         back.requestFocus();
-        back.setOnAction(actionEvent -> {
-            PagesManager.openCenterActions();
-        });
+        back.setOnAction(actionEvent -> PagesManager.openCenterActions());
     }
 
     private PostalAddress addressFromUI() {

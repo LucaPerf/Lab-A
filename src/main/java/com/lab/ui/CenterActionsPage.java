@@ -2,6 +2,8 @@ package com.lab.ui;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.layout.VBox;
 
 /**
  * Controller of center actions page. Layout is stored in "center_actions.fxml".
@@ -10,11 +12,21 @@ import javafx.fxml.FXML;
  */
 public class CenterActionsPage extends Page {
     @FXML
+    private VBox root;
+    @FXML
     private JFXButton addVax;
     @FXML
     private JFXButton addCenter;
     @FXML
     private JFXButton back;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Parent getRoot() {
+        return root;
+    }
 
     /**
      * {@inheritDoc}

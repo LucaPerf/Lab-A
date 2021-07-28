@@ -22,12 +22,20 @@ public class PagesManager {
      * The bounds of the primary screen, in pixels
      */
     public static Rectangle2D bounds = Screen.getPrimary().getBounds();
-    private static Parent centerRegPage;
-    private static Parent centerActionsPage;
-    private static Parent areaSelectionPage;
-    private static Parent userMainPage;
-    private static Parent userRegPage;
-    private static Parent vaxRegPage;
+    //Resource loaders
+    private static FXMLLoader centerRegLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/center_registration.fxml"));
+    private static FXMLLoader centerActionsLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/center_actions.fxml"));
+    private static FXMLLoader areaSelectionLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/area_selection.fxml"));
+    private static FXMLLoader userMainLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/user_main.fxml"));
+    private static FXMLLoader userRegLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/user_registration.fxml"));
+    private static FXMLLoader vaxRegLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/vax_registration.fxml"));
+    //Pages controllers
+    private static Page centerRegPage;
+    private static Page centerActionsPage;
+    private static Page areaSelectionPage;
+    private static Page userMainPage;
+    private static Page userRegPage;
+    private static Page vaxRegPage;
 
     /**
      * Loads all UI pages from fxml, creates a new scene with an empty HBox Node and sets the stage scene
@@ -35,25 +43,21 @@ public class PagesManager {
      * @param stage The stage associated with this application
      */
     public static void initialize(Stage stage) {
-        //Load all pages from fxml
-        try {
-            centerRegPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/center_registration.fxml"));
-            centerActionsPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/center_actions.fxml"));
-            areaSelectionPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/area_selection.fxml"));
-            userMainPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/user_main.fxml"));
-            userRegPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/user_registration.fxml"));
-            vaxRegPage = FXMLLoader.load(PagesManager.class.getResource("/fxml/vax_registration.fxml"));
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        //Load all pages
+        centerRegPage = loadPage(centerRegLoader);
+        centerActionsPage = loadPage(centerActionsLoader);
+        areaSelectionPage = loadPage(areaSelectionLoader);
+        userMainPage = loadPage(userMainLoader);
+        userRegPage = loadPage(userRegLoader);
+        vaxRegPage = loadPage(vaxRegLoader);
 
         //Set scene to an empty HBox
         scene = new Scene(new HBox(), bounds.getWidth() * 0.5, bounds.getHeight() * 0.5);
         stage.setScene(scene);
     }
 
-    private static void open(Parent node) {
-        scene.setRoot(node);
+    private static void open(Page page) {
+        scene.setRoot(page.getRoot());
     }
 
     /**
@@ -80,15 +84,32 @@ public class PagesManager {
     /**
      * Opens the user area main page
      */
-    public static void openUserMain() { open(userMainPage); }
+    public static void openUserMain() {
+        open(userMainPage);
+    }
 
     /**
      * Opens the user registration page
      */
-    public static void openUserReg() { open(userRegPage); }
+    public static void openUserReg() {
+        open(userRegPage);
+    }
 
     /**
      * Opens the vaccination registration page
      */
-    public static void openVaxReg() {open(vaxRegPage);}
+    public static void openVaxReg() {
+        open(vaxRegPage);
+    }
+
+    private static Page loadPage(FXMLLoader loader) {
+        try {
+            loader.load();
+            return loader.getController();
+        } catch (IOException e) {
+            System.out.println("Page resource loading failed \n");
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

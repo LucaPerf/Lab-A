@@ -4,8 +4,13 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="28.0" stylesheets="@../css/light.css" xmlns="http://javafx.com/javafx/11.0.2"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.ui.UserRegPage">
+<VBox fx:id="root"
+      alignment="CENTER"
+      spacing="28.0"
+      stylesheets="@../css/light.css"
+      xmlns="http://javafx.com/javafx/11.0.2"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.lab.ui.UserRegPage">
     <padding>
         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
     </padding>
