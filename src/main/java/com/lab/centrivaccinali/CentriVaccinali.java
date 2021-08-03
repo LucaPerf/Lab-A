@@ -52,9 +52,8 @@ public class CentriVaccinali extends Application {
 
     /**
      * Add a new vaccinated citizen into the center own file
-
+     */
     public static void registraVaccinato(String centerName, VaxInfo info) {
-        Vaccinati.add(centerName,info);
+        //Vaccinati.add(centerName,info);
     }
-     **/
 }
