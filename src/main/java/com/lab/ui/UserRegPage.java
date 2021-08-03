@@ -1,6 +1,7 @@
 package com.lab.ui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.lab.cittadini.Cittadini;
 import com.lab.data.User;
@@ -19,7 +20,7 @@ public class UserRegPage extends Page {
     @FXML
     private JFXTextField username;
     @FXML
-    private JFXTextField password;
+    private JFXPasswordField password;
     @FXML
     private JFXTextField name;
     @FXML
