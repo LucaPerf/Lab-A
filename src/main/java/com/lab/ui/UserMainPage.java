@@ -39,7 +39,7 @@ public class UserMainPage extends Page {
      */
     @Override
     protected void initialize() {
-        login.setOnAction(actionEvent -> System.out.println("Not implemented"));
+        login.setOnAction(actionEvent -> PagesManager.openUserLogin());
 
         register.setOnAction(actionEvent -> PagesManager.openUserReg());
 
@@ -50,5 +50,6 @@ public class UserMainPage extends Page {
      * {@inheritDoc}
      */
     @Override
-    public void reset() { }
+    public void reset() {
+    }
 }

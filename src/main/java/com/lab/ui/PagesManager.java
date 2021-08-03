@@ -2,7 +2,6 @@ package com.lab.ui;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
@@ -29,6 +28,7 @@ public class PagesManager {
     private static FXMLLoader userMainLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/user_main.fxml"));
     private static FXMLLoader userRegLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/user_registration.fxml"));
     private static FXMLLoader vaxRegLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/vax_registration.fxml"));
+    private static FXMLLoader userLoginLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/user_login.fxml"));
     //Pages controllers
     private static Page centerRegPage;
     private static Page centerActionsPage;
@@ -36,6 +36,7 @@ public class PagesManager {
     private static Page userMainPage;
     private static Page userRegPage;
     private static Page vaxRegPage;
+    private static Page userLoginPage;
 
     /**
      * Loads all UI pages from fxml, creates a new scene with an empty HBox Node and sets the stage scene
@@ -50,6 +51,7 @@ public class PagesManager {
         userMainPage = loadPage(userMainLoader);
         userRegPage = loadPage(userRegLoader);
         vaxRegPage = loadPage(vaxRegLoader);
+        userLoginPage = loadPage(userLoginLoader);
 
         //Set scene to an empty HBox
         scene = new Scene(new HBox(), bounds.getWidth() * 0.5, bounds.getHeight() * 0.5);
@@ -100,6 +102,13 @@ public class PagesManager {
      */
     public static void openVaxReg() {
         open(vaxRegPage);
+    }
+
+    /**
+     * Opens the user login page
+     */
+    public static void openUserLogin() {
+        open(userLoginPage);
     }
 
     private static Page loadPage(FXMLLoader loader) {
