@@ -1,8 +1,6 @@
 package com.lab.datamanager;
 
 import com.lab.data.Center;
-import com.lab.data.PostalAddress;
-import com.lab.data.CenterType;
 import org.simpleflatmapper.csv.CsvParser;
 import org.simpleflatmapper.lightningcsv.CsvWriter;
 
@@ -22,11 +20,12 @@ public class Centri {
     private static LinkedHashMap<String, LinkedList<Center>> centers = new LinkedHashMap<>();
 
     /**
-     * Adds a center to the LinkedHasMap, using the comune as key
+     * Adds a center to the LinkedHashMap, using the comune as key
      *
      * @param center The center to add
      */
     private static void addCenter(Center center) {
+
         addToHashMapByComune(center);
     }
 
@@ -108,5 +107,11 @@ public class Centri {
             System.out.println(e);
         }
     }
+
+    public static LinkedHashMap<String, LinkedList<Center>> getCenters(){
+
+        return centers;
+    }
+
 }
 
