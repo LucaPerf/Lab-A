@@ -11,7 +11,7 @@
     <JFXTextField fx:id="username" maxWidth="200.0" prefWidth="200.0" promptText="Nome utente" styleClass="text-field" />
     <JFXPasswordField fx:id="password" maxWidth="200.0" prefWidth="200.0" promptText="Password" styleClass="text-field" />
     <HBox alignment="CENTER" maxWidth="200.0" prefWidth="200.0" spacing="12">
-        <JFXButton fx:id="register" maxWidth="96.0" prefWidth="96.0" styleClass="button-contained" text="LOGIN" />
+        <JFXButton fx:id="register" maxWidth="96.0" prefWidth="96.0" styleClass="button-contained" text="ACCEDI" />
         <JFXButton fx:id="cancel" maxWidth="96.0" prefWidth="96.0" styleClass="button-text" text="ANNULLA" />
     </HBox>
 </VBox>
