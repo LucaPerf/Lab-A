@@ -58,57 +58,72 @@ public class PagesManager {
         stage.setScene(scene);
     }
 
-    private static void open(Page page) {
+    private static Page open(Page page) {
         scene.setRoot(page.getRoot());
+        return page;
     }
 
     /**
      * Open the center registration page
+     *
+     * @return The opened page
      */
-    public static void openCenterReg() {
-        open(centerRegPage);
+    public static CenterRegPage openCenterReg() {
+        return (CenterRegPage) open(centerRegPage);
     }
 
     /**
      * Opens the area selection page
+     *
+     * @return The opened page
      */
-    public static void openAreaSelection() {
-        open(areaSelectionPage);
+    public static AreaSelectionPage openAreaSelection() {
+        return (AreaSelectionPage) open(areaSelectionPage);
     }
 
     /**
      * Opens the center actions page
+     *
+     * @return The opened page
      */
-    public static void openCenterActions() {
-        open(centerActionsPage);
+    public static CenterActionsPage openCenterActions() {
+        return (CenterActionsPage) open(centerActionsPage);
     }
 
     /**
      * Opens the user area main page
+     *
+     * @return The opened page
      */
-    public static void openUserMain() {
-        open(userMainPage);
+    public static UserMainPage openUserMain() {
+        return (UserMainPage) open(userMainPage);
     }
 
     /**
      * Opens the user registration page
+     *
+     * @return The opened page
      */
-    public static void openUserReg() {
-        open(userRegPage);
+    public static UserRegPage openUserReg() {
+        return (UserRegPage) open(userRegPage);
     }
 
     /**
      * Opens the vaccination registration page
+     *
+     * @return The opened page
      */
-    public static void openVaxReg() {
-        open(vaxRegPage);
+    public static VaxRegPage openVaxReg() {
+        return (VaxRegPage) open(vaxRegPage);
     }
 
     /**
      * Opens the user login page
+     *
+     * @return The opened page
      */
-    public static void openUserLogin() {
-        open(userLoginPage);
+    public static UserLoginPage openUserLogin() {
+        return (UserLoginPage) open(userLoginPage);
     }
 
     private static Page loadPage(FXMLLoader loader) {
