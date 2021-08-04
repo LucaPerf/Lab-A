@@ -72,4 +72,16 @@ public class Registrati {
             System.out.println(e);
         }
     }
+
+    /**
+     * Get the login information and check if the user exists and the password is correct
+     *
+     * @param user
+     * @param password
+     * @return
+     */
+    public static User find(String user, String password) {
+        String username = user + " " + password;
+        return users.get(username);
+    }
 }
