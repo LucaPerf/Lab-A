@@ -22,11 +22,11 @@ public class Cittadini {
     /**
      * @param userName The username
      * @param password The user password
-     * @return True if and only if the user exists and the password matches
+     * @return The user object if and only if the user exists and the password matches
      */
-    public static boolean login(String userName, String password) {
+    public static User login(String userName, String password) {
         //User u = Registrati.find(userName,password);
-        //return u != null && u.getPassword().equals(password) ;
-        return true;
+        //return (u != null && u.getPassword().equals(password)) ? u : null ;
+        return null;
     }
 }
