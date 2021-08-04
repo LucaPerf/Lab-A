@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.lab.cittadini.Cittadini;
+import com.lab.data.User;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
@@ -42,9 +43,9 @@ public class UserLoginPage extends Page {
     protected void initialize() {
         register.setOnAction(actionEvent ->
         {
-            if (Cittadini.login(username.getText(), password.getText())) ;
-            {
-                PagesManager.openUserMain();
+            User u = Cittadini.login(username.getText(), password.getText());
+            if (u != null) {
+                PagesManager.openUserMain().setLoggedIn(u);
                 reset();
             }
         });
