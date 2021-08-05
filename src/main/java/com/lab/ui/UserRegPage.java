@@ -3,8 +3,6 @@ package com.lab.ui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.RequiredFieldValidator;
-import com.jfoenix.validation.StringLengthValidator;
 import com.lab.cittadini.Cittadini;
 import com.lab.data.User;
 import javafx.fxml.FXML;
@@ -58,6 +56,7 @@ public class UserRegPage extends Page {
         surname.getValidators().add(requiredFieldValidator);
         ccf.getValidators().add(ccfValidator);
         email.getValidators().add(requiredFieldValidator);
+        uid.getValidators().add(uIDValidator);
         uid.getValidators().add(requiredFieldValidator);
 
         register.setOnAction(actionEvent ->

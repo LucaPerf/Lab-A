@@ -1,14 +1,11 @@
 package com.lab.ui;
 
 import com.jfoenix.controls.*;
-import com.jfoenix.validation.RequiredFieldValidator;
-import com.jfoenix.validation.StringLengthValidator;
 import com.lab.centrivaccinali.CentriVaccinali;
 import com.lab.data.VaxInfo;
 import com.lab.data.VaxType;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
 import java.time.LocalDate;
@@ -68,6 +65,7 @@ public class VaxRegPage extends Page {
         ccf.getValidators().add(ccfValidator);
         type.getValidators().add(requiredFieldValidator);
         uID.getValidators().add(requiredFieldValidator);
+        uID.getValidators().add(uIDValidator);
 
         date.setValue(LocalDate.now());
 

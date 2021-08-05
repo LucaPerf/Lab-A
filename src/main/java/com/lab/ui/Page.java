@@ -7,9 +7,6 @@ import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.control.TextField;
-
-import java.awt.*;
 
 /**
  * Base class of an UI page controller.
@@ -29,6 +26,10 @@ abstract public class Page {
      * This validators checks if the ccf is valid (6 letters -> 3 alphanumerics -> 2 numbers -> 4 alphanumerics -> 1 letter)
      */
     protected RegexValidator ccfValidator = new RegexValidator("Codice fiscale non valido");
+    /**
+     * This validator checks if the unique vaccination id is valid (value is less than 2^16)
+     */
+    protected UIDValidator uIDValidator = new UIDValidator("Valore massimo 65535");
 
     /**
      * Common constructor called from all subclasses
