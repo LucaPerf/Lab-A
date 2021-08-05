@@ -3,6 +3,8 @@ package com.lab.ui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
+import com.jfoenix.validation.StringLengthValidator;
 import com.lab.cittadini.Cittadini;
 import com.lab.data.User;
 import javafx.fxml.FXML;
@@ -49,11 +51,22 @@ public class UserRegPage extends Page {
      */
     @Override
     protected void initialize() {
+        //Add validators
+        username.getValidators().add(requiredFieldValidator);
+        password.getValidators().add(requiredFieldValidator);
+        name.getValidators().add(requiredFieldValidator);
+        surname.getValidators().add(requiredFieldValidator);
+        ccf.getValidators().add(ccfValidator);
+        email.getValidators().add(requiredFieldValidator);
+        uid.getValidators().add(requiredFieldValidator);
+
         register.setOnAction(actionEvent ->
         {
-            Cittadini.registraCittadino(userFromUI());
-            reset();
-            PagesManager.openUserMain();
+            if (isDataValid()) {
+                Cittadini.registraCittadino(userFromUI());
+                reset();
+                PagesManager.openUserMain();
+            }
         });
 
         cancel.setOnAction(actionEvent ->
@@ -68,17 +81,27 @@ public class UserRegPage extends Page {
      */
     @Override
     public void reset() {
-        username.clear();
-        password.clear();
-        name.clear();
-        surname.clear();
-        ccf.clear();
-        email.clear();
-        uid.clear();
+        resetField(username);
+        resetField(password);
+        resetField(name);
+        resetField(surname);
+        resetField(email);
+        resetField(uid);
+        resetField(ccf);
     }
 
     //Creates a new User object from the UI fields
     private User userFromUI() {
         return new User(name.getText(), surname.getText(), ccf.getText(), email.getText(), username.getText(), password.getText(), Integer.parseInt(uid.getText()));
+    }
+
+    private boolean isDataValid() {
+        return username.validate() &
+                password.validate() &
+                name.validate() &
+                surname.validate() &
+                ccf.validate() &
+                email.validate() &
+                uid.validate();
     }
 }

@@ -1,5 +1,7 @@
 package com.lab.ui;
 
+import com.jfoenix.validation.RequiredFieldValidator;
+import com.jfoenix.validation.StringLengthValidator;
 import javafx.fxml.FXML;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -49,12 +51,22 @@ public class CenterRegPage extends Page {
      */
     @FXML
     protected void initialize() {
+        //Set validators
+        name.getValidators().add(requiredFieldValidator);
+        type.getValidators().add(requiredFieldValidator);
+        address.getValidators().add(requiredFieldValidator);
+        city.getValidators().add(requiredFieldValidator);
+        province.getValidators().add(requiredFieldValidator);
+        cap.getValidators().add(capValidator);
+
         type.getItems().addAll(CenterType.values());
 
         register.setOnAction(actionEvent -> {
-            CentriVaccinali.registraCentroVaccinale(centerFromUI());
-            reset();
-            PagesManager.openCenterActions();
+            if (isDataValid()) {
+                CentriVaccinali.registraCentroVaccinale(centerFromUI());
+                reset();
+                PagesManager.openCenterActions();
+            }
         });
 
         back.setOnAction(actionEvent -> {
@@ -68,27 +80,20 @@ public class CenterRegPage extends Page {
      */
     @Override
     public void reset() {
-        name.clear();
-        type.getSelectionModel().clearSelection();
-        address.clear();
-        city.clear();
-        province.clear();
-        cap.clear();
+        resetField(name);
+        resetField(type);
+        resetField(address);
+        resetField(city);
+        resetField(province);
+        resetField(cap);
     }
 
     private PostalAddress addressFromUI() {
-        //Set cap to 0 if the input is an invalid number
-        int capNumber = 0;
-        try {
-            capNumber = Integer.parseInt(cap.getText());
-        } catch (NumberFormatException e) {
-        }
-
         return new PostalAddress(
                 address.getText(),
                 city.getText(),
                 province.getText(),
-                capNumber);
+                Integer.parseInt(cap.getText()));
     }
 
     private Center centerFromUI() {
@@ -96,5 +101,9 @@ public class CenterRegPage extends Page {
                 name.getText(),
                 addressFromUI(),
                 type.getSelectionModel().getSelectedItem());
+    }
+
+    private boolean isDataValid() {
+        return name.validate() & type.validate() & address.validate() & city.validate() & province.validate() & cap.validate();
     }
 }

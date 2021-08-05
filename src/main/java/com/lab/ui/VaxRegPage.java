@@ -1,6 +1,8 @@
 package com.lab.ui;
 
 import com.jfoenix.controls.*;
+import com.jfoenix.validation.RequiredFieldValidator;
+import com.jfoenix.validation.StringLengthValidator;
 import com.lab.centrivaccinali.CentriVaccinali;
 import com.lab.data.VaxInfo;
 import com.lab.data.VaxType;
@@ -58,14 +60,25 @@ public class VaxRegPage extends Page {
      */
     @Override
     protected void initialize() {
+        //Add validators
+        center.getValidators().add(requiredFieldValidator);
+        name.getValidators().add(requiredFieldValidator);
+        surname.getValidators().add(requiredFieldValidator);
+        ccf.getValidators().add(requiredFieldValidator);
+        ccf.getValidators().add(ccfValidator);
+        type.getValidators().add(requiredFieldValidator);
+        uID.getValidators().add(requiredFieldValidator);
+
         date.setValue(LocalDate.now());
 
         type.getItems().addAll(VaxType.values());
 
         add.setOnAction(actionEvent ->
         {
-            CentriVaccinali.registraVaccinato(center.getText(), infoFromUI());
-            addAgain.show(root);
+            if (isDataValid()) {
+                CentriVaccinali.registraVaccinato(center.getText(), infoFromUI());
+                addAgain.show(root);
+            }
         });
 
         back.setOnAction(actionEvent -> {
@@ -90,16 +103,20 @@ public class VaxRegPage extends Page {
 
     @Override
     public void reset() {
-        center.clear();
-        name.clear();
-        surname.clear();
-        ccf.clear();
+        resetField(center);
+        resetField(name);
+        resetField(surname);
+        resetField(ccf);
         date.setValue(LocalDate.now());
-        type.getSelectionModel().clearSelection();
-        uID.clear();
+        resetField(type);
+        resetField(uID);
     }
 
     private VaxInfo infoFromUI() {
         return new VaxInfo(name.getText(), surname.getText(), ccf.getText(), date.getValue(), type.getSelectionModel().getSelectedItem(), Integer.parseInt(uID.getText()));
+    }
+
+    private boolean isDataValid() {
+        return center.validate() & name.validate() & surname.validate() & ccf.validate() & type.validate() & uID.validate();
     }
 }

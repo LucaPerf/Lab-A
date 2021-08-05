@@ -3,6 +3,7 @@ package com.lab.ui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import com.lab.cittadini.Cittadini;
 import com.lab.data.User;
 import javafx.fxml.FXML;
@@ -27,7 +28,6 @@ public class UserLoginPage extends Page {
     @FXML
     private JFXButton cancel;
 
-
     /**
      * {@inheritDoc}
      */
@@ -41,12 +41,17 @@ public class UserLoginPage extends Page {
      */
     @Override
     protected void initialize() {
+        username.getValidators().add(requiredFieldValidator);
+        password.getValidators().add(requiredFieldValidator);
+
         register.setOnAction(actionEvent ->
         {
-            User u = Cittadini.login(username.getText(), password.getText());
-            if (u != null) {
-                PagesManager.openUserMain().setLoggedIn(u);
-                reset();
+            if (isDataValid()) {
+                User u = Cittadini.login(username.getText(), password.getText());
+                if (u != null) {
+                    PagesManager.openUserMain().setLoggedIn(u);
+                    reset();
+                }
             }
         });
 
@@ -62,7 +67,11 @@ public class UserLoginPage extends Page {
      */
     @Override
     public void reset() {
-        username.clear();
-        password.clear();
+        resetField(username);
+        resetField(password);
+    }
+
+    private boolean isDataValid() {
+        return username.validate() & password.validate();
     }
 }
