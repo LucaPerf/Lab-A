@@ -76,12 +76,10 @@ public class Registrati {
     /**
      * Get the login information and check if the user exists and the password is correct
      *
-     * @param user
-     * @param password
+     * @param username
      * @return
      */
-    public static User find(String user, String password) {
-        String username = user + " " + password;
+    public static User find(String username) {
         return users.get(username);
     }
 }
