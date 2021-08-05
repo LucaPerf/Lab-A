@@ -25,8 +25,7 @@ public class Cittadini {
      * @return The user object if and only if the user exists and the password matches
      */
     public static User login(String userName, String password) {
-        //User u = Registrati.find(userName,password);
-        //return (u != null && u.getPassword().equals(password)) ? u : null ;
-        return null;
+        User u = Registrati.find(userName);
+        return (u != null && u.getPassword().equals(password)) ? u : null;
     }
 }
