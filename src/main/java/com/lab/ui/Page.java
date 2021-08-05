@@ -1,12 +1,15 @@
 package com.lab.ui;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+
+import java.time.LocalDate;
 
 /**
  * Base class of an UI page controller.
@@ -82,6 +85,16 @@ abstract public class Page {
      */
     protected static void resetField(JFXComboBox field) {
         field.getSelectionModel().clearSelection();
+        field.resetValidation();
+    }
+
+    /**
+     * Resets a JFX node to its default state, clearing its validators
+     *
+     * @param field The node to be reset
+     */
+    protected static void resetField(JFXDatePicker field) {
+        field.setValue(LocalDate.now());
         field.resetValidation();
     }
 }

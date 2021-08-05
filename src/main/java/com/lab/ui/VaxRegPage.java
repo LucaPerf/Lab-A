@@ -63,6 +63,7 @@ public class VaxRegPage extends Page {
         surname.getValidators().add(requiredFieldValidator);
         ccf.getValidators().add(requiredFieldValidator);
         ccf.getValidators().add(ccfValidator);
+        date.getValidators().add(requiredFieldValidator);
         type.getValidators().add(requiredFieldValidator);
         uID.getValidators().add(requiredFieldValidator);
         uID.getValidators().add(uIDValidator);
@@ -105,7 +106,7 @@ public class VaxRegPage extends Page {
         resetField(name);
         resetField(surname);
         resetField(ccf);
-        date.setValue(LocalDate.now());
+        resetField(date);
         resetField(type);
         resetField(uID);
     }
@@ -115,6 +116,6 @@ public class VaxRegPage extends Page {
     }
 
     private boolean isDataValid() {
-        return center.validate() & name.validate() & surname.validate() & ccf.validate() & type.validate() & uID.validate();
+        return center.validate() & name.validate() & surname.validate() & ccf.validate() & date.validate() & type.validate() & uID.validate();
     }
 }
