@@ -24,6 +24,14 @@ public class User {
     }
 
     /**
+     * @return The password of this user instance
+     * @author Ciceri Luigi
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
      * Creates a new user object.
      *
      * @param name     The name of the user
