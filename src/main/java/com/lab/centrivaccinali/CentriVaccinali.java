@@ -32,12 +32,13 @@ public class CentriVaccinali extends Application {
     @Override
     public void start(Stage stage) {
         stage.setTitle("Lab AB");
-        PagesManager.initialize(stage);
+        PagesManager.openEmptyScene(stage);
         stage.show();
-
+        //Data loading
         Centri.load();
         Registrati.load();
-
+        //UI loading
+        PagesManager.initialize(stage);
         PagesManager.openAreaSelection();
     }
 

@@ -39,7 +39,7 @@ public class PagesManager {
     private static Page userLoginPage;
 
     /**
-     * Loads all UI pages from fxml, creates a new scene with an empty HBox Node and sets the stage scene
+     * Initializes the pages manager and loads all UI pages from fxml.
      *
      * @param stage The stage associated with this application
      */
@@ -52,10 +52,6 @@ public class PagesManager {
         userRegPage = loadPage(userRegLoader);
         vaxRegPage = loadPage(vaxRegLoader);
         userLoginPage = loadPage(userLoginLoader);
-
-        //Set scene to an empty HBox
-        scene = new Scene(new HBox(), bounds.getWidth() * 0.5, bounds.getHeight() * 0.5);
-        stage.setScene(scene);
     }
 
     private static Page open(Page page) {
@@ -124,6 +120,16 @@ public class PagesManager {
      */
     public static UserLoginPage openUserLogin() {
         return (UserLoginPage) open(userLoginPage);
+    }
+
+    /**
+     * Opens a new empty scene of size 0.5 * {@link #bounds} . The scene contains an empty HBox.
+     *
+     * @param stage The stage to add the scene to
+     */
+    public static void openEmptyScene(Stage stage) {
+        scene = new Scene(new HBox(), bounds.getWidth() * 0.5, bounds.getHeight() * 0.5);
+        stage.setScene(scene);
     }
 
     private static Page loadPage(FXMLLoader loader) {
