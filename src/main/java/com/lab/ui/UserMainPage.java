@@ -10,8 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
@@ -43,24 +43,34 @@ public class UserMainPage extends Page {
     private JFXButton searchButton;
     @FXML
     private JFXListView<Center> centers;
+
+    //Search filters
     @FXML
-    private HBox typeFilters;
+    private HBox filtersBox;
+    @FXML
+    private ToggleGroup searchModeGroup;
+    @FXML
+    private JFXToggleNode name;
+    @FXML
+    private JFXToggleNode comune;
+    @FXML
+    private HBox typeFiltersBox;
+    @FXML
+    private ToggleGroup centerTypeGroup;
     @FXML
     private JFXToggleNode hub;
     @FXML
     private JFXToggleNode ospedaliero;
     @FXML
     private JFXToggleNode aziendale;
+
+    //Warning dialog
     @FXML
-    private JFXToggleNode nameFilter;
-    @FXML
-    private JFXToggleNode comuneTypeFilter;
+    private JFXDialog logoutWarning;
     @FXML
     private JFXButton exit;
     @FXML
     private JFXButton cancel;
-    @FXML
-    private JFXDialog logoutWarning;
 
     private User currentUser;
 
@@ -80,12 +90,17 @@ public class UserMainPage extends Page {
         reset();
         setupCentersList();
 
-        //Set up filters
-        nameFilter.setOnAction(actionEvent -> setSearchTypeUI(true));
-        comuneTypeFilter.setOnAction(event -> setSearchTypeUI(false));
-        aziendale.setOnAction(event -> setTypeFiltersUI(CenterType.AZIENDALE));
-        hub.setOnAction(event -> setTypeFiltersUI(CenterType.HUB));
-        ospedaliero.setOnAction(event -> setTypeFiltersUI(CenterType.OSPEDALIERO));
+        //Bind enum to each button
+        hub.setUserData(CenterType.HUB);
+        ospedaliero.setUserData(CenterType.OSPEDALIERO);
+        aziendale.setUserData(CenterType.AZIENDALE);
+
+        searchModeGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == name)
+                setTypeFiltersVisible(false);
+            else if (newValue == comune)
+                setTypeFiltersVisible(true);
+        });
 
         //Set up buttons
         searchButton.setOnAction(event -> search());
@@ -100,8 +115,10 @@ public class UserMainPage extends Page {
         back.setOnAction(actionEvent -> {
             if (currentUser != null)
                 logoutWarning.show(root);
-            else
+            else {
                 PagesManager.openAreaSelection();
+                reset();
+            }
         });
         exit.setOnAction(event ->
         {
@@ -120,17 +137,15 @@ public class UserMainPage extends Page {
         logout.setVisible(false);
         username.setVisible(false);
         username.setText("");
-        nameFilter.setSelected(true);
-        aziendale.setSelected(false);
-        hub.setSelected(false);
-        ospedaliero.setSelected(true);
-        comuneTypeFilter.setSelected(false);
-        typeFilters.setVisible(false);
+        //Reset filters
+        searchModeGroup.selectToggle(name);
+        centerTypeGroup.selectToggle(ospedaliero);
+        setTypeFiltersVisible(false);
         searchbar.clear();
     }
 
     /**
-     * Sets the page to login mode. User information is stored ,logout and username label are enabled.
+     * Sets the page to login mode. User information is stored, logout and username label are enabled.
      *
      * @param user The user information
      */
@@ -178,49 +193,22 @@ public class UserMainPage extends Page {
     }
 
     private CenterType getTypeFromUI() {
-        if (nameFilter.isSelected())
+        if (searchModeGroup.getSelectedToggle() == name)
             return null;
-        else if (ospedaliero.isSelected())
-            return CenterType.OSPEDALIERO;
-        else if (aziendale.isSelected())
-            return CenterType.AZIENDALE;
         else
-            return CenterType.HUB;
+            return (CenterType) centerTypeGroup.getSelectedToggle().getUserData();
     }
 
     private void search() {
         Cittadini.cercaCentroVaccinale(searchbar.getText(), getTypeFromUI());
     }
 
-    //Hides or shows the UI type filter buttons
-    private void setTypeFiltersUI(CenterType type) {
-        switch (type) {
-            case OSPEDALIERO: {
-                hub.setSelected(false);
-                aziendale.setSelected(false);
-                break;
-            }
-            case AZIENDALE: {
-                hub.setSelected(false);
-                ospedaliero.setSelected(false);
-                break;
-            }
-            case HUB: {
-                aziendale.setSelected(false);
-                ospedaliero.setSelected(false);
-                break;
-            }
-        }
-    }
-
-    //Hides or shoes the UI search type buttons
-    private void setSearchTypeUI(boolean byName) {
-        if (byName) {
-            typeFilters.setVisible(false);
-            comuneTypeFilter.setSelected(false);
+    //Shows or hides the comune type filters
+    private void setTypeFiltersVisible(boolean visible) {
+        if (visible) {
+            filtersBox.getChildren().add(typeFiltersBox);
         } else {
-            nameFilter.setSelected(false);
-            typeFilters.setVisible(true);
+            filtersBox.getChildren().remove(typeFiltersBox);
         }
     }
 }
