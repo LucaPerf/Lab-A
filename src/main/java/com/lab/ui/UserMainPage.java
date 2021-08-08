@@ -8,6 +8,7 @@ import com.lab.data.User;
 import com.lab.datamanager.Centri;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.SubScene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -87,7 +88,6 @@ public class UserMainPage extends Page {
      */
     @Override
     protected void initialize() {
-        reset();
         setupCentersList();
 
         //Bind enum to each button
@@ -126,6 +126,9 @@ public class UserMainPage extends Page {
             setLoggedOut();
         });
         cancel.setOnAction(event -> logoutWarning.close());
+
+
+        reset();
     }
 
     /**
@@ -133,10 +136,8 @@ public class UserMainPage extends Page {
      */
     @Override
     public void reset() {
-        currentUser = null;
-        logout.setVisible(false);
-        username.setVisible(false);
-        username.setText("");
+        setLoggedOut();
+
         //Reset filters
         searchModeGroup.selectToggle(name);
         centerTypeGroup.selectToggle(ospedaliero);
@@ -152,29 +153,21 @@ public class UserMainPage extends Page {
     public void setLoggedIn(User user) {
         currentUser = user;
 
-        username.setVisible(true);
+        topbar.getChildren().addAll(username, logout);
         username.setText(currentUser.getUserID());
-        logout.setVisible(true);
-
-        register.setVisible(false);
-        register.toBack();
-        login.setVisible(false);
-        login.toBack();
+        topbar.getChildren().removeAll(register, login);
     }
 
     /**
      * Sets the page to logout mode. Login and register buttons are shown, page information is reset.
      */
     public void setLoggedOut() {
-        reset();
-
-        logout.setVisible(false);
-        logout.toBack();
-        username.setVisible(false);
-        username.toBack();
-
-        register.setVisible(true);
-        login.setVisible(true);
+        currentUser = null;
+        username.setText("");
+        topbar.getChildren().removeAll(username, logout);
+        //If this method is called from initialize(), register and login buttons will already be there because they are defined inside the fxml
+        if (topbar.getChildren().size() == 0)
+            topbar.getChildren().addAll(register, login);
     }
 
     /**
