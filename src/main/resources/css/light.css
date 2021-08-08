@@ -1,35 +1,60 @@
 .root
 {
     -primary-color: #3f51b5;
+    -primary-200: #9FA8DA;
     -primary-color-hover: #3f51b50a;
     -secondary-color: #ffc107;
     -text-on-primary: WHITE;
     -text-on-secondary: #000000;
     -rippler-indigo-fill: #5264AE;
     -fx-background-color: WHITE;
+    -grey-500: #9E9E9E;
+    -grey-300: #E0E0E0;
+    -grey-400: #BDBDBD;
 }
 
+//-------
 //Buttons
-.button-contained{
+//-------
+
+.button-contained,.button-contained-rounded
+{
     -jfx-button-type: RAISED;
     -fx-background-color: -primary-color;
     -fx-text-fill: -text-on-primary;
     -jfx-disable-visual-focus: true;
 }
-.button-text
+.button-text, .button-text-rounded
 {
     -jfx-button-type: FLAT;
     -fx-text-fill: -primary-color;
     -jfx-disable-visual-focus: true;
 }
 
+.button-text-rounded, .button-search-rounded
+{
+     -fx-background-radius:100;
+     -fx-border-radius:100;
+}
+.button-contained-rounded
+{
+    -fx-background-radius:100;
+    -fx-border-radius:100;
+}
+
+//----------
 //Text field
+//----------
+
 .text-field
 {
     -jfx-label-float: true;
 }
 
+//---------
 //Combo box
+//---------
+
 .combo-box
 {
     -jfx-label-float: true;
@@ -57,8 +82,116 @@
     -jfx-rippler-fill: -rippler-indigo-fill;
 }
 
+//-----------
 //Date picker
+//-----------
+
 .date-picker
 {
     -jfx-default-color: -primary-color;
 }
+
+//---------
+//List view
+//---------
+
+.jfx-list-cell .jfx-rippler
+{
+    -jfx-rippler-fill: -rippler-indigo-fill;
+}
+
+.jfx-list-cell:selected
+{
+    -fx-background-color: WHITE;
+    -fx-text-fill: -text-on-secondary;
+}
+
+.jfx-list-cell:odd,
+.jfx-list-cell:even {
+    -fx-background-color: WHITE;
+}
+
+.jfx-list-view
+{
+    -fx-background-insets: 0.0;
+    -jfx-cell-horizontal-margin: 0.0;
+    -jfx-cell-vertical-margin: 5.0;
+    -jfx-expanded: false;
+    -fx-background-color: TRANSPARENT;
+}
+
+//----------
+//Scroll bar
+//----------
+
+.scroll-bar:vertical > .track-background, .scroll-bar:horizontal > .track-background {
+    -fx-background-color: #F1F1F1;
+    -fx-background-insets: 0.0;
+}
+
+.scroll-bar:vertical > .thumb, .scroll-bar:horizontal > .thumb {
+    -fx-background-color: -grey-400;
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 1.0;
+}
+
+.scroll-bar > .increment-button, .scroll-bar > .decrement-button {
+    -fx-padding: 5 2 5 2;
+}
+
+.scroll-bar > .increment-button, .scroll-bar > .decrement-button, .scroll-bar:hover > .increment-button, .scroll-bar:hover > .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar > .increment-button > .increment-arrow, .scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: rgb(150.0, 150.0, 150.0);
+}
+
+.scroll-bar > .increment-button > .increment-arrow {
+    -fx-shape: "M298 426h428l-214 214z";
+}
+
+.scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-shape: "M298 598l214-214 214 214h-428z";
+}
+
+//----------
+//Search bar
+//----------
+
+.search-bar
+{
+    -fx-background-color: WHITE;
+    -fx-border-color: -grey-400;
+    -fx-border-radius: 16 0 0 16;
+    -fx-border-width: 1 0 1 1;
+    -fx-padding: 0 8 0 16;
+}
+
+.button-search-rounded
+{
+    -fx-background-radius:0 100 100 0;
+    -fx-border-radius:0 100 100 0;
+    -fx-border-color: -grey-400;
+    -fx-padding: 1;
+    -fx-border-width:1 1 1 0;
+}
+
+//-----
+//Chips
+//-----
+
+.chip-filter
+{
+    -jfx-toggle-color: -primary-200;
+    -jfx-untoggle-color: -grey-300;
+    -fx-background-color: -grey-300;
+    -fx-background-radius:100;
+    -fx-border-radius:100;
+}
+.chip-filter .jfx-rippler
+{
+    -jfx-rippler-fill:-rippler-indigo-fill;
+}
+
+
