@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 
 import java.util.LinkedList;
 
@@ -29,7 +30,7 @@ public class UserMainPage extends Page {
     @FXML
     private HBox topbar;
     @FXML
-    private AnchorPane root;
+    private StackPane root;
     @FXML
     private JFXButton back;
     @FXML
@@ -54,6 +55,12 @@ public class UserMainPage extends Page {
     private JFXToggleNode nameFilter;
     @FXML
     private JFXToggleNode comuneTypeFilter;
+    @FXML
+    private JFXButton exit;
+    @FXML
+    private JFXButton cancel;
+    @FXML
+    private JFXDialog logoutWarning;
 
     private User currentUser;
 
@@ -91,9 +98,17 @@ public class UserMainPage extends Page {
         login.setOnAction(actionEvent -> PagesManager.openUserLogin());
         register.setOnAction(actionEvent -> PagesManager.openUserReg());
         back.setOnAction(actionEvent -> {
+            if (currentUser != null)
+                logoutWarning.show(root);
+            else
+                PagesManager.openAreaSelection();
+        });
+        exit.setOnAction(event ->
+        {
             PagesManager.openAreaSelection();
             setLoggedOut();
         });
+        cancel.setOnAction(event -> logoutWarning.close());
     }
 
     /**
