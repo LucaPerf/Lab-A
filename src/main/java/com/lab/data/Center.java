@@ -88,4 +88,12 @@ public class Center {
     public String[] toRow() {
         return new String[]{name, address.getCap().toString(), address.getComune(), address.getIndirizzo(), address.getProvincia(), type.toString()};
     }
+
+    /**
+     * @return A brief summary of this center
+     */
+    @Override
+    public String toString() {
+        return name + "\nCentro " + type.toString().toLowerCase(Locale.ROOT) + ", si trova nel comune di " + address.getComune();
+    }
 }
