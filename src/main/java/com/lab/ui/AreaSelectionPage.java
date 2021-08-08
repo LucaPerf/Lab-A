@@ -33,7 +33,7 @@ public class AreaSelectionPage extends Page {
     protected void initialize() {
         centerArea.setOnAction(actionEvent -> PagesManager.openCenterActions());
 
-        userArea.setOnAction(actionEvent -> PagesManager.openUserMain());
+        userArea.setOnAction(actionEvent -> PagesManager.openUserMain().setupCentersList());
     }
 
     /**
