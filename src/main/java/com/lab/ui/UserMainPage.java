@@ -8,7 +8,6 @@ import com.lab.data.User;
 import com.lab.datamanager.Centri;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.SubScene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -51,19 +50,19 @@ public class UserMainPage extends Page {
     @FXML
     private ToggleGroup searchModeGroup;
     @FXML
-    private JFXToggleNode name;
+    private JFXGroupToggleButton name;
     @FXML
-    private JFXToggleNode comune;
+    private JFXGroupToggleButton comune;
     @FXML
     private HBox typeFiltersBox;
     @FXML
     private ToggleGroup centerTypeGroup;
     @FXML
-    private JFXToggleNode hub;
+    private JFXGroupToggleButton hub;
     @FXML
-    private JFXToggleNode ospedaliero;
+    private JFXGroupToggleButton ospedaliero;
     @FXML
-    private JFXToggleNode aziendale;
+    private JFXGroupToggleButton aziendale;
 
     //Warning dialog
     @FXML

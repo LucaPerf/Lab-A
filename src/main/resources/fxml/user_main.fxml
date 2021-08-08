@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
+<?import com.lab.ui.JFXGroupToggleButton?>
 <StackPane fx:id="root" prefHeight="400.0" prefWidth="400.0" stylesheets="@../css/light.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.ui.UserMainPage">
     <AnchorPane>
         <VBox spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -36,21 +37,21 @@
             </HBox>
             <HBox fx:id="filtersBox" alignment="CENTER_LEFT" spacing="8.0">
                 <Label text="Cerca per" />
-                <JFXToggleNode fx:id="name" selected="true" styleClass="chip-filter" text="Nome" textAlignment="CENTER">
+                <JFXGroupToggleButton fx:id="name" selected="true" styleClass="chip-filter" text="Nome" textAlignment="CENTER">
                         <toggleGroup>
                             <ToggleGroup fx:id="searchModeGroup" />
                         </toggleGroup>
-                </JFXToggleNode>
-                <JFXToggleNode fx:id="comune" styleClass="chip-filter" text="Comune" textAlignment="CENTER" toggleGroup="$searchModeGroup" />
+                </JFXGroupToggleButton>
+                <JFXGroupToggleButton fx:id="comune" styleClass="chip-filter" text="Comune" textAlignment="CENTER" toggleGroup="$searchModeGroup" />
                 <HBox fx:id="typeFiltersBox" alignment="CENTER" spacing="8.0">
                     <Label text="Tipo" />
-                    <JFXToggleNode selected="true" fx:id="aziendale" styleClass="chip-filter" text="Aziendale" textAlignment="CENTER">
+                    <JFXGroupToggleButton selected="true" fx:id="aziendale" styleClass="chip-filter" text="Aziendale" textAlignment="CENTER">
                         <toggleGroup>
                             <ToggleGroup fx:id="centerTypeGroup" />
                         </toggleGroup>
-                    </JFXToggleNode>
-                    <JFXToggleNode fx:id="ospedaliero" styleClass="chip-filter" text="Ospedaliero" textAlignment="CENTER" toggleGroup="$centerTypeGroup" />
-                    <JFXToggleNode fx:id="hub" styleClass="chip-filter" text="Hub" textAlignment="CENTER" toggleGroup="$centerTypeGroup" />
+                    </JFXGroupToggleButton>
+                    <JFXGroupToggleButton fx:id="ospedaliero" styleClass="chip-filter" text="Ospedaliero" textAlignment="CENTER" toggleGroup="$centerTypeGroup" />
+                    <JFXGroupToggleButton fx:id="hub" styleClass="chip-filter" text="Hub" textAlignment="CENTER" toggleGroup="$centerTypeGroup" />
                 </HBox>
                 <padding>
                     <Insets left="16.0" />
