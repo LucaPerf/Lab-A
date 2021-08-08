@@ -1,5 +1,6 @@
 package com.lab.cittadini;
 
+import com.lab.data.CenterType;
 import com.lab.data.User;
 import com.lab.datamanager.Registrati;
 
@@ -27,5 +28,20 @@ public class Cittadini {
     public static User login(String userName, String password) {
         User u = Registrati.find(userName);
         return (u != null && u.getPassword().equals(password)) ? u : null;
+    }
+
+    /**
+     * Searches for a center by name or by "comune" and type. If <code>type<code/> is null <code>key</code> is the name of the center, otherwise it is the name of the "comune".
+     *
+     * @param key  The name of the center or "comune" to search for
+     * @param type The center type to search for
+     */
+    public static void cercaCentroVaccinale(String key, CenterType type) {
+        if (type == null)
+            //Centri.find(key);
+            System.out.println("Search by name " + key);
+        else
+            //Centri.find(key,type);
+            System.out.println("Search in " + key + " of type " + type);
     }
 }
