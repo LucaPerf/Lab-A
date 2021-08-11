@@ -74,7 +74,7 @@ public class Registrati {
     }
 
     /**
-     * Get the login information and check if the user exists and the password is correct
+     * Get the login information
      *
      * @param username
      * @return
