@@ -10,8 +10,8 @@ import java.util.Locale;
 
 public class Center {
     private String name;
-    private static PostalAddress address;
-    private static CenterType type;
+    private PostalAddress address;
+    private CenterType type;
 
     /**
      * @return The name of this center
@@ -28,7 +28,7 @@ public class Center {
      */
 
     // public PostalAddess getAddess(){}
-    public static PostalAddress getAddress() {
+    public PostalAddress getAddress() {
 
         return address;
     }
@@ -37,7 +37,7 @@ public class Center {
      * @return The type of this center
      * @author Luca Perfetti
      */
-    public static CenterType getType() {
+    public CenterType getType() {
 
         return type;
     }
