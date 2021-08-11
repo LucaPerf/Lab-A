@@ -1,11 +1,13 @@
 package com.lab.datamanager;
 
 import com.lab.data.Center;
+import com.lab.data.CenterType;
 import org.simpleflatmapper.csv.CsvParser;
 import org.simpleflatmapper.lightningcsv.CsvWriter;
 
 import java.util.*;
 import java.io.*;
+import java.util.concurrent.Callable;
 
 /**
  * Class used for center data management.
@@ -24,6 +26,8 @@ public class Centri {
      *
      * @param center The center to add
      */
+
+    // private static void addCenter(Center center)
     private static void addCenter(Center center) {
 
         addToHashMapByComune(center);
@@ -113,5 +117,40 @@ public class Centri {
         return centers;
     }
 
-}
+    /**
+     *
+     * @param nomeCentro
+     * @return
+     */
 
+    public static LinkedList<Center> find(Center nomeCentro) {
+        Collection<LinkedList<Center>> al = centers.values();
+
+        // create a new Linkedlist
+        LinkedList<Center> cent = new LinkedList<>();
+
+        //scroll through the list of centers and chech if "nomeCentro" is the same as elements in the Hashmap
+            for (LinkedList<Center> it : al)
+                for (Center l : it)
+                    if(nomeCentro.equals(l.getName()))
+                        //add "nomeCentro" to a new list
+                        System.out.println(cent.add(l));
+        return cent;
+    }
+
+    public static LinkedList<Center> find(CenterType type, String nomeComune){
+        //create a new Linkedlist
+        LinkedList<Center> Ll = new LinkedList<>();
+
+        //scroll through the list of centers and chech if "type" is the same as elements in the Hashmap
+        for (Center fr : centers.get(type))
+            if(type.equals(fr.getType()))
+                // add "type" to a new list
+                System.out.println(Ll.add(fr));
+
+        centers.get(nomeComune);
+        centers.containsKey(nomeComune);
+
+        return Ll;
+    }
+}
