@@ -9,8 +9,8 @@ import java.io.*;
 import java.util.*;
 
 /**
- *
- * This class represents the reading of the data of the centers and loads them in the Hashmap, creating a file for each read center
+ * This class manages vaccination data of all centers.
+ * Each center data is saved into a file named Vaccinati_centerName.csv
  *
  * @author Luca Perfetti
  */
@@ -20,66 +20,63 @@ public class Vaccinati {
     public static LinkedHashMap<String, File> files = new LinkedHashMap<>();
 
     /**
-     * Create a HashMap of all files in the center
-     *
+     * Checks if vaccination files exist and creates them. A {@link File} is created for each center and added to {@link #files}
      */
-
     public static void load() {
         Collection<LinkedList<Center>> data = Centri.getCenters().values();
 
         try {
-            for(LinkedList<Center> it : data)
-                for(Center l : it) {
-                    File fl = new File("Vaccinati " + l.getName() + ".csv");
+            for (LinkedList<Center> it : data)
+                for (Center l : it) {
+                    File fl = new File("Vaccinati_" + l.getName() + ".csv");
                     fl.createNewFile();
                     files.put(l.getName(), fl);
                 }
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
 
     /**
-     *Upload the file specified file in the center we need
+     * Loads all vaccination information of <code>centerName<code/> into {@link #vaxinfo}
      *
-     * @param centerName
-     * @throws IOException
+     * @param centerName The name of the center whose vaccination data will be loaded
      */
     public static void load(String centerName) {
-       try{
-           FileReader fr = new FileReader(files.get(centerName));
+        try {
+            FileReader fr = new FileReader(files.get(centerName));
 
-           Iterator<String[]> iter = CsvParser.iterator(fr);
+            Iterator<String[]> iter = CsvParser.iterator(fr);
 
-           while(iter.hasNext()){
-               String[] row = iter.next();
+            while (iter.hasNext()) {
+                String[] row = iter.next();
 
-               vaxinfo.put(Integer.parseInt(row[5]), new VaxInfo(row));
-           }
-       }catch (IOException e){
-           System.out.println(e);
-       }
+                vaxinfo.put(Integer.parseInt(row[5]), new VaxInfo(row));
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     /**
-     * Save the center name and vaccine information in a file
+     * Save all vaccination information to the file Vaccinati_centerName.csv
      *
-     * @param centerName
+     * @param centerName The name of the center whose vaccination data will be saved
      * @param info
      */
 
-    public static void save(String centerName, VaxInfo info){
+    public static void save(String centerName, VaxInfo info) {
 
     }
 
     /**
-     * Add the center name and vaccine information to the HashMap named "vaccini.csv"
+     * Add the vaccination information to the file "Vaccinati_ceneterName.csv"
      *
-     * @param centerName
-     * @param info
+     * @param centerName The name of the center to add the vaccination to
+     * @param info       The vaccination information
      */
-    public static void add(String centerName, VaxInfo info){
-        try{
+    public static void add(String centerName, VaxInfo info) {
+        try {
             FileWriter fw = new FileWriter(files.get(centerName), true);
             CsvWriter cw = CsvWriter.dsl().to(fw);
 
@@ -87,7 +84,7 @@ public class Vaccinati {
 
             cw.appendRow(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5]);
             fw.close();
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
