@@ -1,8 +1,11 @@
 package com.lab.cittadini;
 
+import com.lab.data.Center;
 import com.lab.data.CenterType;
 import com.lab.data.User;
 import com.lab.datamanager.Registrati;
+
+import java.util.LinkedList;
 
 /**
  * This class manages the user actions
@@ -36,12 +39,14 @@ public class Cittadini {
      * @param key  The name of the center or "comune" to search for
      * @param type The center type to search for
      */
-    public static void cercaCentroVaccinale(String key, CenterType type) {
-        if (type == null)
-            //Centri.find(key);
-            System.out.println("Search by name " + key);
+    public static LinkedList<Center> cercaCentroVaccinale(String key, CenterType type) {
+        if (key == null)
+            return new LinkedList<Center>();
         else
-            //Centri.find(key,type);
-            System.out.println("Search in " + key + " of type " + type);
+            return new LinkedList<Center>();
+        //if (type == null)
+        //Centri.find(key);
+        //else
+        //Centri.find(key,type);
     }
 }
