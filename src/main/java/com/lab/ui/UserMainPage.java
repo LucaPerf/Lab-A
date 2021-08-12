@@ -192,7 +192,8 @@ public class UserMainPage extends Page {
     }
 
     private void search() {
-        Cittadini.cercaCentroVaccinale(searchbar.getText(), getTypeFromUI());
+        centers.getItems().clear();
+        centers.getItems().addAll(Cittadini.cercaCentroVaccinale(searchbar.getText(), getTypeFromUI()));
     }
 
     //Shows or hides the comune type filters
