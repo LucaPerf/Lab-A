@@ -4,6 +4,7 @@ import com.lab.data.Center;
 import com.lab.data.VaxInfo;
 import com.lab.datamanager.Centri;
 import com.lab.datamanager.Registrati;
+import com.lab.datamanager.Vaccinati;
 import com.lab.ui.PagesManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -37,6 +38,7 @@ public class CentriVaccinali extends Application {
         //Data loading
         Centri.load();
         Registrati.load();
+        Vaccinati.load();
         //UI loading
         PagesManager.initialize(stage);
         PagesManager.openAreaSelection();
@@ -52,9 +54,12 @@ public class CentriVaccinali extends Application {
     }
 
     /**
-     * Add a new vaccinated citizen into the center own file
+     * Add a new vaccinated citizen into the <code>centerName</code> own file
+     *
+     * @param centerName The name of the center to add the information to
+     * @param info       The information to add
      */
     public static void registraVaccinato(String centerName, VaxInfo info) {
-        //Vaccinati.add(centerName,info);
+        Vaccinati.add(centerName, info);
     }
 }
