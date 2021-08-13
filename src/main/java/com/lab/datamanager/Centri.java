@@ -123,7 +123,7 @@ public class Centri {
      * @return
      */
 
-    public static LinkedList<Center> find(Center nomeCentro) {
+    public static LinkedList<Center> find(String nomeCentro) {
         Collection<LinkedList<Center>> al = centers.values();
 
         // create a new Linkedlist
@@ -132,25 +132,21 @@ public class Centri {
         //scroll through the list of centers and chech if "nomeCentro" is the same as elements in the Hashmap
             for (LinkedList<Center> it : al)
                 for (Center l : it)
-                    if(nomeCentro.equals(l.getName()))
+                    if(nomeCentro.contains(l.getName()))
                         //add "nomeCentro" to a new list
-                        System.out.println(cent.add(l));
+                        cent.add(l);
         return cent;
     }
 
     public static LinkedList<Center> find(CenterType type, String nomeComune){
-        //create a new Linkedlist
         LinkedList<Center> Ll = new LinkedList<>();
 
-        //scroll through the list of centers and chech if "type" is the same as elements in the Hashmap
-        for (Center fr : centers.get(type))
-            if(type.equals(fr.getType()))
-                // add "type" to a new list
-                System.out.println(Ll.add(fr));
-
-        centers.get(nomeComune);
-        centers.containsKey(nomeComune);
-
-        return Ll;
+        if(centers.containsKey(nomeComune)){
+            for (Center fr : centers.get(nomeComune))
+                if (type.equals(fr.getType()))
+                    Ll.add(fr);
+                return Ll;
+        }
+        else return Ll;
     }
 }
