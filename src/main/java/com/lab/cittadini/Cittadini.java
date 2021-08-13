@@ -3,6 +3,7 @@ package com.lab.cittadini;
 import com.lab.data.Center;
 import com.lab.data.CenterType;
 import com.lab.data.User;
+import com.lab.datamanager.Centri;
 import com.lab.datamanager.Registrati;
 
 import java.util.LinkedList;
@@ -30,7 +31,7 @@ public class Cittadini {
      */
     public static User login(String userName, String password) {
         User u = Registrati.find(userName);
-        return (u != null && u.getPassword().equals(password)) ? u : null;
+        return ((u != null) && (u.getPassword().equals(password))) ? u : null;
     }
 
     /**
@@ -40,13 +41,9 @@ public class Cittadini {
      * @param type The center type to search for
      */
     public static LinkedList<Center> cercaCentroVaccinale(String key, CenterType type) {
-        if (key == null)
-            return new LinkedList<Center>();
+        if (type == null)
+            return Centri.find(key);
         else
-            return new LinkedList<Center>();
-        //if (type == null)
-        //Centri.find(key);
-        //else
-        //Centri.find(key,type);
+            return Centri.find(type, key);
     }
 }
