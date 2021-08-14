@@ -49,7 +49,7 @@ public class UserLoginPage extends Page {
             if (isDataValid()) {
                 User u = Cittadini.login(username.getText(), password.getText());
                 if (u != null) {
-                    PagesManager.openUserMain().setLoggedIn(u);
+                    ((UserMainPage) PagesManager.open(PagesManager.PageType.USERMAIN)).setLoggedIn(u);
                     reset();
                 }
             }
@@ -57,7 +57,7 @@ public class UserLoginPage extends Page {
 
         cancel.setOnAction(actionEvent ->
         {
-            PagesManager.openUserMain();
+            PagesManager.open(PagesManager.PageType.USERMAIN);
             reset();
         });
     }

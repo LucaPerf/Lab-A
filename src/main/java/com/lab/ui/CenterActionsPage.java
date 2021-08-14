@@ -33,11 +33,11 @@ public class CenterActionsPage extends Page {
      */
     @FXML
     protected void initialize() {
-        addCenter.setOnAction(actionEvent -> PagesManager.openCenterReg());
+        addCenter.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERREGISTRATION));
 
-        addVax.setOnAction(actionEvent -> PagesManager.openVaxReg());
+        addVax.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.VAXREGISTREATION));
 
-        back.setOnAction(actionEvent -> PagesManager.openAreaSelection());
+        back.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.AREASELECTION));
     }
 
     /**

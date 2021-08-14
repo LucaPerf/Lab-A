@@ -16,6 +16,16 @@ import java.io.IOException;
  */
 
 public class PagesManager {
+    public enum PageType {
+        CENTERREGISTRATION,
+        CENTERACTIONS,
+        AREASELECTION,
+        USERMAIN,
+        USERREGISTRATION,
+        VAXREGISTREATION,
+        USERLOGIN
+    }
+
     private static Scene scene;
     /**
      * The bounds of the primary screen, in pixels
@@ -54,72 +64,41 @@ public class PagesManager {
         userLoginPage = loadPage(userLoginLoader);
     }
 
+    /**
+     * Opens a new page of type {@link PageType}. Pages are reused so data from previous interactions will be present if not reset.
+     *
+     * @param type The type of page to open
+     * @return The opened page or null if no page of <code>type</code> exists
+     * @throws NullPointerException If <code>type</code> is null
+     */
+    public static Page open(PageType type) {
+
+        if (type == null)
+            throw new NullPointerException("Page type cannot be null");
+
+        switch (type) {
+            case USERMAIN:
+                return open(userMainPage);
+            case CENTERREGISTRATION:
+                return open(centerRegPage);
+            case CENTERACTIONS:
+                return open(centerActionsPage);
+            case AREASELECTION:
+                return open(areaSelectionPage);
+            case USERREGISTRATION:
+                return open(userRegPage);
+            case VAXREGISTREATION:
+                return open(vaxRegPage);
+            case USERLOGIN:
+                return open(userLoginPage);
+            default:
+                return null;
+        }
+    }
+
     private static Page open(Page page) {
         scene.setRoot(page.getRoot());
         return page;
-    }
-
-    /**
-     * Open the center registration page
-     *
-     * @return The opened page
-     */
-    public static CenterRegPage openCenterReg() {
-        return (CenterRegPage) open(centerRegPage);
-    }
-
-    /**
-     * Opens the area selection page
-     *
-     * @return The opened page
-     */
-    public static AreaSelectionPage openAreaSelection() {
-        return (AreaSelectionPage) open(areaSelectionPage);
-    }
-
-    /**
-     * Opens the center actions page
-     *
-     * @return The opened page
-     */
-    public static CenterActionsPage openCenterActions() {
-        return (CenterActionsPage) open(centerActionsPage);
-    }
-
-    /**
-     * Opens the user area main page
-     *
-     * @return The opened page
-     */
-    public static UserMainPage openUserMain() {
-        return (UserMainPage) open(userMainPage);
-    }
-
-    /**
-     * Opens the user registration page
-     *
-     * @return The opened page
-     */
-    public static UserRegPage openUserReg() {
-        return (UserRegPage) open(userRegPage);
-    }
-
-    /**
-     * Opens the vaccination registration page
-     *
-     * @return The opened page
-     */
-    public static VaxRegPage openVaxReg() {
-        return (VaxRegPage) open(vaxRegPage);
-    }
-
-    /**
-     * Opens the user login page
-     *
-     * @return The opened page
-     */
-    public static UserLoginPage openUserLogin() {
-        return (UserLoginPage) open(userLoginPage);
     }
 
     /**

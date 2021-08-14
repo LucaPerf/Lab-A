@@ -64,14 +64,14 @@ public class UserRegPage extends Page {
             if (isDataValid()) {
                 Cittadini.registraCittadino(userFromUI());
                 reset();
-                PagesManager.openUserMain();
+                PagesManager.open(PagesManager.PageType.USERMAIN);
             }
         });
 
         cancel.setOnAction(actionEvent ->
         {
             reset();
-            PagesManager.openUserMain();
+            PagesManager.open(PagesManager.PageType.USERMAIN);
         });
     }
 

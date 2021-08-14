@@ -41,7 +41,7 @@ public class CentriVaccinali extends Application {
         Vaccinati.load();
         //UI loading
         PagesManager.initialize(stage);
-        PagesManager.openAreaSelection();
+        PagesManager.open(PagesManager.PageType.AREASELECTION);
     }
 
     /**

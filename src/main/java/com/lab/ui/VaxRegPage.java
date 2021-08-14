@@ -82,7 +82,7 @@ public class VaxRegPage extends Page {
 
         back.setOnAction(actionEvent -> {
             reset();
-            PagesManager.openCenterActions();
+            PagesManager.open(PagesManager.PageType.CENTERACTIONS);
         });
 
         //Dialog
@@ -96,7 +96,7 @@ public class VaxRegPage extends Page {
         no.setOnAction(actionEvent -> {
             addAgain.close();
             reset();
-            PagesManager.openCenterActions();
+            PagesManager.open(PagesManager.PageType.CENTERACTIONS);
         });
     }
 

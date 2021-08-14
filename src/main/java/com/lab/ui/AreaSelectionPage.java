@@ -31,14 +31,15 @@ public class AreaSelectionPage extends Page {
      */
     @FXML
     protected void initialize() {
-        centerArea.setOnAction(actionEvent -> PagesManager.openCenterActions());
+        centerArea.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERACTIONS));
 
-        userArea.setOnAction(actionEvent -> PagesManager.openUserMain().setupCentersList());
+        userArea.setOnAction(actionEvent -> ((UserMainPage) PagesManager.open(PagesManager.PageType.USERMAIN)).setupCentersList());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void reset() { }
+    public void reset() {
+    }
 }

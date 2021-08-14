@@ -65,13 +65,13 @@ public class CenterRegPage extends Page {
             if (isDataValid()) {
                 CentriVaccinali.registraCentroVaccinale(centerFromUI());
                 reset();
-                PagesManager.openCenterActions();
+                PagesManager.open(PagesManager.PageType.CENTERACTIONS);
             }
         });
 
         back.setOnAction(actionEvent -> {
             reset();
-            PagesManager.openCenterActions();
+            PagesManager.open(PagesManager.PageType.CENTERACTIONS);
         });
     }
 
