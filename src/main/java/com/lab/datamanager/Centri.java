@@ -132,7 +132,7 @@ public class Centri {
         //scroll through the list of centers and chech if "nomeCentro" is the same as elements in the Hashmap
             for (LinkedList<Center> it : al)
                 for (Center l : it)
-                    if(nomeCentro.contains(l.getName()))
+                    if(l.getName().contains(nomeCentro))
                         //add "nomeCentro" to a new list
                         cent.add(l);
         return cent;
@@ -147,6 +147,6 @@ public class Centri {
                     Ll.add(fr);
                 return Ll;
         }
-        else return Ll;
+        return Ll;
     }
 }
