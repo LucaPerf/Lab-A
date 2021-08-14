@@ -11,7 +11,8 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.lab.ui.CenterSearchCommonPage"
-      fx:id="root" spacing="12.0">
+      fx:id="root" spacing="12.0"
+      stylesheets="@../css/light.css">
     <HBox alignment="CENTER_LEFT">
         <VBox.margin>
             <Insets top="12.0"/>
