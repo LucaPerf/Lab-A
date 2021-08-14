@@ -37,32 +37,6 @@ public class UserMainPage extends Page {
     private JFXButton login;
     @FXML
     private JFXButton register;
-    @FXML
-    private TextField searchbar;
-    @FXML
-    private JFXButton searchButton;
-    @FXML
-    private JFXListView<Center> centers;
-
-    //Search filters
-    @FXML
-    private HBox filtersBox;
-    @FXML
-    private ToggleGroup searchModeGroup;
-    @FXML
-    private JFXGroupToggleButton name;
-    @FXML
-    private JFXGroupToggleButton comune;
-    @FXML
-    private HBox typeFiltersBox;
-    @FXML
-    private ToggleGroup centerTypeGroup;
-    @FXML
-    private JFXGroupToggleButton hub;
-    @FXML
-    private JFXGroupToggleButton ospedaliero;
-    @FXML
-    private JFXGroupToggleButton aziendale;
 
     //Warning dialog
     @FXML
@@ -71,6 +45,8 @@ public class UserMainPage extends Page {
     private JFXButton exit;
     @FXML
     private JFXButton cancel;
+    @FXML
+    private CenterSearchCommonPage searchController;
 
     private User currentUser;
 
@@ -87,26 +63,7 @@ public class UserMainPage extends Page {
      */
     @Override
     protected void initialize() {
-        setupCentersList();
 
-        //Bind enum to each button
-        hub.setUserData(CenterType.HUB);
-        ospedaliero.setUserData(CenterType.OSPEDALIERO);
-        aziendale.setUserData(CenterType.AZIENDALE);
-
-        searchModeGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == name)
-                setTypeFiltersVisible(false);
-            else if (newValue == comune)
-                setTypeFiltersVisible(true);
-        });
-
-        //Set up buttons
-        searchButton.setOnAction(event -> search());
-        searchbar.setOnKeyPressed(event -> {
-            if (event.getCode().equals(KeyCode.ENTER))
-                search();
-        });
 
         logout.setOnAction(actionEvent -> setLoggedOut());
         login.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.USERLOGIN));
@@ -122,7 +79,7 @@ public class UserMainPage extends Page {
         exit.setOnAction(event ->
         {
             PagesManager.open(PagesManager.PageType.AREASELECTION);
-            setLoggedOut();
+            reset();
         });
         cancel.setOnAction(event -> logoutWarning.close());
 
@@ -136,12 +93,7 @@ public class UserMainPage extends Page {
     @Override
     public void reset() {
         setLoggedOut();
-
-        //Reset filters
-        searchModeGroup.selectToggle(name);
-        centerTypeGroup.selectToggle(ospedaliero);
-        setTypeFiltersVisible(false);
-        searchbar.clear();
+        searchController.reset();
     }
 
     /**
@@ -169,42 +121,5 @@ public class UserMainPage extends Page {
             topbar.getChildren().addAll(register, login);
     }
 
-    /**
-     * Adds 25 centers to the search result list.
-     */
-    public void setupCentersList() {
-        centers.getItems().clear();
-        int i = 0;
-        for (LinkedList<Center> list : Centri.getCenters().values())
-            for (Center c : list) {
-                if (i < 25) {
-                    centers.getItems().add(c);
-                    i++;
-                } else return;
-            }
-    }
 
-    private CenterType getTypeFromUI() {
-        if (searchModeGroup.getSelectedToggle() == name)
-            return null;
-        else
-            return (CenterType) centerTypeGroup.getSelectedToggle().getUserData();
-    }
-
-    private void search() {
-        String key = searchbar.getText();
-        if (!key.equals("")) {
-            centers.getItems().clear();
-            centers.getItems().addAll(Cittadini.cercaCentroVaccinale(key, getTypeFromUI()));
-        }
-    }
-
-    //Shows or hides the comune type filters
-    private void setTypeFiltersVisible(boolean visible) {
-        if (visible) {
-            filtersBox.getChildren().add(typeFiltersBox);
-        } else {
-            filtersBox.getChildren().remove(typeFiltersBox);
-        }
-    }
 }
