@@ -23,7 +23,8 @@ public class PagesManager {
         USERMAIN,
         USERREGISTRATION,
         VAXREGISTREATION,
-        USERLOGIN
+        USERLOGIN,
+        CENTERSELECTION
     }
 
     private static Scene scene;
@@ -39,6 +40,7 @@ public class PagesManager {
     private static FXMLLoader userRegLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/user_registration.fxml"));
     private static FXMLLoader vaxRegLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/vax_registration.fxml"));
     private static FXMLLoader userLoginLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/user_login.fxml"));
+    private static FXMLLoader centerSelectionLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/center_selection.fxml"));
     //Pages controllers
     private static Page centerRegPage;
     private static Page centerActionsPage;
@@ -47,6 +49,7 @@ public class PagesManager {
     private static Page userRegPage;
     private static Page vaxRegPage;
     private static Page userLoginPage;
+    private static Page centerSelectionPage;
 
     /**
      * Initializes the pages manager and loads all UI pages from fxml.
@@ -62,6 +65,7 @@ public class PagesManager {
         userRegPage = loadPage(userRegLoader);
         vaxRegPage = loadPage(vaxRegLoader);
         userLoginPage = loadPage(userLoginLoader);
+        centerSelectionPage = loadPage(centerSelectionLoader);
     }
 
     /**
@@ -91,6 +95,8 @@ public class PagesManager {
                 return open(vaxRegPage);
             case USERLOGIN:
                 return open(userLoginPage);
+            case CENTERSELECTION:
+                return open(centerSelectionPage);
             default:
                 return null;
         }

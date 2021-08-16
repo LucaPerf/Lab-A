@@ -35,7 +35,7 @@ public class CenterActionsPage extends Page {
     protected void initialize() {
         addCenter.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERREGISTRATION));
 
-        addVax.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.VAXREGISTREATION));
+        addVax.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERSELECTION));
 
         back.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.AREASELECTION));
     }
@@ -44,5 +44,6 @@ public class CenterActionsPage extends Page {
      * {@inheritDoc}
      */
     @Override
-    public void reset() { }
+    public void reset() {
+    }
 }
