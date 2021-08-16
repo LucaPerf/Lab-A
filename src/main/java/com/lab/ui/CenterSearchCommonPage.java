@@ -6,11 +6,13 @@ import com.lab.cittadini.Cittadini;
 import com.lab.data.Center;
 import com.lab.data.CenterType;
 import com.lab.datamanager.Centri;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -53,6 +55,7 @@ public class CenterSearchCommonPage extends Page {
 
     /**
      * {@inheritDoc}
+     *
      * @return
      */
     @Override
@@ -71,6 +74,9 @@ public class CenterSearchCommonPage extends Page {
         hub.setUserData(CenterType.HUB);
         ospedaliero.setUserData(CenterType.OSPEDALIERO);
         aziendale.setUserData(CenterType.AZIENDALE);
+
+        setOnListItemAction(event -> {
+        });
 
         searchModeGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == name)
@@ -138,5 +144,21 @@ public class CenterSearchCommonPage extends Page {
         } else {
             filtersBox.getChildren().remove(typeFiltersBox);
         }
+    }
+
+    /**
+     * Sets the method to be executed when a center on the result list is clicked. By default an empty {@link EventHandler} is executed, which does nothing.
+     *
+     * @param event The event handler to be executed
+     */
+    public void setOnListItemAction(EventHandler<MouseEvent> event) {
+        centers.setOnMouseClicked(event);
+    }
+
+    /**
+     * @return The currently selected center in the result list
+     */
+    public Center getSelectedCenter() {
+        return centers.getSelectionModel().getSelectedItem();
     }
 }
