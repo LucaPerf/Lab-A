@@ -2,6 +2,7 @@ package com.lab.ui;
 
 import com.jfoenix.controls.*;
 import com.lab.centrivaccinali.CentriVaccinali;
+import com.lab.data.Center;
 import com.lab.data.VaxInfo;
 import com.lab.data.VaxType;
 import javafx.fxml.FXML;
@@ -19,8 +20,6 @@ public class VaxRegPage extends Page {
 
     @FXML
     private StackPane root;
-    @FXML
-    private JFXTextField center;
     @FXML
     private JFXTextField name;
     @FXML
@@ -45,6 +44,8 @@ public class VaxRegPage extends Page {
     @FXML
     private JFXButton no;
 
+    private Center center;
+
     /**
      * {@inheritDoc}
      */
@@ -58,7 +59,6 @@ public class VaxRegPage extends Page {
     @Override
     protected void initialize() {
         //Add validators
-        center.getValidators().add(requiredFieldValidator);
         name.getValidators().add(requiredFieldValidator);
         surname.getValidators().add(requiredFieldValidator);
         ccf.getValidators().add(requiredFieldValidator);
@@ -75,7 +75,7 @@ public class VaxRegPage extends Page {
         add.setOnAction(actionEvent ->
         {
             if (isDataValid()) {
-                CentriVaccinali.registraVaccinato(center.getText(), infoFromUI());
+                CentriVaccinali.registraVaccinato(center.getName(), infoFromUI());
                 addAgain.show(root);
             }
         });
@@ -88,9 +88,9 @@ public class VaxRegPage extends Page {
         //Dialog
         yes.setOnAction(actionEvent -> {
             addAgain.close();
-            String prevCenter = center.getText();
+            Center prevCenter = center;
             reset();
-            center.setText(prevCenter);
+            center = prevCenter;
         });
 
         no.setOnAction(actionEvent -> {
@@ -102,7 +102,7 @@ public class VaxRegPage extends Page {
 
     @Override
     public void reset() {
-        resetField(center);
+        center = null;
         resetField(name);
         resetField(surname);
         resetField(ccf);
@@ -116,6 +116,15 @@ public class VaxRegPage extends Page {
     }
 
     private boolean isDataValid() {
-        return center.validate() & name.validate() & surname.validate() & ccf.validate() & date.validate() & type.validate() & uID.validate();
+        return name.validate() & surname.validate() & ccf.validate() & date.validate() & type.validate() & uID.validate();
+    }
+
+    /**
+     * Sets the center the vaccinated user will be added to.
+     *
+     * @param center The center to add the vaccinated user to
+     */
+    public void setReferenceCenter(Center center) {
+        this.center = center;
     }
 }

@@ -20,7 +20,6 @@
     </JFXDialog>
 
     <VBox alignment="CENTER" spacing="44.0">
-        <JFXTextField fx:id="center" maxWidth="200.0" prefWidth="200.0" promptText="Nome centro" />
         <JFXTextField fx:id="name" maxWidth="200.0" prefWidth="200.0" promptText="Nome" />
         <JFXTextField fx:id="surname" maxWidth="200.0" prefWidth="200.0" promptText="Cognome" />
         <JFXTextField fx:id="ccf" maxWidth="200.0" prefWidth="200.0" promptText="Codice fiscale" />
