@@ -17,10 +17,9 @@ import java.util.*;
 
 public class Vaccinati {
     public static LinkedHashMap<Integer, VaxInfo> vaxinfo = new LinkedHashMap<>();
-    public static LinkedHashMap<String, File> files = new LinkedHashMap<>();
 
     /**
-     * Checks if vaccination files exist and creates them. A {@link File} is created for each center and added to {@link #files}
+     * Checks if vaccination files exist and creates them.
      */
     public static void load() {
         Collection<LinkedList<Center>> data = Centri.getCenters().values();
@@ -28,9 +27,8 @@ public class Vaccinati {
         try {
             for (LinkedList<Center> it : data)
                 for (Center l : it) {
-                    File fl = new File("Vaccinati_" + l.getName() + ".csv");
+                    File fl = new File(composeFileName(l.getName()));
                     fl.createNewFile();
-                    files.put(l.getName(), fl);
                 }
         } catch (IOException e) {
             System.out.println(e);
@@ -44,7 +42,7 @@ public class Vaccinati {
      */
     public static void load(String centerName) {
         try {
-            FileReader fr = new FileReader(files.get(centerName));
+            FileReader fr = new FileReader(composeFileName(centerName));
 
             Iterator<String[]> iter = CsvParser.iterator(fr);
 
@@ -77,7 +75,7 @@ public class Vaccinati {
      */
     public static void add(String centerName, VaxInfo info) {
         try {
-            FileWriter fw = new FileWriter(files.get(centerName), true);
+            FileWriter fw = new FileWriter(composeFileName(centerName), true);
             CsvWriter cw = CsvWriter.dsl().to(fw);
 
             String[] columns = info.toRow();
@@ -87,5 +85,10 @@ public class Vaccinati {
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+
+    //Creates the file name from centerName
+    private static String composeFileName(String centerName) {
+        return "Vaccinati_" + centerName + ".csv";
     }
 }
