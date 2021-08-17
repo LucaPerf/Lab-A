@@ -100,6 +100,8 @@ public class Centri {
                 //Add to LinkedHashMap with  a list of centers for each comune
                 addToHashMapByComune(centro);
             }
+
+            fr.close();
         } catch (IOException e) {
             System.out.println(e);
         }

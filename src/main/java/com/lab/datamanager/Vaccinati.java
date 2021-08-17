@@ -51,6 +51,8 @@ public class Vaccinati {
 
                 vaxinfo.put(Integer.parseInt(row[5]), new VaxInfo(row));
             }
+
+            fr.close();
         } catch (IOException e) {
             System.out.println(e);
         }

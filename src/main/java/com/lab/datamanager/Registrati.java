@@ -63,6 +63,8 @@ public class Registrati {
                 String[] row = it.next();
                 add(new User(row));
             }
+
+            filer.close();
         } catch (IOException e) {
             System.out.println(e);
         }
