@@ -63,11 +63,6 @@ public class Registrati {
                 String[] row = it.next();
                 add(new User(row));
             }
-            //Debug
-            Collection<User> cit = users.values();
-            for (User y : cit)
-                System.out.println(Arrays.toString(y.toRow()));
-
         } catch (IOException e) {
             System.out.println(e);
         }

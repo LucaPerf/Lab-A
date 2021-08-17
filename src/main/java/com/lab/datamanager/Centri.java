@@ -7,7 +7,6 @@ import org.simpleflatmapper.lightningcsv.CsvWriter;
 
 import java.util.*;
 import java.io.*;
-import java.util.concurrent.Callable;
 
 /**
  * Class used for center data management.
@@ -101,24 +100,17 @@ public class Centri {
                 //Add to LinkedHashMap with  a list of centers for each comune
                 addToHashMapByComune(centro);
             }
-            //Debug
-            Collection<LinkedList<Center>> data = centers.values();
-            for (LinkedList<Center> l : data) {
-                for (Center t : l)
-                    System.out.println(Arrays.toString(t.toRow()));
-            }
         } catch (IOException e) {
             System.out.println(e);
         }
     }
 
-    public static LinkedHashMap<String, LinkedList<Center>> getCenters(){
+    public static LinkedHashMap<String, LinkedList<Center>> getCenters() {
 
         return centers;
     }
 
     /**
-     *
      * @param nomeCentro
      * @return
      */
@@ -130,22 +122,22 @@ public class Centri {
         LinkedList<Center> cent = new LinkedList<>();
 
         //scroll through the list of centers and chech if "nomeCentro" is the same as elements in the Hashmap
-            for (LinkedList<Center> it : al)
-                for (Center l : it)
-                    if(l.getName().contains(nomeCentro))
-                        //add "nomeCentro" to a new list
-                        cent.add(l);
+        for (LinkedList<Center> it : al)
+            for (Center l : it)
+                if (l.getName().contains(nomeCentro))
+                    //add "nomeCentro" to a new list
+                    cent.add(l);
         return cent;
     }
 
-    public static LinkedList<Center> find(CenterType type, String nomeComune){
+    public static LinkedList<Center> find(CenterType type, String nomeComune) {
         LinkedList<Center> Ll = new LinkedList<>();
 
-        if(centers.containsKey(nomeComune)){
+        if (centers.containsKey(nomeComune)) {
             for (Center fr : centers.get(nomeComune))
                 if (type.equals(fr.getType()))
                     Ll.add(fr);
-                return Ll;
+            return Ll;
         }
         return Ll;
     }
