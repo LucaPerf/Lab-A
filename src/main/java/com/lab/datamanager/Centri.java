@@ -26,7 +26,7 @@ public class Centri {
      * @param center The center to add
      */
 
-    // private static void addCenter(Center center)
+    //Adds center to the centers LinkedHashMap
     private static void addCenter(Center center) {
 
         addToHashMapByComune(center);
@@ -107,40 +107,48 @@ public class Centri {
         }
     }
 
+    /**
+     * @return A {@link LinkedHashMap} of {@link Center} containing all centers grouped by comune
+     */
     public static LinkedHashMap<String, LinkedList<Center>> getCenters() {
 
         return centers;
     }
 
     /**
-     * @param nomeCentro
-     * @return
+     * @param centerName The name of the center to search for
+     * @return A list of {@link Center} whose name contains <code>nomeCentro</code>
      */
 
-    public static LinkedList<Center> find(String nomeCentro) {
+    public static LinkedList<Center> find(String centerName) {
         Collection<LinkedList<Center>> al = centers.values();
 
         // create a new Linkedlist
         LinkedList<Center> cent = new LinkedList<>();
 
-        //scroll through the list of centers and chech if "nomeCentro" is the same as elements in the Hashmap
+        //scroll through the list of centers and chech if "centerName" is the same as elements in the Hashmap
         for (LinkedList<Center> it : al)
             for (Center l : it)
-                if (l.getName().contains(nomeCentro))
+                if (l.getName().contains(centerName))
                     //add "nomeCentro" to a new list
                     cent.add(l);
         return cent;
     }
 
-    public static LinkedList<Center> find(CenterType type, String nomeComune) {
-        LinkedList<Center> Ll = new LinkedList<>();
+    /**
+     * @param type   The type of center to search for
+     * @param comune The name of the comune to search in
+     * @return A list of {@link Center} located in <code>comune</code>, of <code>type</code>
+     */
+    public static LinkedList<Center> find(CenterType type, String comune) {
+        LinkedList<Center> ll = new LinkedList<>();
 
-        if (centers.containsKey(nomeComune)) {
-            for (Center fr : centers.get(nomeComune))
+        if (centers.containsKey(comune)) {
+            for (Center fr : centers.get(comune))
                 if (type.equals(fr.getType()))
-                    Ll.add(fr);
-            return Ll;
+                    ll.add(fr);
+            return ll;
         }
-        return Ll;
+        return ll;
     }
 }

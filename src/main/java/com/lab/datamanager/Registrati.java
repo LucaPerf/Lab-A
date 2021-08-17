@@ -71,10 +71,8 @@ public class Registrati {
     }
 
     /**
-     * Get the login information
-     *
-     * @param username
-     * @return
+     * @param username The username to search for
+     * @return The {@link User} whos username is <code>username</code>, <code>null</code> if no user with such name exists
      */
     public static User find(String username) {
         return users.get(username);
