@@ -15,7 +15,7 @@ import java.util.*;
 
 public class Registrati {
     private static File file = new File("Cittadini.csv");
-    private static LinkedHashMap<String, User> users = new LinkedHashMap<>();
+    private static HashMap<String, User> users = new LinkedHashMap<>();
 
     /**
      * Add a citizen to the LinkedHahMap, using userID as key
