@@ -11,6 +11,7 @@
     -grey-500: #9E9E9E;
     -grey-300: #E0E0E0;
     -grey-400: #BDBDBD;
+    -divider-color: #0000001f;
 }
 
 //-------
@@ -62,6 +63,18 @@
 .text-field
 {
     -jfx-label-float: true;
+}
+
+.text-field-info:disabled
+{
+    -fx-font-size:16;
+    -fx-prompt-text-fill: -grey-500;
+    -jfx-label-float: true;
+    -fx-opacity:1.0;
+}
+.text-field-info:disabled .input-line
+{
+    -fx-border-color: -divider-color;
 }
 
 //---------

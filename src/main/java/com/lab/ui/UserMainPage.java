@@ -1,21 +1,11 @@
 package com.lab.ui;
 
 import com.jfoenix.controls.*;
-import com.lab.cittadini.Cittadini;
-import com.lab.data.Center;
-import com.lab.data.CenterType;
 import com.lab.data.User;
-import com.lab.datamanager.Centri;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-
-import java.util.LinkedList;
 
 /**
  * Controller of the user area main page. Layout is stored in "user_main.fxml".
@@ -63,7 +53,12 @@ public class UserMainPage extends Page {
      */
     @Override
     protected void initialize() {
-
+        searchController.setOnListItemAction(event ->
+        {
+            CenterInfoPage page = (CenterInfoPage) PagesManager.open(PagesManager.PageType.CENTERINFO);
+            page.setLoggedIn(currentUser != null);
+            page.setCenter(searchController.getSelectedCenter());
+        });
 
         logout.setOnAction(actionEvent -> setLoggedOut());
         login.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.USERLOGIN));
