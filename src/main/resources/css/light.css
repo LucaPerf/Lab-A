@@ -17,8 +17,12 @@
 //Buttons
 //-------
 
-.button-contained,.button-contained-rounded
+.button-contained,.button-contained-rounded,.button-contained-flat
 {
+    -fx-min-height: 36.0px;
+    -fx-min-width: 64.0px;
+    -fx-padding: 0.0px 16.0px 0.0px 16.0px;
+    -fx-font-size: 14.0px;
     -jfx-button-type: RAISED;
     -fx-background-color: -primary-color;
     -fx-text-fill: -text-on-primary;
@@ -26,6 +30,10 @@
 }
 .button-text, .button-text-rounded
 {
+    -fx-min-height: 36.0px;
+    -fx-min-width: 64.0px;
+    -fx-padding: 0.0px 16.0px 0.0px 16.0px;
+    -fx-font-size: 14.0px;
     -jfx-button-type: FLAT;
     -fx-text-fill: -primary-color;
     -jfx-disable-visual-focus: true;
@@ -40,6 +48,11 @@
 {
     -fx-background-radius:100;
     -fx-border-radius:100;
+}
+
+.button-contained-flat
+{
+    -fx-effect: null;
 }
 
 //----------
@@ -194,4 +207,30 @@
     -jfx-rippler-fill:-rippler-indigo-fill;
 }
 
+//-------
+//Toolbar
+//-------
+
+.jfx-tool-bar {
+    -fx-background-color: WHITE;
+    -fx-pref-width: 100.0%;
+    -fx-pref-height: 56.0px;
+    -fx-max-height :56.0px;
+    -fx-min-height :56.0px;
+}
+
+.jfx-tool-bar HBox {
+    -fx-alignment: center;
+    -fx-spacing: 32.0;
+    -fx-padding: 0.0 10.0;
+}
+
+.jfx-tool-bar Label {
+    -fx-text-fill: BLACK;
+    -fx-font-size: 20.0;
+}
+
+.jfx-tool-bar .jfx-rippler {
+    -jfx-rippler-fill: -grey-300;
+}
 
