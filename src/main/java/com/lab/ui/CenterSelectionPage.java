@@ -3,11 +3,12 @@ package com.lab.ui;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 public class CenterSelectionPage extends Page {
     @FXML
-    private VBox root;
+    private BorderPane root;
     @FXML
     private JFXButton back;
     @FXML

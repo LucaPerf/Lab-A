@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<VBox fx:id="root" spacing="12.0" stylesheets="@../css/light.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.ui.CenterSelectionPage">
-   <HBox alignment="CENTER_LEFT" maxHeight="56.0" minHeight="56.0" spacing="8.0">
-      <JFXButton fx:id="back" alignment="CENTER" maxHeight="24.0" minHeight="24.0" styleClass="button-text-rounded" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <graphic>
-            <FontIcon iconColor="#9e9e9e" iconLiteral="mdral-arrow_back" iconSize="24" />
-         </graphic>
-      </JFXButton>
-      <Label text="Selezione centro" textAlignment="JUSTIFY">
-         <font>
-            <Font size="20.0" />
-         </font></Label>
-      <VBox.margin>
-         <Insets left="4.0" right="4.0" />
-      </VBox.margin>
-   </HBox>
-   <fx:include fx:id="search" source="center_search_common.fxml" VBox.vgrow="ALWAYS"/>
-   <padding>
-      <Insets bottom="12.0" left="12.0" right="12.0" />
-   </padding>
-</VBox>
+<BorderPane fx:id="root" stylesheets="@../css/light.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.ui.CenterSelectionPage">
+    <top>
+        <JFXToolbar>
+            <leftItems>
+                <JFXButton fx:id="back" alignment="CENTER" maxHeight="24.0" minHeight="24.0" styleClass="button-text-rounded" maxWidth="24.0" minWidth="24.0">
+                    <graphic>
+                        <FontIcon iconColor="BLACK" iconLiteral="mdral-arrow_back" iconSize="24"/>
+                    </graphic>
+                </JFXButton>
+                <Label text="Selezione centro"/>
+            </leftItems>
+        </JFXToolbar>
+    </top>
+    <center>
+        <fx:include source="center_search_common.fxml" fx:id="search"/>
+    </center>
+</BorderPane>

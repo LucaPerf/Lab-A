@@ -28,7 +28,7 @@ public class UserMainPage extends Page {
     @FXML
     private JFXButton logout;
     @FXML
-    private HBox topbar;
+    private JFXToolbar topbar;
     @FXML
     private StackPane root;
     @FXML
@@ -104,9 +104,9 @@ public class UserMainPage extends Page {
     public void setLoggedIn(User user) {
         currentUser = user;
 
-        topbar.getChildren().addAll(username, logout);
+        topbar.getRightItems().addAll(username, logout);
         username.setText(currentUser.getUserID());
-        topbar.getChildren().removeAll(register, login);
+        topbar.getRightItems().removeAll(register, login);
     }
 
     /**
@@ -115,10 +115,10 @@ public class UserMainPage extends Page {
     public void setLoggedOut() {
         currentUser = null;
         username.setText("");
-        topbar.getChildren().removeAll(username, logout);
+        topbar.getRightItems().removeAll(username, logout);
         //If this method is called from initialize(), register and login buttons will already be there because they are defined inside the fxml
-        if (topbar.getChildren().size() == 0)
-            topbar.getChildren().addAll(register, login);
+        if (topbar.getRightItems().size() == 0)
+            topbar.getRightItems().addAll(register, login);
     }
 
 
