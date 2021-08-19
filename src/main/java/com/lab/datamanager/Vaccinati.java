@@ -27,7 +27,7 @@ public class Vaccinati {
         try {
             for (LinkedList<Center> it : data)
                 for (Center l : it) {
-                    File fl = new File(composeFileName(l.getName()));
+                    File fl = getFileFromCenter(l.getName());
                     fl.createNewFile();
                 }
         } catch (IOException e) {
@@ -42,7 +42,7 @@ public class Vaccinati {
      */
     public static void load(String centerName) {
         try {
-            FileReader fr = new FileReader(composeFileName(centerName));
+            FileReader fr = new FileReader(getFileFromCenter(centerName));
 
             Iterator<String[]> iter = CsvParser.iterator(fr);
 
@@ -77,7 +77,7 @@ public class Vaccinati {
      */
     public static void add(String centerName, VaxInfo info) {
         try {
-            FileWriter fw = new FileWriter(composeFileName(centerName), true);
+            FileWriter fw = new FileWriter(getFileFromCenter(centerName), true);
             CsvWriter cw = CsvWriter.dsl().to(fw);
 
             String[] columns = info.toRow();
@@ -89,8 +89,8 @@ public class Vaccinati {
         }
     }
 
-    //Creates the file name from centerName
-    private static String composeFileName(String centerName) {
-        return "Vaccinati_" + centerName + ".csv";
+    //Creates a file from centerName
+    private static File getFileFromCenter(String centerName) {
+        return new File("Vaccinati_" + centerName + ".csv");
     }
 }
