@@ -4,27 +4,43 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="root"
-      alignment="CENTER"
-      spacing="12.0"
-      stylesheets="/css/light.css"
-      xmlns="http://javafx.com/javafx/11.0.2"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.lab.ui.CenterActionsPage">
-    <JFXButton fx:id="addCenter"
-               prefWidth="200"
-               styleClass="button-contained"
-               text="AGGIUNGI CENTRO"/>
-    <JFXButton fx:id="addVax"
-               prefWidth="200"
-               styleClass="button-contained"
-               text="AGGIUNGI VACCINATO"/>
-    <JFXButton fx:id="back"
-               prefWidth="200"
-               styleClass="button-text"
-               text="INDIETRO"/>
-    <padding>
-        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
-    </padding>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.control.Label?>
+<BorderPane fx:id="root"
+            stylesheets="/css/light.css"
+            xmlns="http://javafx.com/javafx/11.0.2"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.lab.ui.CenterActionsPage">
+    <top>
+        <JFXToolbar>
+            <leftItems>
+                <JFXButton fx:id="back" alignment="CENTER" maxHeight="24.0" minHeight="24.0"
+                           styleClass="button-text-rounded" maxWidth="24.0" minWidth="24.0">
+                    <graphic>
+                        <FontIcon iconColor="BLACK" iconLiteral="mdral-arrow_back" iconSize="24"/>
+                    </graphic>
+                </JFXButton>
+                <Label text="Area centri"/>
+            </leftItems>
+        </JFXToolbar>
+    </top>
+    <center>
+        <VBox
+                alignment="CENTER"
+                spacing="12.0"
+        >
+            <JFXButton fx:id="addCenter"
+                       prefWidth="200"
+                       styleClass="button-contained"
+                       text="AGGIUNGI CENTRO"/>
+            <JFXButton fx:id="addVax"
+                       prefWidth="200"
+                       styleClass="button-contained"
+                       text="AGGIUNGI VACCINATO"/>
+            <padding>
+                <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+            </padding>
 
-</VBox>
+        </VBox>
+    </center>
+</BorderPane>

@@ -3,7 +3,7 @@ package com.lab.ui;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.BorderPane;
 
 /**
  * Controller of center actions page. Layout is stored in "center_actions.fxml".
@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
  */
 public class CenterActionsPage extends Page {
     @FXML
-    private VBox root;
+    private BorderPane root;
     @FXML
     private JFXButton addVax;
     @FXML

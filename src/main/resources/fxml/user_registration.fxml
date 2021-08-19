@@ -3,20 +3,36 @@
 <?import com.jfoenix.controls.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.control.Label?>
+<BorderPane fx:id="root" stylesheets="@../css/light.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.ui.UserRegPage">
+    <top>
+        <JFXToolbar>
+            <leftItems>
+                <JFXButton fx:id="back" alignment="CENTER" maxHeight="24.0" minHeight="24.0" styleClass="button-text-rounded" maxWidth="24.0" minWidth="24.0">
+                    <graphic>
+                        <FontIcon iconColor="BLACK" iconLiteral="mdral-arrow_back" iconSize="24"/>
+                    </graphic>
+                </JFXButton>
+                <Label text="Registrazione cittadino"/>
+            </leftItems>
+        </JFXToolbar>
+    </top>
+    <center>
+        <VBox alignment="CENTER" spacing="44.0">
+            <padding>
+                <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+            </padding>
+            <JFXTextField fx:id="username" maxWidth="200.0" prefWidth="200.0" promptText="Nome utente" styleClass="text-field"/>
+            <JFXPasswordField fx:id="password" maxWidth="200.0" prefWidth="200.0" promptText="Password" styleClass="text-field"/>
+            <JFXTextField fx:id="name" maxWidth="200.0" prefWidth="200.0" promptText="Nome" styleClass="text-field"/>
+            <JFXTextField fx:id="surname" maxWidth="200.0" prefWidth="200.0" promptText="Cognome" styleClass="text-field"/>
+            <JFXTextField fx:id="ccf" maxWidth="200.0" prefWidth="200.0" promptText="Codeice fiscale" styleClass="text-field"/>
+            <JFXTextField fx:id="email" maxWidth="200.0" prefWidth="200.0" promptText="E-mail" styleClass="text-field"/>
+            <JFXTextField fx:id="uid" maxWidth="200.0" prefWidth="200.0" promptText="Codice vaccinazione" styleClass="text-field"/>
+            <JFXButton fx:id="register" prefWidth="200.0" styleClass="button-contained" text="CONTINUA"/>
+        </VBox>
+    </center>
+</BorderPane>
 
-<VBox fx:id="root" alignment="CENTER" spacing="44.0" stylesheets="@../css/light.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.ui.UserRegPage">
-    <padding>
-        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
-    </padding>
-    <JFXTextField fx:id="username" maxWidth="200.0" prefWidth="200.0" promptText="Nome utente" styleClass="text-field" />
-    <JFXPasswordField fx:id="password" maxWidth="200.0" prefWidth="200.0" promptText="Password" styleClass="text-field" />
-    <JFXTextField fx:id="name" maxWidth="200.0" prefWidth="200.0" promptText="Nome" styleClass="text-field" />
-    <JFXTextField fx:id="surname" maxWidth="200.0" prefWidth="200.0" promptText="Cognome" styleClass="text-field" />
-    <JFXTextField fx:id="ccf" maxWidth="200.0" prefWidth="200.0" promptText="Codeice fiscale" styleClass="text-field" />
-    <JFXTextField fx:id="email" maxWidth="200.0" prefWidth="200.0" promptText="E-mail" styleClass="text-field" />
-    <JFXTextField fx:id="uid" maxWidth="200.0" prefWidth="200.0" promptText="Codice vaccinazione" styleClass="text-field" />
-    <HBox alignment="CENTER" maxWidth="200.0" prefWidth="200.0" spacing="12">
-        <JFXButton fx:id="register" maxWidth="96.0" prefWidth="96.0" styleClass="button-contained" text="CONTINUA" />
-        <JFXButton fx:id="cancel" maxWidth="96.0" prefWidth="96.0" styleClass="button-text" text="ANNULLA" />
-    </HBox>
-</VBox>
+

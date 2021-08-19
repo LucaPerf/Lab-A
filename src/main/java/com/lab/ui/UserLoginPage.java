@@ -3,12 +3,11 @@ package com.lab.ui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.RequiredFieldValidator;
 import com.lab.cittadini.Cittadini;
 import com.lab.data.User;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.BorderPane;
 
 /**
  * Controller of the user login page. Layout is stored in "user_login.fxml".
@@ -18,7 +17,7 @@ import javafx.scene.layout.VBox;
 public class UserLoginPage extends Page {
 
     @FXML
-    private VBox root;
+    private BorderPane root;
     @FXML
     private JFXTextField username;
     @FXML
@@ -26,7 +25,7 @@ public class UserLoginPage extends Page {
     @FXML
     private JFXButton register;
     @FXML
-    private JFXButton cancel;
+    private JFXButton back;
 
     /**
      * {@inheritDoc}
@@ -55,7 +54,7 @@ public class UserLoginPage extends Page {
             }
         });
 
-        cancel.setOnAction(actionEvent ->
+        back.setOnAction(actionEvent ->
         {
             PagesManager.open(PagesManager.PageType.USERMAIN);
             reset();

@@ -1,7 +1,5 @@
 package com.lab.ui;
 
-import com.jfoenix.validation.RequiredFieldValidator;
-import com.jfoenix.validation.StringLengthValidator;
 import javafx.fxml.FXML;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -11,7 +9,7 @@ import com.lab.data.CenterType;
 import com.lab.data.PostalAddress;
 import com.lab.centrivaccinali.CentriVaccinali;
 import javafx.scene.Parent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.BorderPane;
 
 /**
  * Controller of the center registration page. Layout is stored in "center_registration.fxml".
@@ -20,7 +18,7 @@ import javafx.scene.layout.VBox;
  */
 public class CenterRegPage extends Page {
     @FXML
-    private VBox root;
+    private BorderPane root;
     @FXML
     private JFXButton register;
     @FXML
