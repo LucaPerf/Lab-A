@@ -6,7 +6,6 @@ import com.lab.data.Center;
 import com.lab.data.PostalAddress;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
 public class CenterInfoPage extends Page {
@@ -27,7 +26,7 @@ public class CenterInfoPage extends Page {
     @FXML
     private JFXTextField cap;
     @FXML
-    private JFXButton addEvent;
+    private JFXButton report;
 
     private Center center;
 
@@ -38,6 +37,12 @@ public class CenterInfoPage extends Page {
 
     @Override
     protected void initialize() {
+        report.setOnAction(event ->
+        {
+            EventReportPage page = (EventReportPage) PagesManager.open(PagesManager.PageType.EVENTREPORT);
+            page.setCenter(center);
+        });
+
         back.setOnAction(event ->
         {
             reset();
@@ -64,6 +69,6 @@ public class CenterInfoPage extends Page {
     }
 
     public void setLoggedIn(boolean loggedIn) {
-        root.setBottom(loggedIn ? addEvent : null);
+        root.setBottom(loggedIn ? report : null);
     }
 }

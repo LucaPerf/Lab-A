@@ -29,7 +29,8 @@ public class PagesManager {
         VAXREGISTREATION,
         USERLOGIN,
         CENTERSELECTION,
-        CENTERINFO
+        CENTERINFO,
+        EVENTREPORT
     }
 
     private static Scene scene;
@@ -47,6 +48,7 @@ public class PagesManager {
     private static FXMLLoader userLoginLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/user_login.fxml"));
     private static FXMLLoader centerSelectionLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/center_selection.fxml"));
     private static FXMLLoader centerInfoLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/center_info.fxml"));
+    private static FXMLLoader eventReportLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/event_report.fxml"));
     //Pages controllers
     private static Page centerRegPage;
     private static Page centerActionsPage;
@@ -57,6 +59,7 @@ public class PagesManager {
     private static Page userLoginPage;
     private static Page centerSelectionPage;
     private static Page centerInfoPage;
+    private static Page eventReportPage;
 
     /**
      * Initializes the pages manager and loads all UI pages from fxml.
@@ -74,6 +77,7 @@ public class PagesManager {
         userLoginPage = loadPage(userLoginLoader);
         centerSelectionPage = loadPage(centerSelectionLoader);
         centerInfoPage = loadPage(centerInfoLoader);
+        eventReportPage = loadPage(eventReportLoader);
     }
 
     /**
@@ -107,6 +111,8 @@ public class PagesManager {
                 return open(centerSelectionPage);
             case CENTERINFO:
                 return open(centerInfoPage);
+            case EVENTREPORT:
+                return open(eventReportPage);
             default:
                 return null;
         }

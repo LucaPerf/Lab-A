@@ -34,7 +34,7 @@
         </VBox>
     </center>
     <bottom>
-        <JFXButton fx:id="addEvent" alignment="CENTER" contentDisplay="CENTER" styleClass="button-contained" text="SEGNALA EVENTO" BorderPane.alignment="CENTER">
+        <JFXButton fx:id="report" alignment="CENTER" contentDisplay="CENTER" styleClass="button-contained" text="SEGNALA EVENTO" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
             </BorderPane.margin>
