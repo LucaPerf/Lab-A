@@ -77,6 +77,11 @@
     -fx-border-color: -divider-color;
 }
 
+.text-area
+{
+    -jfx-label-float: true;
+}
+
 //---------
 //Combo box
 //---------
@@ -247,3 +252,11 @@
     -jfx-rippler-fill: -grey-300;
 }
 
+//------
+//Slider
+//------
+
+.jfx-slider
+{
+    -jfx-default-thumb: -primary-color;
+}
