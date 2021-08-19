@@ -34,6 +34,8 @@ public class CenterSelectionPage extends Page {
             //Can't be null as when an item is clicked a center is selected
             page.setReferenceCenter(searchController.getSelectedCenter());
         });
+
+        reset();
     }
 
     @Override
