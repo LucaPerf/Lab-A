@@ -64,17 +64,16 @@ public class VaxInfo {
      *            3: date
      *            4: type
      *            5: uID
-     *
-     * @throws IllegalArgumentException       If the center uID is not valid
+     * @throws IllegalArgumentException If the center uID is not valid
      * @author Luca Perfetti
      */
 
-    public VaxInfo(String[] row) throws IllegalArgumentException{
+    public VaxInfo(String[] row) throws IllegalArgumentException {
         name = row[0];
         surname = row[1];
         ccf = row[2];
         date = LocalDate.parse(row[3]);
-        type = VaxType.valueOf(row[4]);
+        type = VaxType.fromString(row[4]);
         uID = Integer.parseInt(row[5]);
     }
 }

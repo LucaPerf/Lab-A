@@ -74,7 +74,7 @@ public class Center {
     public Center(String[] row) throws NumberFormatException, ArrayIndexOutOfBoundsException, IllegalArgumentException {
         name = row[0];
         address = new PostalAddress(row[3], row[2], row[4], Integer.parseInt(row[1]));
-        type = CenterType.valueOf(row[5].toUpperCase(Locale.ROOT));
+        type = CenterType.fromString(row[5]);
     }
 
     /**
