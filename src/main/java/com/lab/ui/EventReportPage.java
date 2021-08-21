@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextArea;
 import com.lab.data.Center;
+import com.lab.data.Event;
+import com.lab.data.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -22,7 +24,7 @@ public class EventReportPage extends Page {
     @FXML
     private JFXButton report;
     @FXML
-    private JFXComboBox type;
+    private JFXComboBox<EventType> type;
     @FXML
     private JFXTextArea notes;
 
@@ -41,6 +43,7 @@ public class EventReportPage extends Page {
      */
     @Override
     protected void initialize() {
+        type.getItems().addAll(EventType.values());
         type.getValidators().add(requiredFieldValidator);
 
         back.setOnAction(event -> PagesManager.open(PagesManager.PageType.CENTERINFO));
@@ -100,5 +103,9 @@ public class EventReportPage extends Page {
                 text = "";
         }
         intensityText.setText(text);
+    }
+
+    private Event eventFromUI() {
+        return new Event((int) intensitySlider.getValue(), notes.getText(), type.getSelectionModel().getSelectedItem());
     }
 }
