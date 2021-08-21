@@ -1,8 +1,7 @@
 package com.lab.data;
 
-import java.security.PublicKey;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.HashMap;
 
 /**
  * This class represents information about a vaccinated person.
@@ -18,6 +17,8 @@ public class VaxInfo {
     private LocalDate date;
     private VaxType type;
     private Integer uID;
+    //Since we know the number of enums and the default load factor, we can calculate the exact map size
+    private HashMap<EventType, Event> events = new HashMap<>((int) Math.ceil(EventType.values().length / 0.8) + 1);
 
     /**
      * Class constructor
@@ -48,32 +49,83 @@ public class VaxInfo {
         return uID;
     }
 
+    /**
+     * @return A CSV row representation of this object with data mapped as follows:<br>
+     * 0: name<br>
+     * 1: surname<br>
+     * 2: ccf<br>
+     * 3: date<br>
+     * 4: type<br>
+     * 5: uID<br>
+     * 6+: events with properties as follows:<br>
+     * 0: type<br>
+     * 1: intensity<br>
+     * 2:report<br>
+     */
     public String[] toRow() {
-        return new String[]{
-                name, surname, ccf, date.toString(), type.toString(), uID.toString()
-        };
+        //6 fixed properties + 3 properties for each event
+        String[] info = new String[6 + events.size() * 3];
+        info[0] = name;
+        info[1] = surname;
+        info[2] = ccf;
+        info[3] = date.toString();
+        info[4] = type.toString();
+        info[5] = uID.toString();
+        //Add events: 3 properties per event (type ,intensity ,report)
+        int offset = 6;
+        for (Event event : events.values()) {
+            info[offset] = event.getType().toString();
+            info[offset + 1] = event.getIntensity().toString();
+            info[offset + 2] = event.getReport();
+            offset += 3;
+        }
+        return info;
     }
 
     /**
      * Creates a new vaxinfo object from a csv row.
      *
-     * @param row The row to get the data from, indexes mapped as follows:
-     *            0: name
-     *            1: surname
-     *            2: ccf
-     *            3: date
-     *            4: type
-     *            5: uID
-     * @throws IllegalArgumentException If the center uID is not valid
+     * @param row The row to get the data from, indexes mapped as follows:<br>
+     *            0: name<br>
+     *            1: surname<br>
+     *            2: ccf<br>
+     *            3: date<br>
+     *            4: type<br>
+     *            5: uID<br>
+     *            6+: events with properties as follows:<br>
+     *            0: type<br>
+     *            1: intensity<br>
+     *            2:report<br>
      * @author Luca Perfetti
      */
 
-    public VaxInfo(String[] row) throws IllegalArgumentException {
+    public VaxInfo(String[] row) {
         name = row[0];
         surname = row[1];
         ccf = row[2];
         date = LocalDate.parse(row[3]);
         type = VaxType.fromString(row[4]);
         uID = Integer.parseInt(row[5]);
+        //Get events: each event has 3 properties
+        for (int i = 6; i < row.length; i += 3) {
+            Event event = new Event(Integer.parseInt(row[i + 1]),
+                    row[i + 2],
+                    EventType.fromString(row[i]));
+            events.put(event.getType(), event);
+        }
+    }
+
+    /**
+     * Adds a new event to this vaccination information
+     *
+     * @param e The event to add
+     * @return False if an event of type <code>e.getType()</code> already exists
+     */
+    public boolean addEvent(Event e) {
+        //Check if event exists
+        if (events.containsKey(e.getType()))
+            return false;
+        events.put(e.getType(), e);
+        return true;
     }
 }
