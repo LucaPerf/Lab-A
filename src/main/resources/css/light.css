@@ -265,3 +265,12 @@
 {
     -jfx-default-thumb: -primary-color;
 }
+
+//-----
+//Fonts
+//-----
+
+.caption
+{
+    -fx-font-size:12;
+}

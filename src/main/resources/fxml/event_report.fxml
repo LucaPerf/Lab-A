@@ -43,7 +43,10 @@
                     <Insets top="-6" />
                 </VBox.margin>
             </JFXSlider>
-            <JFXTextArea fx:id="notes" maxWidth="300" promptText="Note" />
+            <VBox alignment="CENTER_RIGHT" maxWidth="300" spacing="4">
+                <JFXTextArea fx:id="notes" maxWidth="300" promptText="Note"/>
+                <Label fx:id="charCounter" text="0/256" styleClass="caption" textFill="#00000099"/>
+            </VBox>
             <BorderPane.margin>
                 <Insets bottom="16" left="16" right="16" top="32" />
             </BorderPane.margin>

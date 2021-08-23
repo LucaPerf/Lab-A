@@ -7,6 +7,7 @@ import com.lab.data.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.BorderPane;
 
 public class EventReportPage extends Page {
@@ -24,6 +25,8 @@ public class EventReportPage extends Page {
     private JFXComboBox<EventType> type;
     @FXML
     private JFXTextArea notes;
+    @FXML
+    private Label charCounter;
 
     private Center center;
 
@@ -40,6 +43,16 @@ public class EventReportPage extends Page {
      */
     @Override
     protected void initialize() {
+        //Updates character counter and limits length of notes field
+        notes.setTextFormatter(new TextFormatter<>(change ->
+        {
+            if (change.isContentChange() && change.getControlNewText().length() <= 256) {
+                charCounter.setText(change.getControlNewText().length() + "/256");
+                return change;
+            }
+            return null;
+        }));
+
         type.getItems().addAll(EventType.values());
         type.getValidators().add(requiredFieldValidator);
 
