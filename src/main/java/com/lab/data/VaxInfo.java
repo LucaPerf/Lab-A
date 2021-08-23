@@ -18,7 +18,7 @@ public class VaxInfo {
     private VaxType type;
     private Integer uID;
     //Since we know the number of enums and the default load factor, we can calculate the exact map size
-    private HashMap<EventType, Event> events = new HashMap<>((int) Math.ceil(EventType.values().length / 0.8) + 1);
+    public static HashMap<EventType, Event> events = new HashMap<>((int) Math.ceil(EventType.values().length / 0.8) + 1);
 
     /**
      * Class constructor
@@ -121,7 +121,7 @@ public class VaxInfo {
      * @param e The event to add
      * @return False if an event of type <code>e.getType()</code> already exists
      */
-    public boolean addEvent(Event e) {
+    public static boolean addEvent(Event e) {
         //Check if event exists
         if (events.containsKey(e.getType()))
             return false;
