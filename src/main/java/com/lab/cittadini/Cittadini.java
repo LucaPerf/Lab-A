@@ -71,6 +71,6 @@ public class Cittadini {
         if (vi == null)
             return false;
         else
-            return VaxInfo.addEvent(event);
+            return vi.addEvent(event);
     }
 }
