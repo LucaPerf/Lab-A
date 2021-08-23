@@ -39,7 +39,7 @@ public class Centri {
      * @param center The center to add
      */
     private static void addToHashMapByComune(Center center) {
-        String comune = center.getAddress().getComune().toLowerCase(Locale.ROOT);
+        String comune = center.getAddress().getDistrict().toLowerCase(Locale.ROOT);
 
         //if the comune is there, add the center to the list
         if (centers.containsKey(comune))

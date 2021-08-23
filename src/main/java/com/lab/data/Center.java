@@ -88,7 +88,7 @@ public class Center {
      * @author Ciceri Luigi
      */
     public String[] toRow() {
-        return new String[]{name, address.getCap().toString(), address.getComune(), address.getIndirizzo(), address.getProvincia(), type.toString()};
+        return new String[]{name, address.getCap().toString(), address.getDistrict(), address.getStreet(), address.getProvince(), type.toString()};
     }
 
     /**
@@ -96,6 +96,6 @@ public class Center {
      */
     @Override
     public String toString() {
-        return name + "\nCentro " + type.toString().toLowerCase(Locale.ROOT) + ", si trova nel comune di " + address.getComune();
+        return name + "\nCentro " + type.toString().toLowerCase(Locale.ROOT) + ", si trova nel comune di " + address.getDistrict();
     }
 }

@@ -1,46 +1,61 @@
 package com.lab.data;
 
 /**
- *
- * this class represents the address information of the vaccination center.
+ * This class represents a postal address.
  *
  * @author Luca Perfetti
  */
 
 public class PostalAddress {
-    private String indirizzo;
-    private String comune;
-    private String provincia;
+    private String street;
+    private String district;
+    private String province;
     private Integer cap;
 
-    public String getIndirizzo() {
+    /**
+     * @return The street address
+     */
+    public String getStreet() {
 
-        return indirizzo;
+        return street;
     }
 
-    public String getComune() {
+    /**
+     * @return The district
+     */
+    public String getDistrict() {
 
-        return comune;
+        return district;
     }
 
-    public String getProvincia() {
+    /**
+     * @return The province
+     */
+    public String getProvince() {
 
-        return provincia;
+        return province;
     }
 
+    /**
+     * @return The "CAP"
+     */
     public Integer getCap() {
 
         return cap;
     }
 
-    public PostalAddress(String indirizzo, String comune, String provincia, Integer cap){
-        this.indirizzo = indirizzo.trim();
-        this.comune = comune.trim();
-        this.provincia = provincia.trim();
+    /**
+     * Creates a class. All string arguments are trimmed.
+     *
+     * @param address  The street address
+     * @param city     The district
+     * @param province The province
+     * @param cap      The "CAP"
+     */
+    public PostalAddress(String address, String city, String province, Integer cap) {
+        this.street = address.trim();
+        this.district = city.trim();
+        this.province = province.trim();
         this.cap = cap;
-    }
-
-    public String[] ArrayAddress(){
-        return new String[]{indirizzo, provincia, comune, cap.toString()};
     }
 }

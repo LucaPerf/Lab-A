@@ -62,9 +62,9 @@ public class CenterInfoPage extends Page {
         name.setText(center.getName());
         type.setText(center.getType().toString());
         PostalAddress address = center.getAddress();
-        street.setText(address.getIndirizzo());
-        comune.setText(address.getComune());
-        province.setText(address.getProvincia());
+        street.setText(address.getStreet());
+        comune.setText(address.getDistrict());
+        province.setText(address.getProvince());
         cap.setText(address.getCap().toString());
     }
 
