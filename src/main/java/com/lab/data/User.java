@@ -12,6 +12,15 @@ public class User {
     private String surname;
     private String ccf;
     private String email;
+
+    /**
+     *
+     * @return The 16 bit unique vaccination identifier
+     */
+    public Integer getuID() {
+        return uID;
+    }
+
     private Integer uID;
 
 
