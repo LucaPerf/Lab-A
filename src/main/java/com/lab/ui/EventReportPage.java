@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import com.lab.data.Center;
 import com.lab.data.Event;
 import com.lab.data.EventType;
+import com.lab.data.User;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -29,6 +30,7 @@ public class EventReportPage extends Page {
     private Label charCounter;
 
     private Center center;
+    private User user;
 
     /**
      * {@inheritDoc}
@@ -83,6 +85,15 @@ public class EventReportPage extends Page {
      */
     public void setCenter(Center center) {
         this.center = center;
+    }
+
+    /**
+     * Sets the currently logged-in user. The event will be added to this user's data.
+     *
+     * @param user The logged-in user
+     */
+    public void setUser(User user) {
+        this.user = user;
     }
 
     //Sets the intensity text value (Molto lieve, Lieve, Moderata, Forte, Molto forte)

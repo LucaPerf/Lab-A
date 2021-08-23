@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
 import com.lab.data.Center;
 import com.lab.data.PostalAddress;
+import com.lab.data.User;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
@@ -30,6 +31,7 @@ public class CenterInfoPage extends Page {
     private JFXButton report;
 
     private Center center;
+    private User user;
 
     @Override
     public Parent getRoot() {
@@ -42,6 +44,7 @@ public class CenterInfoPage extends Page {
         {
             EventReportPage page = (EventReportPage) PagesManager.open(PagesManager.PageType.EVENTREPORT);
             page.setCenter(center);
+            page.setUser(user);
         });
 
         back.setOnMouseClicked(event ->
@@ -54,7 +57,7 @@ public class CenterInfoPage extends Page {
     @Override
     public void reset() {
         center = null;
-        setLoggedIn(false);
+        setUser(null);
     }
 
     public void setCenter(Center center) {
@@ -69,7 +72,11 @@ public class CenterInfoPage extends Page {
         cap.setText(address.getCap().toString());
     }
 
-    public void setLoggedIn(boolean loggedIn) {
-        root.setBottom(loggedIn ? report : null);
+    public void setUser(User user) {
+        if (user != null) {
+            root.setBottom(report);
+            this.user = user;
+        } else
+            root.setBottom(null);
     }
 }

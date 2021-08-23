@@ -56,7 +56,7 @@ public class UserMainPage extends Page {
         searchController.setOnListItemAction(event ->
         {
             CenterInfoPage page = (CenterInfoPage) PagesManager.open(PagesManager.PageType.CENTERINFO);
-            page.setLoggedIn(currentUser != null);
+            page.setUser(currentUser);
             page.setCenter(searchController.getSelectedCenter());
         });
 
