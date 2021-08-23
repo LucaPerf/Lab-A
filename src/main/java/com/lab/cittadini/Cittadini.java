@@ -27,28 +27,29 @@ public class Cittadini {
     }
 
     /**
-     * @param userName The username
+     * @param userName The trimmed username string
      * @param password The user password
      * @return The user object if and only if the user exists and the password matches
      */
     public static User login(String userName, String password) {
-        User u = Registrati.find(userName);
+        User u = Registrati.find(userName.trim());
         return ((u != null) && (u.getPassword().equals(password))) ? u : null;
     }
 
     /**
      * Searches for a center by name or by "comune" and type. If <code>type<code/> is null <code>key</code> is the name of the center, otherwise it is the name of the "comune".
-     * The returned list is sorted in alphabetic order.
+     * The <code>key</code> is  converted to lowercase by {@link Centri} and trimmed, the returned list is sorted in alphabetic order.
      *
      * @param key  The name of the center or "comune" to search for
      * @param type The center type to search for
      */
     public static LinkedList<Center> cercaCentroVaccinale(String key, CenterType type) {
+        String trimmedKey = key.trim();
         LinkedList<Center> list;
         if (type == null)
-            list = Centri.find(key);
+            list = Centri.find(trimmedKey);
         else
-            list = Centri.find(type, key);
+            list = Centri.find(type, trimmedKey);
 
         list.sort(centerNameComp);
         return list;

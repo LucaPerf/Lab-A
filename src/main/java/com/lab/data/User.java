@@ -32,7 +32,7 @@ public class User {
     }
 
     /**
-     * Creates a new user object.
+     * Creates a new user object. All string parameters are trimmed.
      *
      * @param name     The name of the user
      * @param surname  The surname of the user
@@ -43,11 +43,11 @@ public class User {
      * @param uID      "The unique id (16 bit) provided by the center"
      */
     public User(String name, String surname, String ccf, String email, String userID, String password, Integer uID) {
-        this.name = name;
-        this.surname = surname;
-        this.ccf = ccf;
-        this.email = email;
-        this.userID = userID;
+        this.name = name.trim();
+        this.surname = surname.trim();
+        this.ccf = ccf.trim();
+        this.email = email.trim();
+        this.userID = userID.trim();
         this.password = password;
         this.uID = uID;
     }

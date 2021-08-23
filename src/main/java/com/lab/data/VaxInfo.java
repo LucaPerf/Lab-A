@@ -21,7 +21,7 @@ public class VaxInfo {
     public static HashMap<EventType, Event> events = new HashMap<>((int) Math.ceil(EventType.values().length / 0.8) + 1);
 
     /**
-     * Class constructor
+     * Class constructor. All string parameters are trimmed.
      *
      * @param name    the name of the person
      * @param surname the surname of the person
@@ -31,9 +31,9 @@ public class VaxInfo {
      * @param uID     the unique vaccination id
      */
     public VaxInfo(String name, String surname, String ccf, LocalDate date, VaxType type, Integer uID) {
-        this.name = name;
-        this.surname = surname;
-        this.ccf = ccf;
+        this.name = name.trim();
+        this.surname = surname.trim();
+        this.ccf = ccf.trim();
         this.date = date;
         this.type = type;
         this.uID = uID;

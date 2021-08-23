@@ -43,7 +43,7 @@ public class Center {
     }
 
     /**
-     * Created a Center object
+     * Created a Center object. All string parameters are trimmed.
      *
      * @param name    The name of the center
      * @param address The address of the center
@@ -51,7 +51,7 @@ public class Center {
      * @author Luca Perfetti
      */
     public Center(String name, PostalAddress address, CenterType type) {
-        this.name = name;
+        this.name = name.trim();
         this.address = address;
         this.type = type;
     }

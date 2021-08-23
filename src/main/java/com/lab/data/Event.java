@@ -13,7 +13,6 @@ public class Event {
     private EventType type;
 
     /**
-     *
      * @return The intensity of this event
      */
     public Integer getIntensity() {
@@ -21,7 +20,6 @@ public class Event {
     }
 
     /**
-     *
      * @return The report of this event
      */
     public String getReport() {
@@ -29,7 +27,6 @@ public class Event {
     }
 
     /**
-     *
      * @return The type of this event
      */
     public EventType getType() {
@@ -37,15 +34,15 @@ public class Event {
     }
 
     /**
-     * Created a Event object
+     * Creates an Event object. The string <code>report</code> is trimmed.
      *
      * @param intensity The intensity of the event
-     * @param report The report of the event
-     * @param type The type of the event
+     * @param report    The report of the event
+     * @param type      The type of the event
      */
-    public Event(Integer intensity, String report, EventType type){
+    public Event(Integer intensity, String report, EventType type) {
         this.intensity = intensity;
-        this.report = report;
+        this.report = report.trim();
         this.type = type;
     }
 }

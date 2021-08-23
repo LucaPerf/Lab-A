@@ -34,9 +34,9 @@ public class PostalAddress {
     }
 
     public PostalAddress(String indirizzo, String comune, String provincia, Integer cap){
-        this.indirizzo = indirizzo;
-        this.comune = comune;
-        this.provincia = provincia;
+        this.indirizzo = indirizzo.trim();
+        this.comune = comune.trim();
+        this.provincia = provincia.trim();
         this.cap = cap;
     }
 
