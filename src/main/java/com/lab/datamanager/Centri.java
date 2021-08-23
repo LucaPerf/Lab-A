@@ -33,20 +33,23 @@ public class Centri {
     }
 
     /**
-     * Adds a center to the LinkedHashMap by putting it into its LinkedList which is associated to the center own comune
+     * Adds a center to the LinkedHashMap by putting it into its LinkedList which is associated to the center own comune.
+     * Keys are lowercase.
      *
      * @param center The center to add
      */
     private static void addToHashMapByComune(Center center) {
+        String comune = center.getAddress().getComune().toLowerCase(Locale.ROOT);
+
         //if the comune is there, add the center to the list
-        if (centers.containsKey(center.getAddress().getComune()))
-            centers.get(center.getAddress().getComune()).add(center);
+        if (centers.containsKey(comune))
+            centers.get(comune).add(center);
 
             //if there is no comune, create a new list then add the center and put the list into the HashMap
         else {
             LinkedList<Center> l = new LinkedList<>();
             l.add(center);
-            centers.put(center.getAddress().getComune(), l);
+            centers.put(comune, l);
         }
     }
 
@@ -117,37 +120,37 @@ public class Centri {
 
     /**
      * @param centerName The name of the center to search for
-     * @return A list of {@link Center} whose name contains <code>nomeCentro</code>
+     * @return A list of {@link Center} whose names contain <code>nomeCentro</code> (case-insensitive)
      */
 
     public static LinkedList<Center> find(String centerName) {
-        Collection<LinkedList<Center>> al = centers.values();
-
-        // create a new Linkedlist
         LinkedList<Center> cent = new LinkedList<>();
+        String key = centerName.toLowerCase(Locale.ROOT);
+        String name;
 
-        //scroll through the list of centers and chech if "centerName" is the same as elements in the Hashmap
-        for (LinkedList<Center> it : al)
-            for (Center l : it)
-                if (l.getName().contains(centerName))
-                    //add "nomeCentro" to a new list
+        //scroll through the list of centers and check if "centerName" is the same as elements in the Hashmap
+        for (LinkedList<Center> it : centers.values())
+            for (Center l : it) {
+                name = l.getName().toLowerCase(Locale.ROOT);
+                if (name.contains(key))
                     cent.add(l);
+            }
         return cent;
     }
 
     /**
      * @param type   The type of center to search for
      * @param comune The name of the comune to search in
-     * @return A list of {@link Center} located in <code>comune</code>, of <code>type</code>
+     * @return A list of {@link Center} located in <code>comune</code>, of <code>type</code> (case-insensitive)
      */
     public static LinkedList<Center> find(CenterType type, String comune) {
         LinkedList<Center> ll = new LinkedList<>();
+        String key = comune.toLowerCase(Locale.ROOT);
 
-        if (centers.containsKey(comune)) {
-            for (Center fr : centers.get(comune))
+        if (centers.containsKey(key)) {
+            for (Center fr : centers.get(key))
                 if (type.equals(fr.getType()))
                     ll.add(fr);
-            return ll;
         }
         return ll;
     }
