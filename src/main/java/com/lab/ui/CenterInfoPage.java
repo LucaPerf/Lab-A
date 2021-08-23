@@ -1,6 +1,7 @@
 package com.lab.ui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
 import com.lab.data.Center;
 import com.lab.data.PostalAddress;
@@ -12,7 +13,7 @@ public class CenterInfoPage extends Page {
     @FXML
     private BorderPane root;
     @FXML
-    private JFXButton back;
+    private JFXRippler back;
     @FXML
     private JFXTextField name;
     @FXML
@@ -43,7 +44,7 @@ public class CenterInfoPage extends Page {
             page.setCenter(center);
         });
 
-        back.setOnAction(event ->
+        back.setOnMouseClicked(event ->
         {
             reset();
             PagesManager.open(PagesManager.PageType.USERMAIN);

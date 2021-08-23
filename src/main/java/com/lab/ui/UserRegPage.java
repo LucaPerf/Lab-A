@@ -2,6 +2,7 @@ package com.lab.ui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
 import com.lab.cittadini.Cittadini;
 import com.lab.data.User;
@@ -34,7 +35,7 @@ public class UserRegPage extends Page {
     @FXML
     private JFXButton register;
     @FXML
-    private JFXButton back;
+    private JFXRippler back;
 
     /**
      * {@inheritDoc}
@@ -68,7 +69,7 @@ public class UserRegPage extends Page {
             }
         });
 
-        back.setOnAction(actionEvent ->
+        back.setOnMouseClicked(actionEvent ->
         {
             reset();
             PagesManager.open(PagesManager.PageType.USERMAIN);

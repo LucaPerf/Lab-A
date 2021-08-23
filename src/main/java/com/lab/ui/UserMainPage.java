@@ -22,7 +22,7 @@ public class UserMainPage extends Page {
     @FXML
     private StackPane root;
     @FXML
-    private JFXButton back;
+    private JFXRippler back;
     @FXML
     private JFXButton login;
     @FXML
@@ -63,7 +63,7 @@ public class UserMainPage extends Page {
         logout.setOnAction(actionEvent -> setLoggedOut());
         login.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.USERLOGIN));
         register.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.USERREGISTRATION));
-        back.setOnAction(actionEvent -> {
+        back.setOnMouseClicked(actionEvent -> {
             if (currentUser != null)
                 logoutWarning.show(root);
             else {

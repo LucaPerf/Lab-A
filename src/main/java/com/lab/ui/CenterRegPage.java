@@ -1,5 +1,6 @@
 package com.lab.ui;
 
+import com.jfoenix.controls.JFXRippler;
 import javafx.fxml.FXML;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -22,7 +23,7 @@ public class CenterRegPage extends Page {
     @FXML
     private JFXButton register;
     @FXML
-    private JFXButton back;
+    private JFXRippler back;
     @FXML
     private JFXTextField name;
     @FXML
@@ -67,7 +68,7 @@ public class CenterRegPage extends Page {
             }
         });
 
-        back.setOnAction(actionEvent -> {
+        back.setOnMouseClicked(actionEvent -> {
             reset();
             PagesManager.open(PagesManager.PageType.CENTERACTIONS);
         });

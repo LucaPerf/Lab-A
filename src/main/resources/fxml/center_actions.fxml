@@ -14,12 +14,11 @@
     <top>
         <JFXToolbar>
             <leftItems>
-                <JFXButton fx:id="back" alignment="CENTER" maxHeight="24.0" minHeight="24.0"
-                           styleClass="button-text-rounded" maxWidth="24.0" minWidth="24.0">
-                    <graphic>
-                        <FontIcon iconColor="BLACK" iconLiteral="mdral-arrow_back" iconSize="24"/>
-                    </graphic>
-                </JFXButton>
+                <JFXRippler fx:id="back" position="BACK" styleClass="icon-rippler">
+                    <StackPane style="-fx-padding:10;">
+                        <FontIcon iconColor="BLACK" iconLiteral="mdral-arrow_back" iconSize="24" />
+                    </StackPane>
+                </JFXRippler>
                 <Label text="Area centri"/>
             </leftItems>
         </JFXToolbar>

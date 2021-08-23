@@ -252,6 +252,11 @@
     -jfx-rippler-fill: -grey-300;
 }
 
+.icon-rippler
+{
+    -jfx-mask-type: CIRCLE;
+}
+
 //------
 //Slider
 //------

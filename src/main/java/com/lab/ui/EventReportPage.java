@@ -1,9 +1,6 @@
 package com.lab.ui;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXSlider;
-import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.*;
 import com.lab.data.Center;
 import com.lab.data.Event;
 import com.lab.data.EventType;
@@ -16,7 +13,7 @@ public class EventReportPage extends Page {
     @FXML
     private BorderPane root;
     @FXML
-    private JFXButton back;
+    private JFXRippler back;
     @FXML
     private JFXSlider intensitySlider;
     @FXML
@@ -46,7 +43,7 @@ public class EventReportPage extends Page {
         type.getItems().addAll(EventType.values());
         type.getValidators().add(requiredFieldValidator);
 
-        back.setOnAction(event -> PagesManager.open(PagesManager.PageType.CENTERINFO));
+        back.setOnMouseClicked(event -> PagesManager.open(PagesManager.PageType.CENTERINFO));
 
         intensitySlider.setOnMouseReleased(event -> setIntensityText((int) intensitySlider.getValue()));
 

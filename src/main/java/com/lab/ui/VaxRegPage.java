@@ -35,7 +35,7 @@ public class VaxRegPage extends Page {
     @FXML
     private JFXButton add;
     @FXML
-    private JFXButton back;
+    private JFXRippler back;
     //Dialog
     @FXML
     private JFXDialog addAgain;
@@ -80,7 +80,7 @@ public class VaxRegPage extends Page {
             }
         });
 
-        back.setOnAction(actionEvent -> {
+        back.setOnMouseClicked(actionEvent -> {
             reset();
             PagesManager.open(PagesManager.PageType.CENTERSELECTION);
         });

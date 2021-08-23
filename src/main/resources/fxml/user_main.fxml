@@ -12,11 +12,11 @@
         <top>
             <JFXToolbar fx:id="topbar">
                 <leftItems>
-                    <JFXButton fx:id="back" alignment="CENTER" styleClass="button-text-rounded" maxHeight="24.0" maxWidth="24.0" minHeight="24.0" minWidth="24.0">
-                        <graphic>
-                            <FontIcon iconColor="BLACK" iconLiteral="mdral-arrow_back" iconSize="24"/>
-                        </graphic>
-                    </JFXButton>
+                    <JFXRippler fx:id="back" position="BACK" styleClass="icon-rippler">
+                        <StackPane style="-fx-padding:10;">
+                            <FontIcon iconColor="BLACK" iconLiteral="mdral-arrow_back" iconSize="24" />
+                        </StackPane>
+                    </JFXRippler>
                     <Label textFill="black" text="Area cittadini"/>
                 </leftItems>
                 <rightItems>

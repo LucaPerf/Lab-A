@@ -1,6 +1,7 @@
 package com.lab.ui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRippler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
@@ -10,7 +11,7 @@ public class CenterSelectionPage extends Page {
     @FXML
     private BorderPane root;
     @FXML
-    private JFXButton back;
+    private JFXRippler back;
     @FXML
     private CenterSearchCommonPage searchController;
 
@@ -22,7 +23,7 @@ public class CenterSelectionPage extends Page {
     @Override
     protected void initialize() {
 
-        back.setOnAction(event ->
+        back.setOnMouseClicked(event ->
         {
             reset();
             PagesManager.open(PagesManager.PageType.CENTERACTIONS);

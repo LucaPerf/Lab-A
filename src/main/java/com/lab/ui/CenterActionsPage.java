@@ -1,6 +1,7 @@
 package com.lab.ui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRippler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
@@ -18,7 +19,7 @@ public class CenterActionsPage extends Page {
     @FXML
     private JFXButton addCenter;
     @FXML
-    private JFXButton back;
+    private JFXRippler back;
 
     /**
      * {@inheritDoc}
@@ -37,7 +38,7 @@ public class CenterActionsPage extends Page {
 
         addVax.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERSELECTION));
 
-        back.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.AREASELECTION));
+        back.setOnMouseClicked(actionEvent -> PagesManager.open(PagesManager.PageType.AREASELECTION));
     }
 
     /**
