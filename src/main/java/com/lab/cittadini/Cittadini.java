@@ -1,8 +1,6 @@
 package com.lab.cittadini;
 
-import com.lab.data.Center;
-import com.lab.data.CenterType;
-import com.lab.data.User;
+import com.lab.data.*;
 import com.lab.datamanager.Centri;
 import com.lab.datamanager.Registrati;
 import com.lab.datamanager.Vaccinati;
