@@ -61,16 +61,20 @@ public class Vaccinati {
     /**
      * Save all vaccination information to the file Vaccinati_centerName.csv
      *
-     * @param centerName The name of the center whose vaccination data will be saved
-     * @param info
+     * @param uID Unique id associated with a vaccinated person
+     * @param centerName The name of the center to add the information of vaccinated
      */
 
-    public static void save(String centerName, VaxInfo info) {
+    public static void save(Integer uID, String centerName) {
+        // Get the information of the vaccinated
+        VaxInfo vi = vaxinfo.get(uID);
 
+        //Add the citizen's information to the file "Vaccinati_centerName.csv"
+        Vaccinati.add(centerName, vi);
     }
 
     /**
-     * Add the vaccination information to the file "Vaccinati_ceneterName.csv"
+     * Add the vaccination information  to the file "Vaccinati_ceneterName.csv"
      *
      * @param centerName The name of the center to add the vaccination to
      * @param info       The vaccination information
@@ -90,7 +94,22 @@ public class Vaccinati {
     }
 
     //Creates a file from centerName
-    private static File getFileFromCenter(String centerName) {
+    public static File getFileFromCenter(String centerName) {
         return new File("Vaccinati_" + centerName + ".csv");
+    }
+
+    /**
+     * Searches for the citizen by means of unique id and return his information if he exists else returns null
+     *
+     * @param uID Unique id associated with a vaccinated person
+     */
+    public static VaxInfo find(Integer uID){
+        Collection<VaxInfo> rt = vaxinfo.values();
+
+        for (VaxInfo it : rt)
+            if(uID.equals(it.getuID()))
+                return it;
+
+        return null;
     }
 }
