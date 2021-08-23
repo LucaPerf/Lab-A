@@ -69,8 +69,18 @@ public class Vaccinati {
         // Get the information of the vaccinated
         VaxInfo vi = vaxinfo.get(uID);
 
-        //Add the citizen's information to the file "Vaccinati_centerName.csv"
-        Vaccinati.add(centerName, vi);
+        try {
+            //Overwrites the citizen's information to the file "Vaccinati_centerName.csv"
+            FileOutputStream var = new FileOutputStream(Vaccinati.getFileFromCenter(centerName), true);
+            PrintWriter pw = new PrintWriter(var);
+
+            pw.write(String.valueOf(vi));
+
+            pw.close();
+        } catch (FileNotFoundException e){
+            System.out.println(e);
+        }
+
     }
 
     /**
