@@ -5,6 +5,7 @@ import com.lab.data.CenterType;
 import com.lab.data.User;
 import com.lab.datamanager.Centri;
 import com.lab.datamanager.Registrati;
+import com.lab.datamanager.Vaccinati;
 
 import java.util.LinkedList;
 
@@ -45,5 +46,24 @@ public class Cittadini {
             return Centri.find(key);
         else
             return Centri.find(type, key);
+    }
+
+    /**
+     * Check if the event hash been added in the center file
+     *
+     * @param uID Unique id associated with a vaccinated person
+     * @param event Adverse events to be added or have already been added in the file
+     * @param centerName The name of the center to add its data to the file
+     * @return
+     */
+    public static boolean inserisciEventiAvversi(Integer uID, Event event, String centerName){
+        Vaccinati.load(centerName);
+
+        VaxInfo vi = Vaccinati.find(uID);
+
+        if (vi == null)
+            return false;
+        else
+            return VaxInfo.addEvent(event);
     }
 }
