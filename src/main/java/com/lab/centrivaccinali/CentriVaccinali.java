@@ -3,6 +3,7 @@ package com.lab.centrivaccinali;
 import com.lab.data.Center;
 import com.lab.data.VaxInfo;
 import com.lab.datamanager.Centri;
+import com.lab.datamanager.Data;
 import com.lab.datamanager.Registrati;
 import com.lab.datamanager.Vaccinati;
 import com.lab.ui.PagesManager;
@@ -36,6 +37,7 @@ public class CentriVaccinali extends Application {
         PagesManager.openEmptyScene(stage);
         stage.show();
         //Data loading
+        Data.createDirectory();
         Centri.load();
         Registrati.load();
         Vaccinati.load();

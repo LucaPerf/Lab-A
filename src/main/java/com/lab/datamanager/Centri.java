@@ -16,8 +16,8 @@ import java.io.*;
  * @author Luigi Ciceri
  **/
 
-public class Centri {
-    private static File file = new File("CentriVaccinali.csv");
+public class Centri extends Data{
+    private static File file = new File(dataDirectory,"CentriVaccinali.csv");
     private static LinkedHashMap<String, LinkedList<Center>> centers = new LinkedHashMap<>();
 
     /**

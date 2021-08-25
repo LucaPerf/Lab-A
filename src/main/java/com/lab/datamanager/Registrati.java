@@ -13,8 +13,8 @@ import java.util.*;
  * @author Luca Perfetti
  */
 
-public class Registrati {
-    private static File file = new File("Cittadini.csv");
+public class Registrati extends Data{
+    private static File file = new File(dataDirectory,"Cittadini.csv");
     private static HashMap<String, User> users = new LinkedHashMap<>();
 
     /**

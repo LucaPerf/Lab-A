@@ -15,7 +15,7 @@ import java.util.*;
  * @author Luca Perfetti
  */
 
-public class Vaccinati {
+public class Vaccinati extends Data{
     public static LinkedHashMap<Integer, VaxInfo> vaxinfo = new LinkedHashMap<>();
 
     /**
@@ -95,7 +95,7 @@ public class Vaccinati {
 
     //Creates a file from centerName
     public static File getFileFromCenter(String centerName) {
-        return new File("Vaccinati_" + centerName + ".csv");
+        return new File(dataDirectory,"Vaccinati_" + centerName + ".csv");
     }
 
     /**
