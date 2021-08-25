@@ -61,26 +61,21 @@ public class Vaccinati {
     /**
      * Save all vaccination information to the file Vaccinati_centerName.csv
      *
-     * @param uID Unique id associated with a vaccinated person
-     * @param centerName The name of the center to add the information of vaccinated
      */
+    public static void save(String centerName){
+        for (VaxInfo rt : vaxinfo.values()){
+            try {
+                FileWriter fw = new FileWriter(getFileFromCenter(centerName));
+                CsvWriter cw = CsvWriter.dsl().to(fw);
 
-    public static void save(Integer uID, String centerName) {
-        // Get the information of the vaccinated
-        VaxInfo vi = vaxinfo.get(uID);
+                String[] columns = rt.toRow();
 
-        try {
-            //Overwrites the citizen's information to the file "Vaccinati_centerName.csv"
-            FileOutputStream var = new FileOutputStream(Vaccinati.getFileFromCenter(centerName), true);
-            PrintWriter pw = new PrintWriter(var);
-
-            pw.write(String.valueOf(vi));
-
-            pw.close();
-        } catch (FileNotFoundException e){
-            System.out.println(e);
+                cw.appendRow(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5]);
+                fw.close();
+            }catch (IOException e){
+                System.out.println(e);
+            }
         }
-
     }
 
     /**
@@ -114,12 +109,6 @@ public class Vaccinati {
      * @param uID Unique id associated with a vaccinated person
      */
     public static VaxInfo find(Integer uID){
-        Collection<VaxInfo> rt = vaxinfo.values();
-
-        for (VaxInfo it : rt)
-            if(uID.equals(it.getuID()))
-                return it;
-
-        return null;
+        return vaxinfo.get(uID);
     }
 }
