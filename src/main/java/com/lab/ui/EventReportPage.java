@@ -59,13 +59,18 @@ public class EventReportPage extends Page {
         type.getItems().addAll(EventType.values());
         type.getValidators().add(requiredFieldValidator);
 
-        back.setOnMouseClicked(event -> PagesManager.open(PagesManager.PageType.CENTERINFO));
+        back.setOnMouseClicked(event ->
+        {
+            reset();
+            PagesManager.open(PagesManager.PageType.CENTERINFO);
+        });
 
         intensitySlider.setOnMouseReleased(event -> setIntensityText((int) intensitySlider.getValue()));
 
         report.setOnAction(event -> {
             if (type.validate()) {
                 Cittadini.inserisciEventiAvversi(user.getuID(), eventFromUI(), center.getName());
+                reset();
                 PagesManager.open(PagesManager.PageType.CENTERINFO);
             }
         });
@@ -76,7 +81,9 @@ public class EventReportPage extends Page {
      */
     @Override
     public void reset() {
-
+        type.getSelectionModel().clearSelection();
+        intensitySlider.setValue(3);
+        notes.clear();
     }
 
     /**
