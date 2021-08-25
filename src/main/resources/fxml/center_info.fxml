@@ -6,37 +6,41 @@
 
 <?import javafx.scene.control.Label?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-<BorderPane fx:id="root" stylesheets="@../css/light.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.ui.CenterInfoPage">
-    <top>
-        <JFXToolbar>
-            <leftItems>
-                <JFXRippler fx:id="back" position="BACK" styleClass="icon-rippler">
-                    <StackPane style="-fx-padding:10;">
-                        <FontIcon iconColor="BLACK" iconLiteral="mdral-arrow_back" iconSize="24" />
-                    </StackPane>
-                </JFXRippler>
-                <Label text="Informazioni centro"/>
-            </leftItems>
-        </JFXToolbar>
-    </top>
-    <center>
-        <VBox spacing="24" BorderPane.alignment="TOP_CENTER">
-            <JFXTextField fx:id="name" disable="true" promptText="Nome" styleClass="text-field-info" />
-            <JFXTextField fx:id="type" disable="true" promptText="Tipo" styleClass="text-field-info" />
-            <JFXTextField fx:id="street" disable="true" promptText="Indirizzo" styleClass="text-field-info" />
-            <JFXTextField fx:id="comune" disable="true" promptText="Comune" styleClass="text-field-info" />
-            <JFXTextField fx:id="province" disable="true" promptText="Provincia" styleClass="text-field-info" />
-            <JFXTextField fx:id="cap" disable="true" promptText="CAP" styleClass="text-field-info" />
-            <padding>
-                <Insets bottom="12.0" left="12.0" right="12.0" top="24.0" />
-            </padding>
-        </VBox>
-    </center>
-    <bottom>
-        <JFXButton fx:id="report" alignment="CENTER" contentDisplay="CENTER" styleClass="button-contained" text="SEGNALA EVENTO" BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-            </BorderPane.margin>
-        </JFXButton>
-    </bottom>
-</BorderPane>
+<StackPane fx:id="root" stylesheets="@../css/light.css" xmlns="http://javafx.com/javafx/11.0.2"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.ui.CenterInfoPage">
+    <BorderPane fx:id="borderPane">
+        <top>
+            <JFXToolbar>
+                <leftItems>
+                    <JFXRippler fx:id="back" position="BACK" styleClass="icon-rippler">
+                        <StackPane style="-fx-padding:10;">
+                            <FontIcon iconColor="BLACK" iconLiteral="mdral-arrow_back" iconSize="24"/>
+                        </StackPane>
+                    </JFXRippler>
+                    <Label text="Informazioni centro"/>
+                </leftItems>
+            </JFXToolbar>
+        </top>
+        <center>
+            <VBox spacing="24" BorderPane.alignment="TOP_CENTER">
+                <JFXTextField fx:id="name" disable="true" promptText="Nome" styleClass="text-field-info"/>
+                <JFXTextField fx:id="type" disable="true" promptText="Tipo" styleClass="text-field-info"/>
+                <JFXTextField fx:id="street" disable="true" promptText="Indirizzo" styleClass="text-field-info"/>
+                <JFXTextField fx:id="comune" disable="true" promptText="Comune" styleClass="text-field-info"/>
+                <JFXTextField fx:id="province" disable="true" promptText="Provincia" styleClass="text-field-info"/>
+                <JFXTextField fx:id="cap" disable="true" promptText="CAP" styleClass="text-field-info"/>
+                <padding>
+                    <Insets bottom="12.0" left="12.0" right="12.0" top="24.0"/>
+                </padding>
+            </VBox>
+        </center>
+        <bottom>
+            <JFXButton fx:id="report" alignment="CENTER" contentDisplay="CENTER" styleClass="button-contained"
+                       text="SEGNALA EVENTO" BorderPane.alignment="CENTER">
+                <BorderPane.margin>
+                    <Insets bottom="12.0" left="12.0" right="12.0" top="12.0"/>
+                </BorderPane.margin>
+            </JFXButton>
+        </bottom>
+    </BorderPane>
+</StackPane>

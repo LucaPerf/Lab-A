@@ -1,18 +1,19 @@
 package com.lab.ui;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXRippler;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.lab.data.Center;
 import com.lab.data.PostalAddress;
 import com.lab.data.User;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 
 public class CenterInfoPage extends Page {
     @FXML
-    private BorderPane root;
+    private StackPane root;
+    @FXML
+    private BorderPane borderPane;
     @FXML
     private JFXRippler back;
     @FXML
@@ -30,6 +31,8 @@ public class CenterInfoPage extends Page {
     @FXML
     private JFXButton report;
 
+    private JFXSnackbar eventAddedNotification;
+    private JFXSnackbarLayout eventAddedNotificationLayout = new JFXSnackbarLayout("Evento segnalato con successo");
     private Center center;
     private User user;
 
@@ -40,6 +43,8 @@ public class CenterInfoPage extends Page {
 
     @Override
     protected void initialize() {
+        eventAddedNotification = new JFXSnackbar(root);
+
         report.setOnAction(event ->
         {
             EventReportPage page = (EventReportPage) PagesManager.open(PagesManager.PageType.EVENTREPORT);
@@ -74,9 +79,16 @@ public class CenterInfoPage extends Page {
 
     public void setUser(User user) {
         if (user != null) {
-            root.setBottom(report);
+            borderPane.setBottom(report);
             this.user = user;
         } else
-            root.setBottom(null);
+            borderPane.setBottom(null);
+    }
+
+    /**
+     * Shows the event added notification {@link JFXSnackbar}
+     */
+    public void showEventAddedNotification() {
+        eventAddedNotification.fireEvent(new JFXSnackbar.SnackbarEvent(eventAddedNotificationLayout, SNACKBARDURATION));
     }
 }

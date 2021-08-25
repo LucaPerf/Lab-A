@@ -7,56 +7,63 @@
 <?import javafx.scene.text.*?>
 
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-<BorderPane fx:id="root" stylesheets="@../css/light.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.ui.EventReportPage">
-    <top>
-        <JFXToolbar>
-            <leftItems>
-                <JFXRippler fx:id="back" position="BACK" styleClass="icon-rippler">
-                    <StackPane style="-fx-padding:10;">
-                        <FontIcon iconColor="BLACK" iconLiteral="mdral-arrow_back" iconSize="24" />
-                    </StackPane>
-                </JFXRippler>
-                <Label text="Segnalazione evento"/>
-            </leftItems>
-        </JFXToolbar>
-    </top>
-    <center>
-        <VBox alignment="TOP_CENTER" spacing="28.0" BorderPane.alignment="TOP_CENTER">
-            <JFXComboBox fx:id="type" maxWidth="300" promptText="Evento" />
-            <AnchorPane maxWidth="300">
-                <Label text="Intensità" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-                </Label>
-                <Label fx:id="intensityText" text="Moderata" textFill="dimgray" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
-                <VBox.margin>
-                    <Insets top="16"/>
-                </VBox.margin>
-            </AnchorPane>
-            <JFXSlider fx:id="intensitySlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" maxWidth="300" min="1.0" minorTickCount="0" snapToTicks="true" value="3.0">
-                <VBox.margin>
-                    <Insets top="-6" />
-                </VBox.margin>
-            </JFXSlider>
-            <VBox alignment="CENTER_RIGHT" maxWidth="300" spacing="4">
-                <JFXTextArea fx:id="notes" maxWidth="300" promptText="Note"/>
-                <Label fx:id="charCounter" text="0/256" styleClass="caption" textFill="#00000099"/>
+<StackPane fx:id="root" stylesheets="@../css/light.css" xmlns="http://javafx.com/javafx/11.0.2"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.ui.EventReportPage">
+    <BorderPane>
+        <top>
+            <JFXToolbar>
+                <leftItems>
+                    <JFXRippler fx:id="back" position="BACK" styleClass="icon-rippler">
+                        <StackPane style="-fx-padding:10;">
+                            <FontIcon iconColor="BLACK" iconLiteral="mdral-arrow_back" iconSize="24"/>
+                        </StackPane>
+                    </JFXRippler>
+                    <Label text="Segnalazione evento"/>
+                </leftItems>
+            </JFXToolbar>
+        </top>
+        <center>
+            <VBox alignment="TOP_CENTER" spacing="28.0" BorderPane.alignment="TOP_CENTER">
+                <JFXComboBox fx:id="type" maxWidth="300" promptText="Evento"/>
+                <AnchorPane maxWidth="300">
+                    <Label text="Intensità" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+                           AnchorPane.topAnchor="0">
+                        <font>
+                            <Font size="16.0"/>
+                        </font>
+                    </Label>
+                    <Label fx:id="intensityText" text="Moderata" textFill="dimgray" AnchorPane.bottomAnchor="0"
+                           AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                        <font>
+                            <Font size="16.0"/>
+                        </font>
+                    </Label>
+                    <VBox.margin>
+                        <Insets top="16"/>
+                    </VBox.margin>
+                </AnchorPane>
+                <JFXSlider fx:id="intensitySlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" maxWidth="300"
+                           min="1.0" minorTickCount="0" snapToTicks="true" value="3.0">
+                    <VBox.margin>
+                        <Insets top="-6"/>
+                    </VBox.margin>
+                </JFXSlider>
+                <VBox alignment="CENTER_RIGHT" maxWidth="300" spacing="4">
+                    <JFXTextArea fx:id="notes" maxWidth="300" promptText="Note"/>
+                    <Label fx:id="charCounter" text="0/256" styleClass="caption" textFill="#00000099"/>
+                </VBox>
+                <BorderPane.margin>
+                    <Insets bottom="16" left="16" right="16" top="32"/>
+                </BorderPane.margin>
             </VBox>
-            <BorderPane.margin>
-                <Insets bottom="16" left="16" right="16" top="32" />
-            </BorderPane.margin>
-        </VBox>
-    </center>
-    <bottom>
-        <JFXButton fx:id="report" prefWidth="300" styleClass="button-contained" text="SEGANALA" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="16.0" left="16.0" right="16.0"/>
-         </BorderPane.margin>
-        </JFXButton>
-    </bottom>
-</BorderPane>
+        </center>
+        <bottom>
+            <JFXButton fx:id="report" prefWidth="300" styleClass="button-contained" text="SEGANALA"
+                       BorderPane.alignment="CENTER">
+                <BorderPane.margin>
+                    <Insets bottom="16.0" left="16.0" right="16.0"/>
+                </BorderPane.margin>
+            </JFXButton>
+        </bottom>
+    </BorderPane>
+</StackPane>

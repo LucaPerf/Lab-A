@@ -8,6 +8,7 @@ import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.util.Duration;
 
 import java.time.LocalDate;
 
@@ -33,6 +34,10 @@ abstract public class Page {
      * This validator checks if the unique vaccination id is valid (value is less than 2^16)
      */
     protected UIDValidator uIDValidator = new UIDValidator("Valore massimo 65535");
+    /**
+     * How long snackbars will be displayed before being hidden
+     */
+    protected static final javafx.util.Duration SNACKBARDURATION = Duration.seconds(4);
 
     /**
      * Common constructor called from all subclasses

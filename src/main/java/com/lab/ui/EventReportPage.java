@@ -10,11 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextFormatter;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 
 public class EventReportPage extends Page {
     @FXML
-    private BorderPane root;
+    private StackPane root;
     @FXML
     private JFXRippler back;
     @FXML
@@ -30,6 +30,8 @@ public class EventReportPage extends Page {
     @FXML
     private Label charCounter;
 
+    private JFXSnackbar eventAddedNotification;
+    private JFXSnackbarLayout eventAddedNotificationLayout = new JFXSnackbarLayout("Segnalazione evnto fallita.\nNon hai selezionato il centro corretto oppure hai già segnalato un evento di questo tipo");
     private Center center;
     private User user;
 
@@ -46,6 +48,7 @@ public class EventReportPage extends Page {
      */
     @Override
     protected void initialize() {
+        eventAddedNotification = new JFXSnackbar(root);
         //Updates character counter and limits length of notes field
         notes.setTextFormatter(new TextFormatter<>(change ->
         {
@@ -69,9 +72,11 @@ public class EventReportPage extends Page {
 
         report.setOnAction(event -> {
             if (type.validate()) {
-                Cittadini.inserisciEventiAvversi(user.getuID(), eventFromUI(), center.getName());
-                reset();
-                PagesManager.open(PagesManager.PageType.CENTERINFO);
+                if (Cittadini.inserisciEventiAvversi(user.getuID(), eventFromUI(), center.getName())) {
+                    reset();
+                    ((CenterInfoPage) PagesManager.open(PagesManager.PageType.CENTERINFO)).showEventAddedNotification();
+                } else
+                    eventAddedNotification.fireEvent(new JFXSnackbar.SnackbarEvent(eventAddedNotificationLayout, SNACKBARDURATION));
             }
         });
     }

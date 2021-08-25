@@ -274,3 +274,14 @@
 {
     -fx-font-size:12;
 }
+
+//--------
+//Snackbar
+//--------
+.jfx-snackbar-content {
+    -fx-background-color: #323232;
+}
+
+.jfx-snackbar-toast {
+    -fx-text-fill: WHITE;
+}

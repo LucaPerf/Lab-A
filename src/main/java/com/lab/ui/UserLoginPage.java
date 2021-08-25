@@ -1,14 +1,11 @@
 package com.lab.ui;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXRippler;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.lab.cittadini.Cittadini;
 import com.lab.data.User;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 
 /**
  * Controller of the user login page. Layout is stored in "user_login.fxml".
@@ -18,7 +15,7 @@ import javafx.scene.layout.BorderPane;
 public class UserLoginPage extends Page {
 
     @FXML
-    private BorderPane root;
+    private StackPane root;
     @FXML
     private JFXTextField username;
     @FXML
@@ -27,6 +24,9 @@ public class UserLoginPage extends Page {
     private JFXButton register;
     @FXML
     private JFXRippler back;
+
+    private JFXSnackbar loginFailedNotification;
+    private JFXSnackbarLayout loginFailedNotificationLayout = new JFXSnackbarLayout("Nome utente o password sbagliati");
 
     /**
      * {@inheritDoc}
@@ -41,6 +41,8 @@ public class UserLoginPage extends Page {
      */
     @Override
     protected void initialize() {
+        loginFailedNotification = new JFXSnackbar(root);
+
         username.getValidators().add(requiredFieldValidator);
         password.getValidators().add(requiredFieldValidator);
 
@@ -51,7 +53,8 @@ public class UserLoginPage extends Page {
                 if (u != null) {
                     ((UserMainPage) PagesManager.open(PagesManager.PageType.USERMAIN)).setLoggedIn(u);
                     reset();
-                }
+                } else
+                    loginFailedNotification.fireEvent(new JFXSnackbar.SnackbarEvent(loginFailedNotificationLayout));
             }
         });
 
