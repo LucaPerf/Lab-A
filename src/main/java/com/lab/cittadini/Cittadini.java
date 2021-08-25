@@ -59,18 +59,18 @@ public class Cittadini {
      * Check if the event hash been added in the center file
      *
      * @param uID        Unique id associated with a vaccinated person
-     * @param event      Adverse events to be added or have already been added in the file
+     * @param event      Adverse event to be added
      * @param centerName The name of the center to add its data to the file
-     * @return
+     * @return Fasle if the user hasn't been found or an event of the same type has already been reported
      */
     public static boolean inserisciEventiAvversi(Integer uID, Event event, String centerName) {
         Vaccinati.load(centerName);
-
         VaxInfo vi = Vaccinati.find(uID);
 
-        if (vi == null)
-            return false;
-        else
-            return vi.addEvent(event);
+        if (vi != null && vi.addEvent(event)) {
+            Vaccinati.save(centerName);
+            return true;
+        }
+        return false;
     }
 }

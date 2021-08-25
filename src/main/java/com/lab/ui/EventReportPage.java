@@ -1,6 +1,7 @@
 package com.lab.ui;
 
 import com.jfoenix.controls.*;
+import com.lab.cittadini.Cittadini;
 import com.lab.data.Center;
 import com.lab.data.Event;
 import com.lab.data.EventType;
@@ -64,7 +65,7 @@ public class EventReportPage extends Page {
 
         report.setOnAction(event -> {
             if (type.validate()) {
-                System.out.println("Not implemented");
+                Cittadini.inserisciEventiAvversi(user.getuID(), eventFromUI(), center.getName());
                 PagesManager.open(PagesManager.PageType.CENTERINFO);
             }
         });
