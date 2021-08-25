@@ -14,6 +14,7 @@ import java.util.LinkedList;
  * @author Ciceri Luigi
  */
 public class Cittadini {
+    private Cittadini(){}
 
     private static Comparator<Center> centerNameComp = Comparator.comparing(Center::getName);
 

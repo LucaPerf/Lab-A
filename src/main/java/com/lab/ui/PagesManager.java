@@ -16,6 +16,7 @@ import java.io.IOException;
  */
 
 public class PagesManager {
+    private PagesManager(){}
 
     /**
      * Represents the type of page, used to choose which page to open.

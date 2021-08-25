@@ -14,6 +14,8 @@ import java.util.*;
  */
 
 public class Registrati extends Data{
+    private Registrati(){}
+
     private static File file = new File(dataDirectory,"Cittadini.csv");
     private static HashMap<String, User> users = new LinkedHashMap<>();
 

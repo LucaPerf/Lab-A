@@ -16,6 +16,7 @@ import java.util.*;
  */
 
 public class Vaccinati extends Data{
+    private Vaccinati(){}
     public static LinkedHashMap<Integer, VaxInfo> vaxinfo = new LinkedHashMap<>();
 
     /**

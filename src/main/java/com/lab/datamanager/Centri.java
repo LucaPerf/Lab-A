@@ -17,6 +17,8 @@ import java.io.*;
  **/
 
 public class Centri extends Data{
+    private Centri(){}
+
     private static File file = new File(dataDirectory,"CentriVaccinali.csv");
     private static LinkedHashMap<String, LinkedList<Center>> centers = new LinkedHashMap<>();
 
