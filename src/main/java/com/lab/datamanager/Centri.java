@@ -69,11 +69,8 @@ public class Centri {
             FileWriter fw = new FileWriter(file, true);
             CsvWriter writer = CsvWriter.dsl().to(fw);
 
-            //Each element of the array is a cell
-            String[] columns = center.toRow();
-
             //Write row
-            writer.appendRow(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5]);
+            writer.appendRow(center.toRow());
             fw.close();
         } catch (IOException e) {
             System.out.println(e);

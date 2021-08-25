@@ -39,9 +39,7 @@ public class Registrati {
             FileWriter filew = new FileWriter(file, true);
             CsvWriter cw = CsvWriter.dsl().to(filew);
 
-            String[] columns = cittadino.toRow();
-
-            cw.appendRow(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5], columns[6]);
+            cw.appendRow(cittadino.toRow());
             filew.close();
         } catch (IOException e) {
             System.out.println(e);

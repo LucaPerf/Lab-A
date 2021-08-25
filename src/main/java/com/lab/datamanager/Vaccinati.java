@@ -60,21 +60,19 @@ public class Vaccinati {
 
     /**
      * Save all vaccination information to the file Vaccinati_centerName.csv
-     *
      */
-    public static void save(String centerName){
-        for (VaxInfo rt : vaxinfo.values()){
-            try {
-                FileWriter fw = new FileWriter(getFileFromCenter(centerName));
-                CsvWriter cw = CsvWriter.dsl().to(fw);
+    public static void save(String centerName) {
+        try {
+            FileWriter fw = new FileWriter(getFileFromCenter(centerName));
+            CsvWriter cw = CsvWriter.dsl().to(fw);
 
-                String[] columns = rt.toRow();
+            for (VaxInfo vax : vaxinfo.values())
+                cw.appendRow(vax.toRow());
 
-                cw.appendRow(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5]);
-                fw.close();
-            }catch (IOException e){
-                System.out.println(e);
-            }
+            fw.close();
+
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 
@@ -88,10 +86,7 @@ public class Vaccinati {
         try {
             FileWriter fw = new FileWriter(getFileFromCenter(centerName), true);
             CsvWriter cw = CsvWriter.dsl().to(fw);
-
-            String[] columns = info.toRow();
-
-            cw.appendRow(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5]);
+            cw.appendRow(info.toRow());
             fw.close();
         } catch (IOException e) {
             System.out.println(e);
@@ -108,7 +103,7 @@ public class Vaccinati {
      *
      * @param uID Unique id associated with a vaccinated person
      */
-    public static VaxInfo find(Integer uID){
+    public static VaxInfo find(Integer uID) {
         return vaxinfo.get(uID);
     }
 }
