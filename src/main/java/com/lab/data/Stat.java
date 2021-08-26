@@ -7,20 +7,23 @@ package com.lab.data;
  * @author Luigi Ciceri
  */
 public class Stat {
+    /**
+     * The maximum value of a stat
+     */
+    public final static int MAX_VALUE = 5;
     private EventType type;
     private float average;
     private long reports;
 
     /**
-     * Creates a new stat of <code>type</code> and with an average of <code>value</code>. The report variable will be set to 1.
+     * Creates a new empty stat of <code>type</code>. Reports and average will be set to 0.
      *
-     * @param type  The type of stat
-     * @param value The average value of this stat
+     * @param type The type of stat
      */
-    public Stat(EventType type, float value) {
+    public Stat(EventType type) {
         this.type = type;
-        average = value;
-        reports = 1;
+        average = 0;
+        reports = 0;
     }
 
     /**
@@ -53,6 +56,13 @@ public class Stat {
      */
     public float getAverage() {
         return average;
+    }
+
+    /**
+     * @return The normalized average of this stat
+     */
+    public double getAverageNormalized() {
+        return MAX_VALUE / average;
     }
 
     /**
