@@ -285,3 +285,20 @@
 .jfx-snackbar-toast {
     -fx-text-fill: WHITE;
 }
+//-----------
+//Progrss bar
+//-----------
+.progress-bar{
+    -fx-pref-height:6;
+}
+
+.progress-bar .bar{
+    -fx-background-color: -primary-color;
+    -fx-background-insets:0;
+    -fx-background-radius:3;
+}
+
+.progress-bar .track{
+    -fx-background-color: -grey-300;
+    -fx-background-radius:3;
+}
