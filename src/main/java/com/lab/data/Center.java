@@ -102,20 +102,21 @@ public class Center {
      * @author Ciceri Luigi
      */
     public String[] toRow() {
-        String[] row = new String[6 + stats.size() * 3];
-        row[0] = name;
-        row[1] = address.getCap().toString();
-        row[2] = address.getDistrict();
-        row[3] = address.getStreet();
-        row[4] = address.getProvince();
-        row[5] = type.toString();
+        String[] info = new String[6 + stats.size() * 3];
+        info[0] = name;
+        info[1] = address.getCap().toString();
+        info[2] = address.getDistrict();
+        info[3] = address.getStreet();
+        info[4] = address.getProvince();
+        info[5] = type.toString();
         //Add stats
         int offset = 6;
         for (Stat stat : stats.values()) {
-            System.arraycopy(stat.toRow(), 0, row, offset, stat.toRow().length);
+            String[] row = stat.toRow();
+            System.arraycopy(row, 0, info, offset, row.length);
             offset += 3;
         }
-        return row;
+        return info;
     }
 
     /**
