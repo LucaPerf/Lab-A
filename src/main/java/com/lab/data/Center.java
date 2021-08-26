@@ -133,4 +133,12 @@ public class Center {
         else
             stats.get(event.getType()).update(event.getIntensity());
     }
+
+    /**
+     * @param type The type of stat to return
+     * @return A stat of <code>type</code> or <code>null</code> if no such stat exists
+     */
+    public Stat getStat(EventType type) {
+        return stats.getOrDefault(type, null);
+    }
 }
