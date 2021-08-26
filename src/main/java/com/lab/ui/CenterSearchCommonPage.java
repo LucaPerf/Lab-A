@@ -16,8 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.util.LinkedList;
-
 /**
  * Controller of the center search UI, which means searchbar + search filters + centers result list all inside a {@link VBox}. Layout is stored in "center_search_common.fxml".
  *
@@ -113,13 +111,12 @@ public class CenterSearchCommonPage extends Page {
     public void setupCentersList() {
         centers.getItems().clear();
         int i = 0;
-        for (LinkedList<Center> list : Centri.getCenters().values())
-            for (Center c : list) {
-                if (i < 25) {
-                    centers.getItems().add(c);
-                    i++;
-                } else return;
-            }
+        for (Center center : Centri.getCenters().values()) {
+            if (i < 25) {
+                centers.getItems().add(0,center);
+                i++;
+            } else return;
+        }
     }
 
     private CenterType getTypeFromUI() {

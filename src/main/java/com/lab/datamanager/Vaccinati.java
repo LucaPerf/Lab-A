@@ -15,22 +15,21 @@ import java.util.*;
  * @author Luca Perfetti
  */
 
-public class Vaccinati extends Data{
-    private Vaccinati(){}
+public class Vaccinati extends Data {
+    private Vaccinati() {
+    }
+
     public static LinkedHashMap<Integer, VaxInfo> vaxinfo = new LinkedHashMap<>();
 
     /**
      * Checks if vaccination files exist and creates them.
      */
     public static void load() {
-        Collection<LinkedList<Center>> data = Centri.getCenters().values();
-
         try {
-            for (LinkedList<Center> it : data)
-                for (Center l : it) {
-                    File fl = getFileFromCenter(l.getName());
-                    fl.createNewFile();
-                }
+            for (Center l : Centri.getCenters().values()) {
+                File fl = getFileFromCenter(l.getName());
+                fl.createNewFile();
+            }
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -96,7 +95,7 @@ public class Vaccinati extends Data{
 
     //Creates a file from centerName
     public static File getFileFromCenter(String centerName) {
-        return new File(dataDirectory,"Vaccinati_" + centerName + ".csv");
+        return new File(dataDirectory, "Vaccinati_" + centerName + ".csv");
     }
 
     /**

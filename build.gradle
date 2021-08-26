@@ -24,6 +24,7 @@ dependencies
             implementation group: 'org.simpleflatmapper', name: 'lightning-csv', version: '8.2.3'
             implementation group: 'org.kordamp.ikonli', name: 'ikonli-javafx', version: '12.2.0'
             implementation group: 'org.kordamp.ikonli', name: 'ikonli-material2-pack', version: '12.2.0'
+            implementation("com.google.guava:guava:30.1.1-jre")
             //JavaFX dependencies
             implementation group: 'org.openjfx', name: 'javafx-graphics', version: 16, classifier: 'linux'
             implementation group: 'org.openjfx', name: 'javafx-graphics', version: 16, classifier: 'mac'
