@@ -114,7 +114,7 @@ public class UserMainPage extends Page {
         topbar.getRightItems().removeAll(username, logout);
         //If this method is called from initialize(), register and login buttons will already be there because they are defined inside the fxml
         if (topbar.getRightItems().size() == 0)
-            topbar.getRightItems().addAll(register, login);
+            topbar.getRightItems().addAll(login, register);
     }
 
 
