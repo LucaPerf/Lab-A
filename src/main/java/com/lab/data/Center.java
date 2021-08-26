@@ -46,17 +46,21 @@ public class Center {
     }
 
     /**
-     * Created a Center object with no stats. All string parameters are trimmed.
+     * Created a Center object with an empty stat for each event type. All string parameters are trimmed.
      *
      * @param name    The name of the center
      * @param address The address of the center
      * @param type    The type of the center
      * @author Luca Perfetti
+     * @author Luigi Cieri
      */
     public Center(String name, PostalAddress address, CenterType type) {
         this.name = name.trim();
         this.address = address;
         this.type = type;
+        //Add empty stats
+        for (EventType event : EventType.values())
+            stats.put(event, new Stat(event));
     }
 
     /**
@@ -128,10 +132,7 @@ public class Center {
      * @param event The event ot update the stat with
      */
     public void updateStat(Event event) {
-        if (!stats.containsKey(event.getType()))
-            stats.put(event.getType(), new Stat(event.getType(), event.getIntensity()));
-        else
-            stats.get(event.getType()).update(event.getIntensity());
+        stats.get(event.getType()).update(event.getIntensity());
     }
 
     /**
