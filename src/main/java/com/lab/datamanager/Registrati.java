@@ -44,7 +44,7 @@ public class Registrati extends Data{
             cw.appendRow(cittadino.toRow());
             filew.close();
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -66,7 +66,7 @@ public class Registrati extends Data{
 
             filer.close();
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 

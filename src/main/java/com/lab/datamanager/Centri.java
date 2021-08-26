@@ -57,7 +57,7 @@ public class Centri extends Data {
             writer.appendRow(center.toRow());
             fw.close();
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -86,7 +86,7 @@ public class Centri extends Data {
 
             fr.close();
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 

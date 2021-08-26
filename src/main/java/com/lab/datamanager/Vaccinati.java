@@ -31,7 +31,7 @@ public class Vaccinati extends Data {
                 fl.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -54,7 +54,7 @@ public class Vaccinati extends Data {
 
             fr.close();
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -72,7 +72,7 @@ public class Vaccinati extends Data {
             fw.close();
 
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -89,7 +89,7 @@ public class Vaccinati extends Data {
             cw.appendRow(info.toRow());
             fw.close();
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
