@@ -74,7 +74,9 @@ public class EventReportPage extends Page {
             if (type.validate()) {
                 if (Cittadini.inserisciEventiAvversi(user.getuID(), eventFromUI(), center.getName())) {
                     reset();
-                    ((CenterInfoPage) PagesManager.open(PagesManager.PageType.CENTERINFO)).showEventAddedNotification();
+                    CenterInfoPage page = (CenterInfoPage) PagesManager.open(PagesManager.PageType.CENTERINFO);
+                    page.updateStats();
+                    page.showEventAddedNotification();
                 } else
                     eventAddedNotification.fireEvent(new JFXSnackbar.SnackbarEvent(eventAddedNotificationLayout, SNACKBARDURATION));
             }

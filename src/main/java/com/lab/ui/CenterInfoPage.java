@@ -89,7 +89,7 @@ public class CenterInfoPage extends Page {
         comune.setText(address.getDistrict());
         province.setText(address.getProvince());
         cap.setText(address.getCap().toString());
-        setStats();
+        updateStats();
     }
 
     public void setUser(User user) {
@@ -107,8 +107,10 @@ public class CenterInfoPage extends Page {
         eventAddedNotification.fireEvent(new JFXSnackbar.SnackbarEvent(eventAddedNotificationLayout, SNACKBARDURATION));
     }
 
-    //Sets the stats bars and global stat
-    private void setStats() {
+    /**
+     * Updates the stats indicators with current data from the currently set center.
+     */
+    public void updateStats() {
         Stat global = center.getStat("Global");
         long reports = global.getReports();
         if (reports > 0)
