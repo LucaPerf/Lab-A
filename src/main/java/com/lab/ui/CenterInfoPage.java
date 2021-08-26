@@ -1,9 +1,7 @@
 package com.lab.ui;
 
 import com.jfoenix.controls.*;
-import com.lab.data.Center;
-import com.lab.data.PostalAddress;
-import com.lab.data.User;
+import com.lab.data.*;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
@@ -30,6 +28,23 @@ public class CenterInfoPage extends Page {
     private JFXTextField cap;
     @FXML
     private JFXButton report;
+    //Stats
+    @FXML
+    private StatField globalController;
+    @FXML
+    private StatField headacheController;
+    @FXML
+    private StatField feverController;
+    @FXML
+    private StatField artpainController;
+    @FXML
+    private StatField linfController;
+    @FXML
+    private StatField tachController;
+    @FXML
+    private StatField hyperController;
+    @FXML
+    private JFXTextField globalStat;
 
     private JFXSnackbar eventAddedNotification;
     private JFXSnackbarLayout eventAddedNotificationLayout = new JFXSnackbarLayout("Evento segnalato con successo");
@@ -67,7 +82,6 @@ public class CenterInfoPage extends Page {
 
     public void setCenter(Center center) {
         this.center = center;
-
         name.setText(center.getName());
         type.setText(center.getType().toString());
         PostalAddress address = center.getAddress();
@@ -75,6 +89,7 @@ public class CenterInfoPage extends Page {
         comune.setText(address.getDistrict());
         province.setText(address.getProvince());
         cap.setText(address.getCap().toString());
+        setStats();
     }
 
     public void setUser(User user) {
@@ -90,5 +105,18 @@ public class CenterInfoPage extends Page {
      */
     public void showEventAddedNotification() {
         eventAddedNotification.fireEvent(new JFXSnackbar.SnackbarEvent(eventAddedNotificationLayout, SNACKBARDURATION));
+    }
+
+    //Sets the stats bars and global stat
+    private void setStats()
+    {
+        globalStat.setText("n utenti hanno valutato questo centro con una media di 3.0");
+
+        artpainController.setStat(center.getStat(EventType.ARTPAIN));
+        headacheController.setStat(center.getStat(EventType.HEADACHE));
+        feverController.setStat(center.getStat(EventType.FEVER));
+        linfController.setStat(center.getStat(EventType.LINF));
+        tachController.setStat(center.getStat(EventType.TACH));
+        hyperController.setStat(center.getStat(EventType.HYPER));
     }
 }

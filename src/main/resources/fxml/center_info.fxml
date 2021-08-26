@@ -29,6 +29,24 @@
                 <JFXTextField fx:id="comune" disable="true" promptText="Comune" styleClass="text-field-info"/>
                 <JFXTextField fx:id="province" disable="true" promptText="Provincia" styleClass="text-field-info"/>
                 <JFXTextField fx:id="cap" disable="true" promptText="CAP" styleClass="text-field-info"/>
+                <JFXTextField fx:id="globalStat" disable="true" promptText="Segnalazioni" styleClass="text-field-info"/>
+                <GridPane VBox.vgrow="ALWAYS" hgap="64" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                    </rowConstraints>
+                    <fx:include source="stat_field.fxml" fx:id="linf" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <fx:include source="stat_field.fxml" fx:id="tach" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <fx:include source="stat_field.fxml" fx:id="hyper" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <fx:include source="stat_field.fxml" fx:id="artpain" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <fx:include source="stat_field.fxml" fx:id="fever" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <fx:include source="stat_field.fxml" fx:id="headache" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                </GridPane>
                 <padding>
                     <Insets bottom="12.0" left="12.0" right="12.0" top="24.0"/>
                 </padding>
