@@ -62,7 +62,7 @@ public class Stat {
      * @return The normalized average of this stat
      */
     public double getAverageNormalized() {
-        return MAX_VALUE / average;
+        return  average/MAX_VALUE;
     }
 
     /**
