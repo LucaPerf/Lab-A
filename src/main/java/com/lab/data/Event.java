@@ -45,4 +45,25 @@ public class Event {
         this.report = report.trim();
         this.type = type;
     }
+
+    /**
+     * Creates a new event from a CSV row
+     *
+     * @param row The row to get data from
+     */
+    public Event(String[] row) {
+        type = EventType.fromString(row[0]);
+        intensity = Integer.parseInt(row[1]);
+        report = row[2];
+    }
+
+    /**
+     * @return A CSV row representing this object, mapped as follows:<br>
+     * 0: {@link #type}<br>
+     * 1: {@link #intensity}<br>
+     * 2: {@link #report}
+     */
+    public String[] toRow() {
+        return new String[]{type.toString(), intensity.toString(), report};
+    }
 }

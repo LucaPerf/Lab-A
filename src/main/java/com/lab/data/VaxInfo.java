@@ -1,6 +1,7 @@
 package com.lab.data;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -74,9 +75,8 @@ public class VaxInfo {
         //Add events: 3 properties per event (type ,intensity ,report)
         int offset = 6;
         for (Event event : events.values()) {
-            info[offset] = event.getType().toString();
-            info[offset + 1] = event.getIntensity().toString();
-            info[offset + 2] = event.getReport();
+            String[] row = event.toRow();
+            System.arraycopy(row, 0, info, offset, row.length);
             offset += 3;
         }
         return info;
@@ -108,9 +108,7 @@ public class VaxInfo {
         uID = Integer.parseInt(row[5]);
         //Get events: each event has 3 properties
         for (int i = 6; i < row.length; i += 3) {
-            Event event = new Event(Integer.parseInt(row[i + 1]),
-                    row[i + 2],
-                    EventType.fromString(row[i]));
+            Event event = new Event(Arrays.copyOfRange(row, i, i + 3));
             events.put(event.getType(), event);
         }
     }
