@@ -74,6 +74,7 @@ public class UserMainPage extends Page {
         exit.setOnAction(event ->
         {
             PagesManager.open(PagesManager.PageType.AREASELECTION);
+            logoutWarning.close();
             reset();
         });
         cancel.setOnAction(event -> logoutWarning.close());
