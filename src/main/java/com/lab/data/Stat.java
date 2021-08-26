@@ -11,17 +11,17 @@ public class Stat {
      * The maximum value of a stat
      */
     public final static int MAX_VALUE = 5;
-    private EventType type;
+    private String name;
     private float average;
     private long reports;
 
     /**
      * Creates a new empty stat of <code>type</code>. Reports and average will be set to 0.
      *
-     * @param type The type of stat
+     * @param name The type of stat
      */
-    public Stat(EventType type) {
-        this.type = type;
+    public Stat(String name) {
+        this.name = name;
         average = 0;
         reports = 0;
     }
@@ -30,12 +30,12 @@ public class Stat {
      * Creates a new stat from a CSV row.
      *
      * @param row The row to get the data from mapped as follows:<br>
-     *            * 0: {@link #type}<br>
+     *            * 0: {@link #name}<br>
      *            * 1: {@link #average}<br>
      *            * 2: {@link #reports}<br>
      */
     public Stat(String[] row) {
-        type = EventType.fromString(row[0]);
+        name = row[0];
         average = Float.parseFloat(row[1]);
         reports = Long.parseLong(row[2]);
     }
@@ -62,7 +62,7 @@ public class Stat {
      * @return The normalized average of this stat
      */
     public double getAverageNormalized() {
-        return  average/MAX_VALUE;
+        return average / MAX_VALUE;
     }
 
     /**
@@ -75,17 +75,17 @@ public class Stat {
     /**
      * @return The type of event represented by this stat
      */
-    public EventType getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
     /**
      * @return A CSV row representation of this object,mapped as follows:<br>
-     * 0: {@link #type}<br>
+     * 0: {@link #name}<br>
      * 1: {@link #average}<br>
      * 2: {@link #reports}<br>
      */
     public String[] toRow() {
-        return new String[]{type.toString(), Float.toString(average), Long.toString(reports)};
+        return new String[]{name, Float.toString(average), Long.toString(reports)};
     }
 }

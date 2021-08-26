@@ -24,7 +24,7 @@ public class StatField {
      * @param stat The stat to get the values from
      */
     public void setStat(Stat stat) {
-        name.setText(stat.getType().toString());
+        name.setText(stat.getName());
         value.setText(String.format("%.1f", stat.getAverage()));
         bar.setProgress(stat.getAverageNormalized());
     }

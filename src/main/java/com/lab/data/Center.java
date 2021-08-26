@@ -14,7 +14,7 @@ public class Center {
     private String name;
     private PostalAddress address;
     private CenterType type;
-    private HashMap<EventType, Stat> stats = new HashMap<>((int) Math.ceil(EventType.values().length / 0.8) + 1);
+    private HashMap<String, Stat> stats = new HashMap<>((int) Math.ceil(EventType.values().length / 0.8) + 1);
 
     /**
      * @return The name of this center
@@ -58,9 +58,11 @@ public class Center {
         this.name = name.trim();
         this.address = address;
         this.type = type;
-        //Add empty stats
+        //Add global stat
+        stats.put("Global", new Stat("Global"));
+        //Add per-event stats
         for (EventType event : EventType.values())
-            stats.put(event, new Stat(event));
+            stats.put(event.toString(), new Stat(event.toString()));
     }
 
     /**
@@ -86,7 +88,7 @@ public class Center {
         //Add stats
         for (int i = 6; i < row.length; i += 3) {
             Stat s = new Stat(Arrays.copyOfRange(row, i, i + 3));
-            stats.put(s.getType(), s);
+            stats.put(s.getName(), s);
         }
     }
 
@@ -128,19 +130,24 @@ public class Center {
     }
 
     /**
-     * Updates the stat of <code>type</code>. If no such stat exists, a new one is created.
+     * Updates the stat of with the new <code>event</code>. The global stat will also be updated.
      *
      * @param event The event ot update the stat with
      */
     public void updateStat(Event event) {
-        stats.get(event.getType()).update(event.getIntensity());
+        float value = event.getIntensity();
+        String key = event.getType().toString();
+        //Update global stat
+        stats.get("Global").update(value);
+        //Update partial stat
+        stats.get(key).update(value);
     }
 
     /**
-     * @param type The type of stat to return
+     * @param name The type of stat to return
      * @return A stat of <code>type</code> or <code>null</code> if no such stat exists
      */
-    public Stat getStat(EventType type) {
-        return stats.getOrDefault(type, null);
+    public Stat getStat(String name) {
+        return stats.getOrDefault(name, null);
     }
 }

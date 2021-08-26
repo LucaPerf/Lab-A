@@ -108,15 +108,19 @@ public class CenterInfoPage extends Page {
     }
 
     //Sets the stats bars and global stat
-    private void setStats()
-    {
-        globalStat.setText("n utenti hanno valutato questo centro con una media di 3.0");
+    private void setStats() {
+        Stat global = center.getStat("Global");
+        long reports = global.getReports();
+        if (reports > 0)
+            globalStat.setText(reports + (global.getReports() == 1 ? " utente ha" : " utenti hanno") + " valutato questo centro con una media di " + String.format("%.1f", global.getAverage()));
+        else
+            globalStat.setText("Nessuna evento avverso segnalato");
 
-        artpainController.setStat(center.getStat(EventType.ARTPAIN));
-        headacheController.setStat(center.getStat(EventType.HEADACHE));
-        feverController.setStat(center.getStat(EventType.FEVER));
-        linfController.setStat(center.getStat(EventType.LINF));
-        tachController.setStat(center.getStat(EventType.TACH));
-        hyperController.setStat(center.getStat(EventType.HYPER));
+        artpainController.setStat(center.getStat(EventType.ARTPAIN.toString()));
+        headacheController.setStat(center.getStat(EventType.HEADACHE.toString()));
+        feverController.setStat(center.getStat(EventType.FEVER.toString()));
+        linfController.setStat(center.getStat(EventType.LINF.toString()));
+        tachController.setStat(center.getStat(EventType.TACH.toString()));
+        hyperController.setStat(center.getStat(EventType.HYPER.toString()));
     }
 }
