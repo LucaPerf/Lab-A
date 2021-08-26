@@ -112,7 +112,7 @@ public class CenterInfoPage extends Page {
         Stat global = center.getStat("Global");
         long reports = global.getReports();
         if (reports > 0)
-            globalStat.setText(reports + (global.getReports() == 1 ? " utente ha" : " utenti hanno") + " valutato questo centro con una media di " + String.format("%.1f", global.getAverage()));
+            globalStat.setText("Il centro ha ricevuto " + reports + (reports == 1 ? " segnalazione " : " segnalazioni") + " con una media di " + String.format("%.1f", global.getAverage()));
         else
             globalStat.setText("Nessuna evento avverso segnalato");
 
