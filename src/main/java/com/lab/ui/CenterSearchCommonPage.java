@@ -110,13 +110,7 @@ public class CenterSearchCommonPage extends Page {
      */
     public void setupCentersList() {
         centers.getItems().clear();
-        int i = 0;
-        for (Center center : Centri.getCenters().values()) {
-            if (i < 25) {
-                centers.getItems().add(0,center);
-                i++;
-            } else return;
-        }
+        centers.getItems().addAll(Centri.getRecent(25));
     }
 
     private CenterType getTypeFromUI() {

@@ -133,4 +133,21 @@ public class Centri extends Data {
         }
         return list;
     }
+
+    /**
+     * @param n The number of centers to add to the list. The order is guaranteed by the {@link LinkedListMultimap} implementation
+     * @return A {@link LinkedList} containing the last <code>n</code> registered centers
+     */
+    public static LinkedList<Center> getRecent(int n) {
+        LinkedList<Center> list = new LinkedList<>();
+
+        int i = 0;
+        for (Center center : centers.values()) {
+            if (i < n) {
+                list.addFirst(center);
+                i++;
+            } else break;
+        }
+        return list;
+    }
 }
