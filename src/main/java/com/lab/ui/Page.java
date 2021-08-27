@@ -37,7 +37,7 @@ abstract public class Page {
     /**
      * How long snackbars will be displayed before being hidden
      */
-    protected static final javafx.util.Duration SNACKBARDURATION = Duration.seconds(4);
+    protected static final javafx.util.Duration NOTIFICATION_TIMEOUT = Duration.seconds(4);
 
     /**
      * Common constructor called from all subclasses

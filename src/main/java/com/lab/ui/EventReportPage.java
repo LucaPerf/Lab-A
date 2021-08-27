@@ -78,7 +78,7 @@ public class EventReportPage extends Page {
                     page.updateStats();
                     page.showEventAddedNotification();
                 } else
-                    eventAddedNotification.fireEvent(new JFXSnackbar.SnackbarEvent(eventAddedNotificationLayout, SNACKBARDURATION));
+                    eventAddedNotification.fireEvent(new JFXSnackbar.SnackbarEvent(eventAddedNotificationLayout, NOTIFICATION_TIMEOUT));
             }
         });
     }

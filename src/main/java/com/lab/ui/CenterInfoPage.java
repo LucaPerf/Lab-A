@@ -104,7 +104,7 @@ public class CenterInfoPage extends Page {
      * Shows the event added notification {@link JFXSnackbar}
      */
     public void showEventAddedNotification() {
-        eventAddedNotification.fireEvent(new JFXSnackbar.SnackbarEvent(eventAddedNotificationLayout, SNACKBARDURATION));
+        eventAddedNotification.fireEvent(new JFXSnackbar.SnackbarEvent(eventAddedNotificationLayout, NOTIFICATION_TIMEOUT));
     }
 
     /**
