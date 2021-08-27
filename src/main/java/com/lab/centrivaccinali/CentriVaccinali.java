@@ -52,7 +52,7 @@ public class CentriVaccinali extends Application {
      * @param center The center to add
      */
     public static void registraCentroVaccinale(Center center) {
-        Centri.saveCenter(center);
+        Centri.addCenter(center);
     }
 
     /**
