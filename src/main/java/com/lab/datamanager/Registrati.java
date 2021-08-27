@@ -17,7 +17,7 @@ public class Registrati extends Data{
     private Registrati(){}
 
     private static File file = new File(dataDirectory,"Cittadini.csv");
-    private static HashMap<String, User> users = new LinkedHashMap<>();
+    private static HashMap<String, User> users = new HashMap<>();
 
     /**
      * Add a citizen to the LinkedHahMap, using userID as key
