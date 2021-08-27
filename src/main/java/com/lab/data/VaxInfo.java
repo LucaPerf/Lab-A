@@ -17,7 +17,7 @@ public class VaxInfo {
     private String ccf;
     private LocalDate date;
     private VaxType type;
-    private Integer uID;
+    private Long uID;
     //Since we know the number of enums and the default load factor, we can calculate the exact map size
     private HashMap<EventType, Event> events = new HashMap<>((int) Math.ceil(EventType.values().length / 0.8) + 1);
 
@@ -31,7 +31,7 @@ public class VaxInfo {
      * @param type    the vaccination type
      * @param uID     the unique vaccination id
      */
-    public VaxInfo(String name, String surname, String ccf, LocalDate date, VaxType type, Integer uID) {
+    public VaxInfo(String name, String surname, String ccf, LocalDate date, VaxType type, Long uID) {
         this.name = name.trim();
         this.surname = surname.trim();
         this.ccf = ccf.trim();
@@ -45,7 +45,7 @@ public class VaxInfo {
      *
      * @return the unique vaccination ID
      */
-    public Integer getuID() {
+    public Long getuID() {
 
         return uID;
     }
@@ -105,7 +105,7 @@ public class VaxInfo {
         ccf = row[2];
         date = LocalDate.parse(row[3]);
         type = VaxType.fromString(row[4]);
-        uID = Integer.parseInt(row[5]);
+        uID = Long.parseLong(row[5]);
         //Get events: each event has 3 properties
         for (int i = 6; i < row.length; i += 3) {
             Event event = new Event(Arrays.copyOfRange(row, i, i + 3));
