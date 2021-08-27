@@ -14,14 +14,13 @@ public class User {
     private String email;
 
     /**
-     *
      * @return The 16 bit unique vaccination identifier
      */
-    public Integer getuID() {
+    public Long getuID() {
         return uID;
     }
 
-    private Integer uID;
+    private Long uID;
 
 
     /**
@@ -51,7 +50,7 @@ public class User {
      * @param password "The user password"
      * @param uID      "The unique id (16 bit) provided by the center"
      */
-    public User(String name, String surname, String ccf, String email, String userID, String password, Integer uID) {
+    public User(String name, String surname, String ccf, String email, String userID, String password, Long uID) {
         this.name = name.trim();
         this.surname = surname.trim();
         this.ccf = ccf.trim();
@@ -82,7 +81,7 @@ public class User {
         surname = row[3];
         ccf = row[4];
         email = row[5];
-        uID = Integer.parseInt(row[6]);
+        uID = Long.parseLong(row[6]);
     }
 
     /**

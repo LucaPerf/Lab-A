@@ -92,7 +92,7 @@ public class UserRegPage extends Page {
 
     //Creates a new User object from the UI fields
     private User userFromUI() {
-        return new User(name.getText(), surname.getText(), ccf.getText(), email.getText(), username.getText(), password.getText(), Integer.parseInt(uid.getText()));
+        return new User(name.getText(), surname.getText(), ccf.getText(), email.getText(), username.getText(), password.getText(), Long.parseLong(uid.getText()));
     }
 
     private boolean isDataValid() {

@@ -19,7 +19,7 @@ public class Vaccinati extends Data {
     private Vaccinati() {
     }
 
-    public static LinkedHashMap<Integer, VaxInfo> vaxinfo = new LinkedHashMap<>();
+    public static LinkedHashMap<Long, VaxInfo> vaxinfo = new LinkedHashMap<>();
 
     /**
      * Checks if vaccination files exist and creates them.
@@ -49,7 +49,7 @@ public class Vaccinati extends Data {
             while (iter.hasNext()) {
                 String[] row = iter.next();
 
-                vaxinfo.put(Integer.parseInt(row[5]), new VaxInfo(row));
+                vaxinfo.put(Long.parseLong(row[5]), new VaxInfo(row));
             }
 
             fr.close();
@@ -103,7 +103,7 @@ public class Vaccinati extends Data {
      *
      * @param uID Unique id associated with a vaccinated person
      */
-    public static VaxInfo find(Integer uID) {
+    public static VaxInfo find(Long uID) {
         return vaxinfo.get(uID);
     }
 }

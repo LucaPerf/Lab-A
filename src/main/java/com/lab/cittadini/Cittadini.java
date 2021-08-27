@@ -64,7 +64,7 @@ public class Cittadini {
      * @param centerName The name of the center to add its data to the file
      * @return Fasle if the user hasn't been found or an event of the same type has already been reported
      */
-    public static boolean inserisciEventiAvversi(Integer uID, Event event, String centerName) {
+    public static boolean inserisciEventiAvversi(Long uID, Event event, String centerName) {
         Vaccinati.load(centerName);
         VaxInfo vi = Vaccinati.find(uID);
 

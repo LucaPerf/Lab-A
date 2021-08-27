@@ -41,7 +41,7 @@ public class VaxInfo {
     }
 
     /**
-     * Returns the 16 bit unique vaccination ID associated with the person
+     * Returns the 16 digits unique vaccination ID associated with the person
      *
      * @return the unique vaccination ID
      */
