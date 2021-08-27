@@ -32,22 +32,9 @@ public class Centri extends Data {
      */
 
     //Adds center to the centers LinkedHashMap
-    private static void addCenter(Center center) {
-
+    public static void addCenter(Center center) {
         centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
-    }
 
-
-    /**
-     * Writes a center to the file, in CSV format
-     *
-     * @param center The center to write
-     */
-    public static void saveCenter(Center center) {
-        //Add to the HashMap
-        addCenter(center);
-
-        //Write to file
         try {
             //Open file
             FileWriter fw = new FileWriter(file, true);
@@ -59,6 +46,27 @@ public class Centri extends Data {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * Writes a center to the file, in CSV format
+     *
+     */
+    public static void saveCenter() {
+        try {
+            FileWriter fw = new FileWriter(file);
+            CsvWriter cw = CsvWriter.dsl().to(fw);
+
+            for (Center center : centers.values())
+                cw.appendRow(center.toRow());
+
+            fw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
