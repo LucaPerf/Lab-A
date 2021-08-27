@@ -89,7 +89,7 @@ abstract public class Page {
      *
      * @param field The node to be reset
      */
-    protected static void resetField(JFXComboBox field) {
+    protected static <T> void resetField(JFXComboBox<T> field) {
         field.getSelectionModel().clearSelection();
         field.resetValidation();
     }
