@@ -112,7 +112,7 @@ public class VaxRegPage extends Page {
     }
 
     private VaxInfo infoFromUI() {
-        return new VaxInfo(name.getText(), surname.getText(), ccf.getText(), date.getValue(), type.getSelectionModel().getSelectedItem(), Integer.parseInt(uID.getText()));
+        return new VaxInfo(name.getText(), surname.getText(), ccf.getText(), date.getValue(), type.getSelectionModel().getSelectedItem(), Long.parseLong(uID.getText()));
     }
 
     private boolean isDataValid() {
