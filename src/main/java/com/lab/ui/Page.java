@@ -31,9 +31,9 @@ abstract public class Page {
      */
     protected RegexValidator ccfValidator = new RegexValidator("Codice fiscale non valido");
     /**
-     * This validator checks if the unique vaccination id is valid (value is less than 2^16)
+     * This validator checks if the unique vaccination id is valid (16 numeric digits))
      */
-    protected UIDValidator uIDValidator = new UIDValidator("Valore massimo 65535");
+    protected RegexValidator uIDValidator = new RegexValidator("Sono richieste 16 cifre numeriche");
     /**
      * How long snackbars will be displayed before being hidden
      */
@@ -43,6 +43,7 @@ abstract public class Page {
      * Common constructor called from all subclasses
      */
     public Page() {
+        uIDValidator.setRegexPattern("^[0-9]{16}$");
         capValidator.setRegexPattern("^[0-9]{5}$");
         ccfValidator.setRegexPattern("^[A-Z]{6}[A-Za-z0-9]{3}[0-9]{2}[A-Za-z0-9]{4}[A-Za-z]{1}$");
     }
