@@ -65,10 +65,12 @@ public class Cittadini {
      * @return Fasle if the user hasn't been found or an event of the same type has already been reported
      */
     public static boolean inserisciEventiAvversi(Long uID, Event event, Center center) {
+        Vaccinati.load(center.getName());
         VaxInfo vi = Vaccinati.find(uID);
 
         if (vi != null && vi.addEvent(event)) {
             center.updateStat(event);
+            Vaccinati.save(center.getName());
             Centri.saveCenter();
             return true;
         }
