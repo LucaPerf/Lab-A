@@ -72,7 +72,7 @@ public class EventReportPage extends Page {
 
         report.setOnAction(event -> {
             if (type.validate()) {
-                if (Cittadini.inserisciEventiAvversi(user.getuID(), eventFromUI(), center.getName())) {
+                if (Cittadini.inserisciEventiAvversi(user.getuID(), eventFromUI(), center)) {
                     reset();
                     CenterInfoPage page = (CenterInfoPage) PagesManager.open(PagesManager.PageType.CENTERINFO);
                     page.updateStats();
