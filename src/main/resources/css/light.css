@@ -23,7 +23,6 @@
     -fx-min-height: 36.0px;
     -fx-min-width: 64.0px;
     -fx-padding: 0.0px 16.0px 0.0px 16.0px;
-    -fx-font-size: 14.0px;
     -jfx-button-type: RAISED;
     -fx-background-color: -primary-color;
     -fx-text-fill: -text-on-primary;
@@ -34,7 +33,6 @@
     -fx-min-height: 36.0px;
     -fx-min-width: 64.0px;
     -fx-padding: 0.0px 16.0px 0.0px 16.0px;
-    -fx-font-size: 14.0px;
     -jfx-button-type: FLAT;
     -fx-text-fill: -primary-color;
     -jfx-disable-visual-focus: true;
@@ -60,16 +58,14 @@
 //Text field
 //----------
 
-.text-field
+.text-field, .text-field-info:disabled, .text-area
 {
     -jfx-label-float: true;
 }
 
 .text-field-info:disabled
 {
-    -fx-font-size:16;
     -fx-prompt-text-fill: -grey-500;
-    -jfx-label-float: true;
     -fx-opacity:1.0;
 }
 .text-field-info:disabled .input-line
@@ -194,18 +190,20 @@
 {
     -fx-background-color: WHITE;
     -fx-border-color: -grey-400;
-    -fx-border-radius: 16 0 0 16;
+    -fx-border-radius: 24 0 0 24;
     -fx-border-width: 1 0 1 1;
     -fx-padding: 0 8 0 16;
+    -fx-min-height:48;
 }
 
 .button-search-rounded
 {
     -fx-background-radius:0 100 100 0;
-    -fx-border-radius:0 100 100 0;
+    -fx-border-radius:0 24 24 0;
     -fx-border-color: -grey-400;
     -fx-padding: 1;
     -fx-border-width:1 1 1 0;
+    -fx-min-height:48;
 }
 
 //-----
@@ -245,7 +243,6 @@
 
 .jfx-tool-bar Label {
     -fx-text-fill: BLACK;
-    -fx-font-size: 20.0;
 }
 
 .jfx-tool-bar .jfx-rippler {
@@ -273,6 +270,22 @@
 .caption
 {
     -fx-font-size:12;
+}
+.subtitle1, .jfx-snackbar-toast, .text-field, .text-field-info:disabled, .text-area, .combo-box, .jfx-list-view, .search-bar
+{
+    -fx-font-size:16;
+}
+.headline6, .jfx-tool-bar Label
+{
+    -fx-font-size:20;
+}
+.body2, .chip-filter
+{
+    -fx-font-size:14;
+}
+.button, .button-contained, .button-text
+{
+    -fx-font-size:14;
 }
 
 //--------

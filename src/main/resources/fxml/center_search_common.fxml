@@ -23,12 +23,12 @@
         <JFXButton fx:id="searchButton" alignment="CENTER" minHeight="32.0" minWidth="40.0" prefWidth="40.0"
                    styleClass="button-search-rounded">
             <graphic>
-                <FontIcon iconColor="#3f51b5" iconLiteral="mdrmz-search" iconSize="20" textAlignment="CENTER"/>
+                <FontIcon iconColor="#3f51b5" iconLiteral="mdrmz-search" iconSize="24" textAlignment="CENTER"/>
             </graphic>
         </JFXButton>
     </HBox>
     <HBox fx:id="filtersBox" alignment="CENTER_LEFT" spacing="8.0">
-        <Label text="Cerca per"/>
+        <Label text="Cerca per" styleClass="subtitle1"/>
         <JFXGroupToggleButton fx:id="name" selected="true" styleClass="chip-filter" text="Nome" textAlignment="CENTER">
             <toggleGroup>
                 <ToggleGroup fx:id="searchModeGroup"/>
@@ -37,7 +37,7 @@
         <JFXGroupToggleButton fx:id="comune" styleClass="chip-filter" text="Comune" textAlignment="CENTER"
                               toggleGroup="$searchModeGroup"/>
         <HBox fx:id="typeFiltersBox" alignment="CENTER" spacing="8.0">
-            <Label text="Tipo"/>
+            <Label text="Tipo" styleClass="subtitle1"/>
             <JFXGroupToggleButton selected="true" fx:id="aziendale" styleClass="chip-filter" text="Aziendale"
                                   textAlignment="CENTER">
                 <toggleGroup>
