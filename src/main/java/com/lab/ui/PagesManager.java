@@ -130,7 +130,7 @@ public class PagesManager {
      * @param stage The stage to add the scene to
      */
     public static void openEmptyScene(Stage stage) {
-        scene = new Scene(new HBox(), bounds.getWidth() * 0.5, bounds.getHeight() * 0.5);
+        scene = new Scene(new HBox(), bounds.getWidth() * 0.6, bounds.getHeight() * 0.6);
         stage.setScene(scene);
     }
 
