@@ -78,9 +78,6 @@ public class UserMainPage extends Page {
             reset();
         });
         cancel.setOnAction(event -> logoutWarning.close());
-
-
-        reset();
     }
 
     /**

@@ -36,7 +36,7 @@ public class CenterActionsPage extends Page {
     protected void initialize() {
         addCenter.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERREGISTRATION));
 
-        addVax.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERSELECTION));
+        addVax.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERSELECTION).reset());
 
         back.setOnMouseClicked(actionEvent -> PagesManager.open(PagesManager.PageType.AREASELECTION));
     }
