@@ -1,16 +1,13 @@
 package com.lab.ui;
 
-import com.jfoenix.controls.JFXRippler;
+import com.jfoenix.controls.*;
 import javafx.fxml.FXML;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
 import com.lab.data.Center;
 import com.lab.data.CenterType;
 import com.lab.data.PostalAddress;
 import com.lab.centrivaccinali.CentriVaccinali;
 import javafx.scene.Parent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
@@ -21,7 +18,7 @@ import java.io.IOException;
  */
 public class CenterRegPage extends Page {
     @FXML
-    private BorderPane root;
+    private StackPane root;
     @FXML
     private JFXButton register;
     @FXML
@@ -39,6 +36,9 @@ public class CenterRegPage extends Page {
     @FXML
     private JFXTextField cap;
 
+    JFXSnackbar centerAddedNotification;
+    JFXSnackbarLayout centerAddedNotificationLayout = new JFXSnackbarLayout("Esiste gi\u00E0 un centro con lo steso nome");
+
     /**
      * {@inheritDoc}
      */
@@ -52,6 +52,7 @@ public class CenterRegPage extends Page {
      */
     @FXML
     protected void initialize() {
+        centerAddedNotification = new JFXSnackbar(root);
         //Set validators
         name.getValidators().add(requiredFieldValidator);
         type.getValidators().add(requiredFieldValidator);
@@ -70,7 +71,6 @@ public class CenterRegPage extends Page {
                     PagesManager.openErrorPage(e);
                     return;
                 }
-                reset();
                 PagesManager.open(PagesManager.PageType.CENTERACTIONS);
             }
         });
