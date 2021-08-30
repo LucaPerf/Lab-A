@@ -24,10 +24,15 @@ public class Cittadini {
      * Add a new user and save its data into "Cittadini_Registrati.csv"
      *
      * @param user The user to add
+     * @return True if and only if the user doesn't exist and was successfully added
      * @throws IOException If the user could not be saved to the file for any reason
      */
-    public static void registraCittadino(User user) throws IOException {
-        Registrati.add(user);
+    public static boolean registraCittadino(User user) throws IOException {
+        if (!Registrati.contains(user)) {
+            Registrati.add(user);
+            return true;
+        }
+        return false;
     }
 
     /**

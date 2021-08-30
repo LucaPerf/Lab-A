@@ -6,6 +6,7 @@ import com.lab.data.User;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
+import org.checkerframework.checker.units.qual.A;
 
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public class UserRegPage extends Page {
     private JFXRippler back;
 
     private JFXSnackbar userRegisteredNotification;
-    private JFXSnackbarLayout userRegisterredNotificationLayout = new JFXSnackbarLayout("Un utente con lo stesso nome esiste gi\u00E0");
+    private JFXSnackbarLayout userRegisteredNotificationLayout = new JFXSnackbarLayout("Un utente con lo stesso nome esiste gi\u00E0");
 
     /**
      * {@inheritDoc}
@@ -66,15 +67,19 @@ public class UserRegPage extends Page {
         register.setOnAction(actionEvent ->
         {
             if (isDataValid()) {
+                boolean registered;
                 try {
-                    Cittadini.registraCittadino(userFromUI());
+                    registered = Cittadini.registraCittadino(userFromUI());
                 } catch (IOException e) {
                     ErrorPage page = (ErrorPage) PagesManager.open(PagesManager.PageType.ERRORPAGE);
                     page.setError(e);
                     return;
                 }
-                reset();
-                PagesManager.open(PagesManager.PageType.USERMAIN);
+                if (registered) {
+                    reset();
+                    ((UserMainPage) PagesManager.open(PagesManager.PageType.USERMAIN)).showUserRegisteredNotification();
+                } else
+                    userRegisteredNotification.fireEvent(new JFXSnackbar.SnackbarEvent(userRegisteredNotificationLayout, NOTIFICATION_TIMEOUT));
             }
         });
 
