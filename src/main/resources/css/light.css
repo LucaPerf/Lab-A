@@ -147,6 +147,15 @@
     -fx-background-color: TRANSPARENT;
 }
 
+//-----------
+//Scroll pane
+//-----------
+
+.scroll-pane .viewport
+{
+    -fx-background-color:TRANSPARENT;
+}
+
 //----------
 //Scroll bar
 //----------
