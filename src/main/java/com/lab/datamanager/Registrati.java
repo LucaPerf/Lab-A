@@ -71,4 +71,12 @@ public class Registrati extends Data {
     public static User find(String username) {
         return users.get(username);
     }
+
+    /**
+     * @param user The user to check the existence of
+     * @return True if and only if a user with {@link User#getUserID()} exists. This method uses {@link Map#containsKey(Object)}
+     */
+    public static boolean contains(User user) {
+        return users.containsKey(user.getUserID());
+    }
 }
