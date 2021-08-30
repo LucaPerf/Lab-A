@@ -65,13 +65,20 @@ public class CenterRegPage extends Page {
 
         register.setOnAction(actionEvent -> {
             if (isDataValid()) {
+                boolean centerAdded;
                 try {
-                    CentriVaccinali.registraCentroVaccinale(centerFromUI());
+                    centerAdded = CentriVaccinali.registraCentroVaccinale(centerFromUI());
                 } catch (IOException e) {
                     PagesManager.openErrorPage(e);
                     return;
                 }
-                PagesManager.open(PagesManager.PageType.CENTERACTIONS);
+
+                if (centerAdded) {
+                    reset();
+                    CenterActionsPage page = (CenterActionsPage) PagesManager.open(PagesManager.PageType.CENTERACTIONS);
+                    page.showCenterAddedNotification();
+                } else
+                    centerAddedNotification.fireEvent(new JFXSnackbar.SnackbarEvent(centerAddedNotificationLayout, NOTIFICATION_TIMEOUT));
             }
         });
 

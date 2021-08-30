@@ -57,13 +57,18 @@ public class CentriVaccinali extends Application {
     }
 
     /**
-     * Add a new center into "CentriVaccinali.csv"
+     * Add a new center into "CentriVaccinali.csv" if no such center exists
      *
      * @param center The center to add
+     * @return True if and only if the center doesn't exist and is added correctly
      * @throws IOException If the center could not be added to the file
      */
-    public static void registraCentroVaccinale(Center center) throws IOException {
-        Centri.add(center);
+    public static boolean registraCentroVaccinale(Center center) throws IOException {
+        if (!Centri.contains(center)) {
+            Centri.add(center);
+            return true;
+        }
+        return false;
     }
 
     /**
