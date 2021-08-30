@@ -1,14 +1,11 @@
 package com.lab.ui;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXRippler;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.lab.cittadini.Cittadini;
 import com.lab.data.User;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
@@ -19,7 +16,7 @@ import java.io.IOException;
  */
 public class UserRegPage extends Page {
     @FXML
-    private BorderPane root;
+    private StackPane root;
     @FXML
     private JFXTextField username;
     @FXML
@@ -39,6 +36,9 @@ public class UserRegPage extends Page {
     @FXML
     private JFXRippler back;
 
+    private JFXSnackbar userRegisteredNotification;
+    private JFXSnackbarLayout userRegisterredNotificationLayout = new JFXSnackbarLayout("Un utente con lo stesso nome esiste gi\u00E0");
+
     /**
      * {@inheritDoc}
      */
@@ -52,6 +52,7 @@ public class UserRegPage extends Page {
      */
     @Override
     protected void initialize() {
+        userRegisteredNotification = new JFXSnackbar(root);
         //Add validators
         username.getValidators().add(requiredFieldValidator);
         password.getValidators().add(requiredFieldValidator);

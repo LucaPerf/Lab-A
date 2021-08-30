@@ -40,6 +40,10 @@ public class UserMainPage extends Page {
 
     private User currentUser;
 
+
+    private JFXSnackbar userRegisteredNotification;
+    private JFXSnackbarLayout userRegisteredNotificationLayout = new JFXSnackbarLayout("Registrazione effettuata.\nOra puoi eseguire l'accesso");
+
     /**
      * {@inheritDoc}
      */
@@ -53,6 +57,8 @@ public class UserMainPage extends Page {
      */
     @Override
     protected void initialize() {
+        userRegisteredNotification = new JFXSnackbar(root);
+
         searchController.setOnListItemAction(event ->
         {
             CenterInfoPage page = (CenterInfoPage) PagesManager.open(PagesManager.PageType.CENTERINFO);
@@ -115,4 +121,10 @@ public class UserMainPage extends Page {
     }
 
 
+    /**
+     * This shows a notification which informs that a user was successfully registered
+     */
+    public void showUserRegisteredNotification() {
+        userRegisteredNotification.fireEvent(new JFXSnackbar.SnackbarEvent(userRegisteredNotificationLayout, NOTIFICATION_TIMEOUT));
+    }
 }
