@@ -24,6 +24,8 @@ public class Centri extends Data {
 
     private static File file = new File(dataDirectory, "CentriVaccinali.csv");
     private static LinkedListMultimap<String, Center> centers = LinkedListMultimap.create();
+    //This is needed only to check if a center exists
+    private static HashSet<String> centerNames = new HashSet<>();
 
     /**
      * Adds a center to the LinkedHashMap, using the comune as key
@@ -35,6 +37,7 @@ public class Centri extends Data {
     //Adds center to the centers LinkedHashMap
     public static void add(Center center) throws IOException {
         centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
+        centerNames.add(center.getName());
         //This will close the file wheter an axception is thrown or not
         try (FileWriter fw = new FileWriter(file, true)) {
             CsvWriter writer = CsvWriter.dsl().to(fw);
@@ -84,6 +87,7 @@ public class Centri extends Data {
                 String[] row = iter.next();
                 Center center = new Center(row);
                 centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
+                centerNames.add(center.getName());
                 Vaccinati.createNewFile(center.getName());
             }
         } catch (FileNotFoundException e) {
@@ -150,5 +154,14 @@ public class Centri extends Data {
             } else break;
         }
         return list;
+    }
+
+
+    /**
+     * @param center The center to check the existence of
+     * @return True if and only if <code>center</code> exists. The center name is used to check its existence with the method {@link HashSet#contains(Object)}
+     */
+    public static boolean contains(Center center) {
+        return centerNames.contains(center.getName());
     }
 }
