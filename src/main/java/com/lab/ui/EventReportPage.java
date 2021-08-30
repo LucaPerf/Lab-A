@@ -33,7 +33,7 @@ public class EventReportPage extends Page {
     private Label charCounter;
 
     private JFXSnackbar eventAddedNotification;
-    private JFXSnackbarLayout eventAddedNotificationLayout = new JFXSnackbarLayout("Segnalazione evnto fallita.\nNon hai selezionato il centro corretto oppure hai già segnalato un evento di questo tipo");
+    private JFXSnackbarLayout eventAddedNotificationLayout = new JFXSnackbarLayout("Segnalazione evnto fallita.\nNon hai selezionato il centro corretto oppure hai gi\u00E0 segnalato un evento di questo tipo");
     private Center center;
     private User user;
 
