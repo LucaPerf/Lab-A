@@ -33,7 +33,7 @@ public class Centri extends Data {
      */
 
     //Adds center to the centers LinkedHashMap
-    public static void addCenter(Center center) throws IOException {
+    public static void add(Center center) throws IOException {
         centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
         //This will close the file wheter an axception is thrown or not
         try (FileWriter fw = new FileWriter(file, true)) {
@@ -51,7 +51,7 @@ public class Centri extends Data {
      *
      * @throws IOException If data cannot be saved to the file for any reason
      */
-    public static void saveCenter() throws IOException {
+    public static void save() throws IOException {
         try (FileWriter fw = new FileWriter(file)) {
             CsvWriter cw = CsvWriter.dsl().to(fw);
             for (Center center : centers.values())

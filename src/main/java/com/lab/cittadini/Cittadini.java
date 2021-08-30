@@ -27,7 +27,7 @@ public class Cittadini {
      * @throws IOException If the user could not be saved to the file for any reason
      */
     public static void registraCittadino(User user) throws IOException {
-        Registrati.save(user);
+        Registrati.add(user);
     }
 
     /**
@@ -75,7 +75,7 @@ public class Cittadini {
         if (vi != null && vi.addEvent(event)) {
             center.updateStat(event);
             Vaccinati.save(center.getName());
-            Centri.saveCenter();
+            Centri.save();
             return true;
         }
         return false;

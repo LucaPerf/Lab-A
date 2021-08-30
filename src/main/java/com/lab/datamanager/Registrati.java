@@ -21,23 +21,13 @@ public class Registrati extends Data {
     private static HashMap<String, User> users = new HashMap<>();
 
     /**
-     * Add a citizen to the LinkedHahMap, using userID as key
+     * Adds a suer to a file, named "Cittadini.csv"
      *
      * @param cittadino The citizen to add
-     */
-    public static void add(User cittadino) {
-
-        users.put(cittadino.getUserID(), cittadino);
-    }
-
-    /**
-     * Save citizens in a file, named "Cittadini.csv"
-     *
-     * @param cittadino The citizen to save
      * @throws IOException If data could not be added for any reason
      */
-    public static void save(User cittadino) throws IOException {
-        add(cittadino);
+    public static void add(User cittadino) throws IOException {
+        users.put(cittadino.getUserID(), cittadino);
 
         try (FileWriter filew = new FileWriter(file, true)) {
             CsvWriter cw = CsvWriter.dsl().to(filew);
@@ -65,7 +55,8 @@ public class Registrati extends Data {
             Iterator<String[]> it = CsvParser.iterator(filer);
             while (it.hasNext()) {
                 String[] row = it.next();
-                add(new User(row));
+                User user = new User(row);
+                users.put(user.getUserID(), user);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

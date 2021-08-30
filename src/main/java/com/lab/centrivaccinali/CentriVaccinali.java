@@ -7,7 +7,6 @@ import com.lab.datamanager.Data;
 import com.lab.datamanager.Registrati;
 import com.lab.datamanager.Vaccinati;
 import com.lab.ui.ErrorPage;
-import com.lab.ui.Page;
 import com.lab.ui.PagesManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -65,7 +64,7 @@ public class CentriVaccinali extends Application {
      * @throws IOException If the center could not be added to the file
      */
     public static void registraCentroVaccinale(Center center) throws IOException {
-        Centri.addCenter(center);
+        Centri.add(center);
     }
 
     /**
