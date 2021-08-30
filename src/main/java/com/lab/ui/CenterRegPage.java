@@ -12,6 +12,8 @@ import com.lab.centrivaccinali.CentriVaccinali;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
+
 /**
  * Controller of the center registration page. Layout is stored in "center_registration.fxml".
  *
@@ -62,7 +64,12 @@ public class CenterRegPage extends Page {
 
         register.setOnAction(actionEvent -> {
             if (isDataValid()) {
-                CentriVaccinali.registraCentroVaccinale(centerFromUI());
+                try {
+                    CentriVaccinali.registraCentroVaccinale(centerFromUI());
+                } catch (IOException e) {
+                    PagesManager.openErrorPage(e);
+                    return;
+                }
                 reset();
                 PagesManager.open(PagesManager.PageType.CENTERACTIONS);
             }

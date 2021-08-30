@@ -6,9 +6,13 @@ import com.lab.datamanager.Centri;
 import com.lab.datamanager.Data;
 import com.lab.datamanager.Registrati;
 import com.lab.datamanager.Vaccinati;
+import com.lab.ui.ErrorPage;
+import com.lab.ui.Page;
 import com.lab.ui.PagesManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * Main class used to initialize data and UI
@@ -36,13 +40,21 @@ public class CentriVaccinali extends Application {
         stage.setTitle("Lab AB");
         PagesManager.openEmptyScene(stage);
         stage.show();
-        //Data loading
-        Data.createDirectory();
-        Centri.load();
-        Registrati.load();
-        Vaccinati.load();
         //UI loading
         PagesManager.initialize(stage);
+
+        //Data loading
+        Data.createDirectory();
+        try {
+            Centri.load();
+            Registrati.load();
+            Vaccinati.load();
+        } catch (IOException e) {
+            ErrorPage page = (ErrorPage) PagesManager.open(PagesManager.PageType.ERRORPAGE);
+            page.setError(e);
+            return;
+        }
+
         PagesManager.open(PagesManager.PageType.AREASELECTION);
     }
 
@@ -50,8 +62,9 @@ public class CentriVaccinali extends Application {
      * Add a new center into "CentriVaccinali.csv"
      *
      * @param center The center to add
+     * @throws IOException If the center could not be added to the file
      */
-    public static void registraCentroVaccinale(Center center) {
+    public static void registraCentroVaccinale(Center center) throws IOException {
         Centri.addCenter(center);
     }
 
@@ -60,8 +73,9 @@ public class CentriVaccinali extends Application {
      *
      * @param centerName The name of the center to add the information to
      * @param info       The information to add
+     * @throws IOException If the vaccinated user could not be written to the file
      */
-    public static void registraVaccinato(String centerName, VaxInfo info) {
+    public static void registraVaccinato(String centerName, VaxInfo info) throws IOException {
         Vaccinati.add(centerName, info);
     }
 }

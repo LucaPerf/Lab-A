@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.StackPane;
 
+import java.io.IOException;
+
 public class EventReportPage extends Page {
     @FXML
     private StackPane root;
@@ -72,7 +74,15 @@ public class EventReportPage extends Page {
 
         report.setOnAction(event -> {
             if (type.validate()) {
-                if (Cittadini.inserisciEventiAvversi(user.getuID(), eventFromUI(), center)) {
+                boolean reportAdded;
+                try {
+                    reportAdded = Cittadini.inserisciEventiAvversi(user.getuID(), eventFromUI(), center);
+                } catch (IOException e) {
+                    ErrorPage page = (ErrorPage) PagesManager.open(PagesManager.PageType.ERRORPAGE);
+                    page.setError(e);
+                    return;
+                }
+                if (reportAdded) {
                     reset();
                     CenterInfoPage page = (CenterInfoPage) PagesManager.open(PagesManager.PageType.CENTERINFO);
                     page.updateStats();

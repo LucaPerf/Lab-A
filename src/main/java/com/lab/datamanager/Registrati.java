@@ -13,10 +13,11 @@ import java.util.*;
  * @author Luca Perfetti
  */
 
-public class Registrati extends Data{
-    private Registrati(){}
+public class Registrati extends Data {
+    private Registrati() {
+    }
 
-    private static File file = new File(dataDirectory,"Cittadini.csv");
+    private static File file = new File(dataDirectory, "Cittadini.csv");
     private static HashMap<String, User> users = new HashMap<>();
 
     /**
@@ -33,40 +34,42 @@ public class Registrati extends Data{
      * Save citizens in a file, named "Cittadini.csv"
      *
      * @param cittadino The citizen to save
+     * @throws IOException If data could not be added for any reason
      */
-    public static void save(User cittadino) {
+    public static void save(User cittadino) throws IOException {
         add(cittadino);
 
-        try {
-            FileWriter filew = new FileWriter(file, true);
+        try (FileWriter filew = new FileWriter(file, true)) {
             CsvWriter cw = CsvWriter.dsl().to(filew);
-
             cw.appendRow(cittadino.toRow());
-            filew.close();
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 
     /**
-     * Read the citizens' data from the file and write them in a LinkedHahMap
+     * Read the citizens' data from the file and write them in a HashMap
+     *
+     * @throws IOException If data could not be loaded from the file for any reason
      */
-    public static void load() {
+    public static void load() throws IOException {
         try {
-            //Create the file if it does not exist
             file.createNewFile();
-
-            FileReader filer = new FileReader(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw e;
+        }
+        //Actual parsing
+        try (FileReader filer = new FileReader(file)) {
             Iterator<String[]> it = CsvParser.iterator(filer);
-
             while (it.hasNext()) {
                 String[] row = it.next();
                 add(new User(row));
             }
-
-            filer.close();
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 

@@ -23,8 +23,10 @@ public class Vaccinati extends Data {
 
     /**
      * Checks if vaccination files exist and creates them.
+     *
+     * @throws IOException If files could not be created for any reason
      */
-    public static void load() {
+    public static void load() throws IOException {
         try {
             for (Center l : Centri.getCenters().values()) {
                 File fl = getFileFromCenter(l.getName());
@@ -32,6 +34,7 @@ public class Vaccinati extends Data {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -39,40 +42,35 @@ public class Vaccinati extends Data {
      * Loads all vaccination information of <code>centerName<code/> into {@link #vaxinfo}
      *
      * @param centerName The name of the center whose vaccination data will be loaded
+     * @throws IOException If data could not be loaded from the file for any reason
      */
-    public static void load(String centerName) {
-        try {
-            FileReader fr = new FileReader(getFileFromCenter(centerName));
-
+    public static void load(String centerName) throws IOException {
+        try (FileReader fr = new FileReader(getFileFromCenter(centerName))) {
             Iterator<String[]> iter = CsvParser.iterator(fr);
 
             while (iter.hasNext()) {
                 String[] row = iter.next();
-
                 vaxinfo.put(Long.parseLong(row[5]), new VaxInfo(row));
             }
-
-            fr.close();
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 
     /**
      * Save all vaccination information to the file Vaccinati_centerName.csv
+     *
+     * @throws IOException If data could not be saved to the file for any reason
      */
-    public static void save(String centerName) {
-        try {
-            FileWriter fw = new FileWriter(getFileFromCenter(centerName));
+    public static void save(String centerName) throws IOException {
+        try (FileWriter fw = new FileWriter(getFileFromCenter(centerName))) {
             CsvWriter cw = CsvWriter.dsl().to(fw);
-
             for (VaxInfo vax : vaxinfo.values())
                 cw.appendRow(vax.toRow());
-
-            fw.close();
-
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -81,15 +79,15 @@ public class Vaccinati extends Data {
      *
      * @param centerName The name of the center to add the vaccination to
      * @param info       The vaccination information
+     * @throws IOException If data could not be added to the file for any reason
      */
-    public static void add(String centerName, VaxInfo info) {
-        try {
-            FileWriter fw = new FileWriter(getFileFromCenter(centerName), true);
+    public static void add(String centerName, VaxInfo info) throws IOException {
+        try (FileWriter fw = new FileWriter(getFileFromCenter(centerName), true)) {
             CsvWriter cw = CsvWriter.dsl().to(fw);
             cw.appendRow(info.toRow());
-            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 

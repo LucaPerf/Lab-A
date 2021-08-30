@@ -29,22 +29,19 @@ public class Centri extends Data {
      * Adds a center to the LinkedHashMap, using the comune as key
      *
      * @param center The center to add
+     * @throws IOException If data cannot be added to the file for any reason
      */
 
     //Adds center to the centers LinkedHashMap
-    public static void addCenter(Center center) {
+    public static void addCenter(Center center) throws IOException {
         centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
-
-        try {
-            //Open file
-            FileWriter fw = new FileWriter(file, true);
+        //This will close the file wheter an axception is thrown or not
+        try (FileWriter fw = new FileWriter(file, true)) {
             CsvWriter writer = CsvWriter.dsl().to(fw);
-
-            //Write row
             writer.appendRow(center.toRow());
-            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -52,49 +49,44 @@ public class Centri extends Data {
     /**
      * Writes a center to the file, in CSV format
      *
+     * @throws IOException If data cannot be saved to the file for any reason
      */
-    public static void saveCenter() {
-        try {
-            FileWriter fw = new FileWriter(file);
+    public static void saveCenter() throws IOException {
+        try (FileWriter fw = new FileWriter(file)) {
             CsvWriter cw = CsvWriter.dsl().to(fw);
-
             for (Center center : centers.values())
                 cw.appendRow(center.toRow());
-
-            fw.close();
-
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
-
     }
 
     /**
-     * Method used to read the data from the file and insert it into the LinkedHashMap
+     * Method used to read the data from the file and insert it into the LinkedListMultiMap
+     *
+     * @throws IOException If data cannot be loaded from the file for any reason
      */
-    public static void load() {
+    public static void load() throws IOException {
+        //Try to create the file
         try {
-            //Create the file if it does not exist
             file.createNewFile();
-
-            FileReader fr = new FileReader(file);
-            //Create iterator
-            Iterator<String[]> iter = CsvParser.iterator(fr);
-
-            //Parse all rows
-            while (iter.hasNext()) {
-                //Parse one row which equals to one center object
-                String[] row = iter.next();
-
-                //Create the object
-                Center center = new Center(row);
-
-                centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
-            }
-
-            fr.close();
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
+        }
+        //Actual file reading
+        try (FileReader fr = new FileReader(file)) {
+            Iterator<String[]> iter = CsvParser.iterator(fr);
+            //Parse all rows
+            while (iter.hasNext()) {
+                String[] row = iter.next();
+                Center center = new Center(row);
+                centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -102,7 +94,6 @@ public class Centri extends Data {
      * @return A {@link LinkedListMultimap} of {@link Center} containing all centers grouped by comune
      */
     public static LinkedListMultimap<String, Center> getCenters() {
-
         return centers;
     }
 

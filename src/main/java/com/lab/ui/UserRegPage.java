@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
+
 /**
  * Controller of the user registration page. Layout is stored in "user_registration.fxml".
  *
@@ -63,7 +65,13 @@ public class UserRegPage extends Page {
         register.setOnAction(actionEvent ->
         {
             if (isDataValid()) {
-                Cittadini.registraCittadino(userFromUI());
+                try {
+                    Cittadini.registraCittadino(userFromUI());
+                } catch (IOException e) {
+                    ErrorPage page = (ErrorPage) PagesManager.open(PagesManager.PageType.ERRORPAGE);
+                    page.setError(e);
+                    return;
+                }
                 reset();
                 PagesManager.open(PagesManager.PageType.USERMAIN);
             }

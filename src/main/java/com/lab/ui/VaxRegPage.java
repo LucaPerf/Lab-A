@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 /**
@@ -75,7 +76,13 @@ public class VaxRegPage extends Page {
         add.setOnAction(actionEvent ->
         {
             if (isDataValid()) {
-                CentriVaccinali.registraVaccinato(center.getName(), infoFromUI());
+                try {
+                    CentriVaccinali.registraVaccinato(center.getName(), infoFromUI());
+                } catch (IOException e) {
+                    ErrorPage page = (ErrorPage) PagesManager.open(PagesManager.PageType.ERRORPAGE);
+                    page.setError(e);
+                    return;
+                }
                 addAgain.show(root);
             }
         });

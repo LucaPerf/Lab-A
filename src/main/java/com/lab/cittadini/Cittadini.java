@@ -5,6 +5,7 @@ import com.lab.datamanager.Centri;
 import com.lab.datamanager.Registrati;
 import com.lab.datamanager.Vaccinati;
 
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.LinkedList;
 
@@ -14,7 +15,8 @@ import java.util.LinkedList;
  * @author Ciceri Luigi
  */
 public class Cittadini {
-    private Cittadini(){}
+    private Cittadini() {
+    }
 
     private static Comparator<Center> centerNameComp = Comparator.comparing(Center::getName);
 
@@ -22,8 +24,9 @@ public class Cittadini {
      * Add a new user and save its data into "Cittadini_Registrati.csv"
      *
      * @param user The user to add
+     * @throws IOException If the user could not be saved to the file for any reason
      */
-    public static void registraCittadino(User user) {
+    public static void registraCittadino(User user) throws IOException {
         Registrati.save(user);
     }
 
@@ -59,12 +62,13 @@ public class Cittadini {
     /**
      * Check if the event hash been added in the center file
      *
-     * @param uID        Unique id associated with a vaccinated person
-     * @param event      Adverse event to be added
-     * @param center     Center to update the statics 
+     * @param uID    Unique id associated with a vaccinated person
+     * @param event  Adverse event to be added
+     * @param center Center to update the statics
      * @return Fasle if the user hasn't been found or an event of the same type has already been reported
+     * @throws IOException If data cannot be added to the file for any reason
      */
-    public static boolean inserisciEventiAvversi(Long uID, Event event, Center center) {
+    public static boolean inserisciEventiAvversi(Long uID, Event event, Center center) throws IOException {
         Vaccinati.load(center.getName());
         VaxInfo vi = Vaccinati.find(uID);
 
