@@ -39,6 +39,7 @@ public class Centri extends Data {
         try (FileWriter fw = new FileWriter(file, true)) {
             CsvWriter writer = CsvWriter.dsl().to(fw);
             writer.appendRow(center.toRow());
+            Vaccinati.createNewFile(center.getName());
         } catch (IOException e) {
             e.printStackTrace();
             throw e;
@@ -63,7 +64,7 @@ public class Centri extends Data {
     }
 
     /**
-     * Method used to read the data from the file and insert it into the LinkedListMultiMap
+     * Method used to read the data from the file and insert it into the LinkedListMultiMap. It also creates the vaccination file for each center if it doesn't exist.
      *
      * @throws IOException If data cannot be loaded from the file for any reason
      */
@@ -83,6 +84,7 @@ public class Centri extends Data {
                 String[] row = iter.next();
                 Center center = new Center(row);
                 centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
+                Vaccinati.createNewFile(center.getName());
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -22,23 +22,6 @@ public class Vaccinati extends Data {
     public static LinkedHashMap<Long, VaxInfo> vaxinfo = new LinkedHashMap<>();
 
     /**
-     * Checks if vaccination files exist and creates them.
-     *
-     * @throws IOException If files could not be created for any reason
-     */
-    public static void load() throws IOException {
-        try {
-            for (Center l : Centri.getCenters().values()) {
-                File fl = getFileFromCenter(l.getName());
-                fl.createNewFile();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
-
-    /**
      * Loads all vaccination information of <code>centerName<code/> into {@link #vaxinfo}
      *
      * @param centerName The name of the center whose vaccination data will be loaded
@@ -103,5 +86,21 @@ public class Vaccinati extends Data {
      */
     public static VaxInfo find(Long uID) {
         return vaxinfo.get(uID);
+    }
+
+    /**
+     * Creates an empty vaccination file for the center <code>centerName</code> if and only if it doesn't exist, named Vaccinati_<code>centerName</code>.csv. This method uses {@link File#createNewFile()}.
+     *
+     * @param centerName The name of the center to create the file of
+     * @throws IOException If the file could not be created
+     */
+    public static void createNewFile(String centerName) throws IOException {
+        try {
+            File fl = getFileFromCenter(centerName);
+            fl.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 }
