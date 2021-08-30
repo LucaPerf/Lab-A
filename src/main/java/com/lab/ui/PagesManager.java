@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 
 /**
@@ -16,7 +17,8 @@ import java.io.IOException;
  */
 
 public class PagesManager {
-    private PagesManager(){}
+    private PagesManager() {
+    }
 
     /**
      * Represents the type of page, used to choose which page to open.
@@ -31,7 +33,8 @@ public class PagesManager {
         USERLOGIN,
         CENTERSELECTION,
         CENTERINFO,
-        EVENTREPORT
+        EVENTREPORT,
+        ERRORPAGE
     }
 
     private static Scene scene;
@@ -61,6 +64,7 @@ public class PagesManager {
     private static Page centerSelectionPage;
     private static Page centerInfoPage;
     private static Page eventReportPage;
+    private static Page errorPage = new ErrorPage();
 
     /**
      * Initializes the pages manager and loads all UI pages from fxml.
@@ -79,6 +83,7 @@ public class PagesManager {
         centerSelectionPage = loadPage(centerSelectionLoader);
         centerInfoPage = loadPage(centerInfoLoader);
         eventReportPage = loadPage(eventReportLoader);
+        errorPage.initialize();
     }
 
     /**
@@ -88,11 +93,7 @@ public class PagesManager {
      * @return The opened page or null if no page of <code>type</code> exists
      * @throws NullPointerException If <code>type</code> is null
      */
-    public static Page open(PageType type) {
-
-        if (type == null)
-            throw new NullPointerException("Page type cannot be null");
-
+    public static Page open(@Nonnull PageType type) {
         switch (type) {
             case USERMAIN:
                 return open(userMainPage);
@@ -114,8 +115,10 @@ public class PagesManager {
                 return open(centerInfoPage);
             case EVENTREPORT:
                 return open(eventReportPage);
+            case ERRORPAGE:
+                return open(errorPage);
             default:
-                return null;
+                return openErrorPage(new IllegalArgumentException("Cannot open page of type " + type));
         }
     }
 
@@ -143,5 +146,17 @@ public class PagesManager {
             e.printStackTrace();
             return null;
         }
+    }
+
+    /**
+     * Convenience method to open the error page and set its exception
+     *
+     * @param e The exception to set
+     * @return The opened error page
+     */
+    public static Page openErrorPage(Exception e) {
+        ErrorPage page = (ErrorPage) open(errorPage);
+        page.setError(e);
+        return page;
     }
 }
