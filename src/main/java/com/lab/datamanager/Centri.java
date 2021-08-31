@@ -1,14 +1,17 @@
 package com.lab.datamanager;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.LinkedListMultimap;
 import com.lab.data.Center;
 import com.lab.data.CenterType;
 import org.simpleflatmapper.csv.CsvParser;
 import org.simpleflatmapper.lightningcsv.CsvWriter;
 
-import java.util.*;
 import java.io.*;
-
-import com.google.common.collect.LinkedListMultimap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Locale;
 
 /**
  * Class used for center data management.
@@ -38,14 +41,21 @@ public class Centri extends Data {
     public static void add(Center center) throws IOException {
         centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
         centerNames.add(center.getName());
-        //This will close the file wheter an axception is thrown or not
-        try (FileWriter fw = new FileWriter(file, true)) {
+        //This will close the file whether an exception is thrown or not
+        try (RandomAccessFile rf = new RandomAccessFile(file, "rw");
+             BufferedWriter fw = new BufferedWriter(new FileWriter(rf.getFD()))) {
+            //Save sizes
+            String size = Integer.toString(centerNames.size());
+            fw.write(Strings.padStart(size, 10, '0'));
+            size = Integer.toString(centers.keySet().size());
+            fw.write(Strings.padStart(size, 10, '0'));
+            fw.flush();
+            rf.seek(rf.length());
+
+            //Save new center
             CsvWriter writer = CsvWriter.dsl().to(fw);
             writer.appendRow(center.toRow());
             Vaccinati.createNewFile(center.getName());
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
         }
     }
 
@@ -56,13 +66,16 @@ public class Centri extends Data {
      * @throws IOException If data cannot be saved to the file for any reason
      */
     public static void save() throws IOException {
-        try (FileWriter fw = new FileWriter(file)) {
+        try (RandomAccessFile fr = new RandomAccessFile(file, "rw");
+             BufferedWriter fw = new BufferedWriter(new FileWriter(fr.getFD()))) {
+            //Delete everything after header as we are overwriting, 1 char = 1 byte
+            fr.setLength(21);
+            fr.seek(21);
+
+            //Save centers
             CsvWriter cw = CsvWriter.dsl().to(fw);
             for (Center center : centers.values())
                 cw.appendRow(center.toRow());
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
         }
     }
 
@@ -72,27 +85,28 @@ public class Centri extends Data {
      * @throws IOException If data cannot be loaded from the file for any reason
      */
     public static void load() throws IOException {
-        //Try to create the file
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
-        }
-        //Actual file reading
-        try (FileReader fr = new FileReader(file)) {
-            Iterator<String[]> iter = CsvParser.iterator(fr);
-            //Parse all rows
-            while (iter.hasNext()) {
-                String[] row = iter.next();
-                Center center = new Center(row);
-                centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
-                centerNames.add(center.getName());
-                Vaccinati.createNewFile(center.getName());
+        if (!createNewFile()) {
+            try (BufferedReader fr = new BufferedReader(new FileReader(file))) {
+                //Create maps
+                char[] size = new char[10];
+                fr.read(size, 0, 10);
+                int mapSize = Integer.parseInt(new String(size));
+                centerNames = new HashSet<>(getMapSize(0.75f, mapSize));
+                fr.read(size, 0, 10);
+                mapSize = Integer.parseInt(new String(size));
+                centers = LinkedListMultimap.create(getMapSize(0.75f, mapSize));
+                fr.skip(1);
+
+                //Read centers
+                Iterator<String[]> iter = CsvParser.iterator(fr);
+                while (iter.hasNext()) {
+                    String[] row = iter.next();
+                    Center center = new Center(row);
+                    centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
+                    centerNames.add(center.getName());
+                    Vaccinati.createNewFile(center.getName());
+                }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw e;
         }
     }
 
@@ -163,5 +177,21 @@ public class Centri extends Data {
      */
     public static boolean contains(Center center) {
         return centerNames.contains(center.getName());
+    }
+
+    /**
+     * Creates a new file. The first 10 digits in the first line represents the number of centers, the next 10 the number of districts
+     *
+     * @return True if a file didn't exist and was created successfully, false otherwise. Thi method uses {@link File#createNewFile()}
+     * @throws IOException If the file could not be created for any reason
+     */
+    private static boolean createNewFile() throws IOException {
+        if (file.createNewFile()) {
+            try (FileWriter w = new FileWriter(file)) {
+                w.write("00000000000000000000\n");
+            }
+            return true;
+        }
+        return false;
     }
 }

@@ -1,11 +1,14 @@
 package com.lab.datamanager;
 
+import com.google.common.base.Strings;
 import com.lab.data.User;
 import org.simpleflatmapper.csv.CsvParser;
 import org.simpleflatmapper.lightningcsv.CsvWriter;
 
 import java.io.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Class used for register citizens.
@@ -28,13 +31,17 @@ public class Registrati extends Data {
      */
     public static void add(User cittadino) throws IOException {
         users.put(cittadino.getUserID(), cittadino);
+        try (RandomAccessFile rf = new RandomAccessFile(file, "rw");
+             BufferedWriter writer = new BufferedWriter(new FileWriter(rf.getFD()))) {
+            //Write HashMap size
+            String mapSize = Integer.toString(users.size());
+            writer.write(Strings.padStart(mapSize, 10, '0'));
+            writer.flush();
 
-        try (FileWriter filew = new FileWriter(file, true)) {
-            CsvWriter cw = CsvWriter.dsl().to(filew);
+            //Write user
+            rf.seek(rf.length());
+            CsvWriter cw = CsvWriter.dsl().to(writer);
             cw.appendRow(cittadino.toRow());
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
         }
     }
 
@@ -44,23 +51,23 @@ public class Registrati extends Data {
      * @throws IOException If data could not be loaded from the file for any reason
      */
     public static void load() throws IOException {
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
-        }
-        //Actual parsing
-        try (FileReader filer = new FileReader(file)) {
-            Iterator<String[]> it = CsvParser.iterator(filer);
-            while (it.hasNext()) {
-                String[] row = it.next();
-                User user = new User(row);
-                users.put(user.getUserID(), user);
+        if (!createNewFile()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                //Create hashmap with correct size
+                char[] size = new char[10];
+                reader.read(size, 0, 10);
+                int mapSize = Integer.parseInt(new String(size));
+                users = new HashMap<>(getMapSize(0.75f, mapSize));
+                reader.skip(1);
+
+                //Load users
+                Iterator<String[]> it = CsvParser.iterator(reader);
+                while (it.hasNext()) {
+                    String[] row = it.next();
+                    User user = new User(row);
+                    users.put(user.getUserID(), user);
+                }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw e;
         }
     }
 
@@ -78,5 +85,21 @@ public class Registrati extends Data {
      */
     public static boolean contains(User user) {
         return users.containsKey(user.getUserID());
+    }
+
+    /**
+     * Creates a new file. The first line represents the number of objects (0).
+     *
+     * @return True if a file didn't exist and was created successfully, false otherwise. Thi method uses {@link File#createNewFile()}
+     * @throws IOException If the file could not be created for any reason
+     */
+    private static boolean createNewFile() throws IOException {
+        if (file.createNewFile()) {
+            try (FileWriter fw = new FileWriter(file)) {
+                fw.write("0000000000\n");
+            }
+            return true;
+        }
+        return false;
     }
 }

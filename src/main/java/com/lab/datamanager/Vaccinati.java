@@ -1,12 +1,13 @@
 package com.lab.datamanager;
 
-import com.lab.data.Center;
+import com.google.common.base.Strings;
 import com.lab.data.VaxInfo;
 import org.simpleflatmapper.lightningcsv.CsvParser;
 import org.simpleflatmapper.lightningcsv.CsvWriter;
 
 import java.io.*;
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 /**
  * This class manages vaccination data of all centers.
@@ -28,16 +29,20 @@ public class Vaccinati extends Data {
      * @throws IOException If data could not be loaded from the file for any reason
      */
     public static void load(String centerName) throws IOException {
-        try (FileReader fr = new FileReader(getFileFromCenter(centerName))) {
-            Iterator<String[]> iter = CsvParser.iterator(fr);
+        try (BufferedReader reader = new BufferedReader(new FileReader(getFileFromCenter(centerName)))) {
+            //Read size
+            char[] size = new char[10];
+            reader.read(size, 0, 10);
+            int mapSize = Integer.parseInt(new String(size));
+            vaxinfo = new LinkedHashMap<>(mapSize);
+            reader.skip(1);
 
+            //Read files
+            Iterator<String[]> iter = CsvParser.iterator(reader);
             while (iter.hasNext()) {
                 String[] row = iter.next();
                 vaxinfo.put(Long.parseLong(row[5]), new VaxInfo(row));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
         }
     }
 
@@ -47,13 +52,16 @@ public class Vaccinati extends Data {
      * @throws IOException If data could not be saved to the file for any reason
      */
     public static void save(String centerName) throws IOException {
-        try (FileWriter fw = new FileWriter(getFileFromCenter(centerName))) {
-            CsvWriter cw = CsvWriter.dsl().to(fw);
+        try (RandomAccessFile rFile = new RandomAccessFile(getFileFromCenter(centerName), "rw");
+             BufferedWriter writer = new BufferedWriter(new FileWriter(rFile.getFD()))) {
+            //Delete everything after header as we are overwriting data
+            rFile.setLength(11);
+            rFile.seek(11);
+
+            //Save centers
+            CsvWriter cw = CsvWriter.dsl().to(writer);
             for (VaxInfo vax : vaxinfo.values())
                 cw.appendRow(vax.toRow());
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
         }
     }
 
@@ -65,12 +73,26 @@ public class Vaccinati extends Data {
      * @throws IOException If data could not be added to the file for any reason
      */
     public static void add(String centerName, VaxInfo info) throws IOException {
-        try (FileWriter fw = new FileWriter(getFileFromCenter(centerName), true)) {
-            CsvWriter cw = CsvWriter.dsl().to(fw);
+        //We have to update the old size as we have not loaded data into the HashMap
+        //Read size
+        int newSize;
+        try (FileReader reader = new FileReader(getFileFromCenter(centerName))) {
+            //Read
+            char[] size = new char[10];
+            reader.read(size, 0, 10);
+            newSize = Integer.parseInt(new String(size)) + 1;
+        }
+        //Write new size and info
+        try (RandomAccessFile rFile = new RandomAccessFile(getFileFromCenter(centerName), "rw");
+             BufferedWriter writer = new BufferedWriter(new FileWriter(rFile.getFD()))) {
+            String size = Integer.toString(newSize);
+            writer.write(Strings.padStart(size, 10, '0'));
+            writer.flush();
+            rFile.seek(rFile.length());
+
+            //Info
+            CsvWriter cw = CsvWriter.dsl().to(writer);
             cw.appendRow(info.toRow());
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
         }
     }
 
@@ -89,18 +111,21 @@ public class Vaccinati extends Data {
     }
 
     /**
-     * Creates an empty vaccination file for the center <code>centerName</code> if and only if it doesn't exist, named Vaccinati_<code>centerName</code>.csv. This method uses {@link File#createNewFile()}.
+     * Creates an empty vaccination file for the center <code>centerName</code> if and only if it doesn't exist, named Vaccinati_<code>centerName</code>.csv.
+     * The first line contains the number of vaccinated users.
+     * This method uses {@link File#createNewFile()}.
      *
      * @param centerName The name of the center to create the file of
      * @throws IOException If the file could not be created
      */
-    public static void createNewFile(String centerName) throws IOException {
-        try {
-            File fl = getFileFromCenter(centerName);
-            fl.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
+    public static boolean createNewFile(String centerName) throws IOException {
+        File newFile = getFileFromCenter(centerName);
+        if (newFile.createNewFile()) {
+            try (FileWriter writer = new FileWriter(newFile)) {
+                writer.write("0000000000\n");
+            }
+            return true;
         }
+        return false;
     }
 }

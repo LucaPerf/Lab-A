@@ -16,4 +16,12 @@ public abstract class Data {
             dataDirectory.mkdirs();
     }
 
+    /**
+     * @param loadFactor     The desired load factor
+     * @param expectedValues How many values the map is expected to hold
+     * @return The size a map should have to avoid rehashing if <code>expectedValues</code> are to be inserted
+     */
+    protected static int getMapSize(float loadFactor, int expectedValues) {
+        return (int) (Math.ceil(expectedValues / loadFactor) + 1);
+    }
 }
