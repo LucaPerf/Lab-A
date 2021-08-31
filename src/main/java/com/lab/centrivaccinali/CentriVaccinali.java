@@ -48,6 +48,7 @@ public class CentriVaccinali extends Application {
             Centri.load();
             Registrati.load();
         } catch (IOException e) {
+            e.printStackTrace();
             ErrorPage page = (ErrorPage) PagesManager.open(PagesManager.PageType.ERRORPAGE);
             page.setError(e);
             return;

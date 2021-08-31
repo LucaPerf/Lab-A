@@ -6,7 +6,6 @@ import com.lab.data.User;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
-import org.checkerframework.checker.units.qual.A;
 
 import java.io.IOException;
 
@@ -71,6 +70,7 @@ public class UserRegPage extends Page {
                 try {
                     registered = Cittadini.registraCittadino(userFromUI());
                 } catch (IOException e) {
+                    e.printStackTrace();
                     ErrorPage page = (ErrorPage) PagesManager.open(PagesManager.PageType.ERRORPAGE);
                     page.setError(e);
                     return;

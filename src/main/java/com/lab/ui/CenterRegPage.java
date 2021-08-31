@@ -1,11 +1,11 @@
 package com.lab.ui;
 
 import com.jfoenix.controls.*;
-import javafx.fxml.FXML;
+import com.lab.centrivaccinali.CentriVaccinali;
 import com.lab.data.Center;
 import com.lab.data.CenterType;
 import com.lab.data.PostalAddress;
-import com.lab.centrivaccinali.CentriVaccinali;
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 
@@ -69,6 +69,7 @@ public class CenterRegPage extends Page {
                 try {
                     centerAdded = CentriVaccinali.registraCentroVaccinale(centerFromUI());
                 } catch (IOException e) {
+                    e.printStackTrace();
                     PagesManager.openErrorPage(e);
                     return;
                 }

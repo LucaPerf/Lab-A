@@ -78,6 +78,7 @@ public class EventReportPage extends Page {
                 try {
                     reportAdded = Cittadini.inserisciEventiAvversi(user.getuID(), eventFromUI(), center);
                 } catch (IOException e) {
+                    e.printStackTrace();
                     ErrorPage page = (ErrorPage) PagesManager.open(PagesManager.PageType.ERRORPAGE);
                     page.setError(e);
                     return;

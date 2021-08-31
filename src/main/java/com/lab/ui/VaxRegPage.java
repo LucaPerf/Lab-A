@@ -79,6 +79,7 @@ public class VaxRegPage extends Page {
                 try {
                     CentriVaccinali.registraVaccinato(center.getName(), infoFromUI());
                 } catch (IOException e) {
+                    e.printStackTrace();
                     ErrorPage page = (ErrorPage) PagesManager.open(PagesManager.PageType.ERRORPAGE);
                     page.setError(e);
                     return;
