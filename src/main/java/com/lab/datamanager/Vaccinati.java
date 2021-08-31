@@ -1,6 +1,5 @@
 package com.lab.datamanager;
 
-import com.google.common.base.Strings;
 import com.lab.data.VaxInfo;
 import org.simpleflatmapper.lightningcsv.CsvParser;
 import org.simpleflatmapper.lightningcsv.CsvWriter;
@@ -31,12 +30,8 @@ public class Vaccinati extends Data {
     public static void load(String centerName) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(getFileFromCenter(centerName)))) {
             //Read size
-            char[] size = new char[10];
-            reader.read(size, 0, 10);
-            int mapSize = Integer.parseInt(new String(size));
-            vaxinfo = new LinkedHashMap<>(mapSize);
-            reader.skip(1);
-
+            int size = readHeader(reader, 1)[0];
+            vaxinfo = new LinkedHashMap<>(getMapSize(0.75f, size));
             //Read files
             Iterator<String[]> iter = CsvParser.iterator(reader);
             while (iter.hasNext()) {
@@ -56,8 +51,8 @@ public class Vaccinati extends Data {
              BufferedWriter writer = new BufferedWriter(new FileWriter(rFile.getFD()))) {
             //Delete everything after header as we are overwriting data
             rFile.setLength(11);
+            //Go to file end
             rFile.seek(11);
-
             //Save centers
             CsvWriter cw = CsvWriter.dsl().to(writer);
             for (VaxInfo vax : vaxinfo.values())
@@ -77,20 +72,15 @@ public class Vaccinati extends Data {
         //Read size
         int newSize;
         try (FileReader reader = new FileReader(getFileFromCenter(centerName))) {
-            //Read
-            char[] size = new char[10];
-            reader.read(size, 0, 10);
-            newSize = Integer.parseInt(new String(size)) + 1;
+            newSize = readHeader(reader, 1)[0];
+            newSize++;
         }
         //Write new size and info
         try (RandomAccessFile rFile = new RandomAccessFile(getFileFromCenter(centerName), "rw");
              BufferedWriter writer = new BufferedWriter(new FileWriter(rFile.getFD()))) {
-            String size = Integer.toString(newSize);
-            writer.write(Strings.padStart(size, 10, '0'));
-            writer.flush();
+            writeHeader(writer, newSize);
             rFile.seek(rFile.length());
-
-            //Info
+            //Save info
             CsvWriter cw = CsvWriter.dsl().to(writer);
             cw.appendRow(info.toRow());
         }
@@ -122,7 +112,7 @@ public class Vaccinati extends Data {
         File newFile = getFileFromCenter(centerName);
         if (newFile.createNewFile()) {
             try (FileWriter writer = new FileWriter(newFile)) {
-                writer.write("0000000000\n");
+                writeHeader(writer, 0);
             }
             return true;
         }

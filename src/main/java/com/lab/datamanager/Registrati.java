@@ -1,6 +1,5 @@
 package com.lab.datamanager;
 
-import com.google.common.base.Strings;
 import com.lab.data.User;
 import org.simpleflatmapper.csv.CsvParser;
 import org.simpleflatmapper.lightningcsv.CsvWriter;
@@ -8,6 +7,7 @@ import org.simpleflatmapper.lightningcsv.CsvWriter;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -33,11 +33,7 @@ public class Registrati extends Data {
         users.put(cittadino.getUserID(), cittadino);
         try (RandomAccessFile rf = new RandomAccessFile(file, "rw");
              BufferedWriter writer = new BufferedWriter(new FileWriter(rf.getFD()))) {
-            //Write HashMap size
-            String mapSize = Integer.toString(users.size());
-            writer.write(Strings.padStart(mapSize, 10, '0'));
-            writer.flush();
-
+            writeHeader(writer, users.size());
             //Write user
             rf.seek(rf.length());
             CsvWriter cw = CsvWriter.dsl().to(writer);
@@ -53,13 +49,9 @@ public class Registrati extends Data {
     public static void load() throws IOException {
         if (!createNewFile()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                //Create hashmap with correct size
-                char[] size = new char[10];
-                reader.read(size, 0, 10);
-                int mapSize = Integer.parseInt(new String(size));
-                users = new HashMap<>(getMapSize(0.75f, mapSize));
-                reader.skip(1);
-
+                //Create hashmap
+                int size = readHeader(reader, 1)[0];
+                users = new LinkedHashMap<>(getMapSize(0.75f, size));
                 //Load users
                 Iterator<String[]> it = CsvParser.iterator(reader);
                 while (it.hasNext()) {
@@ -95,8 +87,8 @@ public class Registrati extends Data {
      */
     private static boolean createNewFile() throws IOException {
         if (file.createNewFile()) {
-            try (FileWriter fw = new FileWriter(file)) {
-                fw.write("0000000000\n");
+            try (FileWriter writer = new FileWriter(file)) {
+                writeHeader(writer, 0);
             }
             return true;
         }

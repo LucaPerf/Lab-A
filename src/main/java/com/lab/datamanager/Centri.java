@@ -1,6 +1,5 @@
 package com.lab.datamanager;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.LinkedListMultimap;
 import com.lab.data.Center;
 import com.lab.data.CenterType;
@@ -42,18 +41,12 @@ public class Centri extends Data {
         centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
         centerNames.add(center.getName());
         //This will close the file whether an exception is thrown or not
-        try (RandomAccessFile rf = new RandomAccessFile(file, "rw");
-             BufferedWriter fw = new BufferedWriter(new FileWriter(rf.getFD()))) {
-            //Save sizes
-            String size = Integer.toString(centerNames.size());
-            fw.write(Strings.padStart(size, 10, '0'));
-            size = Integer.toString(centers.keySet().size());
-            fw.write(Strings.padStart(size, 10, '0'));
-            fw.flush();
-            rf.seek(rf.length());
-
+        try (RandomAccessFile rFile = new RandomAccessFile(file, "rw");
+             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(rFile.getFD()))) {
+            writeHeader(bufferedWriter, centerNames.size(), centers.keySet().size());
+            rFile.seek(rFile.length());
             //Save new center
-            CsvWriter writer = CsvWriter.dsl().to(fw);
+            CsvWriter writer = CsvWriter.dsl().to(bufferedWriter);
             writer.appendRow(center.toRow());
             Vaccinati.createNewFile(center.getName());
         }
@@ -70,8 +63,8 @@ public class Centri extends Data {
              BufferedWriter fw = new BufferedWriter(new FileWriter(fr.getFD()))) {
             //Delete everything after header as we are overwriting, 1 char = 1 byte
             fr.setLength(21);
+            //Go to file end
             fr.seek(21);
-
             //Save centers
             CsvWriter cw = CsvWriter.dsl().to(fw);
             for (Center center : centers.values())
@@ -88,15 +81,9 @@ public class Centri extends Data {
         if (!createNewFile()) {
             try (BufferedReader fr = new BufferedReader(new FileReader(file))) {
                 //Create maps
-                char[] size = new char[10];
-                fr.read(size, 0, 10);
-                int mapSize = Integer.parseInt(new String(size));
-                centerNames = new HashSet<>(getMapSize(0.75f, mapSize));
-                fr.read(size, 0, 10);
-                mapSize = Integer.parseInt(new String(size));
-                centers = LinkedListMultimap.create(getMapSize(0.75f, mapSize));
-                fr.skip(1);
-
+                int[] sizes = readHeader(fr, 2);
+                centerNames = new HashSet<>(getMapSize(0.75f, sizes[0]));
+                centers = LinkedListMultimap.create(sizes[1]);
                 //Read centers
                 Iterator<String[]> iter = CsvParser.iterator(fr);
                 while (iter.hasNext()) {
@@ -187,8 +174,8 @@ public class Centri extends Data {
      */
     private static boolean createNewFile() throws IOException {
         if (file.createNewFile()) {
-            try (FileWriter w = new FileWriter(file)) {
-                w.write("00000000000000000000\n");
+            try (FileWriter writer = new FileWriter(file)) {
+                writeHeader(writer, 0);
             }
             return true;
         }
