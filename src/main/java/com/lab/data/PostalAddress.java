@@ -58,4 +58,31 @@ public class PostalAddress {
         this.province = province.trim();
         this.cap = cap;
     }
+
+    /**
+     * Creates an object from a CSV row, mapped as follows:<br>
+     * 0: cap<br>
+     * 1: district<br>
+     * 2: street<br>
+     * 3: province
+     *
+     * @param row The row to get data from
+     */
+    public PostalAddress(String[] row) {
+        cap = Integer.parseInt(row[0]);
+        district = row[1];
+        street = row[2];
+        province = row[3];
+    }
+
+    /**
+     * @return A CSV row representation of this object, mapped as follows:<br>
+     * 0: cap<br>
+     * 1: district<br>
+     * 2: street<br>
+     * 3: province
+     */
+    public String[] toRow() {
+        return new String[]{cap.toString(), district, street, province};
+    }
 }

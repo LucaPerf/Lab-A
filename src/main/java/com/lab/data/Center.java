@@ -83,7 +83,7 @@ public class Center {
      */
     public Center(String[] row) throws NumberFormatException, ArrayIndexOutOfBoundsException, IllegalArgumentException {
         name = row[0];
-        address = new PostalAddress(row[3], row[2], row[4], Integer.parseInt(row[1]));
+        address = new PostalAddress(Arrays.copyOfRange(row, 1, 5));
         type = CenterType.fromString(row[5]);
         //Add stats
         for (int i = 6; i < row.length; i += 3) {
@@ -106,10 +106,7 @@ public class Center {
     public String[] toRow() {
         String[] info = new String[6 + stats.size() * 3];
         info[0] = name;
-        info[1] = address.getCap().toString();
-        info[2] = address.getDistrict();
-        info[3] = address.getStreet();
-        info[4] = address.getProvince();
+        System.arraycopy(address.toRow(), 0, info, 1, 4);
         info[5] = type.toString();
         //Add stats
         int offset = 6;
