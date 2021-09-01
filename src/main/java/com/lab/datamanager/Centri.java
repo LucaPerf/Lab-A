@@ -175,7 +175,7 @@ public class Centri extends Data {
     private static boolean createNewFile() throws IOException {
         if (file.createNewFile()) {
             try (FileWriter writer = new FileWriter(file)) {
-                writeHeader(writer, 0);
+                writeHeader(writer, 0,0);
             }
             return true;
         }
