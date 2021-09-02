@@ -98,13 +98,6 @@ public class Centri extends Data {
     }
 
     /**
-     * @return A {@link LinkedListMultimap} of {@link Center} containing all centers grouped by comune
-     */
-    public static LinkedListMultimap<String, Center> getCenters() {
-        return centers;
-    }
-
-    /**
      * @param centerName The name of the center to search for
      * @return A list of {@link Center} whose names contain <code>nomeCentro</code> (case-insensitive)
      */
@@ -175,7 +168,7 @@ public class Centri extends Data {
     private static boolean createNewFile() throws IOException {
         if (file.createNewFile()) {
             try (FileWriter writer = new FileWriter(file)) {
-                writeHeader(writer, 0,0);
+                writeHeader(writer, 0, 0);
             }
             return true;
         }
