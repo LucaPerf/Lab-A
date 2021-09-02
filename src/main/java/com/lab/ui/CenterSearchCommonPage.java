@@ -1,6 +1,7 @@
 package com.lab.ui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListCell;
 import com.jfoenix.controls.JFXListView;
 import com.lab.cittadini.Cittadini;
 import com.lab.data.Center;
@@ -138,12 +139,17 @@ public class CenterSearchCommonPage extends Page {
     }
 
     /**
-     * Sets the method to be executed when a center on the result list is clicked. By default an empty {@link EventHandler} is executed, which does nothing.
+     * Sets the method to be executed when a center on the result list is clicked. By default an empty {@link EventHandler} is executed, which does nothing. This method sets a new cell factory.
      *
      * @param event The event handler to be executed
      */
     public void setOnListItemAction(EventHandler<MouseEvent> event) {
-        centers.setOnMouseClicked(event);
+        //Sets a new cell factory binding event to OnMouseClicked
+        centers.setCellFactory(param -> {
+            JFXListCell<Center> cell = new JFXListCell<>();
+            cell.setOnMouseClicked(event);
+            return cell;
+        });
     }
 
     /**
