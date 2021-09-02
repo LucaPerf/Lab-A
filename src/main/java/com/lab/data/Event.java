@@ -8,7 +8,7 @@ package com.lab.data;
 
 public class Event {
 
-    private Integer intensity;
+    private int intensity;
     private String report;
     private EventType type;
 
@@ -40,7 +40,7 @@ public class Event {
      * @param report    The report of the event
      * @param type      The type of the event
      */
-    public Event(Integer intensity, String report, EventType type) {
+    public Event(int intensity, String report, EventType type) {
         this.intensity = intensity;
         this.report = report.trim();
         this.type = type;
@@ -64,6 +64,6 @@ public class Event {
      * 2: {@link #report}
      */
     public String[] toRow() {
-        return new String[]{type.toString(), intensity.toString(), report};
+        return new String[]{type.toString(), Integer.toString(intensity), report};
     }
 }

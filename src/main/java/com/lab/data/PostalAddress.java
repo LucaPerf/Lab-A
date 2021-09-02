@@ -10,7 +10,7 @@ public class PostalAddress {
     private String street;
     private String district;
     private String province;
-    private Integer cap;
+    private int cap;
 
     /**
      * @return The street address
@@ -52,7 +52,7 @@ public class PostalAddress {
      * @param province The province
      * @param cap      The "CAP"
      */
-    public PostalAddress(String address, String city, String province, Integer cap) {
+    public PostalAddress(String address, String city, String province, int cap) {
         this.street = address.trim();
         this.district = city.trim();
         this.province = province.trim();
@@ -83,6 +83,6 @@ public class PostalAddress {
      * 3: province
      */
     public String[] toRow() {
-        return new String[]{cap.toString(), district, street, province};
+        return new String[]{Integer.toString(cap), district, street, province};
     }
 }

@@ -73,7 +73,7 @@ public class Cittadini {
      * @return Fasle if the user hasn't been found or an event of the same type has already been reported
      * @throws IOException If data cannot be added to the file for any reason
      */
-    public static boolean inserisciEventiAvversi(Long uID, Event event, Center center) throws IOException {
+    public static boolean inserisciEventiAvversi(long uID, Event event, Center center) throws IOException {
         Vaccinati.load(center.getName());
         VaxInfo vi = Vaccinati.find(uID);
 
