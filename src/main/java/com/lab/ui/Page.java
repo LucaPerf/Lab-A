@@ -45,7 +45,7 @@ abstract public class Page {
     public Page() {
         uIDValidator.setRegexPattern("^[0-9]{16}$");
         capValidator.setRegexPattern("^[0-9]{5}$");
-        ccfValidator.setRegexPattern("^[A-Z]{6}[A-Za-z0-9]{3}[0-9]{2}[A-Za-z0-9]{4}[A-Za-z]{1}$");
+        ccfValidator.setRegexPattern("^[A-Za-z]{6}[A-Za-z0-9]{3}[0-9]{2}[A-Za-z0-9]{4}[A-Za-z]{1}$");
     }
 
     /**
