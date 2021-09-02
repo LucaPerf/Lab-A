@@ -96,7 +96,7 @@ public class Vaccinati extends Data {
      *
      * @param uID Unique id associated with a vaccinated person
      */
-    public static VaxInfo find(Long uID) {
+    public static VaxInfo find(long uID) {
         return vaxinfo.get(uID);
     }
 
