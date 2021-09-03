@@ -71,8 +71,9 @@ public class PagesManager {
      *
      * @param stage The stage associated with this application
      */
-    public static void initialize(Stage stage) {
+    public static void initialize(Stage stage) throws IOException {
         //Load all pages
+        errorPage.initialize();
         centerRegPage = loadPage(centerRegLoader);
         centerActionsPage = loadPage(centerActionsLoader);
         areaSelectionPage = loadPage(areaSelectionLoader);
@@ -83,7 +84,6 @@ public class PagesManager {
         centerSelectionPage = loadPage(centerSelectionLoader);
         centerInfoPage = loadPage(centerInfoLoader);
         eventReportPage = loadPage(eventReportLoader);
-        errorPage.initialize();
     }
 
     /**
@@ -137,15 +137,9 @@ public class PagesManager {
         stage.setScene(scene);
     }
 
-    private static Page loadPage(FXMLLoader loader) {
-        try {
-            loader.load();
-            return loader.getController();
-        } catch (IOException e) {
-            System.out.println("Page resource loading failed \n");
-            e.printStackTrace();
-            return null;
-        }
+    private static Page loadPage(FXMLLoader loader) throws IOException {
+        loader.load();
+        return loader.getController();
     }
 
     /**

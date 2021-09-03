@@ -39,12 +39,11 @@ public class CentriVaccinali extends Application {
         stage.setTitle("Lab AB");
         PagesManager.openEmptyScene(stage);
         stage.show();
-        //UI loading
-        PagesManager.initialize(stage);
-
-        //Data loading
-        Data.createDirectory();
         try {
+            //UI loading
+            PagesManager.initialize(stage);
+            //Data loading
+            Data.createDirectory();
             Centri.load();
             Registrati.load();
         } catch (IOException e) {
