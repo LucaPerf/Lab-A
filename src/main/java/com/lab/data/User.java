@@ -2,38 +2,59 @@ package com.lab.data;
 
 /**
  * This class represents a registered user.
+ * <p>Username, password, name, surname, "Codeice Fiscale", email and unique vaccination id are contained in this class.
  *
  * @author Ciceri Luigi
+ * @author Luca Perfetti
  */
 public class User {
-    private String userID;
+    /**
+     * The username
+     */
+    private String username;
+    /**
+     * The password of this account
+     */
     private String password;
+    /**
+     * The name of the citizen
+     */
     private String name;
+    /**
+     * The surname of the citizen
+     */
     private String surname;
+    /**
+     * The "Codice Fiscale" of the citizen
+     */
     private String ccf;
+    /**
+     * The email of the citizen
+     */
     private String email;
+    /**
+     * The unique vaccination ID.
+     * <p>It must have 16 digits.
+     */
+    private long uID;
 
     /**
-     * @return The 16 bit unique vaccination identifier
+     * @return The 16 digits unique vaccination identifier
      */
     public long getuID() {
         return uID;
     }
 
-    private long uID;
-
 
     /**
      * @return The username of this User
-     * @author Luca Perfetti
      */
-    public String getUserID() {
-        return userID;
+    public String getUsername() {
+        return username;
     }
 
     /**
      * @return The password of this user instance
-     * @author Ciceri Luigi
      */
     public String getPassword() {
         return password;
@@ -46,36 +67,35 @@ public class User {
      * @param surname  The surname of the user
      * @param ccf      The "codice fiscale" of the user
      * @param email    The user email
-     * @param userID   "The user id "nickname"
-     * @param password "The user password"
-     * @param uID      "The unique id (16 bit) provided by the center"
+     * @param username The user id "nickname"
+     * @param password The user password
+     * @param uID      The unique id (16 digits)
      */
-    public User(String name, String surname, String ccf, String email, String userID, String password, long uID) {
+    public User(String name, String surname, String ccf, String email, String username, String password, long uID) {
         this.name = name.trim();
         this.surname = surname.trim();
         this.ccf = ccf.trim();
         this.email = email.trim();
-        this.userID = userID.trim();
+        this.username = username.trim();
         this.password = password;
         this.uID = uID;
     }
 
     /**
      * Creates a new user object from a csv row.
+     * <p>Each element of the array is a cell.
      *
-     * @param row The row to get the data from, indexes mapped as follows:
-     *            0: userid
-     *            1: password
-     *            2: name
-     *            3: surname
-     *            4: CCF
-     *            5: email
-     *            6: unique id
-     * @throws ArrayIndexOutOfBoundsException If the array contains more or less than 7 elements
-     * @throws NumberFormatException          If the uID format is invalid
+     * @param row The row to get the data from, indexes mapped as follows:<br>
+     *            0: {@link #username}<br>
+     *            1: {@link #password}<br>
+     *            2: {@link #name}<br>
+     *            3: {@link #surname}<br>
+     *            4: {@link #ccf}<br>
+     *            5: {@link #email}<br>
+     *            6: {@link #uID}<br>
      */
-    public User(String[] row) throws ArrayIndexOutOfBoundsException, NumberFormatException {
-        userID = row[0];
+    public User(String[] row) {
+        username = row[0];
         password = row[1];
         name = row[2];
         surname = row[3];
@@ -85,17 +105,17 @@ public class User {
     }
 
     /**
-     * @return A string array containing all information about the User object, indexes mapped as follows:
-     * 0: userid
-     * 1: password
-     * 2: name
-     * 3: surname
-     * 4: CCF
-     * 5: email
-     * 6: unique id
+     * @return A csv row representation of this object, indexes mapped as follows:<br>
+     * 0: {@link #username}<br>
+     * 1: {@link #password}<br>
+     * 2: {@link #name}<br>
+     * 3: {@link #surname}<br>
+     * 4: {@link #ccf}<br>
+     * 5: {@link #email}<br>
+     * 6: {@link #uID}<br>
      */
     public String[] toRow() {
         return new String[]{
-                userID, password, name, surname, ccf, email, Long.toString(uID)};
+                username, password, name, surname, ccf, email, Long.toString(uID)};
     }
 }

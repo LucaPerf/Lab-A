@@ -14,29 +14,47 @@ import java.util.Locale;
 
 /**
  * Class used for center data management.
- * Centers data is stored into a LinkedHashMap with the comune name as key, and a LinkedList as values. In this way centers are grouped by comune.
+ * <p>Centers data is stored into a {@link LinkedListMultimap} with district name as key, and {@link Center} as values. In this way centers are grouped by district for fast search operations.
+ * Districts' names are converted to lowercase to allow for case-insensitive search.<br>
+ * A {@link HashSet} provides fast center existence check capability.<br>
+ * A {@link File} represents the file data will be saved to.<br>
+ * To optimize the maps' sizes, a header is written into the first line of the csv file. It contains two digits, padded to reach a length of 10 characters ({@link Integer#MAX_VALUE} length).
+ * The first 10 digits represents the number of centers, the second one the number of districts.
+ * The '\n' separator is appended after the digits.
  * This class provides static methods to load and save centers to a CSV file, named "CentriVaccinali.csv".
  *
  * @author Luigi Ciceri
+ * @author Luca Perfetti
  **/
 
 public class Centri extends Data {
+    /**
+     * Private constructor to avoid class instantiation
+     */
     private Centri() {
     }
 
+    /**
+     * Represents the file data will be saved to.
+     */
     private static File file = new File(dataDirectory, "CentriVaccinali.csv");
+    /**
+     * Stores centers grouped by district.
+     * <p>This data structure allows keys to be mapped to multiple values and uses a {@link java.util.HashMap} as underlying structure.
+     */
     private static LinkedListMultimap<String, Center> centers = LinkedListMultimap.create();
-    //This is needed only to check if a center exists
+    /**
+     * Map needed for fast center existence check.
+     */
     private static HashSet<String> centerNames = new HashSet<>();
 
     /**
-     * Adds a center to the LinkedHashMap, using the comune as key
+     * Adds a center to {@link #centers} and saves it into the {@link #file}.
+     * <p>The header is also updated.
      *
      * @param center The center to add
      * @throws IOException If data cannot be added to the file for any reason
      */
-
-    //Adds center to the centers LinkedHashMap
     public static void add(Center center) throws IOException {
         centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
         centerNames.add(center.getName());
@@ -54,7 +72,9 @@ public class Centri extends Data {
 
 
     /**
-     * Writes a center to the file, in CSV format
+     * Saves all {@link #centers} into the {@link #file}.
+     * <p>This is needed because specific parts of the file can't be overwritten without saving all content again.<br>
+     * The header remain untouched.
      *
      * @throws IOException If data cannot be saved to the file for any reason
      */
@@ -73,7 +93,9 @@ public class Centri extends Data {
     }
 
     /**
-     * Method used to read the data from the file and insert it into the LinkedListMultiMap. It also creates the vaccination file for each center if it doesn't exist.
+     * Read the data from the file and insert it into {@link #centers} and {@link #centerNames}.
+     * <p>It also creates the vaccination file for each center if it doesn't exist, as well as maps of the correct size.<br>
+     * If the file does not exist, it is created and nothing else is done.
      *
      * @throws IOException If data cannot be loaded from the file for any reason
      */
@@ -98,6 +120,8 @@ public class Centri extends Data {
     }
 
     /**
+     * Searches a center by name.
+     *
      * @param centerName The name of the center to search for
      * @return A list of {@link Center} whose names contain <code>nomeCentro</code> (case-insensitive)
      */
@@ -117,8 +141,10 @@ public class Centri extends Data {
     }
 
     /**
+     * Searches a center by district and type.
+     *
      * @param type   The type of center to search for
-     * @param comune The name of the comune to search in
+     * @param comune The name of the district to search in
      * @return A list of {@link Center} located in <code>comune</code>, of <code>type</code> (case-insensitive)
      */
     public static LinkedList<Center> find(CenterType type, String comune) {
@@ -134,7 +160,8 @@ public class Centri extends Data {
     }
 
     /**
-     * @param n The number of centers to add to the list. The order is guaranteed by the {@link LinkedListMultimap} implementation
+     * @param n The number of centers to add to the list.
+     *          <p>The order is guaranteed by the {@link LinkedListMultimap} implementation.
      * @return A {@link LinkedList} containing the last <code>n</code> registered centers
      */
     public static LinkedList<Center> getRecent(int n) {
@@ -152,17 +179,21 @@ public class Centri extends Data {
 
 
     /**
+     * Checks if a center exists.
+     *
      * @param center The center to check the existence of
-     * @return True if and only if <code>center</code> exists. The center name is used to check its existence with the method {@link HashSet#contains(Object)}
+     * @return True if and only if <code>center</code> exists. The center name is used to check its existence with {@link HashSet#contains(Object)}
      */
     public static boolean contains(Center center) {
         return centerNames.contains(center.getName());
     }
 
     /**
-     * Creates a new file. The first 10 digits in the first line represents the number of centers, the next 10 the number of districts
+     * Creates a new file.
+     * <p>Header is written with values of 0 and 0.
      *
-     * @return True if a file didn't exist and was created successfully, false otherwise. Thi method uses {@link File#createNewFile()}
+     * @return True if the file didn't exist and was created successfully, false otherwise.
+     * <p>This method uses {@link File#createNewFile()}
      * @throws IOException If the file could not be created for any reason
      */
     private static boolean createNewFile() throws IOException {

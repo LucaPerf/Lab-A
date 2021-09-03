@@ -11,26 +11,40 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Class used for register citizens.
+ * This class manages registered users' data.
+ * <p> All data is stored into "Cittadini.csv".
+ * The header contains the number of registered users.<br>
+ * Users' data is loaded into a {@link HashMap} with username as key.<br>
  *
  * @author Luca Perfetti
+ * @author Luigi Ciceri
  */
 
 public class Registrati extends Data {
+    /**
+     * Private contructor to avoid class instantiation.
+     */
     private Registrati() {
     }
 
+    /**
+     * {@link File} all data is saved into.
+     */
     private static File file = new File(dataDirectory, "Cittadini.csv");
+    /**
+     * Stores users' information by username.
+     */
     private static HashMap<String, User> users = new HashMap<>();
 
     /**
-     * Adds a suer to a file, named "Cittadini.csv"
+     * Adds a user to {@link #users} and saves it to the {@link #file}.
+     * <p>The header is updated with the new map size.
      *
      * @param cittadino The citizen to add
      * @throws IOException If data could not be added for any reason
      */
     public static void add(User cittadino) throws IOException {
-        users.put(cittadino.getUserID(), cittadino);
+        users.put(cittadino.getUsername(), cittadino);
         try (RandomAccessFile rf = new RandomAccessFile(file, "rw");
              BufferedWriter writer = new BufferedWriter(new FileWriter(rf.getFD()))) {
             writeHeader(writer, users.size());
@@ -42,7 +56,9 @@ public class Registrati extends Data {
     }
 
     /**
-     * Read the citizens' data from the file and write them in a HashMap
+     * Loads all data from {@link #file} into {@link #users}.
+     * <p>If the file does not exist it is created and nothing else is done.<br>
+     * Otherwise the {@link #users} map is assigned a new instance with the correct size parsed from the header.
      *
      * @throws IOException If data could not be loaded from the file for any reason
      */
@@ -57,32 +73,39 @@ public class Registrati extends Data {
                 while (it.hasNext()) {
                     String[] row = it.next();
                     User user = new User(row);
-                    users.put(user.getUserID(), user);
+                    users.put(user.getUsername(), user);
                 }
             }
         }
     }
 
     /**
+     * Searches a user by <code>username</code>.
+     *
      * @param username The username to search for
-     * @return The {@link User} whos username is <code>username</code>, <code>null</code> if no user with such name exists
+     * @return The {@link User} whose username is <code>username</code> or <code>null</code> if no user with such name exists
      */
     public static User find(String username) {
         return users.get(username);
     }
 
     /**
+     * Checks if a user exists.
+     *
      * @param user The user to check the existence of
-     * @return True if and only if a user with {@link User#getUserID()} exists. This method uses {@link Map#containsKey(Object)}
+     * @return True if and only if a user with {@link User#getUsername()} exists.
+     * <p>This method uses {@link Map#containsKey(Object)}
      */
     public static boolean contains(User user) {
-        return users.containsKey(user.getUserID());
+        return users.containsKey(user.getUsername());
     }
 
     /**
-     * Creates a new file. The first line represents the number of objects (0).
+     * Creates a new file.
+     * <p>Header is written with a value of 0.
      *
-     * @return True if a file didn't exist and was created successfully, false otherwise. Thi method uses {@link File#createNewFile()}
+     * @return True if a file didn't exist and was created successfully, false otherwise.
+     * <p>This method uses {@link File#createNewFile()}
      * @throws IOException If the file could not be created for any reason
      */
     private static boolean createNewFile() throws IOException {

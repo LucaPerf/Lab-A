@@ -9,12 +9,17 @@ import java.io.Writer;
 
 /**
  * Base class for all data managed by the application.
+ *
+ * @author Luigi Ciceri
  */
 public abstract class Data {
+    /**
+     * The folder all data will be saved into.
+     */
     protected static File dataDirectory = new File("data");
 
     /**
-     * Creates the "data" folder where all data will be placed f and only if it doesn't exist.
+     * Creates the {@link #dataDirectory} folder where all data will be placed only if it doesn't exist.
      */
     public static void createDirectory() {
         if (!dataDirectory.exists())
@@ -31,7 +36,8 @@ public abstract class Data {
     }
 
     /**
-     * Writes <code>sizes</code> as header. The <code>writer</code> is flushed after writing to apply changes immediately. The <code>writer</code> is advanced after this method is invoked.
+     * Writes <code>sizes</code> as file header.
+     * <p>The <code>writer</code> is flushed after writing to apply changes immediately. The <code>writer</code> is advanced after this method is invoked.
      * Argument ints are prefixed with zeros to ensure that their length is exactly 10. A '\n' separator is added after the line.
      *
      * @param writer The writer to use for this operation
@@ -49,13 +55,14 @@ public abstract class Data {
     }
 
     /**
-     * Reads the header ints into an array. <code>intsHeader</code> are read with <code>reader</code>, each with a length of 10 characters.
+     * Reads the header ints into an array.
+     * <p><code>intsHeader</code> are read with <code>reader</code>, each with a length of 10 characters.
      * The order of ints from the file is preserved.
      * The reader is advanced after this method is invoked and the '\n' header separator skipped.
      *
      * @param reader     The reader to use
      * @param headerSize The number of <code>int</code> contained in the header
-     * @return An array containing all headers
+     * @return An array containing all parsed headers
      * @throws IOException If the header could not be read for any reason
      */
     protected static int[] readHeader(Reader reader, int headerSize) throws IOException {

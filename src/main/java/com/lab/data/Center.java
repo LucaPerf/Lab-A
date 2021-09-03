@@ -5,20 +5,38 @@ import java.util.HashMap;
 import java.util.Locale;
 
 /**
- * This class represents information about a vaccination center.
+ * This class represents a vaccination center.
+ * <p>Methods and constructors are provided for a simple conversion from and to CSV row.<br>
+ * This class contains getters and setters for needed variables.<br>
+ * A {@link java.util.HashMap} is used to store all types of statistics about the center.
  *
  * @author Luca Perfetti
+ * @author Luigi Ciceri
  */
 
 public class Center {
+    /**
+     * The name of the center
+     */
     private String name;
+    /**
+     * The {@link PostalAddress} of this center
+     */
     private PostalAddress address;
+    /**
+     * The {@link CenterType} of this center
+     */
     private CenterType type;
-    private HashMap<String, Stat> stats = new HashMap<>((int) Math.ceil(EventType.values().length / 0.8) + 1);
+    /**
+     * A hashmap containing all {@link Stat} about this center.
+     * <p>The stat's name is used as key to allow the addition of custom statistics.
+     * The hashmap size is calculated from {@link EventType} possible values. Custom statistics are not taken into account.
+     * Default load factor is used.
+     */
+    private HashMap<String, Stat> stats = new HashMap<>((int) Math.ceil(EventType.values().length / 0.75f) + 1);
 
     /**
      * @return The name of this center
-     * @author Luca Perfetti
      */
     public String getName() {
 
@@ -26,19 +44,15 @@ public class Center {
     }
 
     /**
-     * @return The address of this center
-     * @author Luca Perfetti
+     * @return The {@link PostalAddress} of this center
      */
-
-    // public PostalAddess getAddess(){}
     public PostalAddress getAddress() {
 
         return address;
     }
 
     /**
-     * @return The type of this center
-     * @author Luca Perfetti
+     * @return The {@link CenterType} of this center
      */
     public CenterType getType() {
 
@@ -46,13 +60,11 @@ public class Center {
     }
 
     /**
-     * Created a Center object with an empty stat for each event type. All string parameters are trimmed.
+     * Creates a Center object with an empty stat for each event type. All string parameters are trimmed.
      *
      * @param name    The name of the center
      * @param address The address of the center
      * @param type    The type of the center
-     * @author Luca Perfetti
-     * @author Luigi Cieri
      */
     public Center(String name, PostalAddress address, CenterType type) {
         this.name = name.trim();
@@ -66,22 +78,20 @@ public class Center {
     }
 
     /**
-     * Creates a new user object from a csv row.
+     * Creates a new user object from a CSV row.
+     * <p>Eacxh item in the array represents a cell.
+     * The constructor of {@link PostalAddress} is used.
      *
      * @param row The row to get the data from, indexes mapped as follows:<br>
-     *            0: name<br>
+     *            0: {@link #name}<br>
      *            1: cap<br>
      *            2: comune<br>
      *            3: address<br>
      *            4: provincia<br>
-     *            5: type<br>
-     *            6+: stats in groups of 3 elements
-     * @throws NumberFormatException          If the cap is not a valid number
-     * @throws ArrayIndexOutOfBoundsException If the array does not contain 6 elements
-     * @throws IllegalArgumentException       If the center type is not valid
-     * @author Ciceri Luigi
+     *            5: {@link #type}
+     *            6+: {@link #stats} in groups of 3 elements
      */
-    public Center(String[] row) throws NumberFormatException, ArrayIndexOutOfBoundsException, IllegalArgumentException {
+    public Center(String[] row) {
         name = row[0];
         address = new PostalAddress(Arrays.copyOfRange(row, 1, 5));
         type = CenterType.fromString(row[5]);
@@ -94,14 +104,13 @@ public class Center {
 
     /**
      * @return A string array containing all information about the User object, indexes mapped as follows:<br>
-     * 0: name<br>
+     * 0: {@link #name}<br>
      * 1: cap<br>
      * 2: comune<br>
      * 3: address<br>
      * 4: provincia<br>
-     * 5: type<br>
-     * 6+: stats in groups of 3 elements
-     * @author Ciceri Luigi
+     * 5: {@link #type}
+     * 6+: {@link #stats} in groups of 3 elements
      */
     public String[] toRow() {
         String[] info = new String[6 + stats.size() * 3];
@@ -127,7 +136,8 @@ public class Center {
     }
 
     /**
-     * Updates the stat of with the new <code>event</code>. The global stat will also be updated.
+     * Updates the stat {@link EventType#toString()} with the new <code>event</code>.
+     * <p>The global stat will also be updated.
      *
      * @param event The event ot update the stat with
      */
@@ -142,7 +152,7 @@ public class Center {
 
     /**
      * @param name The type of stat to return
-     * @return A stat of <code>type</code> or <code>null</code> if no such stat exists
+     * @return A stat whose name is <code>name</code> or <code>null</code> if no such stat exists
      */
     public Stat getStat(String name) {
         return stats.getOrDefault(name, null);

@@ -2,14 +2,30 @@ package com.lab.data;
 
 /**
  * This class represents a postal address.
+ * <p>Street address, district, province and CAP are stored.<br>
+ * Getters and setters for required variables are provided as well as methods and construcotrs needed to easily convert objects to and from CSV rows.
  *
  * @author Luca Perfetti
+ * @author Luigi Ciceri
  */
 
 public class PostalAddress {
+    /**
+     * The street address
+     */
     private String street;
+    /**
+     * The district this address is in.
+     * <p>The italian for district is "comune".
+     */
     private String district;
+    /**
+     * The province this address is in
+     */
     private String province;
+    /**
+     * The CAP (Codice Avviamento Postale) of this address
+     */
     private int cap;
 
     /**
@@ -37,7 +53,7 @@ public class PostalAddress {
     }
 
     /**
-     * @return The "CAP"
+     * @return The CAP
      */
     public Integer getCap() {
 
@@ -45,12 +61,12 @@ public class PostalAddress {
     }
 
     /**
-     * Creates a class. All string arguments are trimmed.
+     * Class constructor. All string arguments are trimmed.
      *
      * @param address  The street address
      * @param city     The district
      * @param province The province
-     * @param cap      The "CAP"
+     * @param cap      The CAP
      */
     public PostalAddress(String address, String city, String province, int cap) {
         this.street = address.trim();
@@ -60,11 +76,12 @@ public class PostalAddress {
     }
 
     /**
-     * Creates an object from a CSV row, mapped as follows:<br>
-     * 0: cap<br>
-     * 1: district<br>
-     * 2: street<br>
-     * 3: province
+     * Creates an object from a CSV row.
+     * <p>Each element of the <code>row</code>> is a cell. Indexes are mapped as follows:<br>
+     * 0: {@link #cap}<br>
+     * 1: {@link #district}<br>
+     * 2: {@link #street}<br>
+     * 3: {@link #province}
      *
      * @param row The row to get data from
      */
@@ -76,11 +93,12 @@ public class PostalAddress {
     }
 
     /**
-     * @return A CSV row representation of this object, mapped as follows:<br>
-     * 0: cap<br>
-     * 1: district<br>
-     * 2: street<br>
-     * 3: province
+     * @return A CSV row representation of this object.
+     * <p>Each element is a cell. Indexes are mapped as follows:<br>
+     * 0: {@link #cap}<br>
+     * 1: {@link #district}<br>
+     * 2: {@link #street}<br>
+     * 3: {@link #province}
      */
     public String[] toRow() {
         return new String[]{Integer.toString(cap), district, street, province};

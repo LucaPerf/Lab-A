@@ -1,22 +1,33 @@
 package com.lab.data;
 
 /**
- * This class represents a n aggregate statistic about an event type.
- * Values are updated through the <code>update</code> method.
+ * This class represents an aggregate statistic.
+ * <p>Name, average and number of reports are contained in this class.<br>
+ * Values are updated through the {@link Stat#update(float)} method.
  *
  * @author Luigi Ciceri
  */
 public class Stat {
     /**
-     * The maximum value of a stat
+     * The maximum value a stat can reach
      */
     public final static int MAX_VALUE = 5;
+    /**
+     * The name of this statistic
+     */
     private String name;
+    /**
+     * The average value of reports
+     */
     private float average;
+    /**
+     * The number of reports
+     */
     private long reports;
 
     /**
-     * Creates a new empty stat of <code>type</code>. Reports and average will be set to 0.
+     * Creates a new empty stat of <code>name</code>.
+     * <p>Reports and average will be set to 0.
      *
      * @param name The type of stat
      */
@@ -28,11 +39,12 @@ public class Stat {
 
     /**
      * Creates a new stat from a CSV row.
+     * <p>Each element of <code>row</code> is a cell.
      *
-     * @param row The row to get the data from mapped as follows:<br>
-     *            * 0: {@link #name}<br>
-     *            * 1: {@link #average}<br>
-     *            * 2: {@link #reports}<br>
+     * @param row The row to get the data from, mapped as follows:<br>
+     *            0: {@link #name}<br>
+     *            1: {@link #average}<br>
+     *            2: {@link #reports}<br>
      */
     public Stat(String[] row) {
         name = row[0];
@@ -42,10 +54,10 @@ public class Stat {
 
     /**
      * Updates the stat average and number of reports.
-     * The number of reports is increased by 1.
+     * <p>The number of reports is increased by 1.<br>
      * The average value is calculated with the expression <br><code>newAverage = (oldAverage * oldReports + newValue)/(oldReports + 1)</code>
      *
-     * @param value The new evnt value
+     * @param value The new event value
      */
     public void update(float value) {
         average = (average * reports + value) / ++reports;
@@ -73,7 +85,7 @@ public class Stat {
     }
 
     /**
-     * @return The type of event represented by this stat
+     * @return The name of this stat
      */
     public String getName() {
         return name;

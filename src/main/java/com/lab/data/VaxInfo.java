@@ -6,19 +6,46 @@ import java.util.HashMap;
 
 /**
  * This class represents information about a vaccinated person.
+ * <p>Name, surname, "Codice Fiscale", vaccination date, type of vaccine and unique vaccination identifier are contained in this class.<br>
+ * Reported events are stored into a {@link HashMap}.<br>
+ * Required getters and setters are provided.
  *
  * @author Ciceri Luigi
+ * @author Luca Perfetti
  */
 
 public class VaxInfo {
-
+    /**
+     * The name of this vaccinated citizen.
+     */
     private String name;
+    /**
+     * The surname of this vaccinated citizen.
+     */
     private String surname;
+    /**
+     * The "Codice Fiscale" of this vaccinated citizen.
+     */
     private String ccf;
+    /**
+     * The vaccination date of this citizen.
+     * <p>Precision up to days is used.<br>
+     */
     private LocalDate date;
+    /**
+     * The type of vaccine.
+     */
     private VaxType type;
+    /**
+     * The unique vaccination identifier.
+     * <p>A 16 digits unsigned number.
+     */
     private long uID;
-    //Since we know the number of enums and the default load factor, we can calculate the exact map size
+    /**
+     * A {@link HashMap} containing the events reported by this citizen.
+     * <p>Only rported events are stored in this map.<br>
+     * The size of the map is calculated from the number of {@link EventType}, such that no rehashing will ever occur.
+     */
     private HashMap<EventType, Event> events = new HashMap<>((int) Math.ceil(EventType.values().length / 0.8) + 1);
 
     /**
@@ -52,16 +79,16 @@ public class VaxInfo {
 
     /**
      * @return A CSV row representation of this object with data mapped as follows:<br>
-     * 0: name<br>
-     * 1: surname<br>
-     * 2: ccf<br>
-     * 3: date<br>
-     * 4: type<br>
-     * 5: uID<br>
-     * 6+: events with properties as follows:<br>
+     * 0: {@link #name}<br>
+     * 1: {@link #surname}<br>
+     * 2: {@link #ccf}<br>
+     * 3: {@link #date}<br>
+     * 4: {@link #type}<br>
+     * 5: {@link #uID}<br>
+     * 6+: {@link #events} with properties as follows:<br>
      * 0: type<br>
      * 1: intensity<br>
-     * 2:report<br>
+     * 2: report<br>
      */
     public String[] toRow() {
         //6 fixed properties + 3 properties for each event
@@ -86,17 +113,16 @@ public class VaxInfo {
      * Creates a new vaxinfo object from a csv row.
      *
      * @param row The row to get the data from, indexes mapped as follows:<br>
-     *            0: name<br>
-     *            1: surname<br>
-     *            2: ccf<br>
-     *            3: date<br>
-     *            4: type<br>
-     *            5: uID<br>
-     *            6+: events with properties as follows:<br>
+     *            0: {@link #name}<br>
+     *            1: {@link #surname}<br>
+     *            2: {@link #ccf}<br>
+     *            3: {@link #date}<br>
+     *            4: {@link #type}<br>
+     *            5: {@link #uID}<br>
+     *            6+: {@link #events} with properties as follows:<br>
      *            0: type<br>
      *            1: intensity<br>
-     *            2:report<br>
-     * @author Luca Perfetti
+     *            2: report<br>
      */
 
     public VaxInfo(String[] row) {
@@ -114,7 +140,7 @@ public class VaxInfo {
     }
 
     /**
-     * Adds a new event to this vaccination information
+     * Adds a new event to this vaccination information.
      *
      * @param e The event to add
      * @return False if an event of type <code>e.getType()</code> already exists

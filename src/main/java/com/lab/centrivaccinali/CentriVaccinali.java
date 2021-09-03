@@ -14,9 +14,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Main class used to initialize data and UI
+ * Class used to manage centers operations.
+ * <p>This class also initializes UI and loads data from files.
  *
- * @author Ciceri Luigi
+ * @author Luigi Ciceri
+ * @author Luca Perfetti
  */
 public class CentriVaccinali extends Application {
 
@@ -30,7 +32,8 @@ public class CentriVaccinali extends Application {
     }
 
     /**
-     * Opens the UI stage, loads data, and opens the area selection page
+     * Opens the UI stage, loads data, and opens the area selection page.
+     * <p>Overrides {@link Application#init()}
      *
      * @param stage The stage to load
      */
@@ -57,9 +60,10 @@ public class CentriVaccinali extends Application {
     }
 
     /**
-     * Add a new center into "CentriVaccinali.csv" if no such center exists
+     * Registers a new center if no such center exists.
+     * <p>Data is saved into "CentriVaccinali.csv".
      *
-     * @param center The center to add
+     * @param center The center to register
      * @return True if and only if the center doesn't exist and is added correctly
      * @throws IOException If the center could not be added to the file
      */
@@ -72,11 +76,12 @@ public class CentriVaccinali extends Application {
     }
 
     /**
-     * Add a new vaccinated citizen into the <code>centerName</code> own file
+     * Registers a new vaccinated citizen.
+     * <p>Data is saved into "centerName_Vaccinati.csv".
      *
      * @param centerName The name of the center to add the information to
      * @param info       The information to add
-     * @throws IOException If the vaccinated user could not be written to the file
+     * @throws IOException If the vaccinated citizen could not be saved to the file
      */
     public static void registraVaccinato(String centerName, VaxInfo info) throws IOException {
         Vaccinati.add(centerName, info);

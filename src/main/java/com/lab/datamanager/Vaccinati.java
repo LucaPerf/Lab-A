@@ -10,19 +10,31 @@ import java.util.LinkedHashMap;
 
 /**
  * This class manages vaccination data of all centers.
- * Each center data is saved into a file named Vaccinati_centerName.csv
+ * <p> Data for each center is stored into "centerName_Vaccinati.csv".
+ * It is therefore needed to load data dynamically when an operation is required.
+ * This i sdone via {@link Vaccinati#load(String)}.<br>
+ * The header contains the number of information contained in the file.<br>
+ * Data is loaded into a {@link LinkedHashMap} with username as key, to improve iteration performance.
  *
  * @author Luca Perfetti
+ * @author Luigi Ciceri
  */
 
 public class Vaccinati extends Data {
+    /**
+     * Private contructor to avoid class instantiation.
+     */
     private Vaccinati() {
     }
 
+    /**
+     * Stores vaccination information by unique vaccination id.
+     */
     public static LinkedHashMap<Long, VaxInfo> vaxinfo = new LinkedHashMap<>();
 
     /**
      * Loads all vaccination information of <code>centerName<code/> into {@link #vaxinfo}
+     * <p>A new map instance is created with the correct size, parsed from the header.
      *
      * @param centerName The name of the center whose vaccination data will be loaded
      * @throws IOException If data could not be loaded from the file for any reason
@@ -42,7 +54,9 @@ public class Vaccinati extends Data {
     }
 
     /**
-     * Save all vaccination information to the file Vaccinati_centerName.csv
+     * Saves all vaccination information into the file Vaccinati_<code>centerName</code>.csv
+     * <p>This is needed because specific parts of the file cannot be overwritten without saving all data again (for example when reporting a new event).<br>
+     * The header remains untouched.
      *
      * @throws IOException If data could not be saved to the file for any reason
      */
@@ -61,10 +75,12 @@ public class Vaccinati extends Data {
     }
 
     /**
-     * Add the vaccination information  to the file "Vaccinati_ceneterName.csv"
+     * Adds a vaccination information.
+     * <p>Data is saved directly to the file "<code>centerName</code>_Vacinati.csv".<br>
+     * In this case the header must be updated with the new size because data is not necessarily loaded into {@link #vaxinfo}.
      *
-     * @param centerName The name of the center to add the vaccination to
-     * @param info       The vaccination information
+     * @param centerName The name of the center to add the information to
+     * @param info       The vaccination information to add
      * @throws IOException If data could not be added to the file for any reason
      */
     public static void add(String centerName, VaxInfo info) throws IOException {
@@ -86,15 +102,19 @@ public class Vaccinati extends Data {
         }
     }
 
-    //Creates a file from centerName
+    /**
+     * @param centerName The name of the center.
+     * @return A {@link File} whose name follows the naming convention <code>centerName</code>_Vaccinati.csv.
+     */
     public static File getFileFromCenter(String centerName) {
         return new File(dataDirectory, "Vaccinati_" + centerName + ".csv");
     }
 
     /**
-     * Searches for the citizen by means of unique id and return his information if he exists else returns null
+     * Searches for vaccination information by unique id.
      *
      * @param uID Unique id associated with a vaccinated person
+     * @return The {@link VaxInfo} associated with <code>uID</code> or null if no such information exists
      */
     public static VaxInfo find(long uID) {
         return vaxinfo.get(uID);
@@ -102,11 +122,11 @@ public class Vaccinati extends Data {
 
     /**
      * Creates an empty vaccination file for the center <code>centerName</code> if and only if it doesn't exist, named Vaccinati_<code>centerName</code>.csv.
-     * The first line contains the number of vaccinated users.
+     * <p>The first line contains the number of vaccinated users.
      * This method uses {@link File#createNewFile()}.
      *
      * @param centerName The name of the center to create the file of
-     * @throws IOException If the file could not be created
+     * @throws IOException If the file could not be created for any reason
      */
     public static boolean createNewFile(String centerName) throws IOException {
         File newFile = getFileFromCenter(centerName);

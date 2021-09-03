@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This enumerator represents a vaccination type.
- * toString() methods are overridden to easily get properly formatted names.
+ * This enumerator represents adverse events
+ * <p>A pattern allows the enumerator to convert to and from string easily.<br>
+ * {@link Object#toString()} methods are overridden to provide a nicely formatted text.
  *
  * @author Ciceri Luigi
  */
@@ -38,6 +39,9 @@ public enum VaxType {
         }
     };
 
+    /**
+     * Maps {@link VaxType} to a {@link String} representing its name.
+     */
     private static final Map<String, VaxType> VAX_TYPE_MAP;
 
     static {
@@ -47,6 +51,10 @@ public enum VaxType {
         VAX_TYPE_MAP = Collections.unmodifiableMap(map);
     }
 
+    /**
+     * @param name The enum string representation
+     * @return An {@link VaxType} which corresponds to <code>name</code> or null if no such enumerator exists.
+     */
     public static VaxType fromString(String name) {
         return VAX_TYPE_MAP.get(name.toLowerCase());
     }

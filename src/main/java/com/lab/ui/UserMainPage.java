@@ -104,7 +104,7 @@ public class UserMainPage extends Page {
         currentUser = user;
 
         topbar.getRightItems().addAll(username, logout);
-        username.setText(currentUser.getUserID());
+        username.setText(currentUser.getUsername());
         topbar.getRightItems().removeAll(register, login);
     }
 
