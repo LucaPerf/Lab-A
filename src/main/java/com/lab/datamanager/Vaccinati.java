@@ -5,6 +5,7 @@ import org.simpleflatmapper.lightningcsv.CsvParser;
 import org.simpleflatmapper.lightningcsv.CsvWriter;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
@@ -40,7 +41,7 @@ public class Vaccinati extends Data {
      * @throws IOException If data could not be loaded from the file for any reason
      */
     public static void load(String centerName) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(getFileFromCenter(centerName)))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(getFileFromCenter(centerName), StandardCharsets.UTF_8))) {
             //Read size
             int size = readHeader(reader, 1)[0];
             vaxinfo = new LinkedHashMap<>(getMapSize(0.75f, size));
@@ -62,7 +63,7 @@ public class Vaccinati extends Data {
      */
     public static void save(String centerName) throws IOException {
         try (RandomAccessFile rFile = new RandomAccessFile(getFileFromCenter(centerName), "rw");
-             BufferedWriter writer = new BufferedWriter(new FileWriter(rFile.getFD()))) {
+             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(rFile.getFD()), StandardCharsets.UTF_8))) {
             //Delete everything after header as we are overwriting data
             rFile.setLength(11);
             //Go to file end
@@ -87,13 +88,13 @@ public class Vaccinati extends Data {
         //We have to update the old size as we have not loaded data into the HashMap
         //Read size
         int newSize;
-        try (FileReader reader = new FileReader(getFileFromCenter(centerName))) {
+        try (FileReader reader = new FileReader(getFileFromCenter(centerName), StandardCharsets.UTF_8)) {
             newSize = readHeader(reader, 1)[0];
             newSize++;
         }
         //Write new size and info
         try (RandomAccessFile rFile = new RandomAccessFile(getFileFromCenter(centerName), "rw");
-             BufferedWriter writer = new BufferedWriter(new FileWriter(rFile.getFD()))) {
+             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(rFile.getFD()), StandardCharsets.UTF_8))) {
             writeHeader(writer, newSize);
             rFile.seek(rFile.length());
             //Save info
@@ -123,7 +124,8 @@ public class Vaccinati extends Data {
     /**
      * Creates an empty vaccination file for the center <code>centerName</code> if and only if it doesn't exist, named Vaccinati_<code>centerName</code>.csv.
      * <p>The first line contains the number of vaccinated users.
-     * This method uses {@link File#createNewFile()}.
+     * This method uses {@link File#createNewFile()}.<br>
+     * {@link BufferedOutputStream} is not used as only a small amount of data has to be written.
      *
      * @param centerName The name of the center to create the file of
      * @throws IOException If the file could not be created for any reason
@@ -131,7 +133,7 @@ public class Vaccinati extends Data {
     public static boolean createNewFile(String centerName) throws IOException {
         File newFile = getFileFromCenter(centerName);
         if (newFile.createNewFile()) {
-            try (FileWriter writer = new FileWriter(newFile)) {
+            try (FileWriter writer = new FileWriter(newFile, StandardCharsets.UTF_8)) {
                 writeHeader(writer, 0);
             }
             return true;

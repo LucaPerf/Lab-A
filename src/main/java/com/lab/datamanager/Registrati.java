@@ -5,6 +5,7 @@ import org.simpleflatmapper.csv.CsvParser;
 import org.simpleflatmapper.lightningcsv.CsvWriter;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -46,7 +47,7 @@ public class Registrati extends Data {
     public static void add(User cittadino) throws IOException {
         users.put(cittadino.getUsername(), cittadino);
         try (RandomAccessFile rf = new RandomAccessFile(file, "rw");
-             BufferedWriter writer = new BufferedWriter(new FileWriter(rf.getFD()))) {
+             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(rf.getFD()), StandardCharsets.UTF_8))) {
             writeHeader(writer, users.size());
             //Write user
             rf.seek(rf.length());
@@ -64,7 +65,7 @@ public class Registrati extends Data {
      */
     public static void load() throws IOException {
         if (!createNewFile()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
                 //Create hashmap
                 int size = readHeader(reader, 1)[0];
                 users = new LinkedHashMap<>(getMapSize(0.75f, size));
@@ -103,6 +104,7 @@ public class Registrati extends Data {
     /**
      * Creates a new file.
      * <p>Header is written with a value of 0.
+     * {@link BufferedOutputStream} is not used as only a small amount of data has to be written.
      *
      * @return True if a file didn't exist and was created successfully, false otherwise.
      * <p>This method uses {@link File#createNewFile()}
@@ -110,7 +112,7 @@ public class Registrati extends Data {
      */
     private static boolean createNewFile() throws IOException {
         if (file.createNewFile()) {
-            try (FileWriter writer = new FileWriter(file)) {
+            try (FileWriter writer = new FileWriter(file, StandardCharsets.UTF_8)) {
                 writeHeader(writer, 0);
             }
             return true;

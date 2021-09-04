@@ -7,6 +7,7 @@ import org.simpleflatmapper.csv.CsvParser;
 import org.simpleflatmapper.lightningcsv.CsvWriter;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -60,7 +61,7 @@ public class Centri extends Data {
         centerNames.add(center.getName());
         //This will close the file whether an exception is thrown or not
         try (RandomAccessFile rFile = new RandomAccessFile(file, "rw");
-             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(rFile.getFD()))) {
+             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(rFile.getFD()), StandardCharsets.UTF_8))) {
             writeHeader(bufferedWriter, centerNames.size(), centers.keySet().size());
             rFile.seek(rFile.length());
             //Save new center
@@ -80,7 +81,7 @@ public class Centri extends Data {
      */
     public static void save() throws IOException {
         try (RandomAccessFile fr = new RandomAccessFile(file, "rw");
-             BufferedWriter fw = new BufferedWriter(new FileWriter(fr.getFD()))) {
+             BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fr.getFD()), StandardCharsets.UTF_8))) {
             //Delete everything after header as we are overwriting, 1 char = 1 byte
             fr.setLength(21);
             //Go to file end
@@ -101,7 +102,7 @@ public class Centri extends Data {
      */
     public static void load() throws IOException {
         if (!createNewFile()) {
-            try (BufferedReader fr = new BufferedReader(new FileReader(file))) {
+            try (BufferedReader fr = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
                 //Create maps
                 int[] sizes = readHeader(fr, 2);
                 centerNames = new HashSet<>(getMapSize(0.75f, sizes[0]));
@@ -191,6 +192,7 @@ public class Centri extends Data {
     /**
      * Creates a new file.
      * <p>Header is written with values of 0 and 0.
+     * {@link BufferedOutputStream} is not used as only a small amount of data has to be written.
      *
      * @return True if the file didn't exist and was created successfully, false otherwise.
      * <p>This method uses {@link File#createNewFile()}
@@ -198,7 +200,7 @@ public class Centri extends Data {
      */
     private static boolean createNewFile() throws IOException {
         if (file.createNewFile()) {
-            try (FileWriter writer = new FileWriter(file)) {
+            try (FileWriter writer = new FileWriter(file, StandardCharsets.UTF_8)) {
                 writeHeader(writer, 0, 0);
             }
             return true;
