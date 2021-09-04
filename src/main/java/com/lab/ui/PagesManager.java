@@ -11,17 +11,28 @@ import javax.annotation.Nonnull;
 import java.io.IOException;
 
 /**
- * This class manages navigation between pages using static methods. Each page has its own instance, therefore the page state is retained when replaced.
+ * This class manages navigation between pages.
+ * <p>Pages are re-usable to avoid resources consumption and loading times improving UI fluency.
+ * Each page has its own instance, therefore the page state is retained when replaced with another one.
+ * This class contains {@link FXMLLoader} and controller variables for each page (except {@link ErrorPage}.
+ * They follow a common naming convention therefore they are not documented:
+ * <code>pageNameLoader</code> for loaders and <code>pageNamePage</code> for controllers.<br>
+ * A factory-like method is provided to open a specific page. As pages a re-usable, they must be reset manually by invoking {@link Page#reset()}.
+ * A nested enumerator provides means to select the page to open.
  *
  * @author Ciceri Luigi
  */
 
 public class PagesManager {
+    /**
+     * Private constructor to prevent class instantiation.
+     */
     private PagesManager() {
     }
 
     /**
-     * Represents the type of page, used to choose which page to open.
+     * Represents the type of page.
+     * <p>This is used to choose which page to open.
      */
     public enum PageType {
         CENTERREGISTRATION,
@@ -37,6 +48,9 @@ public class PagesManager {
         ERRORPAGE
     }
 
+    /**
+     * The main scene
+     */
     private static Scene scene;
     /**
      * The bounds of the primary screen, in pixels
@@ -67,9 +81,11 @@ public class PagesManager {
     private static Page errorPage = new ErrorPage();
 
     /**
-     * Initializes the pages manager and loads all UI pages from fxml.
+     * Loads the layout of all pages.
+     * <p>The error page is loaded first so that it can be used if any other page fails to load.
      *
      * @param stage The stage associated with this application
+     * @throws IOException If an error occurs during loading
      */
     public static void initialize(Stage stage) throws IOException {
         //Load all pages
@@ -87,11 +103,11 @@ public class PagesManager {
     }
 
     /**
-     * Opens a new page of type {@link PageType}. Pages are reused so data from previous interactions will be present if not reset.
+     * Opens a new page of type {@link PageType}.
+     * <p>Pages are re-usable so data from previous interactions will be present if not reset. If a page type cannot be found the error page is opened and an {@link IllegalArgumentException} is printed onto the stacktrace.
      *
      * @param type The type of page to open
      * @return The opened page or null if no page of <code>type</code> exists
-     * @throws NullPointerException If <code>type</code> is null
      */
     public static Page open(@Nonnull PageType type) {
         switch (type) {
@@ -117,18 +133,29 @@ public class PagesManager {
                 return open(eventReportPage);
             case ERRORPAGE:
                 return open(errorPage);
-            default:
-                return openErrorPage(new IllegalArgumentException("Cannot open page of type " + type));
+            default: {
+                IllegalArgumentException e = new IllegalArgumentException("Cannot open page of type " + type);
+                e.printStackTrace();
+                return openErrorPage(e);
+            }
         }
     }
 
+    /**
+     * Convenience method to open a new page.
+     * <p>The current scene root node is replaced with {@link Page#getRoot()}
+     *
+     * @param page The page to open
+     * @return The opened page
+     */
     private static Page open(Page page) {
         scene.setRoot(page.getRoot());
         return page;
     }
 
     /**
-     * Opens a new empty scene of size 0.5 * {@link #bounds} . The scene contains an empty HBox.
+     * Opens a new empty scene of size 0.6 * {@link #bounds} .
+     * <p>The scene contains an empty HBox.
      *
      * @param stage The stage to add the scene to
      */
@@ -137,13 +164,20 @@ public class PagesManager {
         stage.setScene(scene);
     }
 
+    /**
+     * Convenience method which loads a FXML controller.
+     *
+     * @param loader The loader to load the controller from
+     * @return The loaded controller
+     * @throws IOException If an error occurs during loading
+     */
     private static Page loadPage(FXMLLoader loader) throws IOException {
         loader.load();
         return loader.getController();
     }
 
     /**
-     * Convenience method to open the error page and set its exception
+     * Convenience method to open the error page and set its exception.
      *
      * @param e The exception to set
      * @return The opened error page

@@ -12,7 +12,9 @@ import javafx.scene.layout.StackPane;
 import java.io.IOException;
 
 /**
- * Controller of the center registration page. Layout is stored in "center_registration.fxml".
+ * Controller of the center registration page.
+ * <p>Layout is stored in "center_registration.fxml".<br>
+ * This page contains the required input fields to input data needed to register a center. A confirmation button is shown at the bottom of the screen.
  *
  * @author Ciceri Luigi
  */
@@ -36,11 +38,18 @@ public class CenterRegPage extends Page {
     @FXML
     private JFXTextField cap;
 
+    /**
+     * This snackbar will be shown when a center with the input name already exists.
+     * <p>A snackbar is a small notification at the bottom of the screen, which will be hidden autmatically after a certain amount of time.
+     */
     JFXSnackbar centerAddedNotification;
+    /**
+     * Layout of {@link #centerAddedNotification}
+     */
     JFXSnackbarLayout centerAddedNotificationLayout = new JFXSnackbarLayout("Esiste gi\u00E0 un centro con lo steso nome");
 
     /**
-     * {@inheritDoc}
+     * @return {@inheritDoc}
      */
     @Override
     public Parent getRoot() {
@@ -102,6 +111,9 @@ public class CenterRegPage extends Page {
         resetField(cap);
     }
 
+    /**
+     * @return A {@link PostalAddress} object constructed from data input into the page
+     */
     private PostalAddress addressFromUI() {
         return new PostalAddress(
                 address.getText(),
@@ -110,6 +122,9 @@ public class CenterRegPage extends Page {
                 Integer.parseInt(cap.getText()));
     }
 
+    /**
+     * @return A {@link Center} object constructed from data input into the page
+     */
     private Center centerFromUI() {
         return new Center(
                 name.getText(),
@@ -117,6 +132,13 @@ public class CenterRegPage extends Page {
                 type.getSelectionModel().getSelectedItem());
     }
 
+    /**
+     * Validates data inout into the page's fields.
+     * <p>Lazy evaluation is not used to allow each field to be evaluated.
+     * {@link com.jfoenix.validation.base.ValidatorBase} are used to check data correctness
+     *
+     * @return True if all data is valid
+     */
     private boolean isDataValid() {
         return name.validate() & type.validate() & address.validate() & city.validate() & province.validate() & cap.validate();
     }

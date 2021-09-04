@@ -9,7 +9,7 @@ import com.jfoenix.controls.JFXToggleNode;
  */
 public class JFXGroupToggleButton extends JFXToggleNode {
     /**
-     * Selects the button if not inside a {@link javafx.scene.control.ToggleGroup} or if the button is not selected
+     * Selects the button if not inside a {@link javafx.scene.control.ToggleGroup} or if the button is not selected yet.
      */
     @Override
     public void fire() {

@@ -12,6 +12,16 @@ import javafx.scene.paint.Paint;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 
+/**
+ * This class represents an error page.
+ * <p>It contains a warning icon, a scrollable text containing an exception stacktrace and a close button.
+ * <p>By clicking that button the application will be closed.
+ * The layout of this page is constructed by callingthe {@link #initialize()} method.
+ * By doing so the page is available to display errors arisen from loading FXML layouts.<br>
+ * Node variables are not documented.
+ *
+ * @author Luigi Ciceri
+ */
 public class ErrorPage extends Page {
     private VBox root = new VBox();
     private Label title = new Label("Si \u00E8 verificato un errore!");
@@ -21,11 +31,18 @@ public class ErrorPage extends Page {
     private JFXButton close = new JFXButton("ESCI");
     private String red = "#D32F2F";
 
+    /**
+     * @return {@inheritDoc}
+     */
     @Override
     public Parent getRoot() {
         return root;
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void initialize() {
         //Setup root
@@ -55,13 +72,17 @@ public class ErrorPage extends Page {
         root.getChildren().add(close);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reset() {
 
     }
 
     /**
-     * Sets the exception to be shown as error. The exception stacktrace will be shown
+     * Sets the exception to be shown as error.
+     * <p>The exception stacktrace will be shown as scrollable text.
      *
      * @param e The thrown exception
      */

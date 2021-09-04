@@ -18,7 +18,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller of the center search UI, which means searchbar + search filters + centers result list all inside a {@link VBox}. Layout is stored in "center_search_common.fxml".
+ * Controller of the reusable center search UI.
+ * <p>Layout is stored in "center_search_common.fxml". This can can be re-used.
+ * It contains a searchbar, a set of search filters and a {@link JFXListView} containing the search results.<br>
+ * Every item in the list is associated with a {@link Center} instance.<br>
+ * As this page can be used im multiple layouts, the action to be performed when clicking on a list item has to be set with {@link #setOnListItemAction(EventHandler)}. The default action is to do nothing.
  *
  * @author Ciceri Luigi
  */
@@ -53,9 +57,7 @@ public class CenterSearchCommonPage extends Page {
     private JFXGroupToggleButton aziendale;
 
     /**
-     * {@inheritDoc}
-     *
-     * @return
+     * @return {@inheritDoc}
      */
     @Override
     public Parent getRoot() {
@@ -107,13 +109,16 @@ public class CenterSearchCommonPage extends Page {
     }
 
     /**
-     * Adds 25 centers to the search result list.
+     * Clears the result list and adds last 25 registered centers to the search result list.
      */
     public void setupCentersList() {
         centers.getItems().clear();
         centers.getItems().addAll(Centri.getRecent(25));
     }
 
+    /**
+     * @return The selected center type to search for
+     */
     private CenterType getTypeFromUI() {
         if (searchModeGroup.getSelectedToggle() == name)
             return null;
@@ -121,6 +126,9 @@ public class CenterSearchCommonPage extends Page {
             return (CenterType) centerTypeGroup.getSelectedToggle().getUserData();
     }
 
+    /**
+     * Performs a center search using the currently selected filters.
+     */
     private void search() {
         String key = searchbar.getText();
         if (!key.equals("")) {
@@ -129,7 +137,11 @@ public class CenterSearchCommonPage extends Page {
         }
     }
 
-    //Shows or hides the comune type filters
+    /**
+     * Manages type filters visibility.
+     *
+     * @param visible <code>true</code> shows the type filters, <code>false</code> hides them
+     */
     private void setTypeFiltersVisible(boolean visible) {
         if (visible) {
             filtersBox.getChildren().add(typeFiltersBox);
@@ -139,7 +151,8 @@ public class CenterSearchCommonPage extends Page {
     }
 
     /**
-     * Sets the method to be executed when a center on the result list is clicked. By default an empty {@link EventHandler} is executed, which does nothing. This method sets a new cell factory.
+     * Sets the method to be executed when a center on the result list is clicked.
+     * <p>By default an empty {@link EventHandler} is executed, which does nothing. This method sets a new list cell factory.
      *
      * @param event The event handler to be executed
      */
@@ -154,6 +167,7 @@ public class CenterSearchCommonPage extends Page {
 
     /**
      * @return The currently selected center in the result list
+     * <p>The selection happens when an item is clicked
      */
     public Center getSelectedCenter() {
         return centers.getSelectionModel().getSelectedItem();

@@ -8,7 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
 /**
- * Controller of the user area main page. Layout is stored in "user_main.fxml".
+ * Controller of the user area main page.
+ * <p>Layout is stored in "user_main.fxml".
+ * This page contains a toolbar with several buttons which are dynamically shown base on user login status: if the user is logged in the username is shown next to a logout button, otherwise a login and register buttons are shown.
+ * This page also contains a {@link CenterSearchCommonPage} to search for centers. By clicking an item on the list a {@link CenterInfoPage} opens up.
  *
  * @author Ciceri Luigi
  */
@@ -38,14 +41,23 @@ public class UserMainPage extends Page {
     @FXML
     private CenterSearchCommonPage searchController;
 
+    /**
+     * The currently logged in user.
+     * <p>This is <code>null</code> if no user is logged in.
+     */
     private User currentUser;
-
-
+    /**
+     * This snackbar will be shown when a user has been registered successfully.
+     * <p>A snackbar is a small notification at the bottom of the screen, which will be hidden autmatically after a certain amount of time.
+     */
     private JFXSnackbar userRegisteredNotification;
+    /**
+     * Layout for {@link #userRegisteredNotification}
+     */
     private JFXSnackbarLayout userRegisteredNotificationLayout = new JFXSnackbarLayout("Registrazione effettuata.\nOra puoi eseguire l'accesso");
 
     /**
-     * {@inheritDoc}
+     * @return {@inheritDoc}
      */
     @Override
     public Parent getRoot() {
@@ -96,9 +108,11 @@ public class UserMainPage extends Page {
     }
 
     /**
-     * Sets the page to login mode. User information is stored, logout and username label are enabled.
+     * Sets the page to login mode.
+     * <p>User information is stored and logout and username label are enabled.
+     * Other dynamic nodes are hidden.
      *
-     * @param user The user information
+     * @param user The logged in user
      */
     public void setLoggedIn(User user) {
         currentUser = user;
@@ -109,7 +123,9 @@ public class UserMainPage extends Page {
     }
 
     /**
-     * Sets the page to logout mode. Login and register buttons are shown, page information is reset.
+     * Sets the page to logout mode.
+     * <p>Login and register buttons are shown, other dynamic nodes are hidden.
+     * As this method is also invoked in {@link #initialize()}, login button must not be added again because they are already in the original FXML layout.
      */
     public void setLoggedOut() {
         currentUser = null;

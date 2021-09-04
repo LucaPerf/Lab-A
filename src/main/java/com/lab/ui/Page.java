@@ -13,25 +13,32 @@ import javafx.util.Duration;
 import java.time.LocalDate;
 
 /**
- * Base class of an UI page controller.
+ * Base class of a UI page controller.
+ * <p>This class contains common variables that might be needed by subclasses such as input validators.<br>
+ * Common methods to reset components are also included.<br>
+ * <code>getRoot()</code>, <code>reset()</code> and <code>initialize()</code> are fundamental to this class and must be implemented by all subclasses.
  *
  * @author Ciceri Luigi
  */
 abstract public class Page {
     /**
-     * This validator checks if the field is empty
+     * This validator checks if an input is empty
      */
     protected RequiredFieldValidator requiredFieldValidator = new RequiredFieldValidator("Campo obbligatorio");
     /**
-     * This validator checks if the CAP is valid (string made up of exactly 5 numbers)
+     * This validator checks if a CAP is valid.
+     * <p>The string must contain exactly 5 numeric characters.
      */
     protected RegexValidator capValidator = new RegexValidator("CAP non valido");
     /**
-     * This validators checks if the ccf is valid (6 letters -> 3 alphanumerics -> 2 numbers -> 4 alphanumerics -> 1 letter)
+     * This validator checks if a "Codice Fisacle" is valid.
+     * <p>The following pattern is checked:<br>
+     * 6 letters -> 3 alphanumerics -> 2 numbers -> 4 alphanumerics -> 1 letter
      */
     protected RegexValidator ccfValidator = new RegexValidator("Codice fiscale non valido");
     /**
-     * This validator checks if the unique vaccination id is valid (16 numeric digits))
+     * This validator checks if the unique vaccination id is valid.
+     * <p>The id must contain exactly 16 numeric characters
      */
     protected RegexValidator uIDValidator = new RegexValidator("Sono richieste 16 cifre numeriche");
     /**
@@ -40,7 +47,8 @@ abstract public class Page {
     protected static final javafx.util.Duration NOTIFICATION_TIMEOUT = Duration.seconds(4);
 
     /**
-     * Common constructor called from all subclasses
+     * Common constructor called from all subclasses.
+     * <p>It sets the regular expression patterns needed by validators.
      */
     public Page() {
         uIDValidator.setRegexPattern("^[0-9]{16}$");
@@ -49,12 +57,14 @@ abstract public class Page {
     }
 
     /**
-     * @return The root node of this layout
+     * @return The root node of this page.
+     * <p>The returned object will be the new root of the scene.
      */
     abstract public Parent getRoot();
 
     /**
-     * Binds methods to buttons and sets up the UI. This is called after the corresponding fxml file is loaded.
+     * This is called after the corresponding fxml file is loaded.
+     * <p>Commonly used to bind methods to buttons and set up the UI.
      */
     @FXML
     abstract protected void initialize();

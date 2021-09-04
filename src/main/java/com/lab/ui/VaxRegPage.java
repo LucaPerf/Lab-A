@@ -13,10 +13,14 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 /**
- * Controller of the vaccination registration page. Layout is stored in "vax:registration.fxml".
+ * Controller of the vaccination registration page.
+ * <p>Layout is stored in "vax_registration.fxml".
+ * This page contains fields required to input data for vaccination registration, including a {@link JFXDatePicker} to input the vaccination date.
+ * A confirmation button is shown at the bottom of the screen.
  *
  * @author Ciceri Luigi
  */
+
 public class VaxRegPage extends Page {
 
     @FXML
@@ -45,10 +49,14 @@ public class VaxRegPage extends Page {
     @FXML
     private JFXButton no;
 
+    /**
+     * The center to add the vaccinated user to.
+     * <p>This must be passed from previous the page with {@link #setReferenceCenter(Center)}
+     */
     private Center center;
 
     /**
-     * {@inheritDoc}
+     * @return {@inheritDoc}
      */
     public Parent getRoot() {
         return root;
@@ -108,6 +116,9 @@ public class VaxRegPage extends Page {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reset() {
         center = null;
@@ -119,10 +130,20 @@ public class VaxRegPage extends Page {
         resetField(uID);
     }
 
+    /**
+     * @return A {@link VaxInfo} object created with data from the UI
+     */
     private VaxInfo infoFromUI() {
         return new VaxInfo(name.getText(), surname.getText(), ccf.getText(), date.getValue(), type.getSelectionModel().getSelectedItem(), Long.parseLong(uID.getText()));
     }
 
+    /**
+     * Validates data inout into the page's fields.
+     * <p>Lazy evaluation is not used to allow each field to be evaluated.
+     * {@link com.jfoenix.validation.base.ValidatorBase} are used to check data correctness
+     *
+     * @return True if all data is valid
+     */
     private boolean isDataValid() {
         return name.validate() & surname.validate() & ccf.validate() & date.validate() & type.validate() & uID.validate();
     }

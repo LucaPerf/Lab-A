@@ -8,7 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 
 /**
- * Controller of the user login page. Layout is stored in "user_login.fxml".
+ * Controller of the user login page.
+ * <p>Layout is stored in "user_login.fxml".
  *
  * @author Ciceri Luigi
  */
@@ -25,11 +26,19 @@ public class UserLoginPage extends Page {
     @FXML
     private JFXRippler back;
 
+    /**
+     * This snackbar will be shown when the login has failed.
+     * <p>This could be due to the fact that the user does not exist, or the password or username are wrong.
+     * A snackbar is a small notification at the bottom of the screen, which will be hidden automatically after a certain amount of time.
+     */
     private JFXSnackbar loginFailedNotification;
+    /**
+     * Layout of {@link #loginFailedNotification}
+     */
     private JFXSnackbarLayout loginFailedNotificationLayout = new JFXSnackbarLayout("Nome utente o password sbagliati");
 
     /**
-     * {@inheritDoc}
+     * @return {@inheritDoc}
      */
     @Override
     public Parent getRoot() {
@@ -74,6 +83,13 @@ public class UserLoginPage extends Page {
         resetField(password);
     }
 
+    /**
+     * Validates data inout into the page's fields.
+     * <p>Lazy evaluation is not used to allow each field to be evaluated.
+     * {@link com.jfoenix.validation.base.ValidatorBase} are used to check data correctness
+     *
+     * @return True if all data is valid
+     */
     private boolean isDataValid() {
         return username.validate() & password.validate();
     }

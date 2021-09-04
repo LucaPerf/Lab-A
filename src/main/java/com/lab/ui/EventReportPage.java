@@ -14,6 +14,13 @@ import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
+/**
+ * This class represents an event reporting page.
+ * <p>A combo box is shown to select the type of event, as well as a slider for the intensity and a text area for the report comment.<br>
+ * The report comment is limited to 256 characters by using a {@link TextFormatter}. An indicator below the area shows the current comment length.
+ *
+ * @author Luigi Ciceri
+ */
 public class EventReportPage extends Page {
     @FXML
     private StackPane root;
@@ -32,13 +39,29 @@ public class EventReportPage extends Page {
     @FXML
     private Label charCounter;
 
+    /**
+     * This snackbar will be shown when an event cannot be reported.
+     * <p>This could be due to the fact that an event of the same type has already been reported or the user has not benn vaccinated yet.
+     * A snackbar is a small notification at the bottom of the screen, which will be hidden automatically after a certain amount of time.
+     */
     private JFXSnackbar eventAddedNotification;
+    /**
+     * Layout of {@link #eventAddedNotification}
+     */
     private JFXSnackbarLayout eventAddedNotificationLayout = new JFXSnackbarLayout("Segnalazione evnto fallita.\nNon hai selezionato il centro corretto oppure hai gi\u00E0 segnalato un evento di questo tipo");
+    /**
+     * The center whose statistics will be updated with the reported event.
+     * <p>This is passed from previous pages with {@link #setCenter(Center)}
+     */
     private Center center;
+    /**
+     * The user which is reporting the event.
+     * <p>This is passed from previous pages with {@link #setUser(User)}}
+     */
     private User user;
 
     /**
-     * {@inheritDoc}
+     * @return {@inheritDoc}
      */
     @Override
     public Parent getRoot() {
@@ -122,7 +145,15 @@ public class EventReportPage extends Page {
         this.user = user;
     }
 
-    //Sets the intensity text value (Molto lieve, Lieve, Moderata, Forte, Molto forte)
+    /**
+     * Sets the intensity label.
+     * <p>Text depends on the slider position:<br>
+     * 1:Molto lieve<br>
+     * 2:Lieve<br>
+     * 3:Moderata<br>
+     * 4:Forte<br>
+     * 5:Molto forte
+     */
     private void setIntensityText(int intensity) {
         String text;
         switch (intensity) {
@@ -152,6 +183,9 @@ public class EventReportPage extends Page {
         intensityText.setText(text);
     }
 
+    /**
+     * @return An {@link Event} instance containing data taken from the UI
+     */
     private Event eventFromUI() {
         return new Event((int) intensitySlider.getValue(), notes.getText(), type.getSelectionModel().getSelectedItem());
     }

@@ -1,12 +1,16 @@
 package com.lab.ui;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRippler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 
+/**
+ * This class represents a simple center selection interface.
+ * <p>Its layout is store into "center_selection.fxml".<br>
+ * This page only shows a {@link CenterSearchCommonPage} and a simple {@link com.jfoenix.controls.JFXToolbar}.
+ * By clicking on an item on the list a {@link VaxRegPage} will be opened.
+ */
 public class CenterSelectionPage extends Page {
     @FXML
     private BorderPane root;
@@ -15,11 +19,17 @@ public class CenterSelectionPage extends Page {
     @FXML
     private CenterSearchCommonPage searchController;
 
+    /**
+     * @return {@inheritDoc}
+     */
     @Override
     public Parent getRoot() {
         return root;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void initialize() {
 
@@ -39,6 +49,9 @@ public class CenterSelectionPage extends Page {
         reset();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reset() {
         searchController.reset();

@@ -10,7 +10,9 @@ import javafx.scene.layout.StackPane;
 import java.io.IOException;
 
 /**
- * Controller of the user registration page. Layout is stored in "user_registration.fxml".
+ * Controller of the user registration page.
+ * <p>Layout is stored in "user_registration.fxml".
+ * This page contains fields to input data for user registration. A confirmation button is shown at the bottom of the page.
  *
  * @author CIceri Luigi
  */
@@ -36,11 +38,18 @@ public class UserRegPage extends Page {
     @FXML
     private JFXRippler back;
 
+    /**
+     * This snackbar will be shown when a user already exists.
+     * <p>A snackbar is a small notification at the bottom of the screen, which will be hidden autmatically after a certain amount of time.
+     */
     private JFXSnackbar userRegisteredNotification;
+    /**
+     * Layout for {@link #userRegisteredNotification}
+     */
     private JFXSnackbarLayout userRegisteredNotificationLayout = new JFXSnackbarLayout("Un utente con lo stesso nome esiste gi\u00E0");
 
     /**
-     * {@inheritDoc}
+     * @return {@inheritDoc}
      */
     @Override
     public Parent getRoot() {
@@ -104,11 +113,20 @@ public class UserRegPage extends Page {
         resetField(ccf);
     }
 
-    //Creates a new User object from the UI fields
+    /**
+     * @return A user object with data input into the UI
+     */
     private User userFromUI() {
         return new User(name.getText(), surname.getText(), ccf.getText(), email.getText(), username.getText(), password.getText(), Long.parseLong(uid.getText()));
     }
 
+    /**
+     * Validates data inout into the page's fields.
+     * <p>Lazy evaluation is not used to allow each field to be evaluated.
+     * {@link com.jfoenix.validation.base.ValidatorBase} are used to check data correctness
+     *
+     * @return True if all data is valid
+     */
     private boolean isDataValid() {
         return username.validate() &
                 password.validate() &

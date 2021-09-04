@@ -6,7 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller of the area selection page: "Centri" or "Cittadini". Layout is stored in "area_selection.fxml".
+ * Controller of the area selection page.
+ * <p>Two buttons are shown to select which area to access to.<br>
+ * The layout of this page is defined in "area_selection.fxml"
  *
  * @author Ciceri Luigi
  */
@@ -19,7 +21,7 @@ public class AreaSelectionPage extends Page {
     private JFXButton userArea;
 
     /**
-     * {@inheritDoc}
+     * @return {@inheritDoc}
      */
     @Override
     public Parent getRoot() {

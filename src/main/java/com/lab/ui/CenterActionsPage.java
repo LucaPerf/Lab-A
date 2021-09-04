@@ -9,9 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 
 /**
- * Controller of center actions page. Layout is stored in "center_actions.fxml".
+ * Controller of center actions page.
+ * <p>Layout is stored in "center_actions.fxml".<br>
+ * This page has two buttons to allow the user to choose which action to perform.
  *
- * @author CIceri Luigi
+ * @author Ciceri Luigi
  */
 public class CenterActionsPage extends Page {
     @FXML
@@ -22,12 +24,18 @@ public class CenterActionsPage extends Page {
     private JFXButton addCenter;
     @FXML
     private JFXRippler back;
-
+    /**
+     * This snackbar will be shown when a center has been registered successfully.
+     * <p>A snackbar is a small notification at the bottom of the screen, which will be hidden autmatically after a certain amount of time.
+     */
     private JFXSnackbar centerAddedNotification;
+    /**
+     * Layout of {@link #centerAddedNotification}
+     */
     private JFXSnackbarLayout centerAddedNotificationLayout = new JFXSnackbarLayout("Centro registrato con suceesso");
 
     /**
-     * {@inheritDoc}
+     * @return {@inheritDoc}
      */
     @Override
     public Parent getRoot() {
@@ -56,7 +64,7 @@ public class CenterActionsPage extends Page {
     }
 
     /**
-     * This will show a notification saying that the center was added successfully
+     * This will show a notification informing the user that the center has been added successfully
      */
     public void showCenterAddedNotification() {
         centerAddedNotification.fireEvent(new JFXSnackbar.SnackbarEvent(centerAddedNotificationLayout, NOTIFICATION_TIMEOUT));
