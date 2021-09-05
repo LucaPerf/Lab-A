@@ -12,8 +12,7 @@ import java.util.LinkedHashMap;
 /**
  * This class manages vaccination data of all centers.
  * <p> Data for each center is stored into "centerName_Vaccinati.csv".
- * It is therefore needed to load data dynamically when an operation is required.
- * This i sdone via {@link Vaccinati#load(String)}.<br>
+ * It is therefore needed to load data dynamically when an operation is required, this is done by creating a new class instance.
  * The header contains the number of information contained in the file.<br>
  * Data is loaded into a {@link LinkedHashMap} with username as key, to improve iteration performance.
  *
@@ -22,16 +21,18 @@ import java.util.LinkedHashMap;
  */
 
 public class Vaccinati extends Data {
+
     /**
-     * Private contructor to avoid class instantiation.
+     * Creates a new object which represents vaccination data about <code>centerName</code>
      */
-    private Vaccinati() {
+    public Vaccinati(String centerName) throws IOException {
+        load(centerName);
     }
 
     /**
      * Stores vaccination information by unique vaccination id.
      */
-    public static LinkedHashMap<Long, VaxInfo> vaxinfo = new LinkedHashMap<>();
+    private LinkedHashMap<Long, VaxInfo> vaxinfo = new LinkedHashMap<>();
 
     /**
      * Loads all vaccination information of <code>centerName<code/> into {@link #vaxinfo}
@@ -40,7 +41,7 @@ public class Vaccinati extends Data {
      * @param centerName The name of the center whose vaccination data will be loaded
      * @throws IOException If data could not be loaded from the file for any reason
      */
-    public static void load(String centerName) throws IOException {
+    private void load(String centerName) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(getFileFromCenter(centerName), StandardCharsets.UTF_8))) {
             //Read size
             int size = readHeader(reader, 1)[0];
@@ -61,7 +62,7 @@ public class Vaccinati extends Data {
      *
      * @throws IOException If data could not be saved to the file for any reason
      */
-    public static void save(String centerName) throws IOException {
+    public void save(String centerName) throws IOException {
         try (RandomAccessFile rFile = new RandomAccessFile(getFileFromCenter(centerName), "rw");
              BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(rFile.getFD()), StandardCharsets.UTF_8))) {
             //Delete everything after header as we are overwriting data
@@ -117,7 +118,7 @@ public class Vaccinati extends Data {
      * @param uID Unique id associated with a vaccinated person
      * @return The {@link VaxInfo} associated with <code>uID</code> or null if no such information exists
      */
-    public static VaxInfo find(long uID) {
+    public VaxInfo find(long uID) {
         return vaxinfo.get(uID);
     }
 

@@ -87,12 +87,12 @@ public class Cittadini {
      * @throws IOException If data cannot be saved to the file for any reason
      */
     public static boolean inserisciEventiAvversi(long uID, Event event, Center center) throws IOException {
-        Vaccinati.load(center.getName());
-        VaxInfo vi = Vaccinati.find(uID);
+        Vaccinati data = new Vaccinati(center.getName());
+        VaxInfo vi = data.find(uID);
 
         if (vi != null && vi.addEvent(event)) {
             center.updateStat(event);
-            Vaccinati.save(center.getName());
+            data.save(center.getName());
             Centri.save();
             return true;
         }
