@@ -2,10 +2,10 @@ package com.lab.centrivaccinali;
 
 import com.lab.data.Center;
 import com.lab.data.VaxInfo;
-import com.lab.datamanager.Centri;
+import com.lab.datamanager.Centers;
 import com.lab.datamanager.Data;
-import com.lab.datamanager.Registrati;
-import com.lab.datamanager.Vaccinati;
+import com.lab.datamanager.Users;
+import com.lab.datamanager.Vaccinated;
 import com.lab.ui.ErrorPage;
 import com.lab.ui.PagesManager;
 import javafx.application.Application;
@@ -47,8 +47,8 @@ public class CentriVaccinali extends Application {
             PagesManager.initialize(stage);
             //Data loading
             Data.createDirectory();
-            Centri.load();
-            Registrati.load();
+            Centers.load();
+            Users.load();
         } catch (IOException e) {
             e.printStackTrace();
             ErrorPage page = (ErrorPage) PagesManager.open(PagesManager.PageType.ERRORPAGE);
@@ -68,8 +68,8 @@ public class CentriVaccinali extends Application {
      * @throws IOException If the center could not be added to the file
      */
     public static boolean registraCentroVaccinale(Center center) throws IOException {
-        if (!Centri.contains(center)) {
-            Centri.add(center);
+        if (!Centers.contains(center)) {
+            Centers.add(center);
             return true;
         }
         return false;
@@ -84,6 +84,6 @@ public class CentriVaccinali extends Application {
      * @throws IOException If the vaccinated citizen could not be saved to the file
      */
     public static void registraVaccinato(String centerName, VaxInfo info) throws IOException {
-        Vaccinati.add(centerName, info);
+        Vaccinated.add(centerName, info);
     }
 }

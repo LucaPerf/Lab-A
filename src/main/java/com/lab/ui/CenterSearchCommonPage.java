@@ -6,7 +6,7 @@ import com.jfoenix.controls.JFXListView;
 import com.lab.cittadini.Cittadini;
 import com.lab.data.Center;
 import com.lab.data.CenterType;
-import com.lab.datamanager.Centri;
+import com.lab.datamanager.Centers;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -113,7 +113,7 @@ public class CenterSearchCommonPage extends Page {
      */
     public void setupCentersList() {
         centers.getItems().clear();
-        centers.getItems().addAll(Centri.getRecent(25));
+        centers.getItems().addAll(Centers.getRecent(25));
     }
 
     /**

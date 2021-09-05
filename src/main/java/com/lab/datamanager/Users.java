@@ -21,11 +21,11 @@ import java.util.Map;
  * @author Luigi Ciceri
  */
 
-public class Registrati extends Data {
+public class Users extends Data {
     /**
      * Private contructor to avoid class instantiation.
      */
-    private Registrati() {
+    private Users() {
     }
 
     /**
@@ -41,18 +41,18 @@ public class Registrati extends Data {
      * Adds a user to {@link #users} and saves it to the {@link #file}.
      * <p>The header is updated with the new map size.
      *
-     * @param cittadino The citizen to add
+     * @param user The citizen to add
      * @throws IOException If data could not be added for any reason
      */
-    public static void add(User cittadino) throws IOException {
-        users.put(cittadino.getUsername(), cittadino);
-        try (RandomAccessFile rf = new RandomAccessFile(file, "rw");
-             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(rf.getFD()), StandardCharsets.UTF_8))) {
+    public static void add(User user) throws IOException {
+        users.put(user.getUsername(), user);
+        try (RandomAccessFile rFile = new RandomAccessFile(file, "rw");
+             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(rFile.getFD()), StandardCharsets.UTF_8))) {
             writeHeader(writer, users.size());
             //Write user
-            rf.seek(rf.length());
+            rFile.seek(rFile.length());
             CsvWriter cw = CsvWriter.dsl().to(writer);
-            cw.appendRow(cittadino.toRow());
+            cw.appendRow(user.toRow());
         }
     }
 

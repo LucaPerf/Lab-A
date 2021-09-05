@@ -28,11 +28,11 @@ import java.util.Locale;
  * @author Luca Perfetti
  **/
 
-public class Centri extends Data {
+public class Centers extends Data {
     /**
      * Private constructor to avoid class instantiation
      */
-    private Centri() {
+    private Centers() {
     }
 
     /**
@@ -67,7 +67,7 @@ public class Centri extends Data {
             //Save new center
             CsvWriter writer = CsvWriter.dsl().to(bufferedWriter);
             writer.appendRow(center.toRow());
-            Vaccinati.createNewFile(center.getName());
+            Vaccinated.createNewFile(center.getName());
         }
     }
 
@@ -80,14 +80,14 @@ public class Centri extends Data {
      * @throws IOException If data cannot be saved to the file for any reason
      */
     public static void save() throws IOException {
-        try (RandomAccessFile fr = new RandomAccessFile(file, "rw");
-             BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fr.getFD()), StandardCharsets.UTF_8))) {
+        try (RandomAccessFile rFile = new RandomAccessFile(file, "rw");
+             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(rFile.getFD()), StandardCharsets.UTF_8))) {
             //Delete everything after header as we are overwriting, 1 char = 1 byte
-            fr.setLength(21);
+            rFile.setLength(21);
             //Go to file end
-            fr.seek(21);
+            rFile.seek(21);
             //Save centers
-            CsvWriter cw = CsvWriter.dsl().to(fw);
+            CsvWriter cw = CsvWriter.dsl().to(writer);
             for (Center center : centers.values())
                 cw.appendRow(center.toRow());
         }
@@ -102,19 +102,19 @@ public class Centri extends Data {
      */
     public static void load() throws IOException {
         if (!createNewFile()) {
-            try (BufferedReader fr = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
                 //Create maps
-                int[] sizes = readHeader(fr, 2);
+                int[] sizes = readHeader(reader, 2);
                 centerNames = new HashSet<>(getMapSize(0.75f, sizes[0]));
                 centers = LinkedListMultimap.create(sizes[1]);
                 //Read centers
-                Iterator<String[]> iter = CsvParser.iterator(fr);
+                Iterator<String[]> iter = CsvParser.iterator(reader);
                 while (iter.hasNext()) {
                     String[] row = iter.next();
                     Center center = new Center(row);
                     centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
                     centerNames.add(center.getName());
-                    Vaccinati.createNewFile(center.getName());
+                    Vaccinated.createNewFile(center.getName());
                 }
             }
         }
@@ -145,12 +145,12 @@ public class Centri extends Data {
      * Searches a center by district and type.
      *
      * @param type   The type of center to search for
-     * @param comune The name of the district to search in
-     * @return A list of {@link Center} located in <code>comune</code>, of <code>type</code> (case-insensitive)
+     * @param district The name of the district to search in
+     * @return A list of {@link Center} located in <code>district</code>, of <code>type</code> (case-insensitive)
      */
-    public static LinkedList<Center> find(CenterType type, String comune) {
+    public static LinkedList<Center> find(CenterType type, String district) {
         LinkedList<Center> list = new LinkedList<>();
-        String key = comune.toLowerCase(Locale.ROOT);
+        String key = district.toLowerCase(Locale.ROOT);
 
         if (centers.containsKey(key)) {
             for (Center fr : centers.get(key))

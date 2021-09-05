@@ -1,9 +1,9 @@
 package com.lab.cittadini;
 
 import com.lab.data.*;
-import com.lab.datamanager.Centri;
-import com.lab.datamanager.Registrati;
-import com.lab.datamanager.Vaccinati;
+import com.lab.datamanager.Centers;
+import com.lab.datamanager.Users;
+import com.lab.datamanager.Vaccinated;
 
 import java.io.IOException;
 import java.util.Comparator;
@@ -37,8 +37,8 @@ public class Cittadini {
      * @throws IOException If the user could not be saved to the file for any reason
      */
     public static boolean registraCittadino(User user) throws IOException {
-        if (!Registrati.contains(user)) {
-            Registrati.add(user);
+        if (!Users.contains(user)) {
+            Users.add(user);
             return true;
         }
         return false;
@@ -53,14 +53,14 @@ public class Cittadini {
      * @return A user object if and only if <code>userName</code> exists and the <code>password</code> matches
      */
     public static User login(String userName, String password) {
-        User u = Registrati.find(userName.trim());
+        User u = Users.find(userName.trim());
         return ((u != null) && (u.getPassword().equals(password))) ? u : null;
     }
 
     /**
      * Searches for a center by name or by district and type.
      * <p>If <code>type<code/> is null <code>key</code> is the name of the center, otherwise it is the name of the district.
-     * The <code>key</code> is  converted to lowercase by {@link Centri} and trimmed, the returned list is sorted in alphabetic order using {@link #centerNameComp} and {@link java.util.List#sort(Comparator)}.
+     * The <code>key</code> is  converted to lowercase by {@link Centers} and trimmed, the returned list is sorted in alphabetic order using {@link #centerNameComp} and {@link java.util.List#sort(Comparator)}.
      *
      * @param key  The name of the center or district to search for
      * @param type The center type to search for
@@ -69,9 +69,9 @@ public class Cittadini {
         String trimmedKey = key.trim();
         LinkedList<Center> list;
         if (type == null)
-            list = Centri.find(trimmedKey);
+            list = Centers.find(trimmedKey);
         else
-            list = Centri.find(type, trimmedKey);
+            list = Centers.find(type, trimmedKey);
 
         list.sort(centerNameComp);
         return list;
@@ -87,13 +87,13 @@ public class Cittadini {
      * @throws IOException If data cannot be saved to the file for any reason
      */
     public static boolean inserisciEventiAvversi(long uID, Event event, Center center) throws IOException {
-        Vaccinati.load(center.getName());
-        VaxInfo vi = Vaccinati.find(uID);
+        Vaccinated.load(center.getName());
+        VaxInfo vi = Vaccinated.find(uID);
 
         if (vi != null && vi.addEvent(event)) {
             center.updateStat(event);
-            Vaccinati.save(center.getName());
-            Centri.save();
+            Vaccinated.save(center.getName());
+            Centers.save();
             return true;
         }
         return false;
