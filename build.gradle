@@ -53,12 +53,31 @@ distributions.shadow
                         from startShadowScripts
                     }
         }
+
 //Customize shadow dist task
 shadowDistZip
         {
             destinationDirectory = file("$rootDir/bin")
             archiveBaseName.set('Lab-AB')
             archiveClassifier.set('all')
+            
+            //Copy files required by project specifications
+            into(project.name + '-all') {
+                from '.'
+                include 'doc/*'
+                include('License.txt')
+                include('autori.txt')
+            }
+            //Copy source code into src
+            into(project.name + '-all/src')
+                    {
+                        from '.'
+                        include 'src/**'
+                        include('.gitignore')
+                        include('build.gradle')
+                        include('settings.gradle')
+                    }
+
             //Remove duplicate scripts file in bin folder
             eachFile { file ->
                 if (file.path.contains('bin')) {
