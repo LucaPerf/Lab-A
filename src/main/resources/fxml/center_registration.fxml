@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <StackPane fx:id="root" stylesheets="/css/light.css" xmlns="http://javafx.com/javafx/11.0.2"
            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.ui.CenterRegPage">
@@ -23,7 +24,7 @@
         </top>
         <center>
             <VBox alignment="CENTER" spacing="44.0">
-                <JFXTextField fx:id="name" maxWidth="200.0" prefWidth="200.0" promptText="Name"
+                <JFXTextField fx:id="name" maxWidth="200.0" prefWidth="200.0" promptText="Nome"
                               styleClass="text-field"/>
                 <JFXComboBox fx:id="type" maxWidth="200.0" prefWidth="200.0" promptText="Tipo" styleClass="combo-box"/>
                 <JFXTextField fx:id="address" maxWidth="200.0" prefWidth="200.0" promptText="Indirizzo"
