@@ -1,11 +1,11 @@
 package com.lab.datamanager;
 
 import com.google.common.base.Strings;
+import com.lab.ui.Page;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 /**
  * Base class for all data managed by the application.
@@ -13,15 +13,32 @@ import java.io.Writer;
  * @author Luigi Ciceri
  */
 public abstract class Data {
+    static {
+        try {
+            //Jar path
+            URL jar = Page.class.getProtectionDomain().getCodeSource().getLocation();
+            File parent = new File(jar.toURI());
+            //Parent is two directories above jar
+            dataDirectory = new File(parent.getParentFile().getParentFile(), "data");
+        } catch (SecurityException | URISyntaxException e) {
+            dataDirectory = null;
+        }
+    }
+
     /**
      * The folder all data will be saved into.
      */
-    protected static File dataDirectory = new File("data");
+    protected static File dataDirectory;
 
     /**
      * Creates the {@link #dataDirectory} folder where all data will be placed only if it doesn't exist.
+     *
+     * @throws FileNotFoundException If the data directory could not be created
      */
-    public static void createDirectory() {
+    public static void createDirectory() throws FileNotFoundException {
+        //Throw exception if directory hadn't been created
+        if (dataDirectory == null)
+            throw new FileNotFoundException("Could not create data directory.");
         if (!dataDirectory.exists())
             dataDirectory.mkdirs();
     }
