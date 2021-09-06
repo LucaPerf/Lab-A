@@ -3,7 +3,7 @@ package com.lab.cittadini;
 import com.lab.data.*;
 import com.lab.datamanager.Centers;
 import com.lab.datamanager.Users;
-import com.lab.datamanager.Vaccinated;
+import com.lab.datamanager.Vaccinations;
 
 import java.io.IOException;
 import java.util.Comparator;
@@ -87,12 +87,12 @@ public class Cittadini {
      * @throws IOException If data cannot be saved to the file for any reason
      */
     public static boolean inserisciEventiAvversi(long uID, Event event, Center center) throws IOException {
-        Vaccinated.load(center.getName());
-        VaxInfo vi = Vaccinated.find(uID);
+        Vaccinations.load(center.getName());
+        VaxInfo vi = Vaccinations.find(uID);
 
         if (vi != null && vi.addEvent(event)) {
             center.updateStat(event);
-            Vaccinated.save(center.getName());
+            Vaccinations.save(center.getName());
             Centers.save();
             return true;
         }

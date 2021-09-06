@@ -5,7 +5,7 @@ import com.lab.data.VaxInfo;
 import com.lab.datamanager.Centers;
 import com.lab.datamanager.Data;
 import com.lab.datamanager.Users;
-import com.lab.datamanager.Vaccinated;
+import com.lab.datamanager.Vaccinations;
 import com.lab.ui.ErrorPage;
 import com.lab.ui.PagesManager;
 import javafx.application.Application;
@@ -84,6 +84,6 @@ public class CentriVaccinali extends Application {
      * @throws IOException If the vaccinated citizen could not be saved to the file
      */
     public static void registraVaccinato(String centerName, VaxInfo info) throws IOException {
-        Vaccinated.add(centerName, info);
+        Vaccinations.add(centerName, info);
     }
 }

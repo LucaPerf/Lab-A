@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
  * This class manages vaccination data of all centers.
  * <p> Data for each center is stored into "centerName_Vaccinati.csv".
  * It is therefore needed to load data dynamically when an operation is required.
- * This i sdone via {@link Vaccinated#load(String)}.<br>
+ * This i sdone via {@link Vaccinations#load(String)}.<br>
  * The header contains the number of information contained in the file.<br>
  * Data is loaded into a {@link LinkedHashMap} with username as key, to improve iteration performance.
  *
@@ -21,11 +21,11 @@ import java.util.LinkedHashMap;
  * @author Luigi Ciceri
  */
 
-public class Vaccinated extends Data {
+public class Vaccinations extends Data {
     /**
      * Private contructor to avoid class instantiation.
      */
-    private Vaccinated() {
+    private Vaccinations() {
     }
 
     /**

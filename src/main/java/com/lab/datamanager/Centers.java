@@ -67,7 +67,7 @@ public class Centers extends Data {
             //Save new center
             CsvWriter writer = CsvWriter.dsl().to(bufferedWriter);
             writer.appendRow(center.toRow());
-            Vaccinated.createNewFile(center.getName());
+            Vaccinations.createNewFile(center.getName());
         }
     }
 
@@ -114,7 +114,7 @@ public class Centers extends Data {
                     Center center = new Center(row);
                     centers.put(center.getAddress().getDistrict().toLowerCase(Locale.ROOT), center);
                     centerNames.add(center.getName());
-                    Vaccinated.createNewFile(center.getName());
+                    Vaccinations.createNewFile(center.getName());
                 }
             }
         }
