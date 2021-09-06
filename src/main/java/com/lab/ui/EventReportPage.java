@@ -79,9 +79,9 @@ public class EventReportPage extends Page {
         {
             if (change.isContentChange() && change.getControlNewText().length() <= 256) {
                 charCounter.setText(change.getControlNewText().length() + "/256");
-                return change;
-            }
-            return null;
+            } else
+                change.setText("");
+            return change;
         }));
 
         type.getItems().addAll(EventType.values());
