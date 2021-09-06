@@ -39,7 +39,7 @@ public class CentriVaccinali extends Application {
      */
     @Override
     public void start(Stage stage) {
-        stage.setTitle("Lab AB");
+        stage.setTitle("VaccinOK");
         PagesManager.openEmptyScene(stage);
         stage.show();
         try {

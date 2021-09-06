@@ -58,18 +58,17 @@ distributions.shadow
 shadowDistZip
         {
             destinationDirectory = file("$rootDir/bin")
-            archiveBaseName.set('Lab-AB')
-            archiveClassifier.set('all')
-            
+            archiveBaseName.set(project.name)
+
             //Copy files required by project specifications
-            into(project.name + '-all') {
+            into(project.name ) {
                 from '.'
                 include 'doc/*'
                 include('License.txt')
                 include('autori.txt')
             }
             //Copy source code into src
-            into(project.name + '-all/src')
+            into(project.name + '/src')
                     {
                         from '.'
                         include 'src/**'
