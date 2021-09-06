@@ -33,7 +33,7 @@ public class AreaSelectionPage extends Page {
      */
     @FXML
     protected void initialize() {
-        centerArea.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERACTIONS));
+        centerArea.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERACTIONS).reset());
 
         userArea.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.USERMAIN).reset());
     }

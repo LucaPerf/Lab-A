@@ -96,10 +96,7 @@ public class VaxRegPage extends Page {
             }
         });
 
-        back.setOnMouseClicked(actionEvent -> {
-            reset();
-            PagesManager.open(PagesManager.PageType.CENTERSELECTION);
-        });
+        back.setOnMouseClicked(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERSELECTION));
 
         //Dialog
         yes.setOnAction(actionEvent -> {
@@ -111,7 +108,6 @@ public class VaxRegPage extends Page {
 
         no.setOnAction(actionEvent -> {
             addAgain.close();
-            reset();
             PagesManager.open(PagesManager.PageType.CENTERACTIONS);
         });
     }

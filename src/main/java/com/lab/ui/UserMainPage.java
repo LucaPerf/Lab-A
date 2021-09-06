@@ -79,21 +79,19 @@ public class UserMainPage extends Page {
         });
 
         logout.setOnAction(actionEvent -> setLoggedOut());
-        login.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.USERLOGIN));
-        register.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.USERREGISTRATION));
+        login.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.USERLOGIN).reset());
+        register.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.USERREGISTRATION).reset());
         back.setOnMouseClicked(actionEvent -> {
             if (currentUser != null)
                 logoutWarning.show(root);
             else {
                 PagesManager.open(PagesManager.PageType.AREASELECTION);
-                reset();
             }
         });
         exit.setOnAction(event ->
         {
-            PagesManager.open(PagesManager.PageType.AREASELECTION);
             logoutWarning.close();
-            reset();
+            PagesManager.open(PagesManager.PageType.AREASELECTION);
         });
         cancel.setOnAction(event -> logoutWarning.close());
     }

@@ -92,15 +92,12 @@ public class CenterInfoPage extends Page {
         report.setOnAction(event ->
         {
             EventReportPage page = (EventReportPage) PagesManager.open(PagesManager.PageType.EVENTREPORT);
+            page.reset();
             page.setCenter(center);
             page.setUser(user);
         });
 
-        back.setOnMouseClicked(event ->
-        {
-            reset();
-            PagesManager.open(PagesManager.PageType.USERMAIN);
-        });
+        back.setOnMouseClicked(event -> PagesManager.open(PagesManager.PageType.USERMAIN));
     }
 
     /**

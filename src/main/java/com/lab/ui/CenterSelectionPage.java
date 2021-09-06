@@ -34,19 +34,15 @@ public class CenterSelectionPage extends Page {
     protected void initialize() {
 
         back.setOnMouseClicked(event ->
-        {
-            reset();
-            PagesManager.open(PagesManager.PageType.CENTERACTIONS);
-        });
+                PagesManager.open(PagesManager.PageType.CENTERACTIONS));
 
         searchController.setOnListItemAction(event ->
         {
             VaxRegPage page = (VaxRegPage) PagesManager.open(PagesManager.PageType.VAXREGISTREATION);
+            page.reset();
             //Can't be null as when an item is clicked a center is selected
             page.setReferenceCenter(searchController.getSelectedCenter());
         });
-
-        reset();
     }
 
     /**

@@ -61,17 +61,12 @@ public class UserLoginPage extends Page {
                 User u = Cittadini.login(username.getText(), password.getText());
                 if (u != null) {
                     ((UserMainPage) PagesManager.open(PagesManager.PageType.USERMAIN)).setLoggedIn(u);
-                    reset();
                 } else
                     loginFailedNotification.fireEvent(new JFXSnackbar.SnackbarEvent(loginFailedNotificationLayout));
             }
         });
 
-        back.setOnMouseClicked(actionEvent ->
-        {
-            PagesManager.open(PagesManager.PageType.USERMAIN);
-            reset();
-        });
+        back.setOnMouseClicked(actionEvent -> PagesManager.open(PagesManager.PageType.USERMAIN));
     }
 
     /**

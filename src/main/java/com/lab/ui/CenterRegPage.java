@@ -84,7 +84,6 @@ public class CenterRegPage extends Page {
                 }
 
                 if (centerAdded) {
-                    reset();
                     CenterActionsPage page = (CenterActionsPage) PagesManager.open(PagesManager.PageType.CENTERACTIONS);
                     page.showCenterAddedNotification();
                 } else
@@ -92,10 +91,7 @@ public class CenterRegPage extends Page {
             }
         });
 
-        back.setOnMouseClicked(actionEvent -> {
-            reset();
-            PagesManager.open(PagesManager.PageType.CENTERACTIONS);
-        });
+        back.setOnMouseClicked(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERACTIONS));
     }
 
     /**

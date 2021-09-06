@@ -85,7 +85,6 @@ public class UserRegPage extends Page {
                     return;
                 }
                 if (registered) {
-                    reset();
                     ((UserMainPage) PagesManager.open(PagesManager.PageType.USERMAIN)).showUserRegisteredNotification();
                 } else
                     userRegisteredNotification.fireEvent(new JFXSnackbar.SnackbarEvent(userRegisteredNotificationLayout, NOTIFICATION_TIMEOUT));
@@ -93,10 +92,7 @@ public class UserRegPage extends Page {
         });
 
         back.setOnMouseClicked(actionEvent ->
-        {
-            reset();
-            PagesManager.open(PagesManager.PageType.USERMAIN);
-        });
+                PagesManager.open(PagesManager.PageType.USERMAIN));
     }
 
     /**

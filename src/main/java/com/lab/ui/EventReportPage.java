@@ -87,11 +87,7 @@ public class EventReportPage extends Page {
         type.getItems().addAll(EventType.values());
         type.getValidators().add(requiredFieldValidator);
 
-        back.setOnMouseClicked(event ->
-        {
-            reset();
-            PagesManager.open(PagesManager.PageType.CENTERINFO);
-        });
+        back.setOnMouseClicked(event -> PagesManager.open(PagesManager.PageType.CENTERINFO));
 
         intensitySlider.setOnMouseReleased(event -> setIntensityText((int) intensitySlider.getValue()));
 
@@ -107,7 +103,6 @@ public class EventReportPage extends Page {
                     return;
                 }
                 if (reportAdded) {
-                    reset();
                     CenterInfoPage page = (CenterInfoPage) PagesManager.open(PagesManager.PageType.CENTERINFO);
                     page.updateStats();
                     page.showEventAddedNotification();
@@ -122,7 +117,7 @@ public class EventReportPage extends Page {
      */
     @Override
     public void reset() {
-        type.getSelectionModel().clearSelection();
+        resetField(type);
         intensitySlider.setValue(3);
         notes.clear();
     }

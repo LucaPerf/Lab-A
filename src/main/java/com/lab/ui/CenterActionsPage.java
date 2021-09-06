@@ -49,7 +49,7 @@ public class CenterActionsPage extends Page {
     protected void initialize() {
         centerAddedNotification = new JFXSnackbar(root);
 
-        addCenter.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERREGISTRATION));
+        addCenter.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERREGISTRATION).reset());
 
         addVax.setOnAction(actionEvent -> PagesManager.open(PagesManager.PageType.CENTERSELECTION).reset());
 

@@ -92,7 +92,6 @@ public class CenterSearchCommonPage extends Page {
             if (event.getCode().equals(KeyCode.ENTER))
                 search();
         });
-
     }
 
     /**
