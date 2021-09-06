@@ -1,10 +1,8 @@
 package com.lab.ui;
 
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import javax.annotation.Nonnull;
@@ -52,10 +50,6 @@ public class PagesManager {
      * The main scene
      */
     private static Scene scene;
-    /**
-     * The bounds of the primary screen, in pixels
-     */
-    public static Rectangle2D bounds = Screen.getPrimary().getBounds();
     //Resource loaders
     private static FXMLLoader centerRegLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/center_registration.fxml"));
     private static FXMLLoader centerActionsLoader = new FXMLLoader(PagesManager.class.getResource("/fxml/center_actions.fxml"));
@@ -154,13 +148,13 @@ public class PagesManager {
     }
 
     /**
-     * Opens a new empty scene of size 0.6 * {@link #bounds} .
+     * Opens a new empty scene of size 1280px * 720px .
      * <p>The scene contains an empty HBox.
      *
      * @param stage The stage to add the scene to
      */
     public static void openEmptyScene(Stage stage) {
-        scene = new Scene(new HBox(), bounds.getWidth() * 0.6, bounds.getHeight() * 0.6);
+        scene = new Scene(new HBox(), 1280, 720);
         stage.setScene(scene);
     }
 
