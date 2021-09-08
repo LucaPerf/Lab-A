@@ -45,23 +45,25 @@ shadowJar
         {
             mergeServiceFiles()
         }
-//Copy scripts to root distribution folder
-distributions.shadow
-        {
-            contents
-                    {
-                        from startShadowScripts
-                    }
-        }
 
 //Customize shadow dist task
 shadowDistZip
         {
-            destinationDirectory = file("$rootDir/bin")
             archiveBaseName.set(project.name)
 
+            //Copy scripts to root folder
+            into(project.name)
+                    {
+                        from 'build/scriptsShadow'
+                    }
+
+            //Copy jars to bin
+            into(project.name + '/bin')
+                    {
+                        from 'build/libs'
+                    }
             //Copy files required by project specifications
-            into(project.name ) {
+            into(project.name) {
                 from '.'
                 include 'doc/*'
                 include('License.txt')
@@ -79,16 +81,26 @@ shadowDistZip
 
             //Remove duplicate scripts file in bin folder
             eachFile { file ->
-                if (file.path.contains('bin')) {
+                //Exclude /lib contents
+                if (file.path.contains('lib'))
                     file.exclude()
-                }
+                //Exclude old scripts
+                if (file.getName() == project.name && file.path.contains('bin'))
+                    file.exclude()
+                else if (file.getName() == (project.name + '.bat') && file.path.contains('bin'))
+                    file.exclude()
             }
         }
-//Set non default APP_HOME in scripts
+
+//Set non default APP_HOME and jar folder in scripts
 startShadowScripts
         {
             doLast {
+                //Needed because scripts are in the root directory
                 windowsScript.text = windowsScript.text.replace('set APP_HOME=%DIRNAME%..', 'set APP_HOME=%DIRNAME%')
                 unixScript.text = unixScript.text.replace('cd "`dirname \\"$PRG\\"`/.." >/dev/null', 'cd "`dirname \\"$PRG\\"`" >/dev/null')
+                //Needed because jars are int /bin instead of /lib
+                windowsScript.text = windowsScript.text.replace('set CLASSPATH=%APP_HOME%\\lib\\VaccinOK-all.jar', 'set CLASSPATH=%APP_HOME%\\bin\\VaccinOK-all.jar')
+                unixScript.text = unixScript.text.replace('CLASSPATH=$APP_HOME/lib/VaccinOK-all.jar', 'CLASSPATH=$APP_HOME/bin/VaccinOK-all.jar')
             }
         }
