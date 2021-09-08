@@ -1,6 +1,7 @@
 package com.lab.datamanager;
 
 import com.google.common.base.Strings;
+import com.google.common.io.Files;
 import com.lab.ui.Page;
 
 import java.io.*;
@@ -15,11 +16,15 @@ import java.net.URL;
 public abstract class Data {
     static {
         try {
-            //Jar path
+            //Source path
             URL jar = Page.class.getProtectionDomain().getCodeSource().getLocation();
-            File parent = new File(jar.toURI());
-            //Parent is two directories above jar
-            dataDirectory = new File(parent.getParentFile().getParentFile(), "data");
+            File source = new File(jar.toURI());
+            //Running from jar, parent is two directories above jar as the jar is in /bin
+            if (Files.getFileExtension(source.getAbsolutePath()).equals("jar"))
+                dataDirectory = new File(source.getParentFile().getParentFile(), "data");
+            //Running from gradle, parent is 3 directories above class, as this class is in /build/classes/java/main/com/lab/datamanager
+            else
+                dataDirectory = new File(source.getParentFile().getParentFile().getParentFile().getParentFile(), "data");
         } catch (SecurityException | URISyntaxException e) {
             dataDirectory = null;
         }
