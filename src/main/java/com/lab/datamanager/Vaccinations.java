@@ -16,9 +16,6 @@ import java.util.LinkedHashMap;
  * This i sdone via {@link Vaccinations#load(String)}.<br>
  * The header contains the number of information contained in the file.<br>
  * Data is loaded into a {@link LinkedHashMap} with username as key, to improve iteration performance.
- *
- * @author Luca Perfetti
- * @author Luigi Ciceri
  */
 
 public class Vaccinations extends Data {

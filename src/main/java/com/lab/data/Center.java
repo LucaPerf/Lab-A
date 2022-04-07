@@ -9,9 +9,6 @@ import java.util.Locale;
  * <p>Methods and constructors are provided for a simple conversion from and to CSV row.<br>
  * This class contains getters and setters for needed variables.<br>
  * A {@link java.util.HashMap} is used to store all types of statistics about the center.
- *
- * @author Luca Perfetti
- * @author Luigi Ciceri
  */
 
 public class Center {

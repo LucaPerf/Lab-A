@@ -4,9 +4,6 @@ package com.lab.data;
  * This class represents the information of an adverse event reported by vaccinated person.
  * <p>Event intensity, type and report are stored.
  * Getters are provided for needed variable, as well as methods and constructors to convert to and from CSV row representation.
- *
- * @author Luca Perfetti
- * @author Luigi Ciceri
  */
 
 public class Event {

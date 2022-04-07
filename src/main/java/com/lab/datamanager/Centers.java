@@ -23,9 +23,6 @@ import java.util.Locale;
  * The first 10 digits represents the number of centers, the second one the number of districts.
  * The '\n' separator is appended after the digits.
  * This class provides static methods to load and save centers to a CSV file, named "CentriVaccinali.csv".
- *
- * @author Luigi Ciceri
- * @author Luca Perfetti
  **/
 
 public class Centers extends Data {
@@ -144,7 +141,7 @@ public class Centers extends Data {
     /**
      * Searches a center by district and type.
      *
-     * @param type   The type of center to search for
+     * @param type     The type of center to search for
      * @param district The name of the district to search in
      * @return A list of {@link Center} located in <code>district</code>, of <code>type</code> (case-insensitive)
      */

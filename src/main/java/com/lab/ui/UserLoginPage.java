@@ -10,8 +10,6 @@ import javafx.scene.layout.StackPane;
 /**
  * Controller of the user login page.
  * <p>Layout is stored in "user_login.fxml".
- *
- * @author Ciceri Luigi
  */
 public class UserLoginPage extends Page {
 

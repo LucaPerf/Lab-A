@@ -4,9 +4,6 @@ package com.lab.data;
  * This class represents a postal address.
  * <p>Street address, district, province and CAP are stored.<br>
  * Getters and setters for required variables are provided as well as methods and construcotrs needed to easily convert objects to and from CSV rows.
- *
- * @author Luca Perfetti
- * @author Luigi Ciceri
  */
 
 public class PostalAddress {

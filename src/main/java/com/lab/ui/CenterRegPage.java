@@ -15,8 +15,6 @@ import java.io.IOException;
  * Controller of the center registration page.
  * <p>Layout is stored in "center_registration.fxml".<br>
  * This page contains the required input fields to input data needed to register a center. A confirmation button is shown at the bottom of the screen.
- *
- * @author Ciceri Luigi
  */
 public class CenterRegPage extends Page {
     @FXML

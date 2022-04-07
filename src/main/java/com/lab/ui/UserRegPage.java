@@ -13,8 +13,6 @@ import java.io.IOException;
  * Controller of the user registration page.
  * <p>Layout is stored in "user_registration.fxml".
  * This page contains fields to input data for user registration. A confirmation button is shown at the bottom of the page.
- *
- * @author CIceri Luigi
  */
 public class UserRegPage extends Page {
     @FXML

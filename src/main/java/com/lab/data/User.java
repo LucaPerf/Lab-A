@@ -3,9 +3,6 @@ package com.lab.data;
 /**
  * This class represents a registered user.
  * <p>Username, password, name, surname, "Codeice Fiscale", email and unique vaccination id are contained in this class.
- *
- * @author Ciceri Luigi
- * @author Luca Perfetti
  */
 public class User {
     /**

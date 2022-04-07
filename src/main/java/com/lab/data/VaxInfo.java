@@ -9,9 +9,6 @@ import java.util.HashMap;
  * <p>Name, surname, "Codice Fiscale", vaccination date, type of vaccine and unique vaccination identifier are contained in this class.<br>
  * Reported events are stored into a {@link HashMap}.<br>
  * Required getters and setters are provided.
- *
- * @author Ciceri Luigi
- * @author Luca Perfetti
  */
 
 public class VaxInfo {

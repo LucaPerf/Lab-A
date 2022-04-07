@@ -3,8 +3,6 @@ package com.lab.centrivaccinali;
 /**
  * This class launches the application.
  * <p>This is needed due to an OpenJFX module incompatibility. The only purpose of this class is to call {@link CentriVaccinali#main(String[])}
- *
- * @author Luigi Ciceri
  */
 public class Launcher {
     /**

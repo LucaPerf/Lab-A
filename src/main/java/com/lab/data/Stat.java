@@ -4,8 +4,6 @@ package com.lab.data;
  * This class represents an aggregate statistic.
  * <p>Name, average and number of reports are contained in this class.<br>
  * Values are updated through the {@link Stat#update(float)} method.
- *
- * @author Luigi Ciceri
  */
 public class Stat {
     /**

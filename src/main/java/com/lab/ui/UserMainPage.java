@@ -12,8 +12,6 @@ import javafx.scene.layout.StackPane;
  * <p>Layout is stored in "user_main.fxml".
  * This page contains a toolbar with several buttons which are dynamically shown base on user login status: if the user is logged in the username is shown next to a logout button, otherwise a login and register buttons are shown.
  * This page also contains a {@link CenterSearchCommonPage} to search for centers. By clicking an item on the list a {@link CenterInfoPage} opens up.
- *
- * @author Ciceri Luigi
  */
 public class UserMainPage extends Page {
     @FXML

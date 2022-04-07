@@ -17,8 +17,6 @@ import java.time.LocalDate;
  * <p>This class contains common variables that might be needed by subclasses such as input validators.<br>
  * Common methods to reset components are also included.<br>
  * <code>getRoot()</code>, <code>reset()</code> and <code>initialize()</code> are fundamental to this class and must be implemented by all subclasses.
- *
- * @author Ciceri Luigi
  */
 abstract public class Page {
     /**

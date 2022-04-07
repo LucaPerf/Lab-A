@@ -18,8 +18,6 @@ import java.io.IOException;
  * This class represents an event reporting page.
  * <p>A combo box is shown to select the type of event, as well as a slider for the intensity and a text area for the report comment.<br>
  * The report comment is limited to 256 characters by using a {@link TextFormatter}. An indicator below the area shows the current comment length.
- *
- * @author Luigi Ciceri
  */
 public class EventReportPage extends Page {
     @FXML

@@ -1,17 +1,21 @@
-© Luigi Ciceri, Luca Perfetti 2021
+Copyright © 2022 Ciceri Luigi, Perfetti Luca
 
-DEFINITIONS
-- SOFTWARE: all content bundled within this archive, including the archive itself. SOFTWARE includes, but is not limited to, source code and binary executable files.
-- AUTHORS: the creators of the SOFTWARE.
-- YOU: a person or entity that receives the SOFTWARE directly from the AUTHORS.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+and associated documentation files (the “Software”), to deal in the Software without
+restriction, including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
 
-AUTHORS grant you a limited, non-transferable license to evaluate the SOFTWARE for the assessment of the course "Laboratorio Interdisciplinare A" provided by "Università degli studi dell'insubria, sede di Varese".
-Any other use of the SOFTWARE is forbidden, as well as redistribution.
+The above copyright notice and this permission notice shall be included in all copies or
+substantial portions of the Software.
 
-This SOFTWARE comes "as is" and no warranty is provided.
-The AUTHORS must not be held responsible for any damage, including but not limited, to hardware, users or third parties.
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-The software uses third party libraries which come under their own licenses:
+This software uses third party libraries which come under their own licenses:
 
 \\\\\\\\\\\
 \\OPENJFX\\

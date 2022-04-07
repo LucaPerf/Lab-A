@@ -16,9 +16,6 @@ import java.util.Map;
  * <p> All data is stored into "Cittadini.csv".
  * The header contains the number of registered users.<br>
  * Users' data is loaded into a {@link HashMap} with username as key.<br>
- *
- * @author Luca Perfetti
- * @author Luigi Ciceri
  */
 
 public class Users extends Data {

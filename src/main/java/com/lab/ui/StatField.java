@@ -9,8 +9,6 @@ import javafx.scene.control.ProgressBar;
  * Controller class for {@link StatField}.
  * <p>This class represents a stat field. Lyout is stored in "stat_field.fxml"<br>
  * It is made up of two labels indicating the number of reports and the average reported intensity plus a progressbar used to show the average value.
- *
- * @author Luigi Ciceri
  */
 public class StatField {
     @FXML

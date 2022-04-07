@@ -10,8 +10,6 @@ import java.net.URL;
 
 /**
  * Base class for all data managed by the application.
- *
- * @author Luigi Ciceri
  */
 public abstract class Data {
     static {
@@ -22,7 +20,7 @@ public abstract class Data {
             //Running from jar, parent is two directories above jar as the jar is in /bin
             if (Files.getFileExtension(source.getAbsolutePath()).equals("jar"))
                 dataDirectory = new File(source.getParentFile().getParentFile(), "data");
-            //Running from gradle, parent is 3 directories above class, as this class is in /build/classes/java/main/com/lab/datamanager
+            // Running from gradle, parent is 3 directories above class, as this class is in /build/classes/java/main/com/lab/datamanager
             else
                 dataDirectory = new File(source.getParentFile().getParentFile().getParentFile().getParentFile(), "data");
         } catch (SecurityException | URISyntaxException e) {

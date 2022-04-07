@@ -16,9 +16,6 @@ import java.io.IOException;
 /**
  * Class used to manage centers operations.
  * <p>This class also initializes UI and loads data from files.
- *
- * @author Luigi Ciceri
- * @author Luca Perfetti
  */
 public class CentriVaccinali extends Application {
 

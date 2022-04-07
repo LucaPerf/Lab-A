@@ -11,9 +11,6 @@ import java.util.LinkedList;
 
 /**
  * This class manages user's operations
- *
- * @author Ciceri Luigi
- * @author Luca Perfetti
  */
 public class Cittadini {
     /**

@@ -19,8 +19,6 @@ import org.kordamp.ikonli.javafx.FontIcon;
  * The layout of this page is constructed by callingthe {@link #initialize()} method.
  * By doing so the page is available to display errors arisen from loading FXML layouts.<br>
  * Node variables are not documented.
- *
- * @author Luigi Ciceri
  */
 public class ErrorPage extends Page {
     private VBox root = new VBox();

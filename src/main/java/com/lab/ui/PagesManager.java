@@ -17,8 +17,6 @@ import java.io.IOException;
  * <code>pageNameLoader</code> for loaders and <code>pageNamePage</code> for controllers.<br>
  * A factory-like method is provided to open a specific page. As pages a re-usable, they must be reset manually by invoking {@link Page#reset()}.
  * A nested enumerator provides means to select the page to open.
- *
- * @author Ciceri Luigi
  */
 
 public class PagesManager {

@@ -23,8 +23,6 @@ import javafx.scene.layout.VBox;
  * It contains a searchbar, a set of search filters and a {@link JFXListView} containing the search results.<br>
  * Every item in the list is associated with a {@link Center} instance.<br>
  * As this page can be used im multiple layouts, the action to be performed when clicking on a list item has to be set with {@link #setOnListItemAction(EventHandler)}. The default action is to do nothing.
- *
- * @author Ciceri Luigi
  */
 public class CenterSearchCommonPage extends Page {
     @FXML

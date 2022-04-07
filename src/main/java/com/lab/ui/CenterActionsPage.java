@@ -12,8 +12,6 @@ import javafx.scene.layout.StackPane;
  * Controller of center actions page.
  * <p>Layout is stored in "center_actions.fxml".<br>
  * This page has two buttons to allow the user to choose which action to perform.
- *
- * @author Ciceri Luigi
  */
 public class CenterActionsPage extends Page {
     @FXML

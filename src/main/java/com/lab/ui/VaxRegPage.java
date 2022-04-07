@@ -17,8 +17,6 @@ import java.time.LocalDate;
  * <p>Layout is stored in "vax_registration.fxml".
  * This page contains fields required to input data for vaccination registration, including a {@link JFXDatePicker} to input the vaccination date.
  * A confirmation button is shown at the bottom of the screen.
- *
- * @author Ciceri Luigi
  */
 
 public class VaxRegPage extends Page {

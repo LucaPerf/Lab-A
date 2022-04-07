@@ -8,9 +8,6 @@ import java.util.Map;
  * This enumerator represents adverse events
  * <p>A pattern allows the enumerator to convert to and from string easily.<br>
  * {@link Object#toString()} methods are overridden to provide a nicely formatted text.
- *
- * @author Luca Perfetti
- * @author Luigi Ciceri
  */
 
 public enum EventType {
